@@ -1,6 +1,0 @@
-{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/.bin/acorn","time":"2022-11-17T17:59:11Z"}
-{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/.bin/fxparser","time":"2022-11-17T17:59:11Z"}
-{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/.bin/mime","time":"2022-11-17T17:59:11Z"}
-{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/.bin/parser","time":"2022-11-17T17:59:11Z"}
-{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/.bin/resolve","time":"2022-11-17T17:59:11Z"}
-{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file node_modules/.bin/uuid","time":"2022-11-17T17:59:11Z"}
