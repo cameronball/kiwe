@@ -1,0 +1,23 @@
+{
+  "name": "greenbirdapp",
+  "version": "0.0.1",
+  "description": "cool green bird app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "Cameron Ball",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^18.0.6",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mongodb": "^4.12.0",
+    "mongoose": "^6.7.2",
+    "node-fetch": "^3.2.6",
+    "pug": "^3.0.2"
+  }
+}
