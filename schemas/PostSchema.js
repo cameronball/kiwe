@@ -8,7 +8,8 @@ const PostSchema = new Schema({
 	pinned: Boolean,
 	likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
 	reshareUsers: [{ type: Schema.Types.ObjectId, ref: "User" }],
-	reshareData: { type: Schema.Types.ObjectId, ref: "Post" }
+	reshareData: { type: Schema.Types.ObjectId, ref: "Post" },
+	replyTo: { type: Schema.Types.ObjectId, ref: "Post" },
 }, { timestamps: true });
 
 var Post = mongoose.model('Post', PostSchema);

@@ -55,6 +55,7 @@ nav a.blue {
 
 nav a:hover {
     background-color: var(--buttonHoverBg);
+    text-decoration: none;
     color: var(--blue);
     border-radius: 50%;
 }
@@ -96,6 +97,16 @@ button span {
     padding: var(--spacing);
     border-bottom: 10px solid rgb(230, 236, 240);
     flex-shrink: 0;
+}
+
+.modal .postFormContainer {
+    border: none;
+    padding: 0;
+    padding-top: var(--spacing);
+}
+
+.modal .post {
+    padding: 0 0 var(--spacing) 0;
 }
 
 .userImageContainer {
@@ -222,4 +233,13 @@ button span {
     font-size: 13px;
     color: var(--greyText);
     margin-bottom: 5px;
+}
+
+.replyFlag {
+    margin-bottom: 5px;
+    color: var(--greyText);
+}
+
+.replyFlag a {
+    color: var(--blue);
 }
