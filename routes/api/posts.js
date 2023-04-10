@@ -16,8 +16,22 @@ router.get("/:id", async (req, res, next) => {
 	
 	var postId = req.params.id;
 
-	var results = await getPosts({ _id: postId });
-	results = results[0];
+	var postData = await getPosts({ _id: postId });
+	if (postData.length == 0) {
+		return res.sendStatus(404);
+	}
+	postData = postData[0];
+
+	var results = {
+		postData: postData
+	}
+
+	if(postData.replyTo !== undefined) {
+		results.replyTo = postData.replyTo;
+	}
+
+	results.replies = await getPosts({ replyTo: postId });
+
 	res.status(200).send(results);
 })
 
@@ -115,6 +129,30 @@ router.post("/:id/reshare", async (req, res, next) => {
 	});
 
 	res.status(200).send(post);
+})
+
+router.delete("/:id", async (req, res, next) => {
+	var postId = req.params.id;
+	var postData = await getPosts({ _id: postId });
+	if (postData.length == 0) {
+		return res.sendStatus(404);
+	}
+
+	var reqUserId = req.session.user._id + "";
+	var postUserId = postData[0].postedBy._id.toString();
+
+	if (reqUserId != postUserId){
+		if (req.session.user.admin != true){
+			return res.sendStatus(403);
+		}
+	}
+
+	Post.findByIdAndDelete(req.params.id)
+	.then(result => res.sendStatus(202))
+	.catch(error => {
+		console.log(error);
+		res.sendStatus(400);
+	});
 })
 
 async function getPosts(filter) {

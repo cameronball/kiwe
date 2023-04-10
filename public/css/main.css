@@ -201,7 +201,7 @@ button span {
 
 .header a,
 .header span {
-    padding-right: 5px;
+    padding-right: 0px;
 }
 
 .postButtonContainer button:hover {
@@ -242,4 +242,28 @@ button span {
 
 .replyFlag a {
     color: var(--blue);
+}
+
+.wrapper {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+.header .date {
+    flex: 1;
+}
+
+.header {
+    display:flex;
+}
+
+@media screen and (max-width: 440px){
+    .header {
+        font-size: 11px }
+    .replyFlag {
+        font-size: 13px }
+    .col-2 {
+        max-width:20% !important }
+    .col-10 {
+        max-width: 80% }
 }

@@ -52,7 +52,36 @@ $("#replyModal").on("show.bs.modal", (event) => {
 	$("#submitReplyButton").data("id", postId);
 
     $.get("/api/posts/" + postId, results => {
-        outputPosts(results, $("#originalPostContainer"));
+        outputPosts(results.postData, $("#originalPostContainer"));
+    })
+})
+
+$("#deletePostModal").on("show.bs.modal", (event) => {
+    var button = $(event.relatedTarget);
+    var postId = getPostIdFromElement(button);
+	$("#deletePostButton").data("id", postId);
+})
+
+$("#deletePostButton").click((event) => {
+    var postId = $(event.target).data("id");
+
+    $.ajax({
+        url: `/api/posts/${postId}`,
+        type: "DELETE",
+        success: (data, status, xhr) => {
+
+            if(xhr.status == 403) {
+                alert("You do not have permission to perform this action");
+                return;
+            }
+
+            if(xhr.status != 202) {
+                alert("Could not delete post");
+                return;
+            }
+
+            location.reload();
+        }
     })
 })
 
@@ -109,6 +138,15 @@ $(document).on("click", ".reshareButton", (event) => {
 
 })
 
+$(document).on("click", ".post", (event) => {
+	var element = $(event.target);
+	var postId = getPostIdFromElement(element);
+
+	if (postId !== undefined && !element.is("button")) {
+		window.location.href = "/post/" + postId;
+	}
+});
+
 function getPostIdFromElement(element) {
     var isRoot = element.hasClass("post");
     var rootElement = isRoot == true ? element : element.closest(".post");
@@ -119,14 +157,14 @@ function getPostIdFromElement(element) {
     return postId;
 }
 
-function createPostHtml(postData) {
+function createPostHtml(postData, boldFont = false) {
 
     if(postData == null) return alert("post object is null");
 
     var isReshare = postData.reshareData !== undefined;
     var resharedBy = isReshare ? postData.postedBy.username : null;
     postData = isReshare ? postData.reshareData : postData;
-    
+
     var postedBy = postData.postedBy;
 
     if(postedBy._id === undefined) {
@@ -141,13 +179,20 @@ function createPostHtml(postData) {
 	
     var reshareButtonActiveClass = postData.reshareUsers.includes(userLoggedIn._id) ? "active" : "";
 
+    //- var boldFontClass = boldFont ? "font-weight-bold" : "";
+    var boldFontClass = "";
+    var LargeFontStyle = boldFont ? "font-size:23px;" : "";
+
+    var verified = postedBy.verified ? `<img style="height: 1em;padding-left:5px;vertical-align:-0.175em;filter: invert(44%) sepia(91%) saturate(1231%) hue-rotate(185deg) brightness(106%) contrast(101%);" src="/images/badge-check.svg" data-toggle="tooltip" data-placement="top" title="Verified"></img>` : "";
+    var admin = postedBy.admin ? `<i class="fa-solid fa-hammer" style="height: 1em;padding-left:5px;vertical-align:-0.05em;" data-toggle="tooltip" data-placement="top" title="Admin"></i>` : "";
+
     var reshareText = '';
     if(isReshare) {
         reshareText = `<span><i class='fa-solid fa-repeat'></i>&nbsp;&nbsp;Reshared by <a href='/profile/${resharedBy}'>@${resharedBy}</a></span>`
     }
 	
 	var replyFlag = '';
-	if(postData.replyTo) {
+	if(postData.replyTo && postData.replyTo._id) {
 		
 		if(!postData.replyTo._id) {
 			return alert("Reply to is not populated");
@@ -162,6 +207,14 @@ function createPostHtml(postData) {
 					</div>`
 	}
 
+    var buttons = "";
+    if (postData.postedBy._id == userLoggedIn._id) {
+        buttons = `<button data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
+    }
+    else if (userLoggedIn.admin) {
+        buttons = `<button data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
+    }
+
     return `<div class='post' data-id='${postData._id}'>
                 <div class='postActionContainer'>
                     ${reshareText}
@@ -172,15 +225,16 @@ function createPostHtml(postData) {
                     </div>
                     <div class='postContentContainer'>
                         <div class='header'>
-                            <a href='/profile/${postedBy.username}' class='displayName'>${displayName}<img style="width:20px;vertical-align:text-top;padding:3px 0px 0px 5px;filter: invert(44%) sepia(91%) saturate(1231%) hue-rotate(185deg) brightness(106%) contrast(101%);" src="/images/badge-check.svg" data-toggle="tooltip" data-placement="top" title="Verified"></img></a>
-                            <span class='username'>@${postedBy.username}</span>
-                            <span class='date'>${timestamp}</span>
+                            <span><a href='/profile/${postedBy.username}' class='displayName'>${displayName}</a>${verified}${admin}</span>
+                            <span class='username'>&nbsp;@${postedBy.username}</span>
+                            <span class='date'>&nbsp;&nbsp;•&nbsp;&nbsp;${timestamp}</span>
+                            ${buttons}
                         </div>
 						${replyFlag}
                         <div class='postBody'>
-                            <span>${postData.content}</span>
+                            <span class="${boldFontClass}" style="${LargeFontStyle}">${postData.content}</span>
                         </div>
-                        <div class='postFooter'>
+                        <div class='postFooter' style="${LargeFontStyle}">
                             <div class='postButtonContainer'>
                                 <button data-toggle='modal' data-target='#replyModal'>
                                     <i class='fa-regular fa-comments'></i>
@@ -258,4 +312,21 @@ function outputPosts(results, container) {
 	if (results.length == 0) {
 		container.append("<span class='noResults'>Nothing to show.</span>");
 	}
+}
+
+function outputPostsWithReplies(results, container) {
+    container.html("");
+
+    if(results.replyTo !== undefined && results.replyTo._id !== undefined) {
+        var html = createPostHtml(results.replyTo);
+        container.append(html);
+    }
+
+    var mainPostHtml = createPostHtml(results.postData, true);
+    container.append(mainPostHtml);
+
+    results.replies.forEach(result => {
+        var html = createPostHtml(result);
+        container.append(html);
+    });
 }

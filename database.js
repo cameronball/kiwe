@@ -7,7 +7,7 @@ class Database {
   }
   
   connect() {
-    mongoose.connect('mongodb+srv://root:eR4XD3OSYyxth2rn@twitterclonecluster.tegdn4r.mongodb.net/TwitterCloneDB?retryWrites=true&w=majority')
+    mongoose.connect('mongodb+srv://root:LziGFHUuCEveWaxI@twitterclonecluster.5s8htvw.mongodb.net/?retryWrites=true&w=majority')
     .then(() => {
       console.log('Connected to MongoDB');
     })

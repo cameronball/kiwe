@@ -25,6 +25,8 @@ app.use(session({
 const loginRoute = require('./routes/loginRoutes');
 const registerRoute = require('./routes/registerRoutes');
 const logoutRoute = require('./routes/logout');
+const postRoute = require('./routes/postRoutes');
+const profileRoute = require('./routes/profileRoutes');
 
 
 // Api routes
@@ -34,6 +36,8 @@ app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/logout", logoutRoute);
 app.use("/api/posts", postApiRoute);
+app.use("/post", middleware.requireLogin, postRoute);
+app.use("/profile", middleware.requireLogin, profileRoute);
 
 app.get("/", middleware.requireLogin, (req, res, next) => {
 
