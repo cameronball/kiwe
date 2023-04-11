@@ -13,6 +13,8 @@ const UserSchema = new Schema({
     reshares: [{ type: Schema.Types.ObjectId, ref: "Post" }],
     verified: { type: Boolean, default: false },
     admin: { type: Boolean, default: false },
+    following: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
 }, { timestamps: true });
 
 var User = mongoose.model('User', UserSchema);
