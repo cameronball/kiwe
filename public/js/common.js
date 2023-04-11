@@ -156,8 +156,24 @@ $(document).on("click", ".followButton", (event) => {
     $.ajax({
         url: `/api/users/${userId}/follow`,
         type: "PUT",
-        success: (data) => {            
-            console.log(data);
+        success: (data, status, xhr) => {
+
+            if(xhr.status == 404) {
+                alert("User not found");
+                return;
+            }
+
+            if(data.following && data.following.includes(userId)) {
+                button.addClass("following");
+                button.find("span").text("Unfollow");
+                button.find("i").removeClass("fa-user-plus").addClass("fa-user-minus");
+            }
+            else {
+                button.removeClass("following");
+                button.find("span").text("Follow");
+                button.find("i").removeClass("fa-user-minus").addClass("fa-user-plus");
+            }
+
             // button.find("span").text(postData.reshareUsers.length || "");
 
             // if(postData.reshareUsers.includes(userLoggedIn._id)) {
