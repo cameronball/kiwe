@@ -44,7 +44,8 @@ function createUserHtml(userData, showFollowButton) {
 		}
 		text = isFollowing ? "Unfollow" : "Follow"
 		buttonClass = isFollowing ? "followButton following" : "followButton"
-		followText = `<div class='followButtonContainer'><button class="${buttonClass}" data-user="${userData._id}"><i class="fa-solid fa-user-minus"></i><span>${text}</span></button></div>`
+		buttonIcon = isFollowing ? "fa-user-minus" : "fa-user-plus"
+		followText = `<div class='followButtonContainer'><button class="${buttonClass}" data-user="${userData._id}"><i class="fa-solid ${buttonIcon}"></i><span>${text}</span></button></div>`
 	}
 	else {
 		followText = "";
