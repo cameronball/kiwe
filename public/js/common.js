@@ -174,14 +174,12 @@ $(document).on("click", ".followButton", (event) => {
                 button.find("i").removeClass("fa-user-minus").addClass("fa-user-plus");
             }
 
-            // button.find("span").text(postData.reshareUsers.length || "");
-
-            // if(postData.reshareUsers.includes(userLoggedIn._id)) {
-            //     button.addClass("active");
-            // }
-            // else {
-            //     button.removeClass("active");
-            // }
+            var followersLabel = $("#followersValue");
+            if(followersLabel.length != 0) {
+                var followersText = followersLabel.text();
+                followersText = parseInt(followersText);
+                followersLabel.text(followersText + (data.following && data.following.includes(userId) ? 1 : -1));
+            }
 
         }
     })
