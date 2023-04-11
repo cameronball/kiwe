@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const bodyParser = require("body-parser")
+const sanitizer = require('sanitizer');
 const User = require('../../schemas/UserSchema');
 const Post = require('../../schemas/PostSchema');
 
@@ -46,13 +47,15 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
 	
+	sanitizedContent = sanitizer.escape(req.body.content);
+
 	if (!req.body.content) {
 		console.log("Content param not sent with request");
 		return res.sendStatus(400);
 	}
 
 	var postData = {
-		content: req.body.content,
+		content: sanitizedContent,
 		postedBy: req.session.user
 	}
 
