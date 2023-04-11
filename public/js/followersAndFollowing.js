@@ -34,6 +34,22 @@ function outputUsers(results, container) {
 }
 
 function createUserHtml(userData, showFollowButton) {
+
+	if (showFollowButton && userLoggedIn._id != userData._id) {
+		if(userLoggedIn.following && userLoggedIn.following.includes(userData._id)) {
+			isFollowing = true;
+		}
+		else {
+			isFollowing = false;
+		}
+		text = isFollowing ? "Unfollow" : "Follow"
+		buttonClass = isFollowing ? "followButton following" : "followButton"
+		followText = `<div class='followButtonContainer'><button class="${buttonClass}" data-user="${userData._id}"><i class="fa-solid fa-user-minus"></i><span>${text}</span></button></div>`
+	}
+	else {
+		followText = "";
+	}
+
 	return `<div class="user">
 				<div class="userImageContainer">
 					<img src="${userData.profilePic}">
@@ -43,6 +59,7 @@ function createUserHtml(userData, showFollowButton) {
 						<a href='/profile/${userData.username}'>${userData.firstName} ${userData.lastName}</a>
 						<span class="username">@${userData.username}</span>
 					</div>
+					${followText}
 				</div>
 			</div>`;
 }
