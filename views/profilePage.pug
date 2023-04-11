@@ -9,6 +9,10 @@ block content
 			a(href="/")
 				button#submitPostButton Home
 	else
+		script. 
+			var profileUserId = '!{profileUser._id}';
+			var selectedTab = '!{selectedTab}';
+
 		.profileHeaderContainer
 			.coverPhotoContainer
 
@@ -18,9 +22,20 @@ block content
 				if profileUser._id != userLoggedIn._id
 					a.profileButton(href=`/messages/${profileUser._id}`)
 						i.fas.fa-envelope
-					+createFollowButton(profileUser, true)
+					+createFollowButton(profileUser, false)
 			.userDetailsContainer
-				span.displayName #{profileUser.firstName} #{profileUser.lastName}
+				if profileUser.verified && profileUser.admin
+					span.displayName #{profileUser.firstName} #{profileUser.lastName}
+						img(style='height: 1em;padding-left:5px;vertical-align:-0.175em;filter: invert(44%) sepia(91%) saturate(1231%) hue-rotate(185deg) brightness(106%) contrast(101%);', src='/images/badge-check.svg', data-toggle='tooltip', data-placement='top', title='Verified')
+						i.fa-solid.fa-hammer(style='height: 1em;padding-left:5px;vertical-align:-0.05em;', data-toggle='tooltip', data-placement='top', title='Admin')
+				else if profileUser.verified
+					span.displayName #{profileUser.firstName} #{profileUser.lastName}
+						img(style='height: 1em;padding-left:5px;vertical-align:-0.175em;filter: invert(44%) sepia(91%) saturate(1231%) hue-rotate(185deg) brightness(106%) contrast(101%);', src='/images/badge-check.svg', data-toggle='tooltip', data-placement='top', title='Verified')
+				else if profileUser.admin
+					span.displayName #{profileUser.firstName} #{profileUser.lastName}
+						i.fa-solid.fa-hammer(style='height: 1em;padding-left:5px;vertical-align:-0.05em;', data-toggle='tooltip', data-placement='top', title='Admin')
+				else
+					span.displayName #{profileUser.firstName} #{profileUser.lastName}
 				span.username @#{profileUser.username}
 				span.bio #{profileUser.bio}
 
@@ -31,6 +46,9 @@ block content
 					a(href=`/profile/${profileUser.username}/following`)
 						span.value #{0}
 						span Following
+		.tabsContainer
+			+createTab("Posts", `/profile/${profileUser.username}`, selectedTab != "replies")
+			+createTab("Replies", `/profile/${profileUser.username}/replies`, selectedTab == "replies")
 
 		.postsContainer
 

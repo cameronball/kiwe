@@ -55,3 +55,8 @@ mixin createFollowButton(user, isFollowing)
 		button(class=buttonClass, data-user=user._id)
 			i.fas.fa-user-plus
 			span #{text}
+
+mixin createTab(name, href, isSelected)
+	- className = isSelected ? "tab active" : "tab"
+	a(class=className, href=href)
+		span #{name}

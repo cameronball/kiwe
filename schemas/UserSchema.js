@@ -11,6 +11,8 @@ const UserSchema = new Schema({
     profilePic: { type: String, default: "/images/profilePic.jpeg" },
     likes: [{ type: Schema.Types.ObjectId, ref: "Post" }],
     reshares: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+    verified: { type: Boolean, default: false },
+    admin: { type: Boolean, default: false },
 }, { timestamps: true });
 
 var User = mongoose.model('User', UserSchema);
