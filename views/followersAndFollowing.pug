@@ -14,8 +14,8 @@ block content
 			var selectedTab = '!{selectedTab}';
 
 		.tabsContainer
-			+createTab("Followers", `/profile/${profileUser.username}/following`, selectedTab == "following")
-			+createTab("Following", `/profile/${profileUser.username}/followers`, selectedTab == "followers")
+			+createTab("Followers", `/profile/${profileUser.username}/followers`, selectedTab == "followers")
+			+createTab("Following", `/profile/${profileUser.username}/following`, selectedTab == "following")
 
 		.resultsContainer
 

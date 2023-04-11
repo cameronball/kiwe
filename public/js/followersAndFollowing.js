@@ -9,14 +9,14 @@ $(document).ready(() => {
 })
 
 function loadFollowers() {
-	$.get(`api/users/${profileUserId}/followers`, results => {
-		outputPosts(results, $(".resultsContainer"));
+	$.get(`/api/users/${profileUserId}/followers`, results => {
+		outputUsers(results, $(".resultsContainer"));
 	});
 }
 
 function LoadFollowing() {
-	$.get(`api/users/${profileUserId}/following`, results => {
-		outputPosts(results, $(".resultsContainer"));
+	$.get(`/api/users/${profileUserId}/following`, results => {
+		outputUsers(results, $(".resultsContainer"));
 	});
 }
 
