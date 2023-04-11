@@ -1,0 +1,23 @@
+extends layouts/main-layout.pug
+
+block content
+	if !profileUser
+		center
+			br
+			h1 User not found :(
+			br
+			a(href="/")
+				button#submitPostButton Home
+	else
+		script. 
+			var profileUserId = '!{profileUser._id}';
+			var selectedTab = '!{selectedTab}';
+
+		.tabsContainer
+			+createTab("Followers", `/profile/${profileUser.username}/following`, selectedTab == "following")
+			+createTab("Following", `/profile/${profileUser.username}/followers`, selectedTab == "followers")
+
+		.resultsContainer
+
+block scripts
+	script(src="/js/followersAndFollowing.js")
