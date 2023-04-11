@@ -73,6 +73,7 @@ mixin createImageUploadModal()
 					span(aria-hidden='true') &times;
 				.modal-body
 					p= randomPhrase
+					input#filePhoto(type="file", name="filePhoto")
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#imageUploadButton.btn.btn-primary(type='button') Upload
