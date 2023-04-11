@@ -85,6 +85,16 @@ $("#deletePostButton").click((event) => {
     })
 })
 
+$("#filePhoto").change(function(){
+    if(this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+            $("#imagePreview").attr("src", e.target.result).show();
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+
 $("#replyModal").on("hidden.bs.modal", () => $("#originalPostContainer").html(""))
 
 $(document).on("click", ".likeButton", (event) => {

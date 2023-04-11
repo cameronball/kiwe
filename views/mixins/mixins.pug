@@ -74,6 +74,9 @@ mixin createImageUploadModal()
 				.modal-body
 					p= randomPhrase
 					input#filePhoto(type="file", name="filePhoto")
+
+					.imagePreviewContainer
+						img#imagePreview
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#imageUploadButton.btn.btn-primary(type='button') Upload
