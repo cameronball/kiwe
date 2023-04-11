@@ -13,6 +13,9 @@ block content
 			var profileUserId = '!{profileUser._id}';
 			var selectedTab = '!{selectedTab}';
 
+		- followerCount = profileUser.followers.length;
+		- followingCount = profileUser.following.length;
+
 		.profileHeaderContainer
 			.coverPhotoContainer
 
@@ -46,10 +49,10 @@ block content
 
 				.followersContainer
 					a(href=`/profile/${profileUser.username}/followers`)
-						span#followersValue.value #{0}
+						span#followersValue.value #{followerCount}
 						span Followers
 					a(href=`/profile/${profileUser.username}/following`)
-						span.value #{0}
+						span.value #{followingCount}
 						span Following
 		.tabsContainer
 			+createTab("Posts", `/profile/${profileUser.username}`, selectedTab != "replies")
