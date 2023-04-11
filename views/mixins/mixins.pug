@@ -60,3 +60,19 @@ mixin createTab(name, href, isSelected)
 	- className = isSelected ? "tab active" : "tab"
 	a(class=className, href=href)
 		span #{name}
+
+mixin createImageUploadModal()
+	- const phrases = ["A picture is worth a thousand words, but a new profile picture is worth at least tens of followers.", "A picture is worth a thousand words, but a new profile picture is worth at least tens of followers.", "Your profile picture is the first thing people see. Make it count!","Your profile picture is the first thing people see. Make it count!","Your profile picture is the first thing people see. Make it count!", "How about ditching that old profile pic and giving us a fresh face? We promise not to judge... too much.", "How about a profile picture that's not just a picture of your pet? Unless your pet is like really, really ridiculously good-looking.", "How about a profile picture that's not just a picture of your pet? Unless your pet is like really, really ridiculously good-looking."]
+	- const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)]
+	#imageUploadModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='imageUploadModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#imageUploadModalLabel.modal-title Upload a new profile image
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body
+					p= randomPhrase
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button#imageUploadButton.btn.btn-primary(type='button') Upload
