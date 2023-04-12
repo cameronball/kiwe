@@ -474,6 +474,10 @@ button span {
     color: #FF0000;
 }
 
+.pinnedPostContainer {
+    border-bottom: 10px solid rgb(230, 236, 240)
+}
+
 #imagePreview,
 #coverPreview{
     display: block;

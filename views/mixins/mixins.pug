@@ -48,6 +48,7 @@ mixin createPostModals(userLoggedIn)
 	+createReplyModal(userLoggedIn)
 	+createDeletePostModal()
 	+createPinnedPostModal()
+	+createUnpinPostModal()
 
 mixin createFollowButton(user, isFollowing)
 	- text = isFollowing ? "Unfollow" : "Follow"
@@ -125,3 +126,21 @@ mixin createPinnedPostModal()
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#pinPostButton.btn.btn-primary(type='button') Pin
+
+mixin createUnpinPostModal()
+	- const phrases = ["You've had that post pinned for so long, it's starting to grow cobwebs. It's time to unpin and let some fresh air in."]
+	- const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)]
+	#unpinModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='unpinModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#unpinModalLabel.modal-title Unpin this post?
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body
+					i
+						p= randomPhrase
+					p This post will be unpinned, you can pin it again at any time.
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button#unpinPostButton.btn.btn-primary(type='button') Unpin

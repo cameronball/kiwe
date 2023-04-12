@@ -71,6 +71,12 @@ $("#confirmPinModal").on("show.bs.modal", (event) => {
 	$("#pinPostButton").data("id", postId);
 })
 
+$("#unpinModal").on("show.bs.modal", (event) => {
+    var button = $(event.relatedTarget);
+    var postId = getPostIdFromElement(button);
+	$("#unpinPostButton").data("id", postId);
+})
+
 $("#deletePostButton").click((event) => {
     var postId = $(event.target).data("id");
 
@@ -101,6 +107,30 @@ $("#pinPostButton").click((event) => {
         url: `/api/posts/${postId}`,
         type: "PUT",
         data: { pinned: true },
+        success: (data, status, xhr) => {
+
+            if(xhr.status == 403) {
+                alert("You do not have permission to perform this action");
+                return;
+            }
+
+            if(xhr.status != 204) {
+                alert("Could not delete post");
+                return;
+            }
+
+            location.reload();
+        }
+    })
+})
+
+$("#unpinPostButton").click((event) => {
+    var postId = $(event.target).data("id");
+
+    $.ajax({
+        url: `/api/posts/${postId}`,
+        type: "PUT",
+        data: { pinned: false },
         success: (data, status, xhr) => {
 
             if(xhr.status == 403) {
@@ -372,7 +402,7 @@ function createPostHtml(postData, boldFont = false) {
     var pinnedPostText = "";
     if (postData.postedBy._id == userLoggedIn._id) {
         if(postData.pinned === true) {
-            buttons = `<button class="unpinButton" data-id="${postData._id}" data-toggle="modal" data-target="#confirmPinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`    
+            buttons = `<button class="unpinButton" data-id="${postData._id}" data-toggle="modal" data-target="#unpinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`    
         }
         else {
             buttons = `<button class="pinButton" data-id="${postData._id}" data-toggle="modal" data-target="#confirmPinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
