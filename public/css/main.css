@@ -174,7 +174,8 @@ button span {
 }
 
 .username,
-.date {
+.date,
+.datePlaceholder {
     color: var(--greyText)
 }
 
@@ -258,6 +259,10 @@ button span {
     flex: 1;
 }
 
+.header .datePlaceholder {
+    flex: 1;
+}
+
 .header {
     display:flex;
 }
@@ -271,6 +276,23 @@ button span {
         max-width:20% !important }
     .col-10 {
         max-width: 80% }
+}
+
+.date {
+    display: none;
+}
+
+.datePlaceholder {
+    display: inherit;
+}
+
+@media only screen and (min-width: 768px) {
+    .date {
+        display: inherit;
+    }
+    .datePlaceholder {
+        display: none;
+    }
 }
 
 .profileHeaderContainer .coverPhotoSection {
@@ -434,6 +456,22 @@ button span {
 .postBody span {
     word-wrap: break-word;
     word-break: break-word;
+}
+
+.pinButton:hover {
+    color: #E7B10A;
+}
+
+.unpinButton {
+    color: #E7B10A;
+}
+
+.unpinButton:hover {
+    color: #FF0000;
+}
+
+.deleteButton:hover {
+    color: #FF0000;
 }
 
 #imagePreview,

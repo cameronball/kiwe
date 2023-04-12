@@ -65,6 +65,12 @@ $("#deletePostModal").on("show.bs.modal", (event) => {
 	$("#deletePostButton").data("id", postId);
 })
 
+$("#confirmPinModal").on("show.bs.modal", (event) => {
+    var button = $(event.relatedTarget);
+    var postId = getPostIdFromElement(button);
+	$("#pinPostButton").data("id", postId);
+})
+
 $("#deletePostButton").click((event) => {
     var postId = $(event.target).data("id");
 
@@ -79,6 +85,30 @@ $("#deletePostButton").click((event) => {
             }
 
             if(xhr.status != 202) {
+                alert("Could not delete post");
+                return;
+            }
+
+            location.reload();
+        }
+    })
+})
+
+$("#pinPostButton").click((event) => {
+    var postId = $(event.target).data("id");
+
+    $.ajax({
+        url: `/api/posts/${postId}`,
+        type: "PUT",
+        data: { pinned: true },
+        success: (data, status, xhr) => {
+
+            if(xhr.status == 403) {
+                alert("You do not have permission to perform this action");
+                return;
+            }
+
+            if(xhr.status != 204) {
                 alert("Could not delete post");
                 return;
             }
@@ -339,15 +369,32 @@ function createPostHtml(postData, boldFont = false) {
 	}
 
     var buttons = "";
+    var pinnedPostText = "";
     if (postData.postedBy._id == userLoggedIn._id) {
-        buttons = `<button data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
+        if(postData.pinned === true) {
+            buttons = `<button class="unpinButton" data-id="${postData._id}" data-toggle="modal" data-target="#confirmPinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`    
+        }
+        else {
+            buttons = `<button class="pinButton" data-id="${postData._id}" data-toggle="modal" data-target="#confirmPinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
+        }
     }
     else if (userLoggedIn.admin) {
-        buttons = `<button data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
+        buttons = `<button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
+    }
+
+    if(postData.pinned === true) {
+        pinnedPostText = `<span><i class="fa-solid fa-thumbtack" style="color: rgb(101, 119, 134);"></i>&nbsp;&nbsp;Pinned<span>`
+    }
+
+    if(isReshare && postData.pinned) {
+        temp = pinnedPostText;
+        pinnedPostText = pinnedPostText + '&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;' + reshareText;
+        reshareText = '';
     }
 
     return `<div class='post' data-id='${postData._id}'>
                 <div class='postActionContainer'>
+                    ${pinnedPostText}
                     ${reshareText}
                 </div>
                 <div class='mainContentContainer'>
@@ -359,6 +406,7 @@ function createPostHtml(postData, boldFont = false) {
                             <span><a href='/profile/${postedBy.username}' class='displayName'>${displayName}</a>${verified}${admin}</span>
                             <span class='username'>&nbsp;@${postedBy.username}</span>
                             <span class='date'>&nbsp;&nbsp;•&nbsp;&nbsp;${timestamp}</span>
+                            <span class='datePlaceholder'></span>
                             ${buttons}
                         </div>
 						${replyFlag}

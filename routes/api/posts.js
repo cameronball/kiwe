@@ -188,6 +188,38 @@ router.delete("/:id", async (req, res, next) => {
 	});
 })
 
+router.put("/:id", async (req, res, next) => {
+	var postId = req.params.id;
+	var postData = await getPosts({ _id: postId });
+	if (postData.length == 0) {
+		return res.sendStatus(404);
+	}
+
+	var reqUserId = req.session.user._id + "";
+	var postUserId = postData[0].postedBy._id.toString();
+
+	if (reqUserId != postUserId){
+		if (req.session.user.admin != true){
+			return res.sendStatus(403);
+		}
+	}
+	
+	if (req.body.pinned !== undefined) {
+		await Post.updateMany({ postedBy: req.session.user }, { pinned: false })
+		.catch(error => {
+			console.log(error);
+			res.sendStatus(400);
+		});
+	}
+
+	Post.findByIdAndUpdate(req.params.id, req.body)
+	.then(() => res.sendStatus(204))
+	.catch(error => {
+		console.log(error);
+		res.sendStatus(400);
+	});
+})
+
 async function getPosts(filter) {
 	var results = await Post.find(filter)
 	.populate("postedBy")

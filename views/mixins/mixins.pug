@@ -37,7 +37,8 @@ mixin createDeletePostModal()
 					button.close(type='button', data-dismiss='modal', aria-label='Close')
 					span(aria-hidden='true') &times;
 				.modal-body
-					p= randomPhrase
+					i
+						p= randomPhrase
 					p You won't be able to undo this.
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
@@ -46,6 +47,7 @@ mixin createDeletePostModal()
 mixin createPostModals(userLoggedIn)
 	+createReplyModal(userLoggedIn)
 	+createDeletePostModal()
+	+createPinnedPostModal()
 
 mixin createFollowButton(user, isFollowing)
 	- text = isFollowing ? "Unfollow" : "Follow"
@@ -75,7 +77,8 @@ mixin createImageUploadModal()
 					button.close(type='button', data-dismiss='modal', aria-label='Close')
 					span(aria-hidden='true') &times;
 				.modal-body
-					p= randomPhrase
+					i
+						p= randomPhrase
 					input#filePhoto(type="file", name="filePhoto")
 
 					.imagePreviewContainer
@@ -95,7 +98,8 @@ mixin createCoverPhotoUploadModal()
 					button.close(type='button', data-dismiss='modal', aria-label='Close')
 					span(aria-hidden='true') &times;
 				.modal-body
-					p= randomPhrase
+					i
+						p= randomPhrase
 					input#coverPhoto(type="file", name="coverPhoto")
 
 					.imagePreviewContainer
@@ -103,3 +107,21 @@ mixin createCoverPhotoUploadModal()
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#coverPhotoButton.btn.btn-primary(type='button') Upload
+
+mixin createPinnedPostModal()
+	- const phrases = ["Pinning a post is like putting on your fanciest outfit - let's make sure your profile is dressed to impress.","Let's face it, that post is like the only good part of your profile. Pin it and pretend the rest doesn't exist.","Let's face it, that post is carrying the whole weight of your profile. Pin it to the top and take some of the pressure off the other posts.","That post is like the life raft in the ocean of your profile. Pin it to the top and hope it keeps the rest of your profile from sinking.","Pinning a post is like putting on your superhero cape - let's hope the post you picked is the hero that saves your profile from mediocrity."]
+	- const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)]
+	#confirmPinModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='confirmPinModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#confirmPinModalLabel.modal-title Pin this post?
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body
+					i
+						p= randomPhrase
+					p This post will be pinned to the top of your profile, you can unpin it at any time. You can only pin one post at a time.
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button#pinPostButton.btn.btn-primary(type='button') Pin

@@ -10,6 +10,7 @@ const PostSchema = new Schema({
 	reshareUsers: [{ type: Schema.Types.ObjectId, ref: "User" }],
 	reshareData: { type: Schema.Types.ObjectId, ref: "Post" },
 	replyTo: { type: Schema.Types.ObjectId, ref: "Post" },
+	pinned: Boolean
 }, { timestamps: true });
 
 var Post = mongoose.model('Post', PostSchema);
