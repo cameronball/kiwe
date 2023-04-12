@@ -41,6 +41,7 @@ mixin createDeletePostModal()
 					button.close(type='button', data-dismiss='modal', aria-label='Close')
 					span(aria-hidden='true') &times;
 				.modal-body
+					p= randomPhrase
 					p You won't be able to undo this.
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
