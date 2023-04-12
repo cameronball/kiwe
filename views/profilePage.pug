@@ -20,7 +20,7 @@ block content
 			.coverPhotoContainer
 
 				.userImageContainer
-					img(src=profileUser.profilePic, alt="User profile image")
+					img(src=profileUser.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image")
 					if profileUser._id == userLoggedIn._id
 						button.profilePictureButton(data-toggle="modal" data-target="#imageUploadModal")
 							i.fas.fa-camera
