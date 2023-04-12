@@ -501,6 +501,16 @@ button span {
     
 }
 
+.userDetailsContainer {
+    position: relative;
+}
+
+.followButtonContainer {
+    position:absolute;
+    top:0;
+    right:0;
+}
+
 #imagePreview,
 #coverPreview{
     display: block;
