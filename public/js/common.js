@@ -1,5 +1,6 @@
 // Globals
 var cropper;
+var timer;
 
 $("#postTextarea, #replyTextarea").keyup(event => {
     var textbox = $(event.target);
@@ -233,6 +234,29 @@ $("#coverPhotoButton").click(() => {
         });
     });
 });
+
+$("#userSearchTextbox").keydown(function(event) {
+	clearTimeout(timer);
+	var textbox = $(event.target);
+	var value = textbox.val();
+
+    if(value="" && event.keyCode == 8) {
+        // remove user from selection
+        // implement later
+        return;
+    }
+
+	timer = setTimeout(() => {
+		value = textbox.val().trim();
+		if (value == "") {
+			$(".resultsContainer").html("");
+			return;
+		}
+		else {
+			searchUsers(value);
+		}
+	}, 0.1);
+})
 
 $("#replyModal").on("hidden.bs.modal", () => $("#originalPostContainer").html(""))
 
@@ -583,4 +607,9 @@ function createUserHtml(userData, showFollowButton) {
 					${followText}
 				</div>
 			</div>`;
+}
+
+function searchUsers(searchTerm) {
+    //implement search later
+    console.log("test");
 }
