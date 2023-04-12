@@ -27,11 +27,7 @@ mixin createReplyModal(userLoggedIn)
 					button#submitReplyButton.btn.btn-primary(type='button', disabled="") Reply
 
 mixin createDeletePostModal()
-	- const phrases = ["You know what they say - 'If at first you don't succeed, delete your post and try again.'",
-	"Let's be real, that post was a bit of a hot mess. Deleting it might just be the best decision you'll make all day.",
-	"You're not really going to leave that cringey post up for all your followers to see, are you? Delete it like it never happened.",
-	"Sure, you could keep that embarrassing post up for all eternity, but why not do yourself a favor and delete it? Trust me, your future self will thank you.",
-	"I'm not saying that post was bad, but...okay, fine, I am saying that. Delete it and start fresh - you'll thank me later."	]
+	- const phrases = ["You know what they say - 'If at first you don't succeed, delete your post and try again.'","Let's be real, that post was a bit of a hot mess. Deleting it might just be the best decision you'll make all day.","You're not really going to leave that cringey post up for all your followers to see, are you? Delete it like it never happened.","Sure, you could keep that embarrassing post up for all eternity, but why not do yourself a favor and delete it? Trust me, your future self will thank you.","I'm not saying that post was bad, but...okay, fine, I am saying that. Delete it and start fresh - you'll thank me later."]
 	- const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)]
 	#deletePostModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='deletePostModalLabel', aria-hidden='true')
 		.modal-dialog(role='document')
