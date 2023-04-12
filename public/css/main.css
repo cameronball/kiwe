@@ -414,6 +414,10 @@ button span {
     display: block;
 }
 
+.coverPhotoContainer .userImageContainer img {
+    min-height:120px;
+}
+
 #imagePreview {
     display: block;
     max-width:100%;
