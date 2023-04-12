@@ -519,7 +519,7 @@ function outputPosts(results, container) {
 	$('[data-toggle="tooltip"]').tooltip()
 
 	if (results.length == 0) {
-		container.append("<span class='noResults'>Nothing to show.</span>");
+		container.append("<span class='noResults'>Nothing to show :(</span>");
 	}
 }
 
@@ -549,7 +549,7 @@ function outputUsers(results, container) {
 	});
 
 	if(results.length == 0) {
-		container.append(`<center><br><h1>Nothing to see here :(</h1><br><a href='/profile/${profileUserId}' id='submitPostButton'>Back to profile</a></center>`);
+		container.append(`<span class='noResults'>Nothing to show :(</span>`);
 	}
 }
 
