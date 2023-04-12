@@ -28,6 +28,10 @@ router.post("/", async (req, res, next) => {
   payload.pageTitle = "Register";
 
   if (firstName && lastName && username && email && password) {
+    firstName=firstName.replace(/[&\/\\#, +()$~%'":*?<>{}]/g, '');
+    lastName=lastName.replace(/[&\/\\#, +()$~%'":*?<>{}]/g, '');
+    username=username.replace(/[&\/\\#, +()$~%'":*?<>{}]/g, '');
+    email=email.replace(/[&\/\\#, ()$~%'":*?<>{}]/g, '');
     var user = await User.findOne({
       $or: [
         { username: username },
