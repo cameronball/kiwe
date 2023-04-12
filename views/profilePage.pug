@@ -17,8 +17,11 @@ block content
 		- followingCount = profileUser.following.length;
 
 		.profileHeaderContainer
-			.coverPhotoContainer
-
+			.coverPhotoSection
+				.coverPhotoContainer
+					if profileUser._id == userLoggedIn._id
+						button.coverPhotoButton(data-toggle="modal" data-target="#imageUploadModal")
+							i.fas.fa-camera
 				.userImageContainer
 					img(src=profileUser.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image")
 					if profileUser._id == userLoggedIn._id
