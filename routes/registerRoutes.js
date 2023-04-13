@@ -32,6 +32,9 @@ router.post("/", async (req, res, next) => {
     lastName=lastName.replace(/[&\/\\#, +()$~%'":*?<>{}]/g, '');
     username=username.replace(/[&\/\\#, +()$~%'":*?<>{}]/g, '');
     email=email.replace(/[&\/\\#, ()$~%'":*?<>{}]/g, '');
+    username=username.toLowerCase();
+    email=email.toLowerCase();
+    
     var user = await User.findOne({
       $or: [
         { username: username },

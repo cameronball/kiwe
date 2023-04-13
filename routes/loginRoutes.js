@@ -22,11 +22,14 @@ router.post("/", async (req, res, next) => {
   var payload = req.body;
   payload.pageTitle = "Login";
 
-  if (req.body.logUsername && req.body.logPassword) {
+  username=req.body.logUsername.trim().toLowerCase();
+  password=req.body.logPassword.trim();
+
+  if (username && password) {
     var user = await User.findOne({
       $or: [
-        { username: req.body.logUsername },
-        { email: req.body.logUsername }
+        { username: username },
+        { email: username }
       ]
     })
     .catch((error) => {
