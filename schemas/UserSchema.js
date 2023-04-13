@@ -16,6 +16,7 @@ const UserSchema = new Schema({
     admin: { type: Boolean, default: false },
     following: [{ type: Schema.Types.ObjectId, ref: "User" }],
     followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    verifiedBrand: { type: Boolean, default: false },
 }, { timestamps: true });
 
 var User = mongoose.model('User', UserSchema);

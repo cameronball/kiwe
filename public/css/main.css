@@ -71,13 +71,12 @@ button {
     color: var(--greyButtonText);
 }
 
-button i,
-button span {
+button i, button span {
     pointer-events: none;
 }
 
 .mainSectionContainer {
-    padding:  0;
+    padding: 0;
     border-left: 1px solid var(--lightGrey);
     border-right: 1px solid var(--lightGrey);
     display: flex;
@@ -124,6 +123,7 @@ button span {
     border-radius: 50%;
     background-color: white;
 }
+
 .textareaContainer {
     flex: 1;
     padding-left: var(--spacing);
@@ -173,9 +173,7 @@ button span {
     font-weight: bold;
 }
 
-.username,
-.date,
-.datePlaceholder {
+.username, .date, .datePlaceholder {
     color: var(--greyText)
 }
 
@@ -205,8 +203,7 @@ button span {
     text-decoration: underline;
 }
 
-.header a,
-.header span {
+.header a, .header span {
     padding-right: 0px;
 }
 
@@ -264,18 +261,26 @@ button span {
 }
 
 .header {
-    display:flex;
+    display: flex;
+    height: 1.2em;
 }
 
-@media screen and (max-width: 440px){
+@media screen and (max-width: 440px) {
     .header {
-        font-size: 11px }
+        font-size: 11px
+    }
+
     .replyFlag {
-        font-size: 13px }
+        font-size: 13px
+    }
+
     .col-2 {
-        max-width:20% !important }
+        max-width: 20% !important
+    }
+
     .col-10 {
-        max-width: 80% }
+        max-width: 80%
+    }
 }
 
 .date {
@@ -290,6 +295,7 @@ button span {
     .date {
         display: inherit;
     }
+
     .datePlaceholder {
         display: none;
     }
@@ -298,7 +304,7 @@ button span {
 .profileHeaderContainer .coverPhotoSection {
     height: 320px;
     background-color: var(--blue);
-    position:relative;
+    position: relative;
 }
 
 .profileHeaderContainer .userImageContainer {
@@ -306,11 +312,10 @@ button span {
     width: 120px;
     margin-left: 30px;
     position: absolute;
-    bottom:-60px;
-
+    bottom: -60px;
     display: flex;
     align-items: center;
-        justify-content: center;
+    justify-content: center;
 }
 
 .profileHeaderContainer .userImageContainer img {
@@ -322,6 +327,7 @@ button span {
     padding: var(--spacing);
     min-height: 60px;
 }
+
 .profileButton, .followButton {
     border: 1px solid var(--blue);
     color: var(--blue);
@@ -330,8 +336,8 @@ button span {
     border-radius: 60px;
     display: inline-block;
     margin-left: var(--spacing);
-    min-height:36px;
-    min-width:38px;
+    min-height: 36px;
+    min-width: 38px;
 }
 
 .profileButton:hover, .followButton:hover {
@@ -340,7 +346,7 @@ button span {
 }
 
 .followButton span {
-    margin-left:0.3em
+    margin-left: 0.3em
 }
 
 .followButton.following {
@@ -350,7 +356,7 @@ button span {
 
 .profileHeaderContainer .userDetailsContainer {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     padding: 0 1.5em
 }
 
@@ -361,7 +367,7 @@ button span {
 }
 
 .followersContainer span:not(.value) {
-    color:var(--greyText);
+    color: var(--greyText);
 }
 
 .followersContainer a {
@@ -382,7 +388,7 @@ button span {
 .tab {
     flex: 1;
     height: 52px;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     color: var(--greyText);
@@ -396,23 +402,24 @@ button span {
 
 .tab:hover {
     color: black;
-    background-color: #eeeeee 
+    background-color: #eeeeee
 }
 
 .noResults {
-    font-weight:bold;
-    display:flex;
+    font-weight: bold;
+    display: flex;
     justify-content: center;
-    padding:var(--spacing)
+    padding: var(--spacing)
 }
 
 .resultsContainer {
     display: flex;
     flex-direction: column;
 }
+
 .resultsContainer .user {
     padding: var(--spacing);
-    display:flex;
+    display: flex;
     border-bottom: 1px solid var(--lightGrey);
 }
 
@@ -426,31 +433,31 @@ button span {
 }
 
 .profilePictureButton, .coverPhotoButton {
-    position:absolute;
-    font-size:50px;
+    position: absolute;
+    font-size: 50px;
     color: rgb(0,0,0,0.6);
-    display:none;
+    display: none;
 }
 
-.userImageContainer:hover .profilePictureButton, 
-.coverPhotoContainer:hover > .coverPhotoButton {
+.userImageContainer:hover .profilePictureButton, .coverPhotoContainer:hover > .coverPhotoButton {
     display: block;
 }
 
 .coverPhotoSection .userImageContainer img {
-    min-height:120px;
+    min-height: 120px;
 }
 
 .coverPhotoContainer {
     display: flex;
     align-items: center;
     justify-content: center;
-    height:100%
+    height: 100%
 }
+
 .coverPhotoContainer img {
-    width:100%;
-    height:100%;
-    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .postBody span {
@@ -479,26 +486,25 @@ button span {
 }
 
 .searchBarContainer {
-    position:relative;
+    position: relative;
     color: var(--greyText);
-    padding:10px var(--spacing);
+    padding: 10px var(--spacing);
 }
 
 .searchBarContainer i {
     position: absolute;
-    top:20px;
-    left:30px;
+    top: 20px;
+    left: 30px;
 }
 
 .searchBarContainer #searchBox {
     height: 36px;
-    width:100%;
-    padding:5px 15px 5px 40px;
-    border-radius:50px;
+    width: 100%;
+    padding: 5px 15px 5px 40px;
+    border-radius: 50px;
     border: none;
-    background-color:var(--lightGrey);
-    color:var(--greyText);
-    
+    background-color: var(--lightGrey);
+    color: var(--greyText);
 }
 
 .userDetailsContainer {
@@ -506,29 +512,28 @@ button span {
 }
 
 .followButtonContainer {
-    position:absolute;
-    top:0;
-    right:0;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
-#imagePreview,
-#coverPreview{
+#imagePreview, #coverPreview {
     display: block;
-    max-width:100%;
-    width:100%;
+    max-width: 100%;
+    width: 100%;
 }
 
 .chatPageContainer {
-    display:flex;
-    flex-direction:column;
-    min-height:0;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
 }
 
 .chatTitleBar {
     border-bottom: 1px solid var(--lightGrey);
-    display:flex;
-    align-items:center;
-    min-height:60px;
+    display: flex;
+    align-items: center;
+    min-height: 60px;
     padding: 15px;
 }
 
@@ -537,22 +542,27 @@ button span {
 }
 
 #userSearchTextbox {
-    border:none;
+    border: none;
     flex: 1;
     font-weight: 200;
     min-width: 350px;
 }
 
 #createChatButton {
-    border:none;
-    background-color:var(--blue);
-    color:#fff;
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
     padding: 7px 20px;
     margin: 10px auto;
     border-radius: 50px;
 }
 
 #createChatButton:disabled {
-    background-color:var(--lightGrey);
-    color:var(--greyText);
+    background-color: var(--lightGrey);
+    color: var(--greyText);
+}
+
+.userDetailsContainer .header img {
+    height: 83.4%;
+    margin-top:3px
 }

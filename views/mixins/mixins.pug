@@ -1,7 +1,10 @@
 mixin createPostForm(userLoggedIn)
 	.postFormContainer
 		.userImageContainer
-			img(src=userLoggedIn.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';" alt="User's profile picture")
+			if userLoggedIn.verifiedBrand
+				img(src=userLoggedIn.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image", style="border-radius: 10%;")
+			else
+				img(src=userLoggedIn.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image")
 		.textareaContainer
 			textarea#postTextarea(placeholder="What's happening?")
 			.buttonsContainer
