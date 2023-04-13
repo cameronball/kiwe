@@ -657,7 +657,27 @@ function outputSelectableUsers(results, container) {
 
 function userSelected(user) {
     selectedUsers.push(user);
+    updateSelectedUsersHtml();
     $("#userSearchTextbox").val("").focus();
     $(".resultsContainer").html("");
     $("#createChatButton").prop("disabled", false);
+}
+
+function updateSelectedUsersHtml() {
+    var element = []
+    selectedUsers.forEach(user => {
+        var nameSpace = " "
+        if(user.lastName == null){
+            user.lastName = "";
+        }
+        if(user.lastName == ""){
+            nameSpace = "";
+        }
+        var name = user.firstName + nameSpace + user.lastName;
+        var userElement = $(`<span class='selectedUser'>${name}</span>`);
+        element.push(userElement);
+    });
+
+    $(".selectedUser").remove();
+    $("#selectedUsers").prepend(element);
 }
