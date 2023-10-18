@@ -33,5 +33,22 @@ $(".inputTextbox").keydown((event) => {
 });
 
 function messageSubmitted() {
-	alert(1);
+	var content = $(".inputTextbox").val().trim();
+
+	if(content != "") {
+		sendMessage(content);
+		$(".inputTextbox").val("");
+	}
+}
+
+function sendMessage(content) {
+	$.post("/api/messages", { content: content, chatId: chatId }, (data, status, xhr) => {
+		if(xhr.status != 201) {
+			alert("Could not send message");
+			$(".inputTextbox").val(content);
+			return;
+		}
+
+		console.log(data);
+	})
 }
