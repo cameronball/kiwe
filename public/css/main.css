@@ -737,3 +737,7 @@ button i, button span {
 .chatImagesContainer img:not(:last-child) {
     margin-left: -10px;
 }
+
+#chatNameTextbox {
+    width: 100%;
+}
