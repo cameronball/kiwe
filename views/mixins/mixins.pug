@@ -165,5 +165,8 @@ mixin createChatImage(chatData, userLoggedIn)
 		each user in chatData.users
 			if chatData.users.length != 1 && user._id == userLoggedIn._id
 				- continue
+			else if i >= maxImagesToShow
+				- break
 
 			img(src=user.profilePic alt="User's profile picture", title=user.firstName)
+			- i++
