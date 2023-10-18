@@ -52,7 +52,7 @@ router.get("/:chatId", async (req, res, next) => {
 	}
 
 	if(chat == null) {
-		payload.errorMessage = "Chat not found or you do not have permission to view it.";
+		payload.errorMessage = "Chat not found.";
 	} else {
 		payload.chat = chat;
 	}
