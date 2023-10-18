@@ -27,7 +27,7 @@ router.post("/", async (req, res, next) => {
   var payload = req.body;
   payload.pageTitle = "Register";
 
-  if (firstName && lastName && username && email && password) {
+  if (firstName && username && email && password) {
     firstName=firstName.replace(/[&\/\\#, +()$~%'":*?<>{}]/g, '');
     lastName=lastName.replace(/[&\/\\#, +()$~%'":*?<>{}]/g, '');
     username=username.replace(/[&\/\\#, +()$~%'":*?<>{}]/g, '');

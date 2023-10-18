@@ -241,9 +241,15 @@ $("#userSearchTextbox").keydown(function(event) {
 	var textbox = $(event.target);
 	var value = textbox.val();
 
-    if(value="" && event.keyCode == 8) {
-        // remove user from selection
-        // implement later
+    if(value=="" && (event.which == 8 || event.keyCode == 8)) {
+        selectedUsers.pop();
+        updateSelectedUsersHtml();
+        $(".resultsContainer").html("");
+
+        if(selectedUsers.length == 0) {
+            $("#createChatButton").prop("disabled", true);
+        }
+        
         return;
     }
 
@@ -256,8 +262,19 @@ $("#userSearchTextbox").keydown(function(event) {
 		else {
 			searchUsers(value);
 		}
-	}, 0.1);
+	}, 5);
 })
+
+$("#createChatButton").click(() => {
+    var data = JSON.stringify(selectedUsers);
+
+    $.post("/api/chats", { users: data }, chat => {
+
+        if(!chat || !chat._id) return alert("Invalid response from server");
+
+        window.location.href = `/messages/${chat._id}`;
+    })
+});
 
 $("#replyModal").on("hidden.bs.modal", () => $("#originalPostContainer").html(""))
 
@@ -644,7 +661,7 @@ function outputSelectableUsers(results, container) {
             return;
         }
 
-		var html = createUserHtml(result, true);
+		var html = createUserHtml(result, false);
         var element = $(html);
         element.click(() => userSelected(result));
 		container.append(element);
