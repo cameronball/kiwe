@@ -3,6 +3,7 @@ const app = express();
 const router = express.Router();
 const bodyParser = require("body-parser")
 const bcrypt = require('bcrypt'); 
+const mongoose = require("mongoose");
 const User = require('../schemas/UserSchema');
 const Chat = require('../schemas/ChatSchema');
 
@@ -33,12 +34,18 @@ router.get("/:chatId", async (req, res, next) => {
 
 	var userId = req.session.user;
 	var chatId = req.params.chatId;
+	var isValidId = mongoose.isValidObjectId(chatId);
 
 	var payload = {
 		pageTitle: "Chat",
 		userLoggedIn: req.session.user,
 		userLoggedInJs: JSON.stringify(req.session.user),
 	};
+
+	if(!isValidId) {
+		payload.errorMessage = "Chat not found.";
+		return res.status(200).render("chatPage", payload);
+	}
 
 	var chat = await Chat.findOne({ _id: chatId, users: { $elemMatch: { $eq: userId } } })
 	.populate("users");
