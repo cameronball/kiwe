@@ -153,14 +153,14 @@ mixin createChatImage(chatData, userLoggedIn)
 		return 
 
 	- var i = 0
-	- var maxImagesToShow = 3
+	- var maxImagesToShow = 4
 	- var remainingUsers = chatData.users.length - maxImagesToShow
 	- remainingUsers-- // We wont show the current user in the chat images
 
 	.chatImagesContainer
 		if remainingUsers > 0
 			.userCount
-				span +#{remainingUsers}
+				span +#{remainingUsers+1}
 
 		each user in chatData.users
 			if chatData.users.length != 1 && user._id == userLoggedIn._id

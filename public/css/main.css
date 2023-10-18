@@ -719,5 +719,21 @@ button i, button span {
     height: 40px;
     border: 2px solid #fff;
     border-radius: 50%;
+}
+
+.chatImagesContainer .userCount {
+    height: 40px;
+    width: 40px;
+    background-color: rgb(230,230,230, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    border: 2px solid #fff;
+    margin-left: -40px;
+}
+
+.chatImagesContainer img:not(:last-child) {
     margin-left: -10px;
 }
