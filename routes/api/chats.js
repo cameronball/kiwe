@@ -48,4 +48,13 @@ router.get("/", async (req, res, next) => {
 	})
 });
 
+router.put("/:chatId", async (req, res, next) => {
+	Chat.findByIdAndUpdate(req.params.chatId, req.body)
+	.then(results => res.sendStatus(204))
+	.catch(error => {
+		console.log(error);
+		res.sendStatus(400);
+	})
+});
+
 module.exports = router;
