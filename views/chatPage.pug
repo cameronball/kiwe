@@ -8,5 +8,19 @@ block content
 		script.
 			var chatId = '!{chat._id}';
 
+		.chatPageContainer 
+			.chatTitleBarContainer
+				+createChatImage(chat, userLoggedIn)
+				span#chatName Chat Placeholder 
+
+			.mainContentContainer 
+				.chatContainer
+					.chatMessages
+
+					.footer
+						textarea(name="messageInput", placeholder="Type a message...")
+						button.sendMessageButton 
+							i.fa-solid.fa-paper-plane
+
 block scripts
 	script(src="/js/chatPage.js")
