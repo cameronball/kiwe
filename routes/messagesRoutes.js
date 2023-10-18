@@ -34,19 +34,28 @@ router.get("/:chatId", async (req, res, next) => {
 	var userId = req.session.user;
 	var chatId = req.params.chatId;
 
-	var chat = await Chat.findOne({ _id: chatId, users: { $elemMatch: { $eq: userId } } })
-	.populate("users");
-
-	if(chat == null) {
-		// TODO
-	}
-
 	var payload = {
 		pageTitle: "Chat",
 		userLoggedIn: req.session.user,
 		userLoggedInJs: JSON.stringify(req.session.user),
-		chat: chat
 	};
+
+	var chat = await Chat.findOne({ _id: chatId, users: { $elemMatch: { $eq: userId } } })
+	.populate("users");
+
+	if(chat == null) {
+		var userFound = await User.findById(chatId);
+
+		if(userFound != null) {
+			chat = await getChatByUserId(userFound._id, userId);
+		}
+	}
+
+	if(chat == null) {
+		payload.errorMessage = "Chat not found or you do not have permission to view it.";
+	} else {
+		payload.chat = chat;
+	}
 	
   	res.status(200).render("chatPage", payload);
 })
