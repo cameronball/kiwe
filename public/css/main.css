@@ -1616,3 +1616,15 @@ button i, button span {
 .chatMessages .message.last {
     margin-bottom: 7px;
 }
+
+.loadingSpinnerContainer {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.loadingSpinnerContainer img {
+    width: 15%;
+    margin-top: -50vh;
+}
