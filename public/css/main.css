@@ -1604,3 +1604,20 @@ button i, button span {
     font-weight: 500;
     font-size:12px;
 }
+
+.chatMessages .imageContainer {
+    height: 30px;
+    width: 30px;
+    margin-right: 7px;
+}
+
+.chatMessages img {
+    height: 100%;
+    border-radius: 100%;
+    margin-top: -2px;
+    vertical-align: bottom;
+}
+
+.chatMessages .message.last {
+    margin-bottom: 7px;
+}

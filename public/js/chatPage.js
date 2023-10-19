@@ -102,7 +102,6 @@ function createMessageHtml(message, nextMessage, lastSenderId) {
 	var isFirst = lastSenderId != currentSenderId;
 	var isLast = nextSenderId != currentSenderId;
 
-
 	var isMine = message.sender._id == userLoggedIn._id;
 	var liClassName = isMine ? "mine" : "theirs";
 
@@ -115,11 +114,21 @@ function createMessageHtml(message, nextMessage, lastSenderId) {
 		}
 	}
 
+	var profileImage = "";
 	if(isLast) {
 		liClassName += " last";
+		profileImage = `<img src='${sender.profilePic}'>`;
+	}
+
+	var imageContainer = "";
+	if(!isMine) {
+		imageContainer = `<div class='imageContainer'>
+							${profileImage}
+						</div>`;
 	}
 
 	return `<li class='message ${liClassName}'>
+		${imageContainer}
 		<div class='messageContainer'>
 			${nameElement}
 			<span class='messageBody'>
