@@ -764,3 +764,7 @@ button i, button span {
     flex-direction: column;
     max-width: 55%;
 }
+
+.tooltip {
+    left: 5px !important;
+}
