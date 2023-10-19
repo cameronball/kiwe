@@ -1561,6 +1561,14 @@ button i, button span {
     max-width: 55%;
 }
 
+.chatMessages .message.mine .messageContainer {
+    align-items: flex-end;
+}
+
+.chatMessages .message.mine .messageContainer {
+    align-items: flex-start;
+}
+
 .tooltip {
     left: 5px !important;
 }
@@ -1589,4 +1597,10 @@ button i, button span {
 
 .chatMessages .message.theirs.last:not(.first) .messageBody {
     border-top-left-radius: 2px;
+}
+
+.senderName {
+    color: rgba(0,0,0, 0.5);
+    font-weight: 500;
+    font-size:12px;
 }
