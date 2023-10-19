@@ -400,7 +400,12 @@ function createPostHtml(postData, boldFont = false) {
         return console.log("User object not populated");
     }
 
-    var displayName = postedBy.firstName + " " + postedBy.lastName;
+    if (postedBy.lastName == "") {
+        var displayName = postedBy.firstName;
+    }
+    else {
+        var displayName = postedBy.firstName + " " + postedBy.lastName;
+    }
     var timestamp = timeDifference(new Date(), new Date(postData.createdAt));
 
     var likeButtonActiveClass = postData.likes.includes(userLoggedIn._id) ? "active" : "";
