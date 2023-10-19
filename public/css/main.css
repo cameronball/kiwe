@@ -536,13 +536,6 @@ button i, button span {
     width: 100%;
 }
 
-.chatPageContainer {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    flex: 1;
-}
-
 .chatTitleBar {
     border-bottom: 1px solid var(--lightGrey);
     display: flex;
@@ -969,6 +962,7 @@ button i, button span {
 .mainContentContainer {
     flex: 1;
     display: flex;
+    overflow-y: hidden;
 }
 
 .postContentContainer {
@@ -1337,6 +1331,7 @@ button i, button span {
     flex-direction: column;
     min-height: 0;
     flex: 1;
+    flex-basis: 0;
 }
 
 .chatTitleBar {
