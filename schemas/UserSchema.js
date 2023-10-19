@@ -9,6 +9,7 @@ const UserSchema = new Schema({
     email: { type: String, required: true, trim: true, unique: true },
     password: { type: String, required: true },
     profilePic: { type: String, default: "/images/profilePic.jpeg" },
+    bio: { type: String, default: "" },
     coverPhoto: { type: String },
     likes: [{ type: Schema.Types.ObjectId, ref: "Post" }],
     reshares: [{ type: Schema.Types.ObjectId, ref: "Post" }],

@@ -3,7 +3,6 @@ const app = express();
 const router = express.Router();
 const bodyParser = require("body-parser")
 const sanitizer = require('sanitizer');
-const mongoose = require('mongoose');
 const User = require('../../schemas/UserSchema');
 const Post = require('../../schemas/PostSchema');
 const Chat = require('../../schemas/ChatSchema');
@@ -25,8 +24,8 @@ router.post("/", async (req, res, next) => {
 	
 	Message.create(newMessage)
 	.then(async message => {
-		message = await message.populate("sender").execPopulate();
-		message = await message.populate("chat").execPopulate();
+		message = await message.populate("sender");
+		message = await message.populate("chat");
 		res.status(201).send(message);
 	})
 	.catch(error => {
