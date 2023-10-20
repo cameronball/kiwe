@@ -32,6 +32,7 @@ const profileRoute = require('./routes/profileRoutes');
 const uploadRoute = require('./routes/uploadRoutes');
 const searchRoute = require('./routes/searchRoutes');
 const messagesRoute = require('./routes/messagesRoutes');
+const notificationsRoute = require('./routes/notificationRoutes');
 
 // Api routes
 const postApiRoute = require('./routes/api/posts');
@@ -42,16 +43,18 @@ const messagesApiRoute = require('./routes/api/messages');
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/logout", logoutRoute);
-app.use("/api/posts", postApiRoute);
-app.use("/api/users", usersApiRoute);
-app.use("/api/chats", chatsApiRoute);
-app.use("/api/messages", messagesApiRoute);
 app.use("/post", middleware.requireLogin, postRoute);
 app.use("/profile", middleware.requireLogin, profileRoute);
 app.use("/uploads", uploadRoute);
 app.use("/search", middleware.requireLogin, searchRoute);
 app.use("/messages", middleware.requireLogin, messagesRoute);
+app.use("/notifications", middleware.requireLogin, notificationsRoute);
 
+// Api routes
+app.use("/api/posts", postApiRoute);
+app.use("/api/users", usersApiRoute);
+app.use("/api/chats", chatsApiRoute);
+app.use("/api/messages", messagesApiRoute);
 
 app.get("/", middleware.requireLogin, (req, res, next) => {
 
