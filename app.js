@@ -6,6 +6,7 @@ const path = require('path')
 const bodyParser = require("body-parser")
 const mongoose = require("./database");
 const session = require('express-session');
+const sha512 = require('js-sha512').sha512;
 
 const server = app.listen(port, () => console.log("Server listening on port " + port));
 const io = require('socket.io')(server, { pingTimeout: 60000 });
@@ -64,5 +65,8 @@ app.get("/", middleware.requireLogin, (req, res, next) => {
 })
 
 io.on("connection", (socket) => {
-  console.log("SocketIO connection");
+  socket.on("setup", userData => {
+    socket.join(sha512(userData._id));
+    socket.emit("connected");
+  })
 });
