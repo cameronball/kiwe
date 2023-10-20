@@ -10,5 +10,16 @@ const NotificationSchema = new Schema({
 	entityId : Schema.Types.ObjectId,
 }, { timestamps: true });
 
+NotificationSchema.statics.insertNotification = async (userTo, userFrom, notificationType, entityId) => {
+	var data = {
+		userTo: userTo,
+		userFrom: userFrom,
+		notificationType: notificationType,
+		entityId: entityId
+	};
+	await Notification.deleteOne(data).catch(error => console.log(error));
+	return Notification.create(data).catch(error => console.log(error));
+};
+
 var Notification = mongoose.model('Notification', NotificationSchema);
-module.exports = Post;
+module.exports = Notification;
