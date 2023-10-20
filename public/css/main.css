@@ -742,7 +742,6 @@ button i, button span {
     display: flex;
     align-items: flex-end;
     flex-shrink: 0;
-    -webkit-flex: 0;
 }
 
 .chatMessages .message .messageBody {
@@ -1242,6 +1241,10 @@ button i, button span {
     display: none;
 }
 
+ul {
+    margin: 0;
+}
+
 .userImageContainer:hover .profilePictureButton, .coverPhotoContainer:hover > .coverPhotoButton {
     display: block;
 }
@@ -1540,7 +1543,6 @@ button i, button span {
     display: flex;
     align-items: flex-end;
     flex-shrink: 0;
-    -webkit-flex: 0;
 }
 
 .chatMessages .message .messageBody {
