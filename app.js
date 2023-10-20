@@ -65,8 +65,13 @@ app.get("/", middleware.requireLogin, (req, res, next) => {
 })
 
 io.on("connection", (socket) => {
+
   socket.on("setup", userData => {
     socket.join(sha512(userData._id));
     socket.emit("connected");
   })
+
+  socket.on("join room", room => socket.join(room));
+  socket.on("typing", room => socket.in(room).emit("typing"));
+
 });
