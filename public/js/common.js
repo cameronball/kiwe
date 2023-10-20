@@ -725,3 +725,12 @@ function getOtherChatUsers(users) {
 
 	return users.filter(user => user._id != userLoggedIn._id);
 }
+
+function messageReceived(newMessage) {
+    if($(".chatContainer").length == 0) {
+        //TODO Show popup notification
+    }
+    else {
+        addChatMessageHtml(newMessage);
+    }
+}
