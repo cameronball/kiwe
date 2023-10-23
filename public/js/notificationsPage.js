@@ -4,6 +4,8 @@ $(document).ready(() => {
 	});
 });
 
+$("#markNotificationsAsRead").click(() => markNotificationsAsOpened());
+
 function outputNotificationsList(notifications, container,) {
 	var increment = 0;
 	for (const notification of notifications) {
