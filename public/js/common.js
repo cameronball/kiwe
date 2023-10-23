@@ -376,6 +376,17 @@ $(document).on("click", ".followButton", (event) => {
     })
 });
 
+$(document).on("click", ".notification.active", (event) => {
+    var container = $(event.target);
+    var notificationId = container.data().id;
+    
+    var href = container.attr("href");
+    event.preventDefault();
+
+    var callback = () => window.location = href;
+    markNotificationsAsOpened(notificationId, callback);
+});
+
 function getPostIdFromElement(element) {
     var isRoot = element.hasClass("post");
     var rootElement = isRoot == true ? element : element.closest(".post");
@@ -733,4 +744,15 @@ function messageReceived(newMessage) {
     else {
         addChatMessageHtml(newMessage);
     }
+}
+
+function markNotificationsAsOpened(notificationId = null, callback = null) {
+    if(callback == null) callback = () => location.reload();
+
+    var url = notificationId != null ? `/api/notifications/${notificationId}/markAsOpened` : `/api/notifications/markAsOpened`;
+    $.ajax({
+        url: url,
+        type: "PUT",
+        success: () => callback()
+    })
 }

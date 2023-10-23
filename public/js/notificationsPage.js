@@ -56,7 +56,7 @@ function getNotificationPostHtml(notification, increment) {
 
 		var reshareText = '';
 		if(isReshare) {
-			reshareText = `<span><i class='fa-solid fa-repeat'></i>&nbsp;&nbsp;Reshared by <a href='/profile/${resharedBy}'>@${resharedBy}</a></span>`
+			reshareText = `<span><i class='fa-solid fa-repeat'></i>&nbsp;&nbsp;Reshared by <a>@${resharedBy}</a></span>`
 		}
 		
 		var replyFlag = '';
@@ -71,7 +71,7 @@ function getNotificationPostHtml(notification, increment) {
 
 			var replyToUsername = postData.replyTo.postedBy.username;
 			replyFlag = `<div class='replyFlag'>
-							Replying to <a href='/profile/${replyToUsername}'>@${replyToUsername}</a>
+							Replying to <a>@${replyToUsername}</a>
 						</div>`
 		}
 
@@ -110,7 +110,7 @@ function getNotificationPostHtml(notification, increment) {
 														</div>
 														<div class='postContentContainer'>
 															<div class='header'>
-																<span><a href='/profile/${postedBy.username}' class='displayName'>${displayName}</a>${verifiedBrand}${verified}${admin}${verifiedGovernment}</span>
+																<span><a class='displayName'>${displayName}</a>${verifiedBrand}${verified}${admin}${verifiedGovernment}</span>
 																<span class='username'>&nbsp;@${postedBy.username}</span>
 																<span class='date'>&nbsp;&nbsp;•&nbsp;&nbsp;${timestamp}</span>
 																<span class='datePlaceholder'></span>
@@ -135,7 +135,7 @@ function createNotificationHtml(notification, increment) {
 		getNotificationPostHtml(notification, increment);
 	}
 
-	return `<a href="${url}" class="resultListItem notification ${className}">
+	return `<a href="${url}" class="resultListItem notification ${className}" data-id="${notification._id}">
 				<div class="resultsImageContainer">
 					<img src="${userFrom.profilePic}">
 				</div>
