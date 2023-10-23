@@ -2,17 +2,53 @@ extends layouts/main-layout.pug
 
 block content
 	.settingsContainer
-		button(data-toggle="modal" data-target="#changeUsernameModal	")
+		button(data-toggle="modal" data-target="#changeUsernameModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
 					i(class="fa-solid fa-user")
 				span Change username
 	.settingsContainer
-		a
+		button(data-toggle="modal" data-target="#changeEmailModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-at")
+				span Change email
+	.settingsContainer
+		button(data-toggle="modal" data-target="#changeBioModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-pen-to-square")
+				span Change bio
+	.settingsContainer
+		button(data-toggle="modal" data-target="#changeProfilePictureModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-user-circle")
+				span Change profile picture
+	.settingsContainer
+		button(data-toggle="modal" data-target="#changePasswordModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
 					i(class="fa-solid fa-key")
 				span Change password
+	.settingsContainer
+		button(data-toggle="modal" data-target="#legalModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-scale-balanced")
+				span Legal (Terms of Use, Privacy Policy, Open source acknowledgements etc.)
+	.settingsContainer
+		button(data-toggle="modal" data-target="#2faModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-user-lock")
+				span 2FA (Two-factor authentication)
+	.settingsContainer
+		button(data-toggle="modal" data-target="#deleteAccountModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-user-slash")
+				span Delete account
 	
 	+createChangeUsernameModal()
 
