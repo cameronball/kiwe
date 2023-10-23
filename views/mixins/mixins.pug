@@ -184,3 +184,21 @@ mixin createChatNameModal(chat)
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#chatNameButton.btn.btn-primary(type='button') Save
+
+mixin createChangeUsernameModal()
+	#changeUsernameModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='changeUsernameModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#changeUsernameModalLabel.modal-title Change your username
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body
+					span.errorMessage
+					span Warning: Changing your username will log you out of all other devices.<br> Any characters other than a-z, 0-9 and underscores will be removed.<hr>
+					span(style="font-weight:800;") @
+					input#changeUsernameTextbox(type="text", placeholder="Enter a new username...")
+					p
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button#changeUsernameButton.btn.btn-primary(type='button') Save

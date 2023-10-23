@@ -1,0 +1,22 @@
+extends layouts/main-layout.pug
+
+block content
+	.settingsContainer
+		button(data-toggle="modal" data-target="#changeUsernameModal	")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-user")
+				span Change username
+	.settingsContainer
+		a
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-key")
+				span Change password
+	
+	+createChangeUsernameModal()
+
+
+block scripts
+	script(src="/js/home.js")
+	script(src="/js/settings.js")

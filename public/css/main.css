@@ -531,17 +531,6 @@ button i, button span {
     padding: var(--spacing)
 }
 
-.resultsContainer {
-    display: flex;
-    flex-direction: column;
-}
-
-.resultsContainer .user {
-    padding: var(--spacing);
-    display: flex;
-    border-bottom: 1px solid var(--lightGrey);
-}
-
 .user .userDetailsContainer {
     flex: 1;
     padding: 0 var(--spacing);
@@ -1092,6 +1081,17 @@ button i, button span {
     border-bottom: 1px solid var(--lightGrey);
 }
 
+.settingsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.settingsContainer .user {
+    padding: var(--spacing);
+    display: flex;
+    border-bottom: 1px solid var(--lightGrey);
+}
+
 .user .userDetailsContainer {
     flex: 1;
     padding: 0 var(--spacing);
@@ -1549,4 +1549,24 @@ ul {
     box-shadow: 2px 4px 4px rgba(0,0,0, 0.5);
     -webkit-box-shadow: 2px 4px 4px rgba(0,0,0, 0.5);
     -moz-box-shadow: 2px 4px 4px rgba(0,0,0, 0.5);
+}
+
+.resultsImageContainer i {
+    font-size: 30px;
+    display:flex;
+    margin-left: 25%;
+}
+
+.settingsListItem span {
+    font-weight:600;
+}
+
+.settingsListItem {
+    color:black;
+}
+
+.modal-body .errorMessage {
+    color: var(--red);
+    margin-left: 0px;
+    font-weight:700;
 }
