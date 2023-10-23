@@ -749,7 +749,7 @@ function getOtherChatUsers(users) {
 }
 
 function messageReceived(newMessage) {
-    if($(".chatContainer").length == 0) {
+    if($(`[data-room=${newMessage.chat._id}]`).length == 0) {
         showMessagePopup(newMessage);
     }
     else {
@@ -801,7 +801,9 @@ function createChatHtml(chatData) {
 	var image = getChatImageElements(chatData);
 	var latestMessage = getLatestMessage(chatData.latestMessage);
 
-	return `<a href='/messages/${chatData._id}' class='resultListItem'>
+    var activeClass = !chatData.latestMessage || chatData.latestMessage.readBy.includes(userLoggedIn._id) ? "" : "active";
+
+	return `<a href='/messages/${chatData._id}' class='resultListItem ${activeClass}'>
 				${image}
 				<div class='resultsDetailsContainer ellipsis'>
 					<span class='heading ellipsis'>${chatName}</span>
