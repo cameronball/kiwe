@@ -15,24 +15,25 @@ html(lang="en")
     .wrapper
       .row
         nav.col-2
-          a.blue(href="/") 
-            i.fa-solid.fa-kiwi-bird
-          a(href="/") 
-            i.fa-solid.fa-house
-          a(href="/search") 
-            i.fa-solid.fa-magnifying-glass
-          a(href="/notifications") 
-            i.fa-solid.fa-bell
-            span#notificationsBadge 8
-          a(href="/messages") 
-            i.fa-solid.fa-envelope
-            span#messagesBadge 8
-          a(href="/profile") 
-            i.fa-solid.fa-user
-          a(href="/settings") 
-            i.fa-solid.fa-cog
-          a(href="/logout") 
-            i.fa-solid.fa-right-from-bracket
+          .navBarContainer(style="position: fixed;")
+            a.blue(href="/") 
+              i.fa-solid.fa-kiwi-bird
+            a(href="/") 
+              i.fa-solid.fa-house
+            a(href="/search") 
+              i.fa-solid.fa-magnifying-glass
+            a(href="/notifications") 
+              i.fa-solid.fa-bell
+              span#notificationsBadge 8
+            a(href="/messages") 
+              i.fa-solid.fa-envelope
+              span#messagesBadge 8
+            a(href="/profile") 
+              i.fa-solid.fa-user
+            a(href="/settings") 
+              i.fa-solid.fa-cog
+            a(href="/logout") 
+              i.fa-solid.fa-right-from-bracket
         .mainSectionContainer.col-10.col-md-8.col-lg-6
           .titleContainer 
             h1 #{pageTitle}
