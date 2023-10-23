@@ -18,7 +18,6 @@ function outputNotificationsList(notifications, container,) {
 }
 
 function getNotificationPostHtml(notification, increment) {
-	console.log(notification);
 	$.get(`/api/posts/${notification.entityId}`, (post) => {
 		postData = post.postData;
 		var isReshare = postData.reshareData !== undefined;
@@ -115,7 +114,6 @@ function getNotificationPostHtml(notification, increment) {
 																<span class='username'>&nbsp;@${postedBy.username}</span>
 																<span class='date'>&nbsp;&nbsp;•&nbsp;&nbsp;${timestamp}</span>
 																<span class='datePlaceholder'></span>
-																${buttons}
 															</div>
 															${replyFlag}
 															<div class='postBody'>
@@ -130,17 +128,18 @@ function getNotificationPostHtml(notification, increment) {
 function createNotificationHtml(notification, increment) {
 	var userFrom = notification.userFrom;
 	var text = getNotificationText(notification);
+	var url = getNotificationUrl(notification);
 
 	if (notification.notificationType == "postLike" || notification.notificationType == "postReshare" || notification.notificationType == "reply") {
 		getNotificationPostHtml(notification, increment);
 	}
 
-	return `<a href="#" class="resultListItem notification">
+	return `<a href="${url}" class="resultListItem notification">
 				<div class="resultsImageContainer">
 					<img src="${userFrom.profilePic}">
 				</div>
 				<div id="${increment}" class="resultsDetailsContainer">
-					<span class="ellipsis">${text}</span>
+					<span style="font-weight:500;" class="ellipsis">${text}</span>
 				</div>
 			</a>`;
 }
@@ -176,4 +175,20 @@ function getNotificationText(notification) {
 	}
 
 	return `<span class="ellipsis">${text}</span>`;
+}
+
+function getNotificationUrl(notification) {
+
+	var url = "#";
+
+	console.log(notification.notificationType);
+
+	if(notification.notificationType == "postReshare" || notification.notificationType == "postLike" || notification.notificationType == "reply") {
+		url = `/post/${notification.entityId}`;
+	}
+	else if (notification.notificationType == "follow") {
+		url = `/profile/${notification.entityId}`;
+	}
+
+	return url;
 }
