@@ -93,11 +93,11 @@ router.post("/", async (req, res, next) => {
 	Post.create(postData)
 	.then(async newPost => {
 		newPost = await User.populate(newPost, { path: "postedBy" });
-		newPostReplyTo = await Post.populate(newPost, { path: "replyTo" });
-		newPostReplyTo = newPostReplyTo.replyTo.postedBy;
 
 		if (newPost.replyTo !== undefined) {
-			await Notification.insertNotification(newPost.replyTo.postedBy, newPostReplyTo, "reply", newPost._id);
+			newPostReplyTo = await Post.populate(newPost, { path: "replyTo" });
+			newPostReplyTo = newPostReplyTo.replyTo.postedBy;
+			await Notification.insertNotification(newPostReplyTo, newPost.postedBy._id, "reply", newPost._id);
 		}
 
 		res.status(201).send(newPost);

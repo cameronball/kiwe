@@ -187,8 +187,6 @@ function getNotificationUrl(notification) {
 
 	var url = "#";
 
-	console.log(notification.notificationType);
-
 	if(notification.notificationType == "postReshare" || notification.notificationType == "postLike" || notification.notificationType == "reply") {
 		url = `/post/${notification.entityId}`;
 	}
