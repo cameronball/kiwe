@@ -45,6 +45,7 @@ $("#submitPostButton, #submitReplyButton").click(() => {
     $.post("/api/posts", data, postData => {
 
 		if(postData.replyTo) {
+            emitNotification(postData.replyTo.postedBy);
 			location.reload();
 		}
         else {
@@ -299,6 +300,7 @@ $(document).on("click", ".likeButton", (event) => {
             if(postData.likes.includes(userLoggedIn._id)) {
                 button.addClass("active");
 				button.find("i").removeClass("fa-regular").addClass("fa-solid");
+                emitNotification(postData.postedBy);
             }
             else {
                 button.removeClass("active");
@@ -324,6 +326,7 @@ $(document).on("click", ".reshareButton", (event) => {
 
             if(postData.reshareUsers.includes(userLoggedIn._id)) {
                 button.addClass("active");
+                emitNotification(postData.postedBy);
             }
             else {
                 button.removeClass("active");
@@ -363,6 +366,7 @@ $(document).on("click", ".followButton", (event) => {
                 button.addClass("following");
                 button.find("span").text("Unfollow");
                 button.find("i").removeClass("fa-user-plus").addClass("fa-user-minus");
+                emitNotification(userId);
             }
             else {
                 button.removeClass("following");
