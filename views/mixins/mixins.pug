@@ -185,8 +185,10 @@ mixin createChatNameModal(chat)
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#chatNameButton.btn.btn-primary(type='button') Save
 
-mixin createSettingsModals()
-	+createChangeUsernameModal()
+mixin createSettingsModals(userLoggedIn)
+	+createChangeNameModal(userLoggedIn)
+	+createChangeUsernameModal(userLoggedIn)
+	+createChangeEmailModal(userLoggedIn)
 
 mixin createChangeNameModal(user)
 	#changeNameModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='changeNameModalLabel', aria-hidden='true')
@@ -207,7 +209,7 @@ mixin createChangeNameModal(user)
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#changeNameButton.btn.btn-primary(type='button') Save
 
-mixin createChangeUsernameModal()
+mixin createChangeUsernameModal(user)
 	#changeUsernameModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='changeUsernameModalLabel', aria-hidden='true')
 		.modal-dialog(role='document')
 			.modal-content
@@ -218,8 +220,25 @@ mixin createChangeUsernameModal()
 				.modal-body
 					span.errorMessage.errorMessageUsername
 					span(style="font-weight:800;") @
-					input#changeUsernameTextbox(type="text", placeholder="Enter a new username...")
+					input#changeUsernameTextbox(type="text", placeholder=user.username)
 					p
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#changeUsernameButton.btn.btn-primary(type='button') Save
+
+mixin createChangeEmailModal(user)
+	#changeEmailModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='changeEmailModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#changeEmailModalLabel.modal-title Change your email address
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body
+					span.errorMessage.errorMessageEmail
+					span(style="font-weight:800;") Email address 
+					input#emailTextbox(type="text", placeholder=user.email)
+					p
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button#changeEmailButton.btn.btn-primary(type='button') Save

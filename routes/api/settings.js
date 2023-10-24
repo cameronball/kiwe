@@ -9,6 +9,7 @@ const upload = multer({ dest: 'uploads/' });
 const User = require('../../schemas/UserSchema');
 const Post = require('../../schemas/PostSchema');
 const Notification = require('../../schemas/NotificationSchema');
+var validator = require("email-validator");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -51,25 +52,49 @@ router.put("/name", async (req, res, next) => {
 });
 
 router.put("/username", async (req, res, next) => {
-	username = req.body.username.replace(/[^\w\s]/gi, '');
+	var username = req.body.username.replace(/[^\w\s]/gi, '');
 	username=username.toLowerCase();
 
 	if (!req.body.username) {
-		console.log("Username not sent");
 		return res.sendStatus(400);
 	}
 
-	// Check if username exists
 	var user = await User.findOne({
 		username: username
 	});
 
 	if (user != null) {
-		console.log("Username already in use");
 		return res.sendStatus(409);
 	}
 
 	var newUser = await User.findByIdAndUpdate(req.session.user._id, { username: username }, { new: true });
+
+	req.session.user = newUser;
+
+	return res.sendStatus(200);
+});
+
+router.put("/email", async (req, res, next) => {
+	var email = req.body.email.trim();
+	email=email.toLowerCase();
+
+	if (!req.body.email) {
+		return res.sendStatus(400);
+	}
+
+	if (validator.validate(email) == false) {
+		return res.sendStatus(406);
+	}
+
+	var user = await User.findOne({
+		email: email
+	});
+
+	if (user != null) {
+		return res.sendStatus(409);
+	}
+
+	var newUser = await User.findByIdAndUpdate(req.session.user._id, { email: email }, { new: true });
 
 	req.session.user = newUser;
 
