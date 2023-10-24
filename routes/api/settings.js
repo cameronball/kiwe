@@ -6,9 +6,12 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const upload = multer({ dest: 'uploads/' });
+const bcrypt = require('bcrypt');
+
 const User = require('../../schemas/UserSchema');
 const Post = require('../../schemas/PostSchema');
 const Notification = require('../../schemas/NotificationSchema');
+
 var validator = require("email-validator");
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -106,6 +109,45 @@ router.put("/bio", async (req, res, next) => {
 	bio = bio.replace(/[^\w\s.]/gi, '');
 
 	var newUser = await User.findByIdAndUpdate(req.session.user._id, { bio: bio }, { new: true });
+
+	req.session.user = newUser;
+
+	return res.sendStatus(200);
+});
+
+router.put("/password", async (req, res, next) => {
+	var oldPassword = req.body.oldPassword;
+	var newPassword = req.body.newPassword;
+	var confirmPassword = req.body.confirmPassword;
+	var id = req.session.user._id;
+
+	if (!oldPassword || !newPassword || !confirmPassword) {
+		return res.sendStatus(400);
+	}
+
+	if (newPassword != confirmPassword) {
+		return res.sendStatus(409);
+	}
+
+	var hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+	// Check current password
+	var user = await User.findOne({
+		_id: id
+	});
+
+	if (user == null) {
+		return res.sendStatus(404);
+	}
+	else {
+		var result = await bcrypt.compare(oldPassword, user.password);
+
+		if (result == false) {
+			return res.sendStatus(401);
+		}
+	}
+
+	var newUser = await User.findByIdAndUpdate(req.session.user._id, { password: hashedNewPassword }, { new: true });
 
 	req.session.user = newUser;
 

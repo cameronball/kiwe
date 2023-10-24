@@ -60,3 +60,32 @@ $("#changeEmailButton").click(() => {
 		}
 	});
 });
+
+$("#changePasswordButton").click(() => {
+	$.ajax({
+		url: "/api/settings/password/",
+		type: "PUT",
+		data: { oldPassword: $("#oldPasswordTextbox").val(), newPassword: $("#newPasswordTextbox").val(), confirmPassword: $("#confirmPasswordTextbox").val() },
+		success: (data, status, xhr) => {
+			window.location.href = "/logout";
+		},
+		error: (xhr, status, error) => {
+			if (xhr.status == 401) {
+				$(".errorMessagePassword").text("Password incorrect.");
+				$(".errorMessagePassword").append("<br>");
+			}
+			else if (xhr.status == 404) {
+				$(".errorMessagePassword").text("User not found, try logging out and back in.");
+				$(".errorMessagePassword").append("<br>");
+			}
+			else if (xhr.status == 400) {
+				$(".errorMessagePassword").text("Please fill out all the fields. If you don't know your old password, log out and click 'Forgot password'.");
+				$(".errorMessagePassword").append("<br>");
+			}
+			else if (xhr.status == 409) {
+				$(".errorMessagePassword").text("Passwords do not match.");
+				$(".errorMessagePassword").append("<br>");
+			}
+		}
+	});
+});

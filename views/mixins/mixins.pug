@@ -190,6 +190,7 @@ mixin createSettingsModals(userLoggedIn)
 	+createChangeUsernameModal(userLoggedIn)
 	+createChangeEmailModal(userLoggedIn)
 	+createChangeBioModal(userLoggedIn)
+	+createChangePasswordModal(userLoggedIn)
 
 mixin createChangeNameModal(user)
 	#changeNameModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='changeNameModalLabel', aria-hidden='true')
@@ -260,3 +261,26 @@ mixin createChangeBioModal(user)
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#changeBioButton.btn.btn-primary(type='button') Save
+
+mixin createChangePasswordModal(user)
+	#changePasswordModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='changePasswordModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#changePasswordModalLabel.modal-title Change your password
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(style="padding:0;")
+					span.errorMessage.errorMessagePassword
+					span(style="font-weight:800;") Current password 
+					input#oldPasswordTextbox(type="password", style="width:50%;", placeholder="Enter your current password...")
+					br
+					span(style="font-weight:800;") New password 
+					input#newPasswordTextbox(type="password", style="width:50%;", placeholder="Enter your new password...")
+					br
+					span(style="font-weight:800;") Confirm new password 
+					input#confirmPasswordTextbox(type="password", style="width:50%;", placeholder="Confirm your new password...")
+					p
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button#changePasswordButton.btn.btn-primary(type='button') Save
