@@ -1,0 +1,46 @@
+extends layouts/main-layout.pug
+
+block content
+	.settingsContainer
+		a(href="/settings" style="text-decoration: none;")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-arrow-left")
+				span Back
+	.settingsContainer
+		button(data-toggle="modal" data-target="#privacyPolicyModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-eye-slash")
+				span Privacy Policy
+	.settingsContainer
+		button(data-toggle="modal" data-target="#termsOfServiceModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-file-shield")
+				span Terms of Service
+	.settingsContainer
+		button(data-toggle="modal" data-target="#cookiesModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-cookie-bite")
+				span Cookie Policy
+	.settingsContainer
+		button(data-toggle="modal" data-target="#openSourceModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-code-branch")
+				span Open Source Acknowledgements
+	.settingsContainer
+		button(data-toggle="modal" data-target="#disclaimerModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-triangle-exclamation")
+				span Disclaimer
+
+	+createLegalModals()
+
+
+block scripts
+	script(src="/js/home.js")
+	script(src="/js/legal.js")

@@ -284,3 +284,222 @@ mixin createChangePasswordModal(user)
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#changePasswordButton.btn.btn-primary(type='button') Save
+
+mixin createLegalModals()
+	+createPrivacyPolicyModal()
+	+createTermsOfServiceModal()
+	+createCookiesModal()
+	+createOpenSourceModal()
+	+createDisclaimerModal()
+
+mixin createPrivacyPolicyModal()
+	#privacyPolicyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='privacyPolicyModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#privacyPolicyModalLabel.modal-title Kiwe Privacy Policy
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(style="padding:0;")
+					p(style="padding: 0 1rem;") Effective Date: 24/10/23 <br> At Kiwe, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines our practices concerning the collection, use, and disclosure of your personal data when you use the Kiwe social media platform. <br> Please read this Privacy Policy carefully to understand how we handle your personal information. By using Kiwe, you consent to the practices described in this policy.
+					h3(style="padding: 0 1rem;") 1. Information We Collect
+					h4(style="padding: 0 1rem;") a. Account Information
+					ul
+						li(style="padding: 0 1rem;") When you create a Kiwe account, we may collect your name, email address, username, and password.
+					h4(style="padding: 0 1rem;") b. Profile Information
+					ul
+						li(style="padding: 0 1rem;") You have the option to provide additional profile information, such as a profile picture, bio, location, and website.
+					h4(style="padding: 0 1rem;") c. User-Generated Content
+					ul
+						li(style="padding: 0 1rem;") We collect the content you post on Kiwe, including tweets, images, videos, and other media.
+					h4(style="padding: 0 1rem;") d. Communications
+					ul
+						li(style="padding: 0 1rem;") We may collect communications between you and other Kiwe users, as well as feedback you provide to us.
+					h4(style="padding: 0 1rem;") e. Usage data
+					ul
+						li(style="padding: 0 1rem;") We collect information about how you use Kiwe, including your interactions with other users, the content you view, and the frequency, date, time and duration of your activities, device information, and your IP address.
+					h4(style="padding: 0 1rem;") f. Cookies and Tracking Technologies
+					ul
+						li(style="padding: 0 1rem;") We may use cookies and similar tracking technologies to collect data about your browsing and usage patterns on Kiwe.
+					h3(style="padding: 0 1rem;") 2. How We Use Your Information
+					p(style="padding: 0 1rem;") We use the information we collect for the following purposes:
+					ul
+						li(style="padding: 0 1rem;") To provide and maintain Kiwe's services.
+						li(style="padding: 0 1rem;") To personalize and improve your Kiwe experience.
+						li(style="padding: 0 1rem;") To communicate with you, including for customer support.
+						li(style="padding: 0 1rem;") To ensure compliance with our Terms of Service and other legal requirements.
+						li(style="padding: 0 1rem;") To understand how you use Kiwe, diagnose problems, and optimize the platform.
+						li(style="padding: 0 1rem;") To develop new features and services.
+					h3(style="padding: 0 1rem;") 3. Data Sharing and Disclosure
+					p(style="padding: 0 1rem;") We may share your information with third parties in the following circumstances:
+					ul
+						li(style="padding: 0 1rem;") With other Kiwe users as you interact with them on the platform.
+						li(style="padding: 0 1rem;") With third-party service providers who assist us in providing Kiwe's services.
+						li(style="padding: 0 1rem;") With our moderators and administrators to enforce our Terms of Service and other policies.
+						li(style="padding: 0 1rem;") With law enforcement or other third parties if we believe your actions are inconsistent with our Terms of Service, or to protect the rights, property, or safety of Kiwe, its users, or others.
+						li(style="padding: 0 1rem;") With law enforcement, government agencies, or other third parties if required by applicable law.
+						li(style="padding: 0 1rem;") In connection with a merger, acquisition, or sale of all or a portion of our assets, or other business transfer, as permitted by applicable laws.
+					h3(style="padding: 0 1rem;") 4. Data Retention
+					p(style="padding: 0 1rem;") We retain your information for as long as necessary to provide you with Kiwe's services and to comply with our legal obligations, resolve disputes, and enforce our agreements.
+					h3(style="padding: 0 1rem;") 5. Data Security
+					p(style="padding: 0 1rem;") We take reasonable measures to protect your information from unauthorized access, alteration, or destruction; however, no method of transmission over the Internet, or method of electronic storage, is 100% secure. Therefore, we cannot guarantee its absolute security.
+					h3(style="padding: 0 1rem;") 6. International Data Transfers
+					p(style="padding: 0 1rem;") Kiwe is hosted in the United Kingdom. If you are accessing Kiwe from outside the United Kingdom, please be aware that your information may be transferred to, stored, and processed by us in our facilities and by those third parties with whom we may share your personal information (see "Data Sharing and Disclosure" above), in the United Kingdom and other countries, as permitted by local laws and regulations. By using Kiwe, you consent to the transfer of your information to the United Kingdom and other countries.
+					h3(style="padding: 0 1rem;") 7. Your Choices
+					p(style="padding: 0 1rem;") You have the following choices regarding your information:
+					ul 
+						li(style="padding: 0 1rem;") You can review and update your account information in your Kiwe profile settings.
+						li(style="padding: 0 1rem;") You can delete your account at any time by going to your Kiwe profile settings.
+						li(style="padding: 0 1rem;") You also have all the rights granted under the Data Protection Act 2018 and the General Data Protection Regulation (GDPR), including the right to access, correct, and delete your personal data, and the right to object to our use of your personal data for direct marketing purposes. If you want to exercise these rights, or other rights granted to you by applicable local laws, please contact us at data@kiwe.social
+					h3(style="padding: 0 1rem;") 8. Children's Privacy
+					p(style="padding: 0 1rem;") Kiwe is not intended for children under the age of 13. We do not knowingly collect personal information from children under the age of 13. If you are under 13, please do not use Kiwe or provide any information to us. If we learn that we have collected personal information from a child under the age of 13, we will take steps to delete such information from our files as soon as possible. If you are a parent or guardian and believe your child has provided personal information to us, please contact us at data@kiwe.social to have it removed.
+					h3(style="padding: 0 1rem;") 9. Changes to this Privacy Policy
+					p(style="padding: 0 1rem;") We may update this Privacy Policy from time to time. If we make any material changes to our Privacy Policy, we will notify you by posting the revised Privacy Policy on Kiwe, and where appropriate, by other means. By continuing to use Kiwe after these changes are made, you agree to the revised Privacy Policy. You can review the most current version of our Privacy Policy at any time by visiting this page.
+					h3(style="padding: 0 1rem;") 10. Contact Us
+					p(style="padding: 0 1rem;") If you have any questions about this Privacy Policy, please contact us at support@kiwe.social
+					br
+
+mixin createTermsOfServiceModal()
+	#termsOfServiceModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='termsOfServiceModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#termsOfServiceModalLabel.modal-title Kiwe Terms of Service
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(style="padding:0;")
+					p(style="padding: 0 1rem;") Effective Date: 24/10/23 <br> These Terms of Service ("Terms") govern your access to and use of Kiwe's services, including our various websites, SMS, APIs, email notifications, applications, buttons, widgets, ads, commerce services, and our other covered services (https://kiwe.social) that link to these Terms (collectively, the "Services"), and any information, text, links, graphics, photos, videos, or other materials or arrangements of materials uploaded, downloaded or appearing on the Services (collectively referred to as "Content"). By using the Services you agree to be bound by these Terms.
+					h3(style="padding: 0 1rem;") 1. Acceptance of Terms
+					p(style="padding: 0 1rem;") By accessing or using Kiwe, you confirm that you are at least 13 years old and have the legal capacity to enter into these Terms. If you are under 13, you may only use Kiwe with parental or legal guardian consent.
+					h3(style="padding: 0 1rem;") 2. Your Kiwe Account
+					h4(style="padding: 0 1rem;") 2.1 Registration
+					p(style="padding: 0 1rem;") You may be required to create an account to use certain features of Kiwe. When creating an account, you agree to provide accurate and complete information. You are responsible for maintaining the confidentiality of your account credentials and for all activities associated with your account, and you accept responsibility for all activities that occur under your account. If you believe that your account is no longer secure, then you must immediately change your password or contact us at support@kiwe.social
+					h4(style="padding: 0 1rem;") 2.2 Content and Conduct
+					p(style="padding: 0 1rem;") You are solely responsible for the content you post on Kiwe. You agree not to use the Service for any of the following:
+					ul 
+						li(style="padding: 0 1rem;") Posting content that is illegal, abusive, harassing, threatening, defamatory, obscene, abusive, harassing or otherwise objectionable.
+						li(style="padding: 0 1rem;") Posting content that infringes or violates someone else's rights or otherwise violates the law.
+						li(style="padding: 0 1rem;") Posting content that contains private information of any third party, including, without limitation, addresses, phone numbers, email addresses, Social Security numbers, and credit card numbers.
+						li(style="padding: 0 1rem;") Posting content that impersonates any person or entity, including, without limitation, a Kiwe employee, or falsely states or otherwise misrepresents your affiliation with a person or entity.
+						li(style="padding: 0 1rem;") Posting content that includes malicious content such as malware, Trojan horses, or viruses, or otherwise interferes with any user's access to the Service.
+						li(style="padding: 0 1rem;") Posting content that constitutes spam, such as unwanted promotional or commercial content, or unwanted or mass solicitation.
+						li(style="padding: 0 1rem;") Any form of unauthorised automated access to the Service.
+						li(style="padding: 0 1rem;") Any other activity that Kiwe deems in its sole discretion to be in violation of these Terms.
+					h4(style="padding: 0 1rem;") 2.3 Account Termination
+					p(style="padding: 0 1rem;") We reserve the right to terminate your account or restrict your access to Kiwe if we determine, in our sole discretion, that you have violated these Terms or any of our other policies that you can view on our legal page, with or without notice.
+					h3(style="padding: 0 1rem;") 3. Intellectual Property
+					p(style="padding: 0 1rem;") Kiwe and its original content, features, and functionality are owned by Kiwe and are protected by international copyright.
+					p(style="padding: 0 1rem;") You retain ownership of the content you post on Kiwe. By posting content on Kiwe, you grant us a non-exclusive, worldwide, royalty-free, irrevocable, sub-licensable, perpetual license to use, display, edit, modify, reproduce, distribute, store, and prepare derivative works of your content to provide the Services and to promote Kiwe, your Kiwe account, or the Services in general, in any formats and through any channels, including across any Kiwe Services or third-party website or advertising medium, with or without attribution and with or without notice.
+					h3(style="padding: 0 1rem;") 4. Third-Party Content
+					p(style="padding: 0 1rem;") Kiwe may contain links to third-party websites, advertisers, services, special offers, or other events or activities that are not owned or controlled by Kiwe. We do not endorse or assume any responsibility for any such third-party sites, information, materials, products, or services. If you access any third party website, service, or content from Kiwe, you do so at your own risk and you agree that Kiwe will have no liability arising from your use of or access to any third-party website, service, or content.
+					h3(style="padding: 0 1rem;") 5. Privacy
+					p(style="padding: 0 1rem;") Your use of Kiwe is also governed by our Privacy Policy. Please review it to understand how we collect, use, and share your information.
+					h3(style="padding: 0 1rem;") 6. Disclaimer of Warranties
+					p(style="padding: 0 1rem;") Kiwe is provided "as is" and "as available" without warranties of any kind. We do not guarantee the accuracy, availability, or reliability of the Service.
+					h3(style="padding: 0 1rem;") 7. Limitation of Liability
+					p(style="padding: 0 1rem;") To the fullest extent permitted by law, in no event will Kiwe, its directors, employees, partners, suppliers, or content providers be liable for any indirect, incidental, punitive, consequential, special, or exemplary damages of any kind, including but not limited to damages (i) resulting from your access to, use of, or inability to access or use Kiwe; (ii) for any lost profits, data loss, or cost of procurement or substitute goods or services; or (iii) for any conduct of content of any third party on Kiwe.
+					h3(style="padding: 0 1rem;") 8. Indemnification
+					p(style="padding: 0 1rem;") You agree to indemnify, defend, and hold harmless Kiwe, its directors, employees, partners, suppliers, and content providers from and against any claims, losses, damages, liabilities, judgments, demands, and costs, including reasonable attorneys' fees, arising out of or relating to your use of Kiwe or your violation of these Terms.
+					h3(style="padding: 0 1rem;") 9. Changes to these Terms
+					p(style="padding: 0 1rem;") We may update these Terms from time to time. If we make any material changes to our Terms, we will notify you by posting the revised Terms on Kiwe, and where appropriate, by other means. By continuing to use Kiwe after these changes are made, you agree to the revised Terms. You can review the most current version of our Terms at any time by visiting this page.
+					h3(style="padding: 0 1rem;") 10. Governing Law
+					p(style="padding: 0 1rem;") These Terms are governed by the laws of the United Kingdom, without regard to its conflict of laws principles. If any provision of these Terms is found to be invalid by any court having competent jurisdiction, the invalidity of such provision will not affect the validity of the remaining provisions of these Terms, which will remain in full force and effect. Our failure to enforce any term or condition of these Terms will not be considered a waiver of that provision.
+					h3(style="padding: 0 1rem;") 11. Contact Us
+					p(style="padding: 0 1rem;") If you have any questions about these Terms, please contact us at support@kiwe.social
+					br
+			
+mixin createCookiesModal()
+	#cookiesModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='cookiesModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#cookiesModalLabel.modal-title Kiwe Cookie Policy
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(style="padding:0;")
+					p(style="padding: 0 1rem;") Last Updated: 24/10/23
+					h3(style="padding: 0 1rem;") Introduction
+					p(style="padding: 0 1rem;") This Cookie Policy explains how Kiwe ("Kiwe", "we", "us", and "ours") uses cookies and similar technologies to recognize you when you visit our websites at https://kiwe.social, ("Websites"). It explains what these technologies are and why we use them, as well as your rights to control our use of them.
+					h3(style="padding: 0 1rem;") What are cookies?
+					p(style="padding: 0 1rem;") Cookies are small data files that are placed on your computer or mobile device when you visit a website. Cookies are widely used by website owners in order to make their websites work, or to work more efficiently, as well as to provide reporting information.
+					h3(style="padding: 0 1rem;") How we use cookies:
+					p(style="padding: 0 1rem;") We use cookies for various purposes, including but not limited to:
+					ul 
+						li(style="padding: 0 1rem;") Essential Cookies: These cookies are necessary for the website to function properly. They help you navigate our site and use its features.
+						li(style="padding: 0 1rem;") Analytical/Performance Cookies: These cookies help us understand how you interact with our website, enabling us to improve its performance.
+						li(style="padding: 0 1rem;") Functionality Cookies: These cookies are used to remember your preferences and provide personalized content and features.
+						li(style="padding: 0 1rem;") Advertising Cookies: We, or our third-party partners, may use cookies to deliver relevant advertisements to you.
+					h3(style="padding: 0 1rem;") Your Choices Regarding Cookies
+					p(style="padding: 0 1rem;") If you would like to delete cookies or instruct your web browser to delete or refuse cookies, please visit the help pages of your web browser. Please note, however, that if you delete cookies or refuse to accept them, you might not be able to use all of the features we offer, you may not be able to store your preferences, and some of our pages might not display properly.
+					h3(style="padding: 0 1rem;") Third-Party Cookies
+					p(style="padding: 0 1rem;") Some cookies on Kiwe may be placed by third-party service providers, such as advertisers and analytics partners. These third parties may use cookies to collect information about your online activities across different websites.
+					h3(style="padding: 0 1rem;") Changes to this Cookie Policy
+					p(style="padding: 0 1rem;") We may update this Cookie Policy from time to time. If we make any material changes to our Cookie Policy, we will notify you by posting the revised Cookie Policy on Kiwe, and where appropriate, by other means. By continuing to use Kiwe after these changes are made, you agree to the revised Cookie Policy. You can review the most current version of our Cookie Policy at any time by visiting this page.
+					h3(style="padding: 0 1rem;") Contact Us
+					p(style="padding: 0 1rem;") If you have any questions about this Cookie Policy, please contact us at support@kiwe.social
+					h3(style="padding: 0 1rem;") Additional Information
+					p(style="padding: 0 1rem;") For more information about our data practices, please review our Privacy Policy. You can find our Privacy Policy in the legal section of your settings.
+					br
+
+mixin createOpenSourceModal()
+	#openSourceModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='openSourceModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#openSourceModalLabel.modal-title Kiwe Open Source
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(style="padding:0;")
+					p(style="padding: 0 1rem;") Kiwe uses a number of open-source projects and licensed assets to work properly. We would like to thank the following projects and their maintainers for their contributions to Kiwe:
+					ul 
+						li(style="padding: 0 1rem;") Loading icons from <strong><a href="https://loading.io/">loading.io</a></strong>
+						li(style="padding: 0 1rem;") Many icons from <strong><a href="https://fontawesome.com/">Font Awesome</a></strong>
+					p(style="padding: 0 1rem;") Kiwe is built on the following open-source npm projects:
+					ul 
+						li(style="padding: 0 1rem;") <strong><a href="https://nodejs.org/en/">Node.js</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://expressjs.com/">Express</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://www.mongodb.com/">MongoDB</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://mongoosejs.com/">Mongoose</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://www.npmjs.com/package/express-session">express-session</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://www.npmjs.com/package/express-validator">email-validator</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://www.npmjs.com/package/body-parser">body-parser</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://www.npmjs.com/package/bcrypt">bcrypt</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://www.npmjs.com/package/js-sha512">js-sha512</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://www.npmjs.com/package/multer">multer</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://www.npmjs.com/package/sanitizer">sanitizer</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://www.npmjs.com/package/socket.io">socket.io</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://www.npmjs.com/package/node-fetch">node-fetch</a></strong>
+						li(style="padding: 0 1rem;") <strong><a href="https://www.npmjs.com/package/pug">pug</a></strong>
+					<br>
+
+mixin createDisclaimerModal()
+	#disclaimerModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='disclaimerModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#disclaimerModalLabel.modal-title Disclaimer
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(style="padding:0;")
+					p(style="padding: 0 1rem;") Welcome to Kiwe, your go-to social media platform for sharing thoughts, ideas, and connecting with others. We value your presence on our platform, but it's essential to understand the following disclaimer and our terms of use to ensure a positive experience for everyone:
+					h3(style="padding: 0 1rem;") 1. User Responsibility:
+					p(style="padding: 0 1rem;") Kiwe is a platform for sharing thoughts, ideas, and information. Users are responsible for the content they post.
+					p(style="padding: 0 1rem;") Users must follow our community guidelines and abide by applicable laws and regulations.
+					h3(style="padding: 0 1rem;") 2. Privacy and Data:
+					p(style="padding: 0 1rem;") We take your privacy seriously. Your personal information and data are protected as per our Privacy Policy.
+					p(style="padding: 0 1rem;") Please be cautious about sharing sensitive or personal information publicly.
+					h3(style="padding: 0 1rem;") 3. Content Ownership:
+					p(style="padding: 0 1rem;") Users retain ownership of their content, but they grant Kiwe a license to use, share, and display it on the platform.
+					p(style="padding: 0 1rem;") Respect intellectual property rights. Do not post copyrighted material without permission.
+					h3(style="padding: 0 1rem;") 4. Respect and Civility:
+					p(style="padding: 0 1rem;") We encourage respectful and constructive discussions. Harassment, hate speech, or any form of abusive behavior is not tolerated.
+					p(style="padding: 0 1rem;") Report any inappropriate content or users to our moderation team.
+					h3(style="padding: 0 1rem;") 5. Third-Party Links:
+					p(style="padding: 0 1rem;") Kiwe may contain links to third-party websites or content. We are not responsible for the content or practices of external websites.
+					h3(style="padding: 0 1rem;") 6. Content Accuracy:
+					p(style="padding: 0 1rem;") Information shared on Kiwe may not always be accurate or up-to-date. Verify information before relying on it.
+					h3(style="padding: 0 1rem;") 7. Moderation:
+					p(style="padding: 0 1rem;") Kiwe reserves the right to moderate and remove content that violates our terms and policies.
+					p(style="padding: 0 1rem;") Users may be subject to sanctions or account suspension if they repeatedly violate our rules.
+					h3(style="padding: 0 1rem;") 8. More information:
+					p(style="padding: 0 1rem;") For more information about our terms and policies, please visit our legal page and see the applicable documents.
