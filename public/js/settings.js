@@ -8,8 +8,8 @@ $("#changeNameButton").click(() => {
 		},
 		error: (xhr, status, error) => {
 			if (xhr.status == 400) {
-				$(".errorMessage").text("Please enter a first name.");
-				$(".errorMessage").append("<br>");
+				$(".errorMessageName").text("Please enter a first name.");
+				$(".errorMessageName").append("<br>");
 			}
 		}
 	});
@@ -25,12 +25,12 @@ $("#changeUsernameButton").click(() => {
 		},
 		error: (xhr, status, error) => {
 			if (xhr.status == 400) {
-				$(".errorMessage").text("Please enter a username.");
-				$(".errorMessage").append("<br>");
+				$(".errorMessageUsername").text("Please enter a username.");
+				$(".errorMessageUsername").append("<br>");
 			}
 			else if (xhr.status == 409) {
-				$(".errorMessage").text("That username is already taken.");
-				$(".errorMessage").append("<br>");
+				$(".errorMessageUsername").text("That username is already taken.");
+				$(".errorMessageUsername").append("<br>");
 			}
 		}
 	});

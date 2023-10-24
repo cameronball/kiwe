@@ -197,8 +197,7 @@ mixin createChangeNameModal(user)
 					button.close(type='button', data-dismiss='modal', aria-label='Close')
 					span(aria-hidden='true') &times;
 				.modal-body
-					span.errorMessage
-					span Warning: Changing your name may log you out.<hr>
+					span.errorMessage.errorMessageName
 					span(style="font-weight:800;") First name 
 					input#firstNameTextbox(type="text", placeholder="Enter your first name...", value=user.firstName)
 					span(style="font-weight:800;") <br>Last name (optional) 
@@ -217,8 +216,7 @@ mixin createChangeUsernameModal()
 					button.close(type='button', data-dismiss='modal', aria-label='Close')
 					span(aria-hidden='true') &times;
 				.modal-body
-					span.errorMessage
-					span Warning: Changing your username will log you out.<br> Any characters other than a-z, 0-9 and underscores will be removed.<hr>
+					span.errorMessage.errorMessageUsername
 					span(style="font-weight:800;") @
 					input#changeUsernameTextbox(type="text", placeholder="Enter a new username...")
 					p
