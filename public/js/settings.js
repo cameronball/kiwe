@@ -4,7 +4,7 @@ $("#changeNameButton").click(() => {
 		type: "PUT",
 		data: { firstName: $("#firstNameTextbox").val(), lastName: $("#lastNameTextbox").val()},
 		success: (data, status, xhr) => {
-			window.location.href = "/logout";
+			window.location.href = "/profile";
 		},
 		error: (xhr, status, error) => {
 			if (xhr.status == 400) {
@@ -21,7 +21,7 @@ $("#changeUsernameButton").click(() => {
 		type: "PUT",
 		data: { username: $("#changeUsernameTextbox").val(), id: userLoggedIn._id },
 		success: (data, status, xhr) => {
-			window.location.href = "/logout";
+			window.location.href = "/profile";
 		},
 		error: (xhr, status, error) => {
 			if (xhr.status == 400) {

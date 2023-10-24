@@ -23,29 +23,31 @@ router.put("/name", async (req, res, next) => {
 		return res.sendStatus(400);
 	} else {
 		try {
-		  var firstNameUpdate = User.findByIdAndUpdate(
-			req.session.user._id,
-			{ firstName: newFirstName },
-			{ new: true }
-		  );
+			var firstNameUpdate = User.findByIdAndUpdate(
+				req.session.user._id,
+				{ firstName: newFirstName },
+				{ new: true }
+			);
 
-		  var lastNameUpdate = User.findByIdAndUpdate(
-			req.session.user._id,
-			{ lastName: newLastName },
-			{ new: true }
-		  );
+			var lastNameUpdate = User.findByIdAndUpdate(
+				req.session.user._id,
+				{ lastName: newLastName },
+				{ new: true }
+			);
 
-		  var [updatedUser, _] = await Promise.all([
-			firstNameUpdate,
-			lastNameUpdate,
-		  ]);
+			var [updatedUser, _] = await Promise.all([
+				firstNameUpdate,
+				lastNameUpdate,
+			]);
+			
+			req.session.user = updatedUser;
 
-		  return res.sendStatus(200);
-		} catch (error) {
-		  console.error(error);
-		  return res.sendStatus(500);
+			return res.sendStatus(200);
+			} catch (error) {
+			console.error(error);
+			return res.sendStatus(500);
+			}
 		}
-	  }
 });
 
 router.put("/username", async (req, res, next) => {
@@ -67,7 +69,9 @@ router.put("/username", async (req, res, next) => {
 		return res.sendStatus(409);
 	}
 
-	var user = await User.findByIdAndUpdate(req.session.user._id, { username: username }, { new: true });
+	var newUser = await User.findByIdAndUpdate(req.session.user._id, { username: username }, { new: true });
+
+	req.session.user = newUser;
 
 	return res.sendStatus(200);
 });

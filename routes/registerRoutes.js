@@ -3,7 +3,7 @@ const app = express();
 const router = express.Router();
 const bodyParser = require("body-parser")
 const bcrypt = require('bcrypt');
-const validator = require("email-validator");
+var validator = require("email-validator");
 const User = require('../schemas/UserSchema');
 
 app.set("view engine", "pug");
