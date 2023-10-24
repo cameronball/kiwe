@@ -952,3 +952,18 @@ function getBasicNotificationUrl(notification) {
 
 	return url;
 }
+
+$("#changeBioButton").click(() => {
+	$.ajax({
+		url: "/api/settings/bio/",
+		type: "PUT",
+		data: { bio: $("#bioTextbox").val() },
+		success: (data, status, xhr) => {
+			window.location.href = "/profile";
+		},
+		error: (xhr, status, error) => {
+			$(".errorMessageBio").text("An error occured.");
+			$(".errorMessageBio").append("<br>");
+		}
+	});
+});

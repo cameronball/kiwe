@@ -189,6 +189,7 @@ mixin createSettingsModals(userLoggedIn)
 	+createChangeNameModal(userLoggedIn)
 	+createChangeUsernameModal(userLoggedIn)
 	+createChangeEmailModal(userLoggedIn)
+	+createChangeBioModal(userLoggedIn)
 
 mixin createChangeNameModal(user)
 	#changeNameModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='changeNameModalLabel', aria-hidden='true')
@@ -242,3 +243,20 @@ mixin createChangeEmailModal(user)
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#changeEmailButton.btn.btn-primary(type='button') Save
+					
+mixin createChangeBioModal(user)
+	#changeBioModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='changeBioModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#changeBioModalLabel.modal-title Change your bio
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body
+					span.errorMessage.errorMessageBio
+					span(style="font-weight:800;") Bio 
+					textarea#bioTextbox(type="text", style="width:100%;height:15vh;white-space: pre-wrap;", placeholder="Enter your bio...") #{user.bio}
+					p
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button#changeBioButton.btn.btn-primary(type='button') Save

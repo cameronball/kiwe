@@ -149,8 +149,11 @@ block content
 					a(href=`/profile/${profileUser.username}/following`)
 						span.value #{followingCount}
 						span Following
-
-				span.bio(style='margin-top:10px;') #{profileUser.bio}
+				if profileUser._id == userLoggedIn._id
+					- var editBioButton = `<button data-toggle="modal" data-target="#changeBioModal"><i class="fa-solid fa-square-pen" style="color:var(--blue)"></i></button>`
+				else
+					- var editBioButton = ``;
+				span.bio(style='margin-top:10px;') #{profileUser.bio} !{editBioButton}
 				
 		.tabsContainer
 			+createTab("Posts", `/profile/${profileUser.username}`, selectedTab != "replies")
@@ -162,6 +165,7 @@ block content
 		+createPostModals(userLoggedIn)
 		+createImageUploadModal()
 		+createCoverPhotoUploadModal()
+		+createChangeBioModal(userLoggedIn)
 
 block scripts
 	script(src="/js/profile.js")

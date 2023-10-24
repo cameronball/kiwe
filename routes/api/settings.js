@@ -101,4 +101,15 @@ router.put("/email", async (req, res, next) => {
 	return res.sendStatus(200);
 });
 
+router.put("/bio", async (req, res, next) => {
+	var bio = req.body.bio.trim();
+	bio = bio.replace(/[^\w\s.]/gi, '');
+
+	var newUser = await User.findByIdAndUpdate(req.session.user._id, { bio: bio }, { new: true });
+
+	req.session.user = newUser;
+
+	return res.sendStatus(200);
+});
+
 module.exports = router;
