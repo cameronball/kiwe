@@ -12,6 +12,42 @@ const Notification = require('../../schemas/NotificationSchema');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+router.put("/name", async (req, res, next) => {
+	var newFirstName = req.body.firstName.trim();
+	var newLastName = req.body.lastName.trim();
+	
+	newFirstName=newFirstName.replace(/[^\w\s]/gi, '');
+	newLastName=newLastName.replace(/[^\w\s]/gi, '');
+
+	if (!newFirstName) {
+		return res.sendStatus(400);
+	} else {
+		try {
+		  var firstNameUpdate = User.findByIdAndUpdate(
+			req.session.user._id,
+			{ firstName: newFirstName },
+			{ new: true }
+		  );
+
+		  var lastNameUpdate = User.findByIdAndUpdate(
+			req.session.user._id,
+			{ lastName: newLastName },
+			{ new: true }
+		  );
+
+		  var [updatedUser, _] = await Promise.all([
+			firstNameUpdate,
+			lastNameUpdate,
+		  ]);
+
+		  return res.sendStatus(200);
+		} catch (error) {
+		  console.error(error);
+		  return res.sendStatus(500);
+		}
+	  }
+});
+
 router.put("/username", async (req, res, next) => {
 	username = req.body.username.replace(/[^\w\s]/gi, '');
 	username=username.toLowerCase();

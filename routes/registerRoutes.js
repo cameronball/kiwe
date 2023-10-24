@@ -3,6 +3,7 @@ const app = express();
 const router = express.Router();
 const bodyParser = require("body-parser")
 const bcrypt = require('bcrypt');
+const validator = require("email-validator");
 const User = require('../schemas/UserSchema');
 
 app.set("view engine", "pug");
@@ -64,6 +65,9 @@ router.post("/", async (req, res, next) => {
       // User found
       if (email == user.email) {
         payload.errorMessage = "Email already in use.";
+      }
+      if (validator.validate(email) == false) {
+        payload.errorMessage = "Please enter a valid email.";
       }
       else {
         payload.errorMessage = "Username already taken.";

@@ -2,6 +2,12 @@ extends layouts/main-layout.pug
 
 block content
 	.settingsContainer
+		button(data-toggle="modal" data-target="#changeNameModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-signature")
+				span Change name
+	.settingsContainer
 		button(data-toggle="modal" data-target="#changeUsernameModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
@@ -25,6 +31,12 @@ block content
 				.resultsImageContainer
 					i(class="fa-solid fa-user-circle")
 				span Change profile picture
+	.settingsContainer
+		button(data-toggle="modal" data-target="#changeCoverPhotoModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-panorama")
+				span Change profile cover photo
 	.settingsContainer
 		button(data-toggle="modal" data-target="#changePasswordModal")
 			.resultListItem(class="settingsListItem")
@@ -50,6 +62,7 @@ block content
 					i(class="fa-solid fa-user-slash")
 				span Delete account
 	
+	+createChangeNameModal(userLoggedIn)
 	+createChangeUsernameModal()
 
 
