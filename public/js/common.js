@@ -214,7 +214,7 @@ $("#imageUploadButton").click(() => {
             data: formData,
             processData: false,
             contentType: false,
-            success: () => location.reload()
+            success: () => window.location.href = "/profile"
         });
     });
 });
@@ -237,7 +237,7 @@ $("#coverPhotoButton").click(() => {
             data: formData,
             processData: false,
             contentType: false,
-            success: () => location.reload()
+            success: () => window.location.href = "/profile"
         });
     });
 });

@@ -26,13 +26,13 @@ block content
 					i(class="fa-solid fa-pen-to-square")
 				span Change bio
 	.settingsContainer
-		button(data-toggle="modal" data-target="#changeProfilePictureModal")
+		button(data-toggle="modal" data-target="#imageUploadModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
 					i(class="fa-solid fa-user-circle")
 				span Change profile picture
 	.settingsContainer
-		button(data-toggle="modal" data-target="#changeCoverPhotoModal")
+		button(data-toggle="modal" data-target="#coverPhotoUploadModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
 					i(class="fa-solid fa-panorama")
@@ -63,6 +63,8 @@ block content
 				span Delete account
 	
 	+createSettingsModals(userLoggedIn)
+	+createImageUploadModal()
+	+createCoverPhotoUploadModal()
 
 
 block scripts
