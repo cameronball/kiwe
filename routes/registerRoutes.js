@@ -35,6 +35,12 @@ router.post("/", async (req, res, next) => {
     email=email.replace(/[&\/\\#, ()$~%'":*?<>{}]/g, '');
     username=username.toLowerCase();
     email=email.toLowerCase();
+
+    // Update the payload with sanitized data
+    payload.firstName = firstName;
+    payload.lastName = lastName;
+    payload.username = username;
+    payload.email = email;
     
     var user = await User.findOne({
       $or: [
@@ -51,9 +57,10 @@ router.post("/", async (req, res, next) => {
     if (user == null) {
       // No user found
 
-      var data = req.body;
+      var data = payload;
 
       data.password = await bcrypt.hash(password, 10);
+      data.following = ['65302a9670ee1780e3593113', '65392a74ee7e23fb0db658f8'];
 
       User.create(data)
       .then((user) => {
