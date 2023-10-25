@@ -184,9 +184,11 @@ router.delete("/delete", async (req, res, next) => {
 	await Notification.deleteMany({ "userTo": id });
 	await Notification.deleteMany({ "userFrom": id });
 
-	// Delete chats
-	await Chat.deleteMany({ "userTo": id });
-	await Chat.deleteMany({ "userFrom": id });
+	// Remove user from any chats that they are in, there is an array in each chat document that contains the ids of the users in the chat
+	await Chat.updateMany(
+		{ "users": { $elemMatch: { $eq: id } } },
+		{ $pull: { "users": id } }
+	);
 
 	// Delete messages
 	await Message.deleteMany({ "sender": id });

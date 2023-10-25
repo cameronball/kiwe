@@ -1570,3 +1570,15 @@ ul {
     margin-left: 0px;
     font-weight:700;
 }
+
+.text-danger {
+    color: var(--red);
+    margin-left: 0px;
+    font-weight:700;
+}
+
+.text-success {
+    color: var(--green);
+    margin-left: 0px;
+    font-weight:700;
+}

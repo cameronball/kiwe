@@ -533,3 +533,41 @@ mixin createDisclaimerModal()
 					p(style="padding: 0 1rem;") Users may be subject to sanctions or account suspension if they repeatedly violate our rules.
 					h3(style="padding: 0 1rem;") 8. More information:
 					p(style="padding: 0 1rem;") For more information about our terms and policies, please visit our legal page and see the applicable documents.
+
+mixin createAdminModals()
+	+createVerifyUserModal()
+	+createAddLikeModel()
+
+mixin createVerifyUserModal()
+	#verifyUserModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='verifyUserModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#verifyUserModalLabel.modal-title Verify user
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(id="verifyUserModalBody")
+					span.errorMessage.errorMessageVerify
+					p Username:
+					input#verifyUserUsernameTextbox(type="text", placeholder="Username...")
+					| &nbsp;
+					button#verifySearchButton.btn.btn-primary(type='button') Search
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+
+mixin createAddLikeModel()
+	#addLikeModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addLikeModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#addLikeModalLabel.modal-title Add like to post
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(id="addLikeModalBody")
+					span.errorMessage.errorMessageAddLike
+					p Post ID:
+					input#addLikeIdTextbox(type="text", placeholder="Post ID...")
+					| &nbsp;
+					button#addLikeSearchButton.btn.btn-primary(type='button') Search
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel

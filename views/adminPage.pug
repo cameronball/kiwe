@@ -1,0 +1,39 @@
+extends layouts/main-layout.pug
+
+block content
+	.settingsContainer
+		a(href="/settings" style="text-decoration: none;")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-arrow-left")
+				span Back
+	.settingsContainer
+		button(data-toggle="modal" data-target="#verifyUserModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-user-check")
+				span Verification panel
+	.settingsContainer
+		button(data-toggle="modal" data-target="#addLikeModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-heart-circle-plus")
+				span Add like
+	.settingsContainer
+		button(data-toggle="modal" data-target="#banUserModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-user-lock")
+				span Ban/ Unban user
+	.settingsContainer
+		button(data-toggle="modal" data-target="#statsModal")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fa-solid fa-chart-bar")
+				span Stats
+	
+	+createAdminModals()
+
+block scripts
+	script(src="/js/home.js")
+	script(src="/js/admin.js")

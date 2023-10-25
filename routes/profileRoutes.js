@@ -24,31 +24,56 @@ router.get("/:username", async (req, res, next) => {
 
 	var payload = await getPayload(req.params.username, req.session.user);
 
-  	res.status(200).render("profilePage", payload);
+	if(payload==404) {
+		res.sendStatus(404);
+		return;
+	}
+	else{
+		res.status(200).render("profilePage", payload);
+	}
 })
 
 router.get("/:username/replies", async (req, res, next) => {
 
 	var payload = await getPayload(req.params.username, req.session.user);
-	payload.selectedTab = "replies";
 	
-  	res.status(200).render("profilePage", payload);
+	if(payload==404) {
+		res.sendStatus(404);
+		return;
+	}
+	else{
+		payload.selectedTab = "replies";
+		res.status(200).render("profilePage", payload);
+	}
 })
 
 router.get("/:username/followers", async (req, res, next) => {
 
 	var payload = await getPayload(req.params.username, req.session.user);
-	payload.selectedTab = "followers";
-	
-  	res.status(200).render("followersAndFollowing", payload);
+
+	if(payload==404) {
+		res.sendStatus(404);
+		return;
+	}
+	else{
+		payload.selectedTab = "followers";
+		res.status(200).render("followersAndFollowing", payload);
+	}
+
 })
 
 router.get("/:username/following", async (req, res, next) => {
 
 	var payload = await getPayload(req.params.username, req.session.user);
-	payload.selectedTab = "following";
 	
-  	res.status(200).render("followersAndFollowing", payload);
+	if(payload==404) {
+		res.sendStatus(404);
+		return;
+	}
+	else{
+		payload.selectedTab = "following";
+		res.status(200).render("followersAndFollowing", payload);
+	}
 })
 
 async function getPayload(username, userLoggedIn) {
@@ -69,7 +94,7 @@ async function getPayload(username, userLoggedIn) {
 		}
 	}
 	catch {
-		return res.sendStatus(404);
+		return 404;
 	}
 
 	return {

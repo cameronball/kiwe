@@ -43,6 +43,7 @@ const chatsApiRoute = require('./routes/api/chats');
 const messagesApiRoute = require('./routes/api/messages');
 const notificationsApiRoute = require('./routes/api/notifications');
 const settingsApiRoute = require('./routes/api/settings');
+const adminApiRoute = require('./routes/api/admin');
 
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
@@ -63,6 +64,7 @@ app.use("/api/chats", chatsApiRoute);
 app.use("/api/messages", messagesApiRoute);
 app.use("/api/notifications", notificationsApiRoute);
 app.use("/api/settings", settingsApiRoute);
+app.use("/api/admin", adminApiRoute);
 
 app.get("/", middleware.requireLogin, (req, res, next) => {
 
