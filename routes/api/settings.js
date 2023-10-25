@@ -10,6 +10,8 @@ const bcrypt = require('bcrypt');
 
 const User = require('../../schemas/UserSchema');
 const Post = require('../../schemas/PostSchema');
+const Chat = require('../../schemas/ChatSchema');
+const Message = require('../../schemas/MessageSchema');
 const Notification = require('../../schemas/NotificationSchema');
 
 var validator = require("email-validator");
@@ -152,6 +154,59 @@ router.put("/password", async (req, res, next) => {
 	req.session.user = newUser;
 
 	return res.sendStatus(200);
+});
+
+router.delete("/delete", async (req, res, next) => {
+	var id = req.session.user._id;
+	var password = req.body.password;
+
+	if (!password) {
+		return res.sendStatus(400);
+	}
+
+	// Check current password
+	var user = await User.findOne({
+		_id: id
+	});
+
+	if (user == null) {
+		return res.sendStatus(404);
+	}
+	else {
+		var result = await bcrypt.compare(password, user.password);
+
+		if (result == false) {
+			return res.sendStatus(401);
+		}
+	}
+
+	// Delete notifications
+	await Notification.deleteMany({ "userTo": id });
+	await Notification.deleteMany({ "userFrom": id });
+
+	// Delete chats
+	await Chat.deleteMany({ "userTo": id });
+	await Chat.deleteMany({ "userFrom": id });
+
+	// Delete messages
+	await Message.deleteMany({ "sender": id });
+
+
+	// Delete posts
+	await Post.deleteMany({ "postedBy": id });
+
+	// Delete user
+	await User.findByIdAndDelete(id);
+
+	req.session.destroy((err) => {
+		if (err) {
+			console.log(err);
+		}
+		else {
+			res.clearCookie("connect.sid");
+			return res.sendStatus(200);
+		}
+	});
 });
 
 module.exports = router;

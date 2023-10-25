@@ -89,3 +89,28 @@ $("#changePasswordButton").click(() => {
 		}
 	});
 });
+
+$("#deleteAccountButton").click(() => {
+	$.ajax({
+		url: "/api/settings/delete/",
+		type: "DELETE",
+		data: { password: $("#deleteAccountPasswordTextbox").val() },
+		success: (data, status, xhr) => {
+			window.location.href = "/logout";
+		},
+		error: (xhr, status, error) => {
+			if (xhr.status == 401) {
+				$(".errorMessageDelete").text("Password incorrect.");
+				$(".errorMessageDelete").append("<br>");
+			}
+			else if (xhr.status == 404) {
+				$(".errorMessageDelete").text("User not found, try logging out and back in.");
+				$(".errorMessageDelete").append("<br>");
+			}
+			else if (xhr.status == 400) {
+				$(".errorMessageDelete").text("Please fill out all the fields. If you don't know your password, log out and click 'Forgot password'.");
+				$(".errorMessageDelete").append("<br>");
+			}
+		}
+	});
+});

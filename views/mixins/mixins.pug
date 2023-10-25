@@ -192,6 +192,7 @@ mixin createSettingsModals(userLoggedIn)
 	+createChangeBioModal(userLoggedIn)
 	+createChangePasswordModal(userLoggedIn)
 	+createMultiFactorModal(userLoggedIn)
+	+createDeleteAccountModal(userLoggedIn)
 
 mixin createChangeNameModal(user)
 	#changeNameModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='changeNameModalLabel', aria-hidden='true')
@@ -295,7 +296,24 @@ mixin createMultiFactorModal(user)
 					button.close(type='button', data-dismiss='modal', aria-label='Close')
 					span(aria-hidden='true') &times;
 				.modal-body
-					span(style="font-weight:800;") 2FA is coming soon!
+					span(style="font-weight:600;") 2FA is coming soon!
+
+mixin createDeleteAccountModal(user)
+	#deleteAccountModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='deleteAccountModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content 
+				.modal-header 
+					h5#deleteAccountModalLabel.modal-title Delete your account?
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body
+					span.errorMessage.errorMessageDelete
+					p Are you sure you want to delete your account? This action cannot be undone.
+					p Enter your password to confirm:
+					input#deleteAccountPasswordTextbox(type="password", placeholder="Enter your password...")
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+					button#deleteAccountButton.btn.btn-primary(type='button', style='background-color:red;') Delete
 
 mixin createLegalModals()
 	+createPrivacyPolicyModal()
