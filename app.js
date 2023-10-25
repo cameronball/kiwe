@@ -34,6 +34,7 @@ const searchRoute = require('./routes/searchRoutes');
 const messagesRoute = require('./routes/messagesRoutes');
 const notificationsRoute = require('./routes/notificationRoutes');
 const settingsRoute = require('./routes/settingsRoutes');
+const adminRoute = require('./routes/adminRoutes');
 
 // Api routes
 const postApiRoute = require('./routes/api/posts');
@@ -53,6 +54,7 @@ app.use("/search", middleware.requireLogin, searchRoute);
 app.use("/messages", middleware.requireLogin, messagesRoute);
 app.use("/notifications", middleware.requireLogin, notificationsRoute);
 app.use("/settings", middleware.requireLogin, settingsRoute);
+app.use("/admin", middleware.requireAdmin, adminRoute);
 
 // Api routes
 app.use("/api/posts", postApiRoute);
@@ -72,6 +74,10 @@ app.get("/", middleware.requireLogin, (req, res, next) => {
 
   res.status(200).render("home", payload);
 })
+
+app.use((req, res) => {
+  res.redirect('/');
+});
 
 io.on("connection", (socket) => {
 

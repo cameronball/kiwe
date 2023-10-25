@@ -53,8 +53,12 @@ router.get("/:id", async (req, res, next) => {
 	
 	var postId = req.params.id;
 
-	var postData = await getPosts({ _id: postId });
-	if (postData.length == 0) {
+	try {
+		var postData = await getPosts({ _id: postId });
+		if (postData.length == 0) {
+			return res.sendStatus(404);
+		}
+	} catch (error) {
 		return res.sendStatus(404);
 	}
 	postData = postData[0];
