@@ -858,6 +858,7 @@ function showNotificationPopup(data) {
 
 function showMessagePopup(data) {
 
+    // TODO - if new chat this won't work, need to find another way cuz it can't check if ._id is set without erroring
     if(!data.chat.latestMessage._id) {
         data.chat.latestMessage = data;
     }
