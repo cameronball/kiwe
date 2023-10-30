@@ -1,6 +1,6 @@
 var connected = false;
 
-var socket = io("http://localhost:80");
+var socket = io("http://139.59.199.91:80");
 socket.emit("setup", userLoggedIn);
 
 socket.on("connected", () => connected = true);
