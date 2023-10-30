@@ -1,5 +1,4 @@
 var connected = false;
-require('https').globalAgent.options.rejectUnauthorized = false;
 
 var socket = io("https://kiwe.social:80");
 socket.emit("setup", userLoggedIn);

@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const https = require('https');
+const fs = require('fs');
 const port = 80;
 const middleware = require('./middleware')
 const path = require('path')
@@ -8,7 +10,21 @@ const mongoose = require("./database");
 const session = require('express-session');
 const sha512 = require('js-sha512').sha512;
 
-const server = app.listen(port, () => console.log("Server listening on port " + port));
+const sslKeyPath = './kiwi.social.key';
+const sslCertPath = './kiwi.social.pem';
+
+const options = {
+  key: fs.readFileSync(sslKeyPath),   // Read your private key file
+  cert: fs.readFileSync(sslCertPath), // Read your certificate file
+};
+
+const server = https.createServer(options, app); // Create an HTTPS server
+
+server.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
+
+
 const io = require('socket.io')(server, { pingTimeout: 60000 });
 
 app.set("view engine", "pug");
