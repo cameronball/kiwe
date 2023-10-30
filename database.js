@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
 class Database {
 
   constructor() {
@@ -7,7 +9,7 @@ class Database {
   }
   
   connect() {
-    mongoose.connect('mongodb+srv://root:LziGFHUuCEveWaxI@twitterclonecluster.c5tzsqb.mongodb.net/?retryWrites=true&w=majority')
+    mongoose.connect(process.env.MONGODB)
     .then(() => {
       console.log('Connected to MongoDB');
     })
