@@ -5,11 +5,9 @@ const app = express();
 const port = 3000;
 
 app.post('/webhook', (req, res) => {
+	
+  console.log('Deployment script started');
   const deploy = spawn('sh', ['./deployment.sh']);
-
-  deploy.stdout.on('data', (data) => {
-    console.log(`stdout: ${data}`);
-  });
 
   deploy.on('close', (code) => {
     console.log(`Deployment script exited with code ${code}`);
