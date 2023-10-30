@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const https = require('https');
 const fs = require('fs');
-const port = 80;
+const port = 443;
 const middleware = require('./middleware')
 const path = require('path')
 const bodyParser = require("body-parser")
@@ -51,6 +51,7 @@ const messagesRoute = require('./routes/messagesRoutes');
 const notificationsRoute = require('./routes/notificationRoutes');
 const settingsRoute = require('./routes/settingsRoutes');
 const adminRoute = require('./routes/adminRoutes');
+const sslRoute = require('./routes/sslRoutes');
 
 // Api routes
 const postApiRoute = require('./routes/api/posts');
@@ -72,6 +73,7 @@ app.use("/messages", middleware.requireLogin, messagesRoute);
 app.use("/notifications", middleware.requireLogin, notificationsRoute);
 app.use("/settings", middleware.requireLogin, settingsRoute);
 app.use("/admin", middleware.requireAdmin, adminRoute);
+app.use("/.well-known", sslRoute);
 
 // Api routes
 app.use("/api/posts", postApiRoute);
