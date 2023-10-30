@@ -18,9 +18,16 @@ const options = {
   cert: fs.readFileSync(sslCertPath), // Read your certificate file
 };
 
-const server = https.createServer(options, app); // Create an HTTPS server
+// const server = https.createServer(options, app); // Create an HTTPS server
 
+/*
 server.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
+*/
+
+// Create http server
+const server = app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 
