@@ -1,7 +1,7 @@
 {
-  "name": "greenbirdapp",
+  "name": "kiwe",
   "version": "0.0.1",
-  "description": "cool green bird app",
+  "description": "The best bird-based social media app.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
