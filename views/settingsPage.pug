@@ -5,55 +5,55 @@ block content
 		button(data-toggle="modal" data-target="#changeNameModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
-					i(class="fa-solid fa-signature")
+					i(class="fas fa-signature")
 				span Change name
 	.settingsContainer
 		button(data-toggle="modal" data-target="#changeUsernameModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
-					i(class="fa-solid fa-user")
+					i(class="fas fa-user")
 				span Change username
 	.settingsContainer
 		button(data-toggle="modal" data-target="#changeEmailModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
-					i(class="fa-solid fa-at")
+					i(class="fas fa-at")
 				span Change email
 	.settingsContainer
 		button(data-toggle="modal" data-target="#changeBioModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
-					i(class="fa-solid fa-pen-to-square")
+					i(class="fas fa-edit")
 				span Change bio
 	.settingsContainer
 		button(data-toggle="modal" data-target="#imageUploadModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
-					i(class="fa-solid fa-user-circle")
+					i(class="fas fa-user-circle")
 				span Change profile picture
 	.settingsContainer
 		button(data-toggle="modal" data-target="#coverPhotoUploadModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
-					i(class="fa-solid fa-panorama")
+					i(class="fas images")
 				span Change profile cover photo
 	.settingsContainer
 		button(data-toggle="modal" data-target="#changePasswordModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
-					i(class="fa-solid fa-key")
+					i(class="fas fa-key")
 				span Change password
 	.settingsContainer
-		a(href="/settings/legal" style="text-decoration: none;")
+		a(href="/legal" style="text-decoration: none;")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
-					i(class="fa-solid fa-scale-balanced")
+					i(class="fas fa-balance-scale")
 				span Legal
 	.settingsContainer
 		button(data-toggle="modal" data-target="#multiFactorModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
-					i(class="fa-solid fa-user-lock")
+					i(class="fas fa-user-lock")
 				span 2FA
 	if userLoggedIn.admin
 		.settingsContainer
@@ -66,7 +66,7 @@ block content
 		button(data-toggle="modal" data-target="#deleteAccountModal")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
-					i(class="fa-solid fa-user-slash")
+					i(class="fas fa-user-slash")
 				span Delete account
 	
 	+createSettingsModals(userLoggedIn)

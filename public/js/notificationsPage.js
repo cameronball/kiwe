@@ -41,7 +41,7 @@ function getNotificationPostHtml(notification, increment) {
 		var timestamp = timeDifference(new Date(), new Date(postData.createdAt));
 
 		var likeButtonActiveClass = postData.likes.includes(userLoggedIn._id) ? "active" : "";
-		var likeButtonFillIcon = postData.likes.includes(userLoggedIn._id) ? "fa-solid" : "fa-regular";
+		var likeButtonFillIcon = postData.likes.includes(userLoggedIn._id) ? "fas" : "far";
 		
 		var reshareButtonActiveClass = postData.reshareUsers.includes(userLoggedIn._id) ? "active" : "";
 
@@ -54,11 +54,11 @@ function getNotificationPostHtml(notification, increment) {
 		
 		var admin = "";
 
-		var verifiedGovernment = postedBy.verifiedGovernment ? `<i class="fa-solid fa-circle-check" style="margin-left:5px;color:#696969;" data-toggle="tooltip" data-placement="top" title="Government Affiliated Account"></i>` : "";
+		var verifiedGovernment = postedBy.verifiedGovernment ? `<i class="fas fa-circle-check" style="margin-left:5px;color:#696969;" data-toggle="tooltip" data-placement="top" title="Government Affiliated Account"></i>` : "";
 
 		var reshareText = '';
 		if(isReshare) {
-			reshareText = `<span><i class='fa-solid fa-repeat'></i>&nbsp;&nbsp;Reshared by <a>@${resharedBy}</a></span>`
+			reshareText = `<span><i class='fas fa-repeat'></i>&nbsp;&nbsp;Reshared by <a>@${resharedBy}</a></span>`
 		}
 		
 		var replyFlag = '';
@@ -81,18 +81,18 @@ function getNotificationPostHtml(notification, increment) {
 		var pinnedPostText = "";
 		if (postData.postedBy._id == userLoggedIn._id) {
 			if(postData.pinned === true) {
-				buttons = `<button class="unpinButton" data-id="${postData._id}" data-toggle="modal" data-target="#unpinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`    
+				buttons = `<button class="unpinButton" data-id="${postData._id}" data-toggle="modal" data-target="#unpinModal"><i class="fas fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fas fa-trash"></i></button>`    
 			}
 			else {
-				buttons = `<button class="pinButton" data-id="${postData._id}" data-toggle="modal" data-target="#confirmPinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
+				buttons = `<button class="pinButton" data-id="${postData._id}" data-toggle="modal" data-target="#confirmPinModal"><i class="fas fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fas fa-trash"></i></button>`
 			}
 		}
 		else if (userLoggedIn.admin) {
-			buttons = `<button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
+			buttons = `<button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fas fa-trash"></i></button>`
 		}
 
 		if(postData.pinned === true) {
-			pinnedPostText = `<span><i class="fa-solid fa-thumbtack" style="color: rgb(101, 119, 134);"></i>&nbsp;&nbsp;Pinned<span>`
+			pinnedPostText = `<span><i class="fas fa-thumbtack" style="color: rgb(101, 119, 134);"></i>&nbsp;&nbsp;Pinned<span>`
 		}
 
 		if(isReshare && postData.pinned) {
