@@ -473,10 +473,10 @@ function createPostHtml(postData, boldFont = false) {
     var pinnedPostText = "";
     if (postData.postedBy._id == userLoggedIn._id) {
         if(postData.pinned === true) {
-            buttons = `<button class="unpinButton" aria-label="Unpin post" data-id="${postData._id}" data-toggle="modal" data-target="#unpinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`    
+            buttons = `<button class="unpinButton" aria-label="Unpin post" data-id="${postData._id}" data-toggle="modal" data-target="#unpinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" aria-label="Delete post" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`    
         }
         else {
-            buttons = `<button class="pinButton" aria-label="Pin post" data-id="${postData._id}" data-toggle="modal" data-target="#confirmPinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
+            buttons = `<button class="pinButton" aria-label="Pin post" data-id="${postData._id}" data-toggle="modal" data-target="#confirmPinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" aria-label="Delete Post" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
         }
     }
     else if (userLoggedIn.admin) {
