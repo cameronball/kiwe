@@ -480,7 +480,7 @@ function createPostHtml(postData, boldFont = false) {
         }
     }
     else if (userLoggedIn.admin) {
-        buttons = `<button class="deleteButton" data-id="${postData._id}" data-toggle="modal" aria-label="Delete Post" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
+        buttons = `<button class="deleteButton" data-id="${postData._id}" aria-label="Delete Post" data-toggle="modal" aria-label="Delete Post" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
     }
 
     if(postData.pinned === true) {
