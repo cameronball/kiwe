@@ -9,9 +9,9 @@ app.set("view engine", "pug");
 app.set("views", "views");
 
 router.get("/", (req, res, next) => {
-	var payload = createPayload(req.session.user, "Settings");
-	payload.selectedTab = "posts";
-  	res.status(200).render("settingsPage", payload);
+	var payload = createPayload(req.session.user, "Legal");
+	payload.selectedTab = "legal";
+  	res.status(200).render("legalPage", payload);
 });
 
 function createPayload(userLoggedIn, title){

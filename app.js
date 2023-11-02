@@ -57,6 +57,7 @@ const searchRoute = require('./routes/searchRoutes');
 const messagesRoute = require('./routes/messagesRoutes');
 const notificationsRoute = require('./routes/notificationRoutes');
 const settingsRoute = require('./routes/settingsRoutes');
+const legalRoute = require('./routes/legalRoutes');
 const adminRoute = require('./routes/adminRoutes');
 const sslRoute = require('./routes/sslRoutes');
 
@@ -79,6 +80,7 @@ app.use("/search", middleware.requireLogin, searchRoute);
 app.use("/messages", middleware.requireLogin, messagesRoute);
 app.use("/notifications", middleware.requireLogin, notificationsRoute);
 app.use("/settings", middleware.requireLogin, settingsRoute);
+app.use("/legal", legalRoute);
 app.use("/admin", middleware.requireAdmin, adminRoute);
 app.use("/.well-known", sslRoute);
 
