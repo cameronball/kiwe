@@ -473,14 +473,14 @@ function createPostHtml(postData, boldFont = false) {
     var pinnedPostText = "";
     if (postData.postedBy._id == userLoggedIn._id) {
         if(postData.pinned === true) {
-            buttons = `<button class="unpinButton" data-id="${postData._id}" data-toggle="modal" data-target="#unpinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`    
+            buttons = `<button class="unpinButton" aria-label="Unpin post" data-id="${postData._id}" data-toggle="modal" data-target="#unpinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`    
         }
         else {
-            buttons = `<button class="pinButton" data-id="${postData._id}" data-toggle="modal" data-target="#confirmPinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
+            buttons = `<button class="pinButton" aria-label="Pin post" data-id="${postData._id}" data-toggle="modal" data-target="#confirmPinModal"><i class="fa-solid fa-thumbtack"></i></button><button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
         }
     }
     else if (userLoggedIn.admin) {
-        buttons = `<button class="deleteButton" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
+        buttons = `<button class="deleteButton" data-id="${postData._id}" data-toggle="modal" aria-label="Delete Post" data-target="#deletePostModal"><i class="fa-solid fa-trash"></i></button>`
     }
 
     if(postData.pinned === true) {
@@ -500,7 +500,7 @@ function createPostHtml(postData, boldFont = false) {
                 </div>
                 <div class='mainContentContainer'>
                     <div class='userImageContainer'>
-                        <img ${squarePicture} src='${postedBy.profilePic}'>
+                        <img ${squarePicture} src='${postedBy.profilePic}' alt="${postedBy.firstName}'s Profile Image">
                     </div>
                     <div class='postContentContainer'>
                         <div class='header'>
@@ -516,18 +516,18 @@ function createPostHtml(postData, boldFont = false) {
                         </div>
                         <div class='postFooter' style="${LargeFontStyle}">
                             <div class='postButtonContainer'>
-                                <button data-toggle='modal' data-target='#replyModal'>
+                                <button aria-label="Comment" data-toggle='modal' data-target='#replyModal'>
                                     <i class='fa-regular fa-comments'></i>
                                 </button>
                             </div>
                             <div class='postButtonContainer green'>
-                                <button class='reshareButton ${reshareButtonActiveClass}'>
+                                <button aria-label="Reshare" class='reshareButton ${reshareButtonActiveClass}'>
                                     <i class='fa-solid fa-repeat'></i>
                                     <span>${postData.reshareUsers.length || ""}</span>
                                 </button>
                             </div>
                             <div class='postButtonContainer red'>
-                                <button class='likeButton ${likeButtonActiveClass}'>
+                                <button aria-label="Like" class='likeButton ${likeButtonActiveClass}'>
                                     <i class='${likeButtonFillIcon} fa-heart'></i>
                                     <span>${postData.likes.length || ""}</span>
                                 </button>
