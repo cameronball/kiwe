@@ -1,4 +1,4 @@
-# Kiwe - Twitter-Style Social Media Site
+# Kiwe - Bird App Style Social Media Site
 
 ![Kiwe Logo](link_to_logo_image.png)
 
