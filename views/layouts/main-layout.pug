@@ -6,6 +6,7 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title #{pageTitle}
+    link(rel="icon" type="image/png" href="/images/favicon.ico")
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.css")
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css", integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N", crossorigin="anonymous")
     link(href="/css/main.css", rel="stylesheet")
@@ -18,22 +19,22 @@ html(lang="en")
           .navBarContainer(style="position: fixed;")
             a.blue(href="/") 
               i.fa-solid.fa-kiwi-bird
-            a(href="/") 
+            a(href="/")
               i.fa-solid.fa-house
             a(href="/search") 
               i.fa-solid.fa-magnifying-glass
             a(href="/notifications") 
-              i.fa-solid.fa-bell
+              i.fa-regular.fa-bell
               span#notificationsBadge 8
             a(href="/messages") 
-              i.fa-solid.fa-envelope
+              i.fa-regular.fa-envelope
               span#messagesBadge 8
             a(href="/profile") 
-              i.fa-solid.fa-user
+              i.fa-regular.fa-face-smile
             a(href="/settings") 
-              i.fa-solid.fa-cog
+              i.fa-solid.fa-bars
             a(href="/logout") 
-              i.fa-solid.fa-right-from-bracket
+              i.fa-solid.fa-person-running
         .mainSectionContainer.col-10.col-md-8.col-lg-6
           .titleContainer 
             h1 #{pageTitle}

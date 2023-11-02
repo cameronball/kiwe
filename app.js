@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const https = require('https');
 const fs = require('fs');
-const port = 80;
+const port = 443;
 const middleware = require('./middleware')
 const path = require('path')
 const bodyParser = require("body-parser")
@@ -14,23 +14,19 @@ const sslKeyPath = './kiwi.social.key';
 const sslCertPath = './kiwi.social.pem';
 
 const options = {
-  key: fs.readFileSync(sslKeyPath),   // Read your private key file
-  cert: fs.readFileSync(sslCertPath), // Read your certificate file
+  key: fs.readFileSync('private.key.pem'), // Read the private key file
+  cert: fs.readFileSync('domain.cert.pem'), // Read the domain certificate file
+  ca: [
+    fs.readFileSync('intermediate.cert.pem') // Read the intermediate certificate file
+    // Add more intermediate certificates if there are any
+  ]
 };
 
-// const server = https.createServer(options, app); // Create an HTTPS server
+const server = https.createServer(options, app);
 
-/*
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
-*/
-
-// Create http server
-const server = app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
-
 
 const io = require('socket.io')(server, { pingTimeout: 60000 });
 
