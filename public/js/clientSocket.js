@@ -1,6 +1,6 @@
 var connected = false;
 
-var socket = io("http://kiwe.social:80");
+var socket = io("http://kiwe.social:443");
 socket.emit("setup", userLoggedIn);
 
 socket.on("connected", () => connected = true);
