@@ -13,6 +13,18 @@ const sha512 = require('js-sha512').sha512;
 const sslKeyPath = './kiwi.social.key';
 const sslCertPath = './kiwi.social.pem';
 
+// Create http server to ensure users to use secure connection
+const httpApp = express();
+const http = require('http');
+
+httpApp.get("*", function(req, res, next) {
+    res.redirect("https://" + req.headers.host + req.path);
+});
+
+http.createServer(httpApp).listen(80, function() {
+    console.log("HTTP redirect server listening on port 80");
+});
+
 const options = {
   key: fs.readFileSync('private.key.pem'), // Read the private key file
   cert: fs.readFileSync('domain.cert.pem'), // Read the domain certificate file
