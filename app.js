@@ -56,6 +56,7 @@ const settingsRoute = require('./routes/settingsRoutes');
 const legalRoute = require('./routes/legalRoutes');
 const adminRoute = require('./routes/adminRoutes');
 const sslRoute = require('./routes/sslRoutes');
+const banRoute = require('./routes/bannedRoutes');
 
 // Api routes
 const postApiRoute = require('./routes/api/posts');
@@ -79,6 +80,7 @@ app.use("/settings", middleware.requireLogin, settingsRoute);
 app.use("/legal", legalRoute);
 app.use("/admin", middleware.requireAdmin, adminRoute);
 app.use("/.well-known", sslRoute);
+app.use("/banned", banRoute);
 
 // Api routes
 app.use("/api/posts", postApiRoute);
