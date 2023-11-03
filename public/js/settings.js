@@ -114,3 +114,7 @@ $("#deleteAccountButton").click(() => {
 		}
 	});
 });
+
+$(document).ready(() => {
+	$("#settingsButtonIcon").removeClass("far").addClass("fas");
+})
