@@ -379,8 +379,6 @@ $("#statsSearchButton").click(() => {
 			$("#statsModalBody").append("<br class='statsResults'>");
 			$("#statsModalBody").append("<span class='text-success statsResults'>Users: " + data.getUserCount + "</span>");
 			$("#statsModalBody").append("<br class='statsResults'>");
-			$("#statsModalBody").append("<button class='btn btn-success statsResults' id='refreshButton'>Refresh</button>");
-			$("#statsModalBody").append("<br class='statsResults'>");
 		},
 		error: (xhr, status, error) => {
 			$(".errorMessageStats").text("Error: " + xhr.status);
