@@ -19,6 +19,7 @@ const UserSchema = new Schema({
     followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
     verifiedBrand: { type: Boolean, default: false },
     verifiedGovernment: { type: Boolean, default: false },
+    banned: { type: Boolean, default: false },
 }, { timestamps: true });
 
 var User = mongoose.model('User', UserSchema);
