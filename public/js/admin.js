@@ -366,6 +366,29 @@ $(document).on("click", "#addFiveLikesButton", () => {
 	});
 });
 
+$("#statsSearchButton").click(() => {
+	
+	$(".errorMessageStats").text("");
+	$(".statsResults").remove();
+
+	$.ajax({
+		url: "/api/admin/stats",
+		type: "GET",
+		success: (data, status, xhr) => {
+			$("#statsModalBody").append("<br class='statsResults'>");
+			$("#statsModalBody").append("<br class='statsResults'>");
+			$("#statsModalBody").append("<span class='text-success statsResults'>Users: " + data.getUserCount + "</span>");
+			$("#statsModalBody").append("<br class='statsResults'>");
+			$("#statsModalBody").append("<button class='btn btn-success statsResults' id='refreshButton'>Refresh</button>");
+			$("#statsModalBody").append("<br class='statsResults'>");
+		},
+		error: (xhr, status, error) => {
+			$(".errorMessageStats").text("Error: " + xhr.status);
+			$(".errorMessageStats").append("<br>");
+		}
+	});
+});
+
 $(document).ready(() => {
 	$("#settingsButtonIcon").removeClass("far").addClass("fas");
 })
