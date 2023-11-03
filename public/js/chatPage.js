@@ -30,7 +30,7 @@ $(document).ready(() => {
 		$(".loadingSpinnerContainer").remove();
 		$(".chatContainer").css("visibility", "visible");
 	})
-	$("#inboxButtonIcon").removeClass("far").addClass("fas");
+	$("#messageButtonIcon").removeClass("far").addClass("fas");
 });
 
 $("#chatNameButton").click(() => {
