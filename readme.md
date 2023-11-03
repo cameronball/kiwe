@@ -27,6 +27,7 @@ Welcome to Kiwe, a social media platform where you can chirp, like, rechirp, and
 - Highlight the icon of the page that you are currently on in the side panel.
 - Add site favicon
 - Add button alt text for accessibility
+- Add stats in admin panel
 
 ## Key Features
 Kiwe offers a wide range of features, including:
