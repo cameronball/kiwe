@@ -28,6 +28,10 @@ router.get("/verifySearch", async (req, res, next) => {
 
 	var username = req.query.username;
 
+	var getUserCount = await User.count({}, function(err, count){
+	    console.log( "Number of docs: ", count );
+	});
+
 	var user = await User.findOne({ username: username });
 
 	if (user==null) {
