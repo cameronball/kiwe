@@ -29,3 +29,7 @@ function search(searchTerm, searchType) {
 
 	})
 }
+
+$(document).ready(() => {
+	$("#searchButtonIcon").removeClass("far").addClass("fas");
+})
