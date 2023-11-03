@@ -13,6 +13,9 @@ const sha512 = require('js-sha512').sha512;
 const sslKeyPath = './kiwi.social.key';
 const sslCertPath = './kiwi.social.pem';
 
+var datetime = new Date();
+console.log("app.js started at: " + datetime);
+
 // Create http server to ensure users to use secure connection
 const httpApp = express();
 const http = require('http');
