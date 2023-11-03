@@ -555,6 +555,23 @@ mixin createVerifyUserModal()
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
 
+mixin createBanUserModal()
+	#banUserModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='banUserModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#banUserModalLabel.modal-title Verify user
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(id="banUserModalBody")
+					span.errorMessage.errorMessageBan
+					p Username:
+					input#banUserUsernameTextbox(type="text", placeholder="Username...")
+					| &nbsp;
+					button#banSearchButton.btn.btn-primary(type='button') Search
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+
 mixin createAddLikeModel()
 	#addLikeModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addLikeModalLabel', aria-hidden='true')
 		.modal-dialog(role='document')
