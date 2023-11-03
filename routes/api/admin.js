@@ -178,8 +178,11 @@ router.put("/ban", async (req, res, next) => {
 		return res.sendStatus(400);
 	}
 
+	console.log("Past empty check");
+
 	switch (type) {
 		case "ban":
+			console.log("Ban check success");
 			if(action=="ban") {
 				var update = await User.findByIdAndUpdate(
 					id,
@@ -188,11 +191,13 @@ router.put("/ban", async (req, res, next) => {
 				);
 			}
 			else if(action=="unban") {
+				console.log("Unban point reached")
 				var update = await User.findByIdAndUpdate(
 					id,
 					{ banned: false },
 					{ new: true }
 				);
+				console.log(update):
 			}
 			else {
 				return res.sendStatus(400);
