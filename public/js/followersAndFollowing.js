@@ -1,4 +1,5 @@
 $(document).ready(() => {
+	$("#profileButtonIcon").removeClass("far").addClass("fas");
 
 	if(selectedTab == "followers") {
 		loadFollowers();
@@ -6,7 +7,6 @@ $(document).ready(() => {
 	else {
 		LoadFollowing();
 	}
-	$("#profileButtonIcon").removeClass("fas").addClass("far");
 })
 
 function loadFollowers() {
