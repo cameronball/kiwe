@@ -182,6 +182,102 @@ $(document).on("click", "#unverifyGovernmentButton", () => {
 	verifyApiCall("#verifyUserUsernameTextbox", "government", "unverify");
 });
 
+$("#banSearchButton").click(() => {
+	
+	$(".errorMessageBan").text("");
+	$(".banResults").remove();
+
+	$.ajax({
+		url: "/api/admin/banSearch",
+		type: "GET",
+		data: { username: $("#banUserUsernameTextbox").val() },
+		success: (data, status, xhr) => {
+			$("#banUserModalBody").append("<br class='banResults'>");
+			$("#banUserModalBody").append("<br class='banResults'>");
+
+			$("#banUserUsernameTextbox").attr("data-username", data.username);
+			
+			if(data.banned) {
+				$("#banUserModalBody").append("<span class='text-danger banResults'>" + data.username + " is banned.</span>");
+				$("#banUserModalBody").append("<button class='btn btn-success banResults' id='unbanUserButton'>Unban</button>");
+			}
+			else {
+				$("#banUserModalBody").append("<span class='text-success banResults'>" + data.username + " is not banned.</span>");
+				$("#banUserModalBody").append("<button class='btn btn-danger banResults' id='banUserButton'>Ban</button>");
+			}
+		},
+		error: (xhr, status, error) => {
+			if (xhr.status == 400) {
+				$(".errorMessageBan").text("Please enter a username.");
+				$(".errorMessageBan").append("<br>");
+			}
+			else if (xhr.status == 404) {
+				$(".errorMessageBan").text("That user could not be found.");
+				$(".errorMessageBan").append("<br>");
+			}
+		}
+	});
+});
+
+// We use the same structure as verify (ie including type) for simplicity but also for future when we add suspensions, shadowbans etc
+function banApiCall(textboxName, type, action) {
+	$.ajax({
+		url: "/api/admin/ban",
+		type: "PUT",
+		data: { username: $(textboxName).attr("data-username"), type: type, action: action },
+		success: (data, status, xhr) => {
+
+			$(".errorMessageBan").text("");
+			$(".banResults").remove();
+
+			$("#banUserModalBody").append("<span class='text-success banResults'>Success!</span>");
+
+			$.ajax({
+				url: "/api/admin/banSearch",
+				type: "GET",
+				data: { username: $("#banUserUsernameTextbox").val() },
+				success: (data, status, xhr) => {
+					$("#banUserModalBody").append("<br class='banResults'>");
+					$("#banUserModalBody").append("<br class='banResults'>");
+		
+					$("#banUserUsernameTextbox").attr("data-username", data.username);
+					
+					if(data.banned) {
+						$("#banUserModalBody").append("<span class='text-danger banResults'>" + data.username + " is banned.</span>");
+						$("#banUserModalBody").append("<button class='btn btn-success banResults' id='unbanUserButton'>Unban</button>");
+					}
+					else {
+						$("#banUserModalBody").append("<span class='text-success banResults'>" + data.username + " is not banned.</span>");
+						$("#banUserModalBody").append("<button class='btn btn-danger banResults' id='banUserButton'>Ban</button>");
+					}
+				},
+				error: (xhr, status, error) => {
+					if (xhr.status == 400) {
+						$(".errorMessageBan").text("Please enter a username.");
+						$(".errorMessageBan").append("<br>");
+					}
+					else if (xhr.status == 404) {
+						$(".errorMessageBan").text("That user could not be found.");
+						$(".errorMessageBan").append("<br>");
+					}
+				}
+			});
+		},
+		error: (xhr, status, error) => {
+			$(".errorMessageBan").text("Something went wrong: " + error);
+		}
+	});
+};
+
+$(document).on("click", "#banUserButton", () => {
+	// Format is username container, type and action (type represents ban/suspension etc action is the positive or negative action)
+	banApiCall("#banUserUsernameTextbox", "ban", "ban");
+});
+
+$(document).on("click", "#unbanUserButton", () => {
+	banApiCall("#banUserUsernameTextbox", "ban", "unban");
+});
+
 $("#addLikeSearchButton").on("click", () => {
 	$(".errorMessageAddLike").text("");
 	$(".addLikeResults").remove();
