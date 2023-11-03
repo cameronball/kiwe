@@ -249,3 +249,7 @@ $(document).on("click", "#addFiveLikesButton", () => {
 		}
 	});
 });
+
+$(document).ready(() => {
+	$("#settingsButtonIcon").removeClass("far").addClass("fas");
+})
