@@ -259,9 +259,9 @@ router.get("/stats", async (req, res, next) => {
 	var getMessageCount = await Message.count({});
 
 	var counts = {
-	    userCount,
-	    postCount,
-	    messageCount,
+	    getUserCount,
+	    getPostCount,
+	    getMessageCount,
 	  };
 
 	return res.status(200).send(counts);
