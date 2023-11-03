@@ -5,7 +5,8 @@ $(document).ready(() => {
 		} else {
 			outputChatList(data, $(".resultsContainer"));
 		}
-	})	
+	})
+	$("#messageButtonIcon").removeClass("far").addClass("fas");
 })
 
 function outputChatList(chatList, container) {
