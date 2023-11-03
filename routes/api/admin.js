@@ -264,7 +264,7 @@ router.get("/stats", async (req, res, next) => {
 	    messageCount,
 	  };
 
-	return counts;
+	return res.status(200).send(counts);
 });
 
 module.exports = router;
