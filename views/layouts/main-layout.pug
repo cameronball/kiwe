@@ -19,19 +19,19 @@ html(lang="en")
           .navBarContainer(style="position: fixed;")
             a.blue(href="/") 
               i.fad.fa-kiwi-bird
-            a(href="/")
+            a(href="/", id="homeButtonIcon")
               i.far.fa-home
-            a(href="/search") 
+            a(href="/search" id="searchButtonIcon")
               i.far.fa-search
-            a(href="/notifications") 
+            a(href="/notifications" id="notificationButtonIcon")
               i.far.fa-bell
               span#notificationsBadge 8
-            a(href="/messages") 
+            a(href="/messages" id="messageButtonIcon")
               i.far.fa-envelope
               span#messagesBadge 8
-            a(href="/profile") 
+            a(href="/profile" id="profileButtonIcon")
               i.far.fa-user
-            a(href="/settings") 
+            a(href="/settings" id="settingsButtonIcon")
               i.far.fa-cog
             a(href="/logout") 
               i.far.fa-sign-out
