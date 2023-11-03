@@ -165,8 +165,14 @@ router.put("/ban", async (req, res, next) => {
 	var type = req.body.type;
 	var action = req.body.action;
 
+	console.log(username);
+	console.log(type);
+	console.log(action);
+
 	var user = await User.findOne({ username: username });
 	var id = user._id;
+
+	console.log(id);
 
 	if (!username || !type || !action) {
 		return res.sendStatus(400);
