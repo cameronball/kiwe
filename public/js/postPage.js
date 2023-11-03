@@ -7,4 +7,5 @@ $(document).ready(() => {
 			$(".postsContainer").append("<span class='noResults'>This post is not found or is longer available</span>");
 		}
 	  });
+	$("#homeButtonIcon").removeClass("far").addClass("fas");
 })
