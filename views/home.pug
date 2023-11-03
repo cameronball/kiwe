@@ -3,6 +3,7 @@ extends layouts/main-layout.pug
 block content
   +createPostForm(userLoggedIn)
   .postsContainer
+  - $("#homeButtonIcon").removeClass("far").addClass("fas");
 
   +createPostModals(userLoggedIn)
 
