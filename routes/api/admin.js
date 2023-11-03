@@ -140,6 +140,70 @@ router.put("/verify", async (req, res, next) => {
 	}
 });
 
+router.get("/banSearch", async (req, res, next) => {
+	// Get user's verification status
+	
+	if(!req.query.username) {
+		return res.sendStatus(400);	
+	}
+
+	var username = req.query.username;
+
+	var user = await User.findOne({ username: username });
+
+	if (user==null) {
+		return res.sendStatus(404);
+	}
+	else {
+		// Return 200 and the user data
+		return res.status(200).send(user);
+	}
+});
+
+router.put("/ban", async (req, res, next) => {
+	var username = req.body.username;
+	var type = req.body.type;
+	var action = req.body.action;
+
+	var user = await User.findOne({ username: username });
+	var id = user._id;
+
+	if (!username || !type || !action) {
+		return res.sendStatus(400);
+	}
+
+	switch (type) {
+		case "ban":
+			if(action=="ban") {
+				var update = await User.findByIdAndUpdate(
+					id,
+					{ banned: true },
+					{ new: true }
+				);
+			}
+			else if(action=="unban") {
+				var update = await User.findByIdAndUpdate(
+					id,
+					{ unban: false },
+					{ new: true }
+				);
+			}
+			else {
+				return res.sendStatus(400);
+			}
+			break;
+		default:
+			return res.sendStatus(400);
+	}
+
+	if (update == null) {
+		return res.sendStatus(500);
+	}
+	else {
+		return res.sendStatus(200);
+	}
+});
+
 router.get("/addLikeSearch", async (req, res, next) => {
 
 	if(!req.query.id) {
