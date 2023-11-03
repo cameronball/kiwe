@@ -6,6 +6,8 @@ $(document).ready(() => {
 	else {
 		loadPosts(false);
 	}
+
+	$("#profileButtonIcon").removeClass("far").addClass("fas");
 })
 
 function loadPosts(replyBool) {
