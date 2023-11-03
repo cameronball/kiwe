@@ -379,6 +379,10 @@ $("#statsSearchButton").click(() => {
 			$("#statsModalBody").append("<br class='statsResults'>");
 			$("#statsModalBody").append("<span class='text-success statsResults'>Users: " + data.getUserCount + "</span>");
 			$("#statsModalBody").append("<br class='statsResults'>");
+			$("#statsModalBody").append("<span class='text-success statsResults'>Users: " + data.getPostCount + "</span>");
+			$("#statsModalBody").append("<br class='statsResults'>");
+			$("#statsModalBody").append("<span class='text-success statsResults'>Users: " + data.getMessageCount + "</span>");
+			$("#statsModalBody").append("<br class='statsResults'>");
 		},
 		error: (xhr, status, error) => {
 			$(".errorMessageStats").text("Error: " + xhr.status);
