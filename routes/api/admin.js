@@ -191,13 +191,13 @@ router.put("/ban", async (req, res, next) => {
 				);
 			}
 			else if(action=="unban") {
-				console.log("Unban point reached")
+				console.log("Unban point reached");
 				var update = await User.findByIdAndUpdate(
 					id,
 					{ banned: false },
 					{ new: true }
 				);
-				console.log(update):
+				console.log(update);
 			}
 			else {
 				return res.sendStatus(400);
