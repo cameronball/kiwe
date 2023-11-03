@@ -28,9 +28,6 @@ router.get("/verifySearch", async (req, res, next) => {
 
 	var username = req.query.username;
 
-	var getUserCount = await User.count({});
-	console.log(getUserCount);
-
 	var user = await User.findOne({ username: username });
 
 	if (user==null) {
@@ -254,6 +251,20 @@ router.put("/addLike", async (req, res, next) => {
 	}
 
 	return res.status(200).send(update);
+});
+
+router.get("/stats", async (req, res, next) => {
+	var getUserCount = await User.count({});
+	var getPostCount = await Post.count({});
+	var getMessageCount = await Message.count({});
+
+	var counts = {
+	    userCount,
+	    postCount,
+	    messageCount,
+	  };
+
+	return counts;
 });
 
 module.exports = router;
