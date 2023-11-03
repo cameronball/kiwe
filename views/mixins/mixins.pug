@@ -536,7 +536,8 @@ mixin createDisclaimerModal()
 
 mixin createAdminModals()
 	+createVerifyUserModal()
-	+createAddLikeModel()
+	+createBanUserModal()
+	+createAddLikeModal()
 
 mixin createVerifyUserModal()
 	#verifyUserModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='verifyUserModalLabel', aria-hidden='true')
@@ -572,7 +573,7 @@ mixin createBanUserModal()
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
 
-mixin createAddLikeModel()
+mixin createAddLikeModal()
 	#addLikeModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addLikeModalLabel', aria-hidden='true')
 		.modal-dialog(role='document')
 			.modal-content
