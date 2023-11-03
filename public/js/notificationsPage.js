@@ -2,6 +2,7 @@ $(document).ready(() => {
 	$.get("/api/notifications", (data) => {
 		outputNotificationsList(data, $(".resultsContainer"));		
 	});
+	$("#notificationButtonIcon").removeClass("far").addClass("fas");
 });
 
 $("#markNotificationsAsRead").click(() => markNotificationsAsOpened());
