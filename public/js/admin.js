@@ -64,6 +64,10 @@ $("#verifySearchButton").click(() => {
 				$(".errorMessageVerify").text("That user could not be found.");
 				$(".errorMessageVerify").append("<br>");
 			}
+			else {
+				$(".errorMessageVerify").text("Unknown error occured. Code: " + xhr.status);
+				$(".errorMessageVerify").append("<br>");
+			}
 		}
 	});
 });
@@ -141,6 +145,10 @@ function verifyApiCall(textboxName, type, action) {
 						$(".errorMessageVerify").text("That user could not be found.");
 						$(".errorMessageVerify").append("<br>");
 					}
+					else {
+						$(".errorMessageVerify").text("Unknown error occured. Code: " + xhr.status);
+						$(".errorMessageVerify").append("<br>");
+					}
 				}
 			});
 		},
@@ -215,6 +223,10 @@ $("#banSearchButton").click(() => {
 				$(".errorMessageBan").text("That user could not be found.");
 				$(".errorMessageBan").append("<br>");
 			}
+			else {
+				$(".errorMessageBan").text("Unknown error occured. Code: " + xhr.status);
+				$(".errorMessageBan").append("<br>");
+			}
 		}
 	});
 });
@@ -258,6 +270,10 @@ function banApiCall(textboxName, type, action) {
 					}
 					else if (xhr.status == 404) {
 						$(".errorMessageBan").text("That user could not be found.");
+						$(".errorMessageBan").append("<br>");
+					}
+					else {
+						$(".errorMessageBan").text("Unknown error occured. Code: " + xhr.status);
 						$(".errorMessageBan").append("<br>");
 					}
 				}
@@ -305,6 +321,10 @@ $("#addLikeSearchButton").on("click", () => {
 			}
 			else if (xhr.status == 404) {
 				$(".errorMessageAddLike").text("That post could not be found.");
+				$(".errorMessageAddLike").append("<br>");
+			}
+			else {
+				$(".errorMessageAddlike").text("Unknown error occured. Code: " + xhr.status);
 				$(".errorMessageAddLike").append("<br>");
 			}
 		}
