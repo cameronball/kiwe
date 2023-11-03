@@ -19,6 +19,15 @@ Welcome to Kiwe, a social media platform where you can chirp, like, rechirp, and
 
 - **SSL Integration:** We've added SSL support to ensure that real-time Socket.IO features work seamlessly on Safari.
 
+## v3 Features already implemented
+### These are features currently in the main branch that will be officially production ready in the upcoming v3 update
+- Ban users, admin ban panel
+- Redirect http traffic to https by creating a http redirect server (fixes a safari issue where sometimes a user putting in the page url will get put onto an error page due to no page being served on port 80)
+- Update to FontAwesome regular icons rather than solid so it is cleaner and to facilitate the feature below.
+- Highlight the icon of the page that you are currently on in the side panel.
+- Add site favicon
+- Add button alt text for accessibility
+
 ## Key Features
 Kiwe offers a wide range of features, including:
 - Chirping (Tweeting)
