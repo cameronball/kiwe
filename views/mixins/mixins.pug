@@ -538,6 +538,7 @@ mixin createAdminModals()
 	+createVerifyUserModal()
 	+createBanUserModal()
 	+createAddLikeModal()
+	+createStatsModal()
 
 mixin createVerifyUserModal()
 	#verifyUserModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='verifyUserModalLabel', aria-hidden='true')
@@ -587,5 +588,19 @@ mixin createAddLikeModal()
 					input#addLikeIdTextbox(type="text", placeholder="Post ID...")
 					| &nbsp;
 					button#addLikeSearchButton.btn.btn-primary(type='button') Search
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+
+mixin createStatsModal()
+	#statsModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='statsModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#statsModalLabel.modal-title Stats
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(id="statsModalBody")
+					span.errorMessage.errorMessageStats
+					button#statsSearchButton.btn.btn-primary(type='button') Refresh
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
