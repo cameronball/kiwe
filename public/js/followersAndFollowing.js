@@ -6,6 +6,7 @@ $(document).ready(() => {
 	else {
 		LoadFollowing();
 	}
+	$("#profileButtonIcon").removeClass("fas").addClass("far");
 })
 
 function loadFollowers() {
