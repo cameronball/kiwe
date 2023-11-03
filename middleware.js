@@ -1,6 +1,11 @@
 exports.requireLogin = (req, res, next) => {
   if (req.session && req.session.user) {
-    return next();
+    if (req.session.user.banned) {
+      return res.redirect('/banned');
+    }
+    else {
+      return next();
+    }
   }
   else {
     return res.redirect('/login');
