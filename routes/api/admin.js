@@ -184,7 +184,7 @@ router.put("/ban", async (req, res, next) => {
 			else if(action=="unban") {
 				var update = await User.findByIdAndUpdate(
 					id,
-					{ unban: false },
+					{ banned: false },
 					{ new: true }
 				);
 			}
