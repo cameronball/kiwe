@@ -672,7 +672,10 @@ function outputPosts(results, container) {
 		container.append(html);
         var random = Math.floor(Math.random() * 4) + 5;
         if (adIncrement >= random) {
-            if (ads.length <= 0) {
+            if (ads.length == 0) {
+                adIncrement = 0;
+            }
+            else {
                 var randomAdId = Math.floor(Math.random() * ads.length);
                 container.append(ads[randomAdId]);
                 // Remove that ad from ads
