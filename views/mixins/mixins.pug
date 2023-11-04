@@ -9,6 +9,8 @@ mixin createPostForm(userLoggedIn)
 			textarea#postTextarea(placeholder="What's happening?")
 			.buttonsContainer
 				button#submitPostButton(disabled="") Post
+				.imageUploadButton(style="color: var(--blue);margin-left:10px;display: flex; align-items: center; justify-content: center;")
+					i.fas.fa-camera(color="var(--blue)")
 
 mixin createReplyModal(userLoggedIn)
 	#replyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='replyModalLabel', aria-hidden='true')
