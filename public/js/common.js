@@ -547,9 +547,16 @@ function createPostHtml(postData, boldFont = false) {
     var image = "";
 
     if(postData.image) {
-        var image = `<div class='postImage'>
-                        <img src='${postData.image}'>
-                    </div>`;
+        if(postData.content) {
+            var image = `<div class='postImage'>
+                            <img src='${postData.image}'>
+                        </div>`;
+        }
+        else {
+            var image = `<br><div class='postImage'>
+                            <img src='${postData.image}'>
+                        </div>`;
+        }
     }
 
     return `<div class='post' data-id='${postData._id}'>
