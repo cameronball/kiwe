@@ -2,10 +2,9 @@ extends layouts/main-layout.pug
 
 block content
 
-	// If searchTerm is provided in the URL, then create a hidden div with the searchTerm in it
-	- if (selectedTab == "users" && searchTerm) {
-		.searchTermContainer(data-search="#{searchTerm}")
-	- }
+	if selectedTab == "posts"
+		if searchTerm
+			.searchTermContainer(data-search=searchTerm)
 
 	.searchBarContainer
 		i.fas.fa-magnifying-glass
