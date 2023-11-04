@@ -2,6 +2,12 @@ extends layouts/main-layout.pug
 
 block content
 
+	// If searchTerm is provided in the URL, then use it. Otherwise, use an empty string
+	- var searchTerm = ""
+	- if (payload.selectedTab == "users" && payload.searchTerm) {
+		- searchTerm = payload.searchTerm
+	- }
+
 	.searchBarContainer
 		i.fas.fa-magnifying-glass
 		input#searchBox(type="text", name="searchBox", data-search=selectedTab, placeholder="Search...")
