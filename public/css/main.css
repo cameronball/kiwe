@@ -625,7 +625,7 @@ button i, button span {
     right: 0;
 }
 
-#imagePreview, #coverPreview, #postPhoto {
+#imagePreview, #coverPreview, #postImagePreview {
     display: block;
     max-width: 100%;
     width: 100%;
