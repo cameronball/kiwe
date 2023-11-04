@@ -621,9 +621,7 @@ ads.push(`<div class="post" data-id="65463a609b3c16b8083cbd25">
 </div>`);
 
 ads.push(`<div class="post" data-id="6546432f56a7bbae36bc7d0c">
-<div class="postActionContainer"><span><i class="fas fa-ad" style="color: var(--blue);"></i>&nbsp;&nbsp;Paid promotion<span>
-
-</span></span></div>
+<div class="postActionContainer"><span style="font-size:14px;"><i class="fas fa-ad" style="color: var(--blue);"></i>&nbsp;&nbsp;Paid promotion</span></div>
 <div class="mainContentContainer">
     <div class="userImageContainer">
         <img style="border-radius: 10%;" src="/uploads/images/3e995925d43fc8c5975379bb80b87758.png" alt="Amazon's Profile Image">
