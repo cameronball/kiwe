@@ -107,12 +107,12 @@ function getNotificationPostHtml(notification, increment) {
 		if(postData.image) {
 			if(postData.content) {
 				var image = `<div class='postImage'>
-								<img src='${postData.image}'>
+								<img style="width: auto;" src='${postData.image}'>
 							</div>`;
 			}
 			else {
 				var image = `<br><div class='postImage'>
-								<img src='${postData.image}'>
+								<img style="width: auto;" src='${postData.image}'>
 							</div>`;
 			}
 		}
