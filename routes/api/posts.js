@@ -94,9 +94,7 @@ router.post("/", upload.single("croppedImage"), async (req, res, next) => {
 				console.log(error);
 				return res.sendStatus(400);
 			}
-			else {
-				var includesImage = true;
-			}
+			var includesImage = true;
 		})
 	}
 
