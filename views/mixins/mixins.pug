@@ -9,8 +9,9 @@ mixin createPostForm(userLoggedIn)
 			textarea#postTextarea(placeholder="What's happening?")
 			.buttonsContainer(style="display: flex; flex-direction: row;")
 				button#submitPostButton(disabled="") Post
-				.imageUploadButton(style="color: var(--blue);margin-left:10px;display: flex; align-items: center; justify-content: center;")
-					i.fas.fa-camera(style="height: 100%; width: 100%; object-fit: contain;" color="var(--blue)")
+				button(type="button", data-toggle="modal", data-target="#imagePostUploadModal")
+					.imageUploadButton(style="color: var(--blue);margin-left:10px;display: flex; align-items: center; justify-content: center;")
+						i.fas.fa-camera(style="font-size:2.5vh;" color="var(--blue)")
 
 mixin createReplyModal(userLoggedIn)
 	#replyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='replyModalLabel', aria-hidden='true')
@@ -92,6 +93,27 @@ mixin createImageUploadModal()
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#imageUploadButton.btn.btn-primary(type='button') Upload
+
+mixin createImagePostUploadModal(userLoggedIn)
+	#imagePostUploadModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='imagePostUploadModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#imagePostUploadModalLabel.modal-title Upload an image
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body
+					.postFormContainer
+						.userImageContainer
+							img(src=userLoggedIn.profilePic, alt="User's profile picture")
+						.textareaContainer
+							textarea#imagePostTextarea(placeholder="What's happening?")
+					input#postPhoto(type="file", name="postPhoto")
+					.imagePreviewContainer
+						img#postImagePreview
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button#imagePostUploadButton.btn.btn-primary(type='button') Post
 
 mixin createCoverPhotoUploadModal()
 	- const phrases = ["Looks like your cover photo could use a little love. Time for a refresh, don't you think?","Well, your old cover photo was...certainly a choice. Let's try something new, shall we?","It's time to give your profile the Hollywood treatment with a brand new cover photo!","Listen, I'm not saying your old cover photo was terrible, but...okay, fine, I am saying that. Let's do better this time around, yeah?","Your old cover photo was like a relic from the MySpace era. Let's bring your profile into the modern age."]

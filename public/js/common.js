@@ -196,6 +196,26 @@ $("#coverPhoto").change(function(){
     }
 });
 
+$("#postPhoto").change(function(){
+    if(this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+            var image = document.getElementById("postImagePreview");
+            image.src = e.target.result;
+
+            if(cropper !== undefined) {
+                cropper.destroy();
+            }
+
+            cropper = new Cropper(image, {
+                aspectRatio: 1 / 1,
+                background: false
+            });
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+
 $("#imageUploadButton").click(() => {
     var canvas = cropper.getCroppedCanvas();
 
@@ -238,6 +258,34 @@ $("#coverPhotoButton").click(() => {
             processData: false,
             contentType: false,
             success: () => window.location.href = "/profile"
+        });
+    });
+});
+
+$("#imagePostUploadButton").click(() => {
+    var canvas = cropper.getCroppedCanvas();
+    var content = $("#imagePostTextarea").val();
+
+    if(canvas == null) {
+        alert("Could not upload image. Make sure it is an image file.");
+        return;
+    }
+
+    canvas.toBlob((blob) => {
+        var data = new FormData();
+        data.append("croppedImage", blob);
+        data.append("content", content);
+
+        $.ajax({
+            url: "/api/posts",
+            type: "POST",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: (postData) => {
+                var html = createPostHtml(postData);
+                $(".postsContainer").prepend(html);
+            }
         });
     });
 });
