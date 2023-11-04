@@ -14,7 +14,14 @@ router.get("/", (req, res, next) => {
   	res.status(200).render("searchPage", payload);
 })
 
-router.get("/:selectedTab", (req, res, next) => {
+router.get("/query/:searchTerm", (req, res, next) => {
+	var payload = createPayload(req.session.user);
+	payload.selectedTab = "posts";
+	payload.searchTerm = req.params.searchTerm;
+  	res.status(200).render("searchPage", payload);
+})
+
+router.get("/tab/:selectedTab", (req, res, next) => {
 	var payload = createPayload(req.session.user);
 	payload.selectedTab = req.params.selectedTab;
   	res.status(200).render("searchPage", payload);
