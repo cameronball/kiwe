@@ -545,6 +545,8 @@ function createPostHtml(postData, boldFont = false) {
         reshareText = '';
     }
 
+    var image = "";
+
     if(postData.image) {
         var image = `<div class='postImage'>
                         <img src='${postData.image}'>
