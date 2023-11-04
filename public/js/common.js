@@ -273,9 +273,13 @@ $("#imagePostUploadButton").click(() => {
     }
 
     canvas.toBlob((blob) => {
-        var data = new FormData();
-        data.append("croppedImage", blob);
-        data.append("content", content);
+
+        var data = {
+            content: content,
+            image: blob
+        }
+
+        console.log(data);
 
         $.ajax({
             url: "/api/posts",
