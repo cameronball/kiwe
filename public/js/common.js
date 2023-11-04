@@ -576,7 +576,7 @@ function timeDifference(current, previous) {
 }
 
 function outputPosts(results, container) {
-    var adIncrement = 3;
+    var adIncrement = 5;
 	container.html("");
 
 	if(!Array.isArray(results)) {
@@ -586,7 +586,9 @@ function outputPosts(results, container) {
 	results.forEach(result => {
 		var html = createPostHtml(result);
 		container.append(html);
-        if (adIncrement == 5) {
+        // Generate random number from 5-8
+        var random = Math.floor(Math.random() * 4) + 5;
+        if (adIncrement >= random) {
             container.append(`<div class="post" data-id="65463a609b3c16b8083cbd25">
             <div class="postActionContainer">
                 <span><i class="fas fa-ad" style="color: rgb(101, 119, 134);"></i>&nbsp;&nbsp;Paid promotion<span>
