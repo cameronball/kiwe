@@ -1,9 +1,11 @@
 extends layouts/main-layout.pug
 
 block content
-
+	- console.log(1);
 	if selectedTab == "posts"
+		- console.log(2);
 		if searchTerm
+			- console.log(3);
 			.searchTermContainer(data-search=searchTerm)
 
 	.searchBarContainer
