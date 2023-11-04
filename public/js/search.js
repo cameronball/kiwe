@@ -32,4 +32,11 @@ function search(searchTerm, searchType) {
 
 $(document).ready(() => {
 	$("#searchButtonIcon").removeClass("far").addClass("fas");
+
+	// Check if data-term is set on the search box
+	var value = $("#searchBox").data().term;
+	var searchType = $("#searchBox").data().search;
+	if(value && value != "") {
+		search(value, searchType);
+	}
 })
