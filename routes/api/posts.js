@@ -80,11 +80,12 @@ router.get("/:id", async (req, res, next) => {
 	res.status(200).send(results);
 })
 
-router.post("/", upload.any(), async (req, res, next) => {
+router.post("/", upload.single("croppedImage"), async (req, res, next) => {
 	
 	var includesImage = false;
 	
 	if(req.file) {
+		console.log("File uploaded");
 		var includesImage = true;
 		var filePath = `/uploads/images/${req.file.filename}.png`;
 		var tempPath = req.file.path;

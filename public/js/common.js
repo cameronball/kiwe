@@ -273,7 +273,7 @@ $("#imagePostUploadButton").click(() => {
     canvas.toBlob((blob) => {
         var formData = new FormData();
         formData.append('content', $("#imagePostTextarea").val());
-        formData.append('image', blob);
+        formData.append('croppedImage', blob);
     
         console.log(formData);
     
