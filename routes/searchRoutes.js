@@ -14,11 +14,8 @@ router.get("/", (req, res, next) => {
   	res.status(200).render("searchPage", payload);
 })
 
-router.get("/:selectedTab/:searchTerm", (req, res, next) => {
+router.get("/:selectedTab", (req, res, next) => {
 	var payload = createPayload(req.session.user);
-	if (req.params.searchTerm) {
-		payload.searchTerm = req.params.searchTerm;
-	}
 	payload.selectedTab = req.params.selectedTab;
   	res.status(200).render("searchPage", payload);
 })
