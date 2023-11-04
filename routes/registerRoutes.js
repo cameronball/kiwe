@@ -24,6 +24,7 @@ router.post("/", async (req, res, next) => {
   var username = req.body.username.trim();
   var email = req.body.email.trim();
   var password = req.body.password;
+  var secretCode = req.body.secretCode.trim();
 
   var payload = req.body;
   payload.pageTitle = "Register";
@@ -62,11 +63,18 @@ router.post("/", async (req, res, next) => {
       data.password = await bcrypt.hash(password, 10);
       data.following = ['65302a9670ee1780e3593113', '65392a74ee7e23fb0db658f8'];
 
-      User.create(data)
-      .then((user) => {
-          req.session.user = user;
-          return res.redirect("/");
-      })
+      if (secretCode == process.env.CODE) {
+        User.create(data)
+        .then((user) => {
+            req.session.user = user;
+            return res.redirect("/");
+        })
+      }
+      else {
+        payload.errorMessage = "Invalid signup code.";
+        res.status(200).render("register", payload);
+      }
+      
     }
     else {
       // User found
