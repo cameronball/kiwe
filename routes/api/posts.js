@@ -82,7 +82,19 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", upload.any(), async (req, res, next) => {
 	
-	console.log(req.body);
+	if(req.file) {
+		var includesImage = true;
+		var filePath = `/uploads/images/${req.file.filename}.png`;
+		var tempPath = req.file.path;
+		var targetPath = path.join(__dirname, `../../${filePath}`);
+
+		fs.rename(tempPath, targetPath, async error => {
+			if(error != null) {
+				console.log(error);
+				return res.sendStatus(400);
+			}
+		})
+	}
 
 	sanitizedContent = sanitizer.escape(req.body.content);
 
@@ -103,6 +115,10 @@ router.post("/", upload.any(), async (req, res, next) => {
 	var postData = {
 		content: sanitizedContent,
 		postedBy: req.session.user
+	}
+
+	if (includesImage) {
+		postData.image = filePath;
 	}
 
 	if (req.body.replyTo) {
