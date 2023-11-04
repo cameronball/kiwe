@@ -2,6 +2,13 @@ extends layouts/main-layout.pug
 
 block content
 	.resultsContainer
+		a.resultListItem(href='/messages/new')
+			.resultsImageContainer
+				i.fas.fa-comment-medical
+			.resultsDetailsContainer.ellipsis
+				span.heading.ellipsis New chat
+				span.subText.ellipsis Create new message
+
 
 block headerButton
 	a(href="/messages/new")
