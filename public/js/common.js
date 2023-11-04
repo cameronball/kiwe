@@ -576,6 +576,7 @@ function timeDifference(current, previous) {
 }
 
 function outputPosts(results, container) {
+    var adIncrement = 3;
 	container.html("");
 
 	if(!Array.isArray(results)) {
@@ -585,6 +586,53 @@ function outputPosts(results, container) {
 	results.forEach(result => {
 		var html = createPostHtml(result);
 		container.append(html);
+        if (adIncrement == 5) {
+            container.append(`<div class="post" data-id="65463a609b3c16b8083cbd25">
+            <div class="postActionContainer">
+                <span><i class="fas fa-ad" style="color: rgb(101, 119, 134);"></i>&nbsp;&nbsp;Paid promotion<span>
+                
+            </span></span></div>
+            <div class="mainContentContainer">
+                <div class="userImageContainer">
+                    <img style="border-radius: 10%;" src="/uploads/images/cf1f01d79e5c0b82b2e25b8afb7d92e0.png" alt="Kiwe's Profile Image">
+                </div>
+                <div class="postContentContainer">
+                    <div class="header">
+                        <span><a href="/profile/kiwe" class="displayName">Kiwe</a></span>
+                        <span class="username">&nbsp;@kiwe</span>
+                        
+                        
+                        
+                    </div>
+                    
+                    <div class="postBody">
+                        <span class="" style="">Update 3 is incoming! Features include new icons, hashtags, image chips and more!</span>
+                    </div>
+                    <div class="postFooter" style="">
+                        <div class="postButtonContainer">
+                            <button aria-label="Comment" data-toggle="modal" data-target="#replyModal">
+                                <i class="fas fa-comments"></i>
+                            </button>
+                        </div>
+                        <div class="postButtonContainer green">
+                            <button aria-label="Reshare" class="reshareButton ">
+                                <i class="fas fa-repeat"></i>
+                                <span></span>
+                            </button>
+                        </div>
+                        <div class="postButtonContainer red">
+                            <button aria-label="Like" class="likeButton ">
+                                <i class="far fa-heart"></i>
+                                &nbsp;<span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`);
+        adIncrement = 0;
+        }
+        adIncrement++;
 	});
 
 	$('[data-toggle="tooltip"]').tooltip()
