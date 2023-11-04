@@ -82,6 +82,8 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", upload.any(), async (req, res, next) => {
 	
+	var includesImage = false;
+	
 	if(req.file) {
 		var includesImage = true;
 		var filePath = `/uploads/images/${req.file.filename}.png`;
@@ -111,14 +113,17 @@ router.post("/", upload.any(), async (req, res, next) => {
 		return "<a style='color:var(--blue);' href='https://kiwe.social/search/query/" + encodedHashtag + "'>" + matched + "</a>";
 	});
 
-
-	var postData = {
-		content: sanitizedContent,
-		postedBy: req.session.user
-	}
-
-	if (includesImage) {
-		postData.image = filePath;
+	if(includesImage) {
+		var postData = {
+			content: sanitizedContent,
+			postedBy: req.session.user,
+			image: filePath
+		}
+	} else {
+		var postData = {
+			content: sanitizedContent,
+			postedBy: req.session.user
+		}
 	}
 
 	if (req.body.replyTo) {
