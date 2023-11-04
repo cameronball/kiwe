@@ -78,7 +78,10 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
 	
+	console.log(req.body);
+
 	sanitizedContent = sanitizer.escape(req.body.content);
+
 
 	if (!req.body.content) {
 		console.log("Content param not sent with request");

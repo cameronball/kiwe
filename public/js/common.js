@@ -264,8 +264,6 @@ $("#coverPhotoButton").click(() => {
 
 $("#imagePostUploadButton").click(() => {
     var canvas = cropper.getCroppedCanvas();
-    var content = $("#imagePostTextarea").val();
-    console.log(content);
 
     if(canvas == null) {
         alert("Could not upload image. Make sure it is an image file.");
@@ -275,7 +273,7 @@ $("#imagePostUploadButton").click(() => {
     canvas.toBlob((blob) => {
 
         var data = {
-            content: content,
+            content: $("#imagePostTextarea").val(),
             image: blob
         }
 
