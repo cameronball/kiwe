@@ -545,6 +545,12 @@ function createPostHtml(postData, boldFont = false) {
         reshareText = '';
     }
 
+    if(postData.image) {
+        var image = `<div class='postImage'>
+                        <img src='${postData.image}'>
+                    </div>`;
+    }
+
     return `<div class='post' data-id='${postData._id}'>
                 <div class='postActionContainer'>
                     ${pinnedPostText}
@@ -566,6 +572,7 @@ function createPostHtml(postData, boldFont = false) {
                         <div class='postBody'>
                             <span class="${boldFontClass}" style="${LargeFontStyle}">${postData.content}</span>
                         </div>
+                        ${image}
                         <div class='postFooter' style="${LargeFontStyle}">
                             <div class='postButtonContainer'>
                                 <button aria-label="Comment" data-toggle='modal' data-target='#replyModal'>

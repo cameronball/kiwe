@@ -1582,3 +1582,11 @@ ul {
     margin-left: 0px;
     font-weight:700;
 }
+
+.postImage img {
+    max-height:300px;
+    max-width: 300px;
+    height:30vh;
+    border: var(--blueLight) solid 5px;
+    border-radius: 10%;
+}
