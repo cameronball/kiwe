@@ -6,6 +6,10 @@ const sanitizer = require('sanitizer');
 const User = require('../../schemas/UserSchema');
 const Post = require('../../schemas/PostSchema');
 const Notification = require('../../schemas/NotificationSchema');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const upload = multer({ dest: 'uploads/' });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -76,7 +80,7 @@ router.get("/:id", async (req, res, next) => {
 	res.status(200).send(results);
 })
 
-router.post("/", async (req, res, next) => {
+router.post("/", upload.any(), async (req, res, next) => {
 	
 	console.log(req.body);
 

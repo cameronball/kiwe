@@ -271,18 +271,16 @@ $("#imagePostUploadButton").click(() => {
     }
 
     canvas.toBlob((blob) => {
-
-        var data = {
-            content: $("#imagePostTextarea").val(),
-            image: blob
-        }
-
-        console.log(data);
-
+        var formData = new FormData();
+        formData.append('content', $("#imagePostTextarea").val());
+        formData.append('image', blob);
+    
+        console.log(formData);
+    
         $.ajax({
             url: "/api/posts",
             type: "POST",
-            data: data,
+            data: formData,
             processData: false,
             contentType: false,
             success: (postData) => {
