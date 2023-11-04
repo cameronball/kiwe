@@ -672,8 +672,13 @@ function outputPosts(results, container) {
 		container.append(html);
         var random = Math.floor(Math.random() * 4) + 5;
         if (adIncrement >= random) {
-            container.append(ads[Math.floor(Math.random() * ads.length)]);
-        adIncrement = 0;
+            if (ads.length <= 0) {
+                var randomAdId = Math.floor(Math.random() * ads.length);
+                container.append(ads[randomAdId]);
+                // Remove that ad from ads
+                ads.splice(randomAdId, 1);
+                adIncrement = 0;
+            }
         }
         adIncrement++;
 	});
