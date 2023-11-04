@@ -89,7 +89,7 @@ router.post("/", async (req, res, next) => {
 	var hashtagRegex = /#[a-zA-Z0-9]+/;
 	sanitizedContent = sanitizedContent.replace(hashtagRegex, function(matched){
 		var encodedHashtag = encodeURIComponent(matched);
-		return "<a href='https://kiwe.social/search/query/" + encodedHashtag + "'>" + matched + "</a>";
+		return "<a style='color:var(--blue);' href='https://kiwe.social/search/query/" + encodedHashtag + "'>" + matched + "</a>";
 	});
 
 
