@@ -1587,6 +1587,5 @@ ul {
     max-height:300px;
     max-width: 300px;
     height:30vh;
-    border: var(--blueLight) solid 5px;
     border-radius: 10%;
 }
