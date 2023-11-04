@@ -5,7 +5,7 @@ block content
 	.searchBarContainer
 		i.fas.fa-magnifying-glass
 		if searchTerm
-			input#searchBox(type="text", name="searchBox", data-search=selectedTab, data-term=searchTerm placeholder="Search...")
+			input#searchBox(type="text", name="searchBox", data-search=selectedTab, text=searchTerm ,data-term=searchTerm placeholder="Search...")
 		else
 			input#searchBox(type="text", name="searchBox", data-search=selectedTab placeholder="Search...")
 
