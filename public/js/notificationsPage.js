@@ -101,6 +101,22 @@ function getNotificationPostHtml(notification, increment) {
 			pinnedPostText = pinnedPostText + '&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;' + reshareText;
 			reshareText = '';
 		}
+
+		var image = "";
+
+		if(postData.image) {
+			if(postData.content) {
+				var image = `<div class='postImage'>
+								<img src='${postData.image}'>
+							</div>`;
+			}
+			else {
+				var image = `<br><div class='postImage'>
+								<img src='${postData.image}'>
+							</div>`;
+			}
+		}
+
 		var containerId = `#${increment}`;
 		$(containerId).append(`<div class='post' style='border-bottom: 0px !important;' data-id='${postData._id}'>
 													<div class='postActionContainer'>
@@ -122,6 +138,7 @@ function getNotificationPostHtml(notification, increment) {
 															<div class='postBody'>
 																<span>${postData.content}</span>
 															</div>
+															${image}
 														</div>
 													</div>
 												</div>`);
