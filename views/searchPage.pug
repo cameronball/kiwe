@@ -3,9 +3,9 @@ extends layouts/main-layout.pug
 block content
 
 	// If searchTerm is provided in the URL, then use it. Otherwise, use an empty string
-	- var searchTerm = ""
-	- if (payload.selectedTab == "users" && payload.searchTerm) {
-		- searchTerm = payload.searchTerm
+	- var localSearchTerm = ""
+	- if (selectedTab == "users" && searchTerm) {
+		- localSearchTerm = searchTerm
 	- }
 
 	.searchBarContainer
