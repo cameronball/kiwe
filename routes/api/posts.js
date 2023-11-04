@@ -87,7 +87,10 @@ router.post("/", async (req, res, next) => {
 
 	// Check for hashtags and put them in a link if they exist
 	var hashtagRegex = /#[a-zA-Z0-9]+/;
-	sanitizedContent = sanitizedContent.replace(hashtagRegex, "<a href='https://kiwe.social/search/query/$&'>$&</a>");
+	sanitizedContent = sanitizedContent.replace(hashtagRegex, function(matched){
+		var encodedHashtag = encodeURIComponent(matched);
+		return "<a href='https://kiwe.social/search/query/" + encodedHashtag + "'>" + matched + "</a>";
+	});
 
 
 	var postData = {
