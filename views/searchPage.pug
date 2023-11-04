@@ -2,10 +2,9 @@ extends layouts/main-layout.pug
 
 block content
 
-	// If searchTerm is provided in the URL, then use it. Otherwise, use an empty string
-	- var localSearchTerm = ""
+	// If searchTerm is provided in the URL, then create a hidden div with the searchTerm in it
 	- if (selectedTab == "users" && searchTerm) {
-		- localSearchTerm = searchTerm
+		.searchTermContainer(data-search="#{searchTerm}")
 	- }
 
 	.searchBarContainer
