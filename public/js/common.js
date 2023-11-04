@@ -275,8 +275,6 @@ $("#imagePostUploadButton").click(() => {
         formData.append('content', $("#imagePostTextarea").val());
         formData.append('croppedImage', blob);
     
-        console.log(formData);
-    
         $.ajax({
             url: "/api/posts",
             type: "POST",

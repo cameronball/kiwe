@@ -85,8 +85,6 @@ router.post("/", upload.single("croppedImage"), async (req, res, next) => {
 	var includesImage = false;
 	
 	if(req.file) {
-		console.log("File uploaded");
-		var includesImage = true;
 		var filePath = `/uploads/images/${req.file.filename}.png`;
 		var tempPath = req.file.path;
 		var targetPath = path.join(__dirname, `../../${filePath}`);
@@ -96,23 +94,31 @@ router.post("/", upload.single("croppedImage"), async (req, res, next) => {
 				console.log(error);
 				return res.sendStatus(400);
 			}
+			else {
+				var includesImage = true;
+			}
 		})
 	}
 
 	sanitizedContent = sanitizer.escape(req.body.content);
 
 
-	if (!req.body.content) {
+	if (!req.body.content && filePath == null) {
 		console.log("Content param not sent with request");
 		return res.sendStatus(400);
 	}
 
-	// Check for hashtags and put them in a link if they exist
-	var hashtagRegex = /#[a-zA-Z0-9]+/g;
-	sanitizedContent = sanitizedContent.replace(hashtagRegex, function(matched){
-		var encodedHashtag = encodeURIComponent(matched);
-		return "<a style='color:var(--blue);' href='https://kiwe.social/search/query/" + encodedHashtag + "'>" + matched + "</a>";
-	});
+	if (req.body.content) {
+		// Check for hashtags and put them in a link if they exist
+		var hashtagRegex = /#[a-zA-Z0-9]+/g;
+		sanitizedContent = sanitizedContent.replace(hashtagRegex, function(matched){
+			var encodedHashtag = encodeURIComponent(matched);
+			return "<a style='color:var(--blue);' href='https://kiwe.social/search/query/" + encodedHashtag + "'>" + matched + "</a>";
+		});
+	}
+	else {
+		sanitizedContent = "";
+	}
 
 	if(includesImage) {
 		var postData = {
