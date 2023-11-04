@@ -287,7 +287,7 @@ $("#imagePostUploadButton").click(() => {
                 var html = createPostHtml(postData);
                 $(".postsContainer").prepend(html);
                 $("#imagePostTextarea").val("");
-                $("#postImagePreview").cropper("destroy");
+                cropper.destroy();
                 $("#imagePostUploadModal").modal("hide");
             }
         });
