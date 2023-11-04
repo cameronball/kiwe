@@ -209,7 +209,8 @@ $("#postPhoto").change(function(){
 
             cropper = new Cropper(image, {
                 aspectRatio: 1 / 1,
-                background: false
+                background: false,
+                viewMode: 1
             });
         }
         reader.readAsDataURL(this.files[0]);
