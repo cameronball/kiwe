@@ -2,6 +2,8 @@
 
 ![Kiwe Logo](link_to_logo_image.png)
 
+### <a href="https://kiwe.social">kiwe.social</a>
+
 Welcome to Kiwe, a social media platform where you can chirp, like, rechirp, and connect with others in a fun and engaging way. This `readme.md` provides an overview of the features and updates in version 2, as well as a sneak peek at what's planned for version 3.
 
 ## Updates in v2
