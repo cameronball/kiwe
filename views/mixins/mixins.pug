@@ -7,10 +7,10 @@ mixin createPostForm(userLoggedIn)
 				img(src=userLoggedIn.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image")
 		.textareaContainer
 			textarea#postTextarea(placeholder="What's happening?")
-			.buttonsContainer
+			.buttonsContainer(style="display: flex; flex-direction: row;")
 				button#submitPostButton(disabled="") Post
 				.imageUploadButton(style="color: var(--blue);margin-left:10px;display: flex; align-items: center; justify-content: center;")
-					i.fas.fa-camera(color="var(--blue)")
+					i.fas.fa-camera(style="height: 100%; width: 100%; object-fit: contain;" color="var(--blue)")
 
 mixin createReplyModal(userLoggedIn)
 	#replyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='replyModalLabel', aria-hidden='true')
