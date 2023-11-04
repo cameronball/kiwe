@@ -1,16 +1,13 @@
 extends layouts/main-layout.pug
 
 block content
-	- console.log(1);
-	if selectedTab == "posts"
-		- console.log(2);
-		if searchTerm
-			- console.log(3);
-			.searchTermContainer(data-search=searchTerm)
 
 	.searchBarContainer
 		i.fas.fa-magnifying-glass
-		input#searchBox(type="text", name="searchBox", data-search=selectedTab, placeholder="Search...")
+		if searchTerm
+			input#searchBox(type="text", name="searchBox", data-search=selectedTab, data-term=searchTerm placeholder="Search...")
+		else
+			input#searchBox(type="text", name="searchBox", data-search=selectedTab placeholder="Search...")
 
 	.tabsContainer
 		+createTab("Posts", `/search/posts`, selectedTab != "users")

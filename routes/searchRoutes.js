@@ -17,6 +17,7 @@ router.get("/", (req, res, next) => {
 router.get("/query/:searchTerm", (req, res, next) => {
 	var payload = createPayload(req.session.user);
 	payload.selectedTab = "posts";
+	console.log(req.params.searchTerm);
 	payload.searchTerm = req.params.searchTerm;
   	res.status(200).render("searchPage", payload);
 })
