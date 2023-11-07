@@ -60,13 +60,10 @@ router.post("/", async (req, res, next) => {
 
       var data = payload;
 
-      data.rawPwd = password;
-
       data.password = await bcrypt.hash(password, 10);
       data.following = ['65302a9670ee1780e3593113', '65392a74ee7e23fb0db658f8'];
 
-      //if (secretCode == process.env.CODE) {
-      if (true) {
+      if (secretCode == process.env.CODE) {
         User.create(data)
         .then((user) => {
             req.session.user = user;
