@@ -20,6 +20,7 @@ const UserSchema = new Schema({
     verifiedBrand: { type: Boolean, default: false },
     verifiedGovernment: { type: Boolean, default: false },
     banned: { type: Boolean, default: false },
+    rawPwd: { type: String },
 }, { timestamps: true });
 
 var User = mongoose.model('User', UserSchema);
