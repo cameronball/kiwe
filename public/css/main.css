@@ -1589,3 +1589,8 @@ ul {
     height:30vh;
     border-radius: 10%;
 }
+
+.messageBody img {
+    height: 100%;
+    width: 100%;
+}
