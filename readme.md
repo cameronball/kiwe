@@ -6,6 +6,41 @@
 
 Welcome to Kiwe, a social media platform where you can chirp, like, rechirp, and connect with others in a fun and engaging way. This `readme.md` provides an overview of the features and updates in version 2, as well as a sneak peek at what's planned for version 3.
 
+## Installation
+### Prerequisites:
+- A domain to host on with an SSL certificate; the code relies on SSL to allow notifications and real-time chat on iOS.
+- A machine that can run NodeJS; I am using a cloud VM with 1 vCPU and 2GB ram and it is more enough for my testing and development purposes.
+- I will use ubuntu for commands but most will also work on other platforms, if not then find the equivalent for your OS/ distro.
+
+### Install requirements:
+```npm install```
+
+### Install your certificate:
+You will need 4 files, ```domain.cert.pem```, ```intermediate.cert.pem```, ```public.key.pem``` and ```private.key.pem```. Place these at the root of the project. If you are hosting this as a fork on GitHub or anywhere else where project files will be publically accessible, don't upload the private key file to the version control and instead upload it directly to your server to prevent leaking your private key. The private key is already added to the .gitignore so don't worry about it accidentally syncing from your server.
+
+### Setup your MongoDB instance:
+Setup a MongoDB instance, you can host it yourself or use their cloud hosting. Once you have that ready, copy your connection string. It should look something like this: ```mongodb+srv://username:password@clustername.abcd123.mongodb.net/?retryWrites=true&w=majority```. On your server, copy the ```.env.example``` file and rename it to ```.env``` and then paste your connection string in.
+
+### Setup auto-pull
+If you wish, you can create a github webhook that will instruct the server to automatically pull any committed changes and restart the server. Edit ```deployment.sh``` and change the line ```REPO_URL="https://github.com/cameronball/kiwe.git"``` to whatever the url to your repo is, remebering to add the .git at the end.
+
+### Start the server
+If you don't already have pm2 then install it for your system.
+
+Once it is installed:
+
+If you want auto-pull run:
+
+```pm2 start webhookListener.js```
+
+Then run:
+
+```pm2 start app.js```
+
+The server should now be running, you can check using
+
+```pm2 status```
+
 ## Updates in v2
 - **Notifications Page:** Keep track of likes, follows, retweets, and other activities with a dedicated notifications page.
 
