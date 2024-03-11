@@ -30,6 +30,9 @@ Welcome to Kiwe, a social media platform where you can chirp, like, rechirp, and
 - Add site favicon
 - Add button alt text for accessibility
 - Add stats in admin panel
+- Advert Chips
+- Image Chirps
+- Implementation of sending images in DM's is about 50% done.
 
 ## Key Features
 Kiwe offers a wide range of features, including:
