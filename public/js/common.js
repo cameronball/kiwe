@@ -430,7 +430,7 @@ $(document).on("click", ".post", (event) => {
 	var element = $(event.target);
 	var postId = getPostIdFromElement(element);
 
-	if (postId !== undefined && !element.is("button")) {
+	if (postId !== undefined && !element.is("button") && !onPostPage) {
 		window.location.href = "/post/" + postId;
 	}
 });
