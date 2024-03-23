@@ -9,6 +9,7 @@ class Database {
   }
   
   connect() {
+    console.log(process.env.MONGODB);
     mongoose.connect(process.env.MONGODB)
     .then(() => {
       console.log('Connected to MongoDB');

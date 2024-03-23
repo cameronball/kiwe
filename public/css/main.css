@@ -255,6 +255,18 @@ button i, button span {
     font-size: 19px;
 }
 
+.codeContainer {
+    flex: 1;
+    padding-left: var(--spacing);
+}
+
+.codeContainer textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+    font-size: 19px;
+}
+
 #submitPostButton {
     background-color: var(--blue);
     color: white;

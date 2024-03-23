@@ -91,4 +91,4 @@ lerna-debug.log
 Thumbs.db
 
 uploads/
-kiwi.social.key
+*.pem

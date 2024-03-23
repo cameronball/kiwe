@@ -3,6 +3,7 @@ extends layouts/main-layout.pug
 block content
   +createPostForm(userLoggedIn)
   +createImagePostUploadModal(userLoggedIn)
+  +createCodeUploadModal(userLoggedIn)
   .postsContainer
 
   +createPostModals(userLoggedIn)

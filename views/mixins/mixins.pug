@@ -7,11 +7,16 @@ mixin createPostForm(userLoggedIn)
 				img(src=userLoggedIn.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image")
 		.textareaContainer
 			textarea#postTextarea(placeholder="What's happening?")
+			pre
+				code
 			.buttonsContainer(style="display: flex; flex-direction: row;")
 				button#submitPostButton(disabled="") Post
 				button(type="button", data-toggle="modal", data-target="#imagePostUploadModal")
 					.imageUploadButton(style="color: var(--blue);margin-left:10px;display: flex; align-items: center; justify-content: center;")
 						i.fas.fa-camera(style="font-size:2.5vh;" color="var(--blue)")
+				button(type="button", data-toggle="modal", data-target="#codeUploadModal")
+					.codeUploadButton(style="color: #00bb00;margin-left:10px;display:flex; align-items:center; jutify-content:center;")
+						i.fas.fa-code(style="font-size:2.5vh;")
 
 mixin createReplyModal(userLoggedIn)
 	#replyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='replyModalLabel', aria-hidden='true')
@@ -93,6 +98,28 @@ mixin createImageUploadModal()
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#imageUploadButton.btn.btn-primary(type='button') Upload
+
+mixin createCodeUploadModal()
+	#codeUploadModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='codeUploadModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#codeUploadModalLabel.modal-title Add a code snippet
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body
+					.postFormContainer
+						.userImageContainer
+							img(src=userLoggedIn.profilePic, alt="User's profile picture")
+						.textareaContainer
+							textarea#codePostTextarea(placeholder="Post main body...")
+					.codeContainer
+						textarea#codePostCodeTextarea(placeholder="Code snippet...")
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button#codePostUploadButton.btn.btn-primary(type='button') Post
+
+
 
 mixin createImagePostUploadModal(userLoggedIn)
 	#imagePostUploadModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='imagePostUploadModalLabel', aria-hidden='true')
