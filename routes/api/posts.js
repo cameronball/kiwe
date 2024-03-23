@@ -83,6 +83,12 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", upload.single("croppedImage"), async (req, res, next) => {
 	
 	var includesImage = false;
+	var includesCode = false;
+
+	if(req.body.codeContent) {
+		var code = sanitizer.escape(req.body.codeContent);
+		includesCode = true;
+	}
 	
 	if(req.file) {
 		var filePath = `/uploads/images/${req.file.filename}.png`;
@@ -102,7 +108,7 @@ router.post("/", upload.single("croppedImage"), async (req, res, next) => {
 	sanitizedContent = sanitizer.escape(req.body.content);
 
 
-	if (!req.body.content && filePath == null) {
+	if (!req.body.content && filePath == null && !includesCode) {
 		console.log("Content param not sent with request");
 		return res.sendStatus(400);
 	}
@@ -125,7 +131,15 @@ router.post("/", upload.single("croppedImage"), async (req, res, next) => {
 			postedBy: req.session.user,
 			image: filePath
 		}
-	} else {
+	} 
+	else if(includesCode) {
+		var postData = {
+			content: sanitizedContent,
+			postedBy: req.session.user,
+			code: code
+		}
+	}
+	else {
 		var postData = {
 			content: sanitizedContent,
 			postedBy: req.session.user

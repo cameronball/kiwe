@@ -302,6 +302,35 @@ $("#imagePostUploadButton").click(() => {
     });
 });
 
+$("#codePostUploadButton").click(() => {
+    var codeBoxContent = $("#codePostCodeTextarea").val();
+
+    if(codeBoxContent == "") {
+        alert("Enter some code.");
+        return;
+    }
+
+    var formData = new FormData();
+    formData.append('content', $("#codePostTextarea").val());
+    formData.append('codeContent', codeBoxContent);
+
+    $.ajax({
+        url: "/api/posts",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: (postData) => {
+            var html = createPostHtml(postData);
+            $(".postsContainer").prepend(html);
+            $("#codePostTextarea").val("");
+            $("#codePostCodeTextarea").val("");
+            $("#codePostUploadModal").modal("hide");
+            hljs.highlightAll();
+        }
+    });
+});
+
 $("#userSearchTextbox").keydown(function(event) {
 	clearTimeout(timer);
 	var textbox = $(event.target);
@@ -471,7 +500,9 @@ function createPostHtml(postData, boldFont = false) {
     if(postData == null) return alert("post object is null");
 
     var isReshare = postData.reshareData !== undefined;
+    var hasCode = postData.code !== undefined;
     var resharedBy = isReshare ? postData.postedBy.username : null;
+    var codeContent = hasCode ? postData.code : null;
     postData = isReshare ? postData.reshareData : postData;
 
     var postedBy = postData.postedBy;
@@ -568,6 +599,13 @@ function createPostHtml(postData, boldFont = false) {
         }
     }
 
+    if(hasCode) {
+        var codeHtml = `<pre><code>${codeContent}</code></pre>`
+    }
+    else {
+        var codeHtml = ``;
+    }
+
     return `<div class='post' data-id='${postData._id}'>
                 <div class='postActionContainer'>
                     ${pinnedPostText}
@@ -588,6 +626,7 @@ function createPostHtml(postData, boldFont = false) {
 						${replyFlag}
                         <div class='postBody'>
                             <span class="${boldFontClass}" style="${LargeFontStyle}">${postData.content}</span>
+                            ${codeHtml}
                         </div>
                         ${image}
                         <div class='postFooter' style="${LargeFontStyle}">
@@ -786,6 +825,7 @@ function outputPosts(results, container) {
 	results.forEach(result => {
 		var html = createPostHtml(result);
 		container.append(html);
+        hljs.highlightAll();
         var random = Math.floor(Math.random() * 4) + 5;
         if (adIncrement >= random) {
             if (ads.length == 0) {
@@ -817,14 +857,17 @@ function outputPostsWithReplies(results, container) {
     else if(results.replyTo !== undefined && results.replyTo._id !== undefined) {
         var html = createPostHtml(results.replyTo);
         container.append(html);
+        hljs.highlightAll();
     }
 
     var mainPostHtml = createPostHtml(results.postData, true);
     container.append(mainPostHtml);
+    hljs.highlightAll();
 
     results.replies.forEach(result => {
         var html = createPostHtml(result);
         container.append(html);
+        hljs.highlightAll();
     });
 }
 
