@@ -429,7 +429,7 @@ $(document).on("click", ".reshareButton", (event) => {
 $(document).on("click", ".post", (event) => {
 	var element = $(event.target);
 	var postId = getPostIdFromElement(element);
-    var isMainPostBoolean = getPostIdFromElement(element);
+    var isMainPostBoolean = getIsMainPostFromElement(element);
 
 	if (postId !== undefined && !element.is("button") && !isMainPostBoolean) {
 		window.location.href = "/post/" + postId;
