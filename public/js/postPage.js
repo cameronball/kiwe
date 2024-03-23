@@ -8,5 +8,4 @@ $(document).ready(() => {
 		}
 	  });
 	$("#homeButtonIcon").removeClass("far").addClass("fas");
-	window.onPostPage = true;
 })
