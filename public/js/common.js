@@ -500,7 +500,7 @@ function createPostHtml(postData, boldFont = false) {
     if(postData == null) return alert("post object is null");
 
     var isReshare = postData.reshareData !== undefined;
-    var hasCode = postData.code !== undefined;
+    var hasCode = postData.code !== '';
     var resharedBy = isReshare ? postData.postedBy.username : null;
     var codeContent = hasCode ? postData.code : null;
     postData = isReshare ? postData.reshareData : postData;
