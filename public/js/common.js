@@ -4,6 +4,7 @@ var timer;
 var selectedUsers = [];
 
 $(document).ready(() => {
+    var onPostPage = false;
     refreshMessagesBadge();
     refreshNotificationsBadge();
 
