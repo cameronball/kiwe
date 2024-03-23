@@ -619,7 +619,12 @@ function createPostHtml(postData, boldFont = false) {
     }
 
     if(hasCode) {
-        var codeHtml = `<pre><code>${codeContent}</code></pre>`
+        if(postData.content) {
+            var codeHtml = `<pre><code>${codeContent}</code></pre>`
+        }
+        else {
+            var codeHtml = `<br><pre><code>${codeContent}</code></pre>`
+        }
     }
     else {
         var codeHtml = ``;
