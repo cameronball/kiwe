@@ -2,9 +2,9 @@
 var cropper;
 var timer;
 var selectedUsers = [];
+window.onPostPage = false;
 
 $(document).ready(() => {
-    var onPostPage = false;
     refreshMessagesBadge();
     refreshNotificationsBadge();
 
