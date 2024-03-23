@@ -499,7 +499,7 @@ function getPostIdFromElement(element) {
 function getIsMainPostFromElement(element) {
     var isRoot = element.hasClass("post");
     var rootElement = isRoot == true ? element : element.closest(".post");
-    var isMainPost = rootElement.data().mainPostBool;
+    var isMainPost = rootElement.data("mainpostbool");
 
     if(isMainPost === undefined) return alert("Post id undefined");
 
