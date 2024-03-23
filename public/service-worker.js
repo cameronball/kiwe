@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kiwe-cache-v1';
+const CACHE_NAME = 'kiwe-cache-v2';
 const urlsToCache = [
   '/css/main.css',
   '/css/login.css',
