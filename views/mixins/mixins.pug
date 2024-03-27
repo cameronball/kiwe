@@ -11,10 +11,10 @@ mixin createPostForm(userLoggedIn)
 				button#submitPostButton(disabled="") Post
 				button(type="button", data-toggle="modal", data-target="#imagePostUploadModal")
 					.imageUploadButton(style="color: var(--blue);margin-left:10px;display: flex; align-items: center; justify-content: center;")
-						i.fas.fa-camera(style="font-size:2.5vh;" color="var(--blue)")
+						i.fad.fa-camera(style="font-size:2.5vh;" color="var(--blue)")
 				button(type="button", data-toggle="modal", data-target="#codeUploadModal")
-					.codeUploadButton(style="color: #00bb00;margin-left:10px;display:flex; align-items:center; jutify-content:center;")
-						i.fas.fa-code(style="font-size:2.5vh;")
+					.codeUploadButton(style="color: #008800;margin-left:10px;display:flex; align-items:center; jutify-content:center;")
+						i.fad.fa-code(style="font-size:2.5vh;")
 
 mixin createReplyModal(userLoggedIn)
 	#replyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='replyModalLabel', aria-hidden='true')
