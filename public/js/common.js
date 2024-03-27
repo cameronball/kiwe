@@ -590,7 +590,7 @@ function createPostHtml(postData, boldFont = false) {
         }
     }
     else if (userLoggedIn.admin) {
-        buttons = `<button class="deleteButton" data-id="${postData._id}" data-mainPostBool="${postPageMainPost}" aria-label="Delete Post" data-toggle="modal" aria-label="Delete Post" data-target="#deletePostModal"><i class="fas fa-trash"></i></button>`
+        buttons = `<button class="deleteButton" data-id="${postData._id}" data-mainPostBool="${postPageMainPost}" aria-label="Delete Post" data-toggle="modal" aria-label="Delete Post" data-target="#deletePostModal"><i class="fad fa-trash"></i></button>`
     }
 
     if(postData.pinned === true) {
