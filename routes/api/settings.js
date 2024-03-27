@@ -6,6 +6,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const upload = multer({ dest: 'uploads/' });
+const sanitizer = require('sanitizer');
 const bcrypt = require('bcrypt');
 
 const User = require('../../schemas/UserSchema');
@@ -108,7 +109,8 @@ router.put("/email", async (req, res, next) => {
 
 router.put("/bio", async (req, res, next) => {
 	var bio = req.body.bio.trim();
-	bio = bio.replace(/[^\w\s.]/gi, '');
+	//bio = bio.replace(/[^\w\s.]/gi, '');
+	bio = sanitizer.escape(bio);
 
 	var newUser = await User.findByIdAndUpdate(req.session.user._id, { bio: bio }, { new: true });
 
