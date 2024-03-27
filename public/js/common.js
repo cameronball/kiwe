@@ -491,7 +491,7 @@ function getPostIdFromElement(element) {
     var rootElement = isRoot == true ? element : element.closest(".post");
     var postId = rootElement.data().id;
 
-    if(postId === undefined) return alert("Post id undefined");
+    if(postId === undefined) return console.log("Post id undefined");
 
     return postId;
 }
