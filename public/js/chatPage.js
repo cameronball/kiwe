@@ -173,6 +173,13 @@ function createMessageHtml(message, nextMessage, lastSenderId) {
 						</div>`;
 	}
 
+	if (!message.content && message.imageMessage != undefined) {
+		var messageContent = `<img src=${message.imageMessage}></img>`;
+	}
+	else {
+		var messageContent = message.content;
+	}
+
 	return `<li class='message ${liClassName}'>
 		${imageContainer}
 		<div class='messageContainer'>
