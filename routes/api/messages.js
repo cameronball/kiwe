@@ -79,7 +79,7 @@ router.post("/imageMessage", upload.single("croppedImage"), async (req, res, nex
 
 	var newMessage = {
 		sender: req.session.user._id,
-		chat: req.body.chatId.
+		chat: req.body.chatId,
 		imageMessage: filePath;
 	};
 	
