@@ -243,12 +243,12 @@ mixin createSendImageMessageModal()
 					button.close(type='button', data-dismiss='modal', aria-label='Close')
 					span(aria-hidden='true') &times;
 				.modal-body
-					input#messagePhoto(type="file", name="postPhoto")
+					input#messagePhoto(type="file", name="messagePhoto")
 					.imagePreviewContainer
 						img#messageImagePreview
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-					button#chatNameButton.btn.btn-primary(type='button') Send
+					button#imageMessageSendButton.btn.btn-primary(type='button') Send
 
 mixin createSettingsModals(userLoggedIn)
 	+createChangeNameModal(userLoggedIn)
