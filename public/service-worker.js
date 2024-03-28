@@ -1,6 +1,5 @@
-const CACHE_NAME = 'kiwe-cache-v2';
+const CACHE_NAME = 'kiwe-cache-v3';
 const urlsToCache = [
-  '/css/main.css',
   '/css/login.css',
   '/js/bootstrap.min.js',
 ];
