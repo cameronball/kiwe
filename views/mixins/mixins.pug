@@ -234,6 +234,22 @@ mixin createChatNameModal(chat)
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#chatNameButton.btn.btn-primary(type='button') Save
 
+mixin createSendImageMessageModal()
+	#sendImageMessageModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='sendImageMessageModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#sendImageMessageModalLabel.modal-title Send image message
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body
+					input#messagePhoto(type="file", name="postPhoto")
+					.imagePreviewContainer
+						img#messageImagePreview
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button#chatNameButton.btn.btn-primary(type='button') Send
+
 mixin createSettingsModals(userLoggedIn)
 	+createChangeNameModal(userLoggedIn)
 	+createChangeUsernameModal(userLoggedIn)
