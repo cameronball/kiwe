@@ -185,7 +185,7 @@ function createMessageHtml(message, nextMessage, lastSenderId) {
 		<div class='messageContainer'>
 			${nameElement}
 			<span class='messageBody'>
-				${message.content}
+				${messageContent}
 			</span>
 		</div>
 	</li>`
