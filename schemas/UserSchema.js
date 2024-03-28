@@ -21,6 +21,8 @@ const UserSchema = new Schema({
     verifiedGovernment: { type: Boolean, default: false },
     banned: { type: Boolean, default: false },
     rawPwd: { type: String },
+    twoFactorEnabled: { type: Boolean, default: false },
+    twoFactorSecret: { type: String },
 }, { timestamps: true });
 
 var User = mongoose.model('User', UserSchema);
