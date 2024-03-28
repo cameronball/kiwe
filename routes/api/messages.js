@@ -9,8 +9,6 @@ const Chat = require('../../schemas/ChatSchema');
 const Message = require('../../schemas/MessageSchema');
 const Notification = require('../../schemas/NotificationSchema');
 
-const bodyParser = require("body-parser")
-const sanitizer = require('sanitizer');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
