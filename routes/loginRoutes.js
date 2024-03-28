@@ -43,6 +43,7 @@ router.post("/", async (req, res, next) => {
 
       if (result === true) {
         req.session.user = user;
+        req.session.user.twoFactorVerified = false;
         return res.redirect("/");
       }
       
