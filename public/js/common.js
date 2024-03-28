@@ -281,6 +281,7 @@ $("#imageMessageSendButton").click(() => {
     canvas.toBlob((blob) => {
         var formData = new FormData();
         formData.append("croppedImage", blob);
+	formData.append("chatId", chatId);
 
         $.ajax({
             url: "/api/messages/imageMessage",
