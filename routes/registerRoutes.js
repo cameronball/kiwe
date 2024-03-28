@@ -67,6 +67,7 @@ router.post("/", async (req, res, next) => {
         User.create(data)
         .then((user) => {
             req.session.user = user;
+            req.session.user.twoFactorVerified = false;
             return res.redirect("/");
         })
       }
