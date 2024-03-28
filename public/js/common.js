@@ -288,7 +288,7 @@ $("#imageMessageSendButton").click(() => {
             data: formData,
             processData: false,
             contentType: false,
-            success: () => window.location.href = "/profile/"+chatId
+            success: () => window.location.href = "/messages/"+chatId
         });
     });
 });
