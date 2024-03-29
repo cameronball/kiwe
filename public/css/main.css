@@ -1606,3 +1606,13 @@ ul {
     height: 100%;
     width: 100%;
 }
+
+.postBody {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.postBody pre {
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
