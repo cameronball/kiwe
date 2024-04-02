@@ -11,16 +11,10 @@ mongoose.connect(process.env.MONGODB, {
 async function getPostsWithin24Hours() {
   try {
     const twentyFourHoursAgo = moment().subtract(24, 'hours');
-
-    const posts = await Post.find({
-      createdAt: { $gte: twentyFourHoursAgo },
-    }).exec();
-
-    console.log(posts);
+    const posts = await Post.find({ createdAt: { $gte: twentyFourHoursAgo } }).exec();
+    return posts; // <-- Ensure to return the posts
   } catch (error) {
-    console.error('Error fetching posts:', error);
-  } finally {
-    mongoose.disconnect();
+    throw error;
   }
 }
 
