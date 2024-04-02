@@ -20,7 +20,7 @@ function extractHashtags(content) {
   const regex = /%23([^']+)/g; // Regex to match hashtags starting with %23 and ending before '
   const matches = content.match(regex);
   if (matches) {
-    return matches.map(match => match.substring(4)); // Extracting the word after %23
+    return matches.map(match => match.substring(3)); // Extracting the word after %23
   }
   return [];
 }
