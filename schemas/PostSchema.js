@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
 	content: { type: String, trim: true },
-	postedBy: { type: Schema.Types.ObjectId, ref: "User" },
+	postedBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
 	pinned: Boolean,
 	likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
 	reshareUsers: [{ type: Schema.Types.ObjectId, ref: "User" }],
