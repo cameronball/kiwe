@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const { getPostsWithin24Hours } = require('./24HourPosts');
 
 async function main() {
