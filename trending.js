@@ -6,10 +6,14 @@ async function main() {
     console.log('Hashtags within the posts from the past 24 hours:');
     const hashtagsFrequency = extractHashtagsFrequency(posts);
     console.log(hashtagsFrequency);
+
+    fs.writeFileSync('hashtagsFrequency.json', JSON.stringify(hashtagsFrequency, null, 2));
+    console.log('Hashtags frequency saved to file: hashtagsFrequency.json');
   } catch (error) {
     console.error('Error fetching posts:', error);
   }
 }
+
 
 function extractHashtagsFrequency(posts) {
   const hashtagsFrequency = {};
