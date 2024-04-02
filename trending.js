@@ -14,6 +14,7 @@ async function main() {
 
     fs.writeFileSync(filePath, JSON.stringify(hashtagsFrequency, null, 2));
     console.log('Hashtags frequency saved to file:', filePath);
+    process.exit()
   } catch (error) {
     console.error('Error fetching posts:', error);
   }
