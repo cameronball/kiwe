@@ -23,7 +23,11 @@ function extractHashtagsFrequency(posts) {
       }
     });
   });
-  return hashtagsFrequency;
+  const sortedHashtagsFrequency = Object.fromEntries(
+    Object.entries(hashtagsFrequency).sort(([,a],[,b]) => b - a)
+  );
+
+  return sortedHashtagsFrequency;
 }
 
 function extractHashtags(content) {
