@@ -1128,7 +1128,7 @@ function createChatHtml(chatData) {
 	var image = getChatImageElements(chatData);
 	var latestMessage = getLatestMessage(chatData.latestMessage);
 
-    var activeClass = !chatData.latestMessage || chatData.latestMessage.readBy.includes(userLoggedIn._id) ? "" : "active";
+  	var activeClass = !chatData.latestMessage || chatData.latestMessage.readBy.includes(userLoggedIn._id) ? "" : "active";
 
 	return `<a href='/messages/${chatData._id}' class='resultListItem ${activeClass}'>
 				${image}
@@ -1142,11 +1142,20 @@ function createChatHtml(chatData) {
 function getLatestMessage(latestMessage) {
 	if(latestMessage != null) {
 		var sender = latestMessage.sender;
+		let senderName = "";
+
 		if (sender.lastName == "") {
-			return `${sender.firstName}: ${latestMessage.content}`;
+			senderName = `${sender.firstName}`;
 		}
 		else {
-			return `${sender.firstName} ${sender.lastName}: ${latestMessage.content}`;
+			senderName = `${sender.firstName} ${sender.lastName}`;
+		}
+
+		if (latestMessage.content !== undefined) {
+			return `${senderName}: ${latestMessage.content}`;
+		}
+		else if (latestMessage.imageMessage !== undefined) {
+			return `${senderName}: Image Message`;
 		}
 	}
 
