@@ -99,7 +99,7 @@ mixin createImageUploadModal()
 
 mixin createCodeUploadModal()
 	#codeUploadModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='codeUploadModalLabel', aria-hidden='true')
-		.modal-dialog(role='document')
+		.modal-dialog.modal-lg(role='document')
 			.modal-content
 				.modal-header
 					h5#codeUploadModalLabel.modal-title Add a code snippet
@@ -112,7 +112,7 @@ mixin createCodeUploadModal()
 						.textareaContainer
 							textarea#codePostTextarea(placeholder="Post main body...")
 					.codeContainer
-						textarea#codePostCodeTextarea(placeholder="Code snippet...")
+						textarea#codePostCodeTextarea(placeholder="Code snippet...", style="height:40vh;")
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#codePostUploadButton.btn.btn-primary(type='button') Post
