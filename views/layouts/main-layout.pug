@@ -46,6 +46,21 @@ html(lang="en")
 
           block content
         .d-none.d-md-block.col-2.col-lg-4
+          //- Script to load JSON file and print hashtags
+          script.
+            fetch('/hashtagsFrequency.json')
+              .then(response => response.json())
+              .then(data => {
+                const hashtagsContainer = document.getElementById('hashtags-container');
+                for (const hashtag in data) {
+                  const pTag = document.createElement('p');
+                  pTag.textContent = `${hashtag}: ${data[hashtag]}`;
+                  hashtagsContainer.appendChild(pTag);
+                }
+              })
+              .catch(error => console.error('Error fetching hashtags:', error));
+          //- Container to hold the hashtags
+          div#hashtags-container
     #notificationList
           
     // script(src='https://kit.fontawesome.com/f4df77d797.js' crossorigin='anonymous')
