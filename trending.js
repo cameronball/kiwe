@@ -4,18 +4,28 @@ async function main() {
   try {
     const posts = await getPostsWithin24Hours();
     console.log('Hashtags within the posts from the past 24 hours:');
-    posts.forEach(post => {
-      const hashtags = extractHashtags(post.content);
-      if (hashtags.length > 0) {
-        console.log(`Post ID: ${post._id}, Hashtags: ${hashtags.join(', ')}`);
-      }
-    });
+    const hashtagsFrequency = extractHashtagsFrequency(posts);
+    console.log(hashtagsFrequency);
   } catch (error) {
     console.error('Error fetching posts:', error);
   }
 }
 
-// Function to extract hashtags from post content
+function extractHashtagsFrequency(posts) {
+  const hashtagsFrequency = {};
+  posts.forEach(post => {
+    const hashtags = extractHashtags(post.content);
+    hashtags.forEach(hashtag => {
+      if (hashtagsFrequency.hasOwnProperty(hashtag)) {
+        hashtagsFrequency[hashtag]++;
+      } else {
+        hashtagsFrequency[hashtag] = 1;
+      }
+    });
+  });
+  return hashtagsFrequency;
+}
+
 function extractHashtags(content) {
   const regex = /%23([^']+)/g; // Regex to match hashtags starting with %23 and ending before '
   const matches = content.match(regex);
