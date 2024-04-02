@@ -53,10 +53,15 @@ html(lang="en")
               .then(data => {
                 const hashtagsContainer = document.getElementById('hashtags-container');
                 for (const hashtag in data) {
+                  const divTag = document.createElement('div');
+                  divTag.style.borderBottom = '1px solid var(--lightGrey)';
+
                   const aTag = document.createElement('a');
                   aTag.href = `https://kiwe.social/search/query/%23${hashtag}`; // Replace with your website URL
-                  aTag.innerHTML = `<span style="display: block;">#${hashtag}</span><span style="display: block;">${data[hashtag]}</span>`;
-                  hashtagsContainer.appendChild(aTag);
+                  aTag.innerHTML = `<span style="display: block;font-size:18px;color:var(--blue);padding-left:1%;">#${hashtag}</span><span style="display: block;padding-bottom:1vh;color:var(--greyText);padding-left:1%;">${data[hashtag]} Posts</span>`;
+
+                  divTag.appendChild(aTag);
+                  hashtagsContainer.appendChild(divTag);
                 }
               })
               .catch(error => console.error('Error fetching hashtags:', error));
@@ -65,7 +70,7 @@ html(lang="en")
           div#trendingContainer(style="width:100%;position:fixed;")
             div.titleContainer
               h1 Trending
-            div#hashtags-container(style="margin-top: 1vh; padding-left: 1%;")
+            div#hashtags-container(style="margin-top: 1vh;")
     #notificationList
           
     // script(src='https://kit.fontawesome.com/f4df77d797.js' crossorigin='anonymous')
