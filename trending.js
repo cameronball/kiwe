@@ -1,4 +1,4 @@
-const { getPostsWithin24Hours } = require('./24HourPosts.js');
+const { getPostsWithin24Hours } = require('./24HourPosts');
 
 getPostsWithin24Hours().then(posts => {
   console.log('Posts within the past 24 hours:');
