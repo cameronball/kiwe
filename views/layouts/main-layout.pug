@@ -45,7 +45,7 @@ html(lang="en")
             block headerButton
 
           block content
-        .d-none.d-md-block.col-2.col-lg-4
+        .d-none.d-md-block.col-2.col-lg-4(style="padding-left:0;")
           //- Script to load JSON file and print hashtags
           script.
             fetch('/hashtagsFrequency.json')
@@ -61,7 +61,11 @@ html(lang="en")
               })
               .catch(error => console.error('Error fetching hashtags:', error));
           //- Container to hold the hashtags
-          div#hashtags-container
+
+          div#trendingContainer
+            div.titleContainer
+              h1 Trending
+            div#hashtags-container(style="margin-top: 1vh; padding-left: 1%;")
     #notificationList
           
     // script(src='https://kit.fontawesome.com/f4df77d797.js' crossorigin='anonymous')
