@@ -28,7 +28,9 @@ $(document).ready(() => {
 
 		$(".loadingSpinnerContainer").remove();
 		$(".chatContainer").css("visibility", "visible");
-		scrollToBottom(false);
+		$('.chatContainer').imagesLoaded(function () {
+		    scrollToBottom(false);
+		});
 	})
 	$("#messageButtonIcon").removeClass("far").addClass("fas");
 });
