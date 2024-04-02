@@ -24,11 +24,11 @@ $(document).ready(() => {
 
 		var messagesHtml = messages.join("");
 		addMessagesHtmlToPage(messagesHtml);
-		scrollToBottom(false);
 		markAllMessagesAsRead();
 
 		$(".loadingSpinnerContainer").remove();
 		$(".chatContainer").css("visibility", "visible");
+		scrollToBottom(false);
 	})
 	$("#messageButtonIcon").removeClass("far").addClass("fas");
 });
@@ -88,8 +88,6 @@ function updateTyping() {
 
 function addMessagesHtmlToPage(html) {
 	$(".chatMessages").append(html);
-
-	// TODO: scroll to new message
 }
 
 function messageSubmitted() {
