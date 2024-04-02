@@ -23,3 +23,5 @@ async function getPostsWithin24Hours() {
     mongoose.disconnect();
   }
 }
+
+module.exports = { getPostsWithin24Hours };
