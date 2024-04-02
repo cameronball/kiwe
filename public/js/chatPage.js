@@ -28,8 +28,19 @@ $(document).ready(() => {
 
 		$(".loadingSpinnerContainer").remove();
 		$(".chatContainer").css("visibility", "visible");
-		$('.chatContainer').imagesLoaded(function () {
-		    scrollToBottom(false);
+		var images = document.querySelectorAll('.chatContainer img');
+
+		var numImages = images.length;
+		var imagesLoaded = 0;
+	
+		images.forEach(image => {
+		    image.onload = () => {
+			imagesLoaded++;
+	
+			if (imagesLoaded === numImages) {
+			    scrollToBottom(false);
+			}
+		    };
 		});
 	})
 	$("#messageButtonIcon").removeClass("far").addClass("fas");
