@@ -54,8 +54,8 @@ html(lang="en")
                 const hashtagsContainer = document.getElementById('hashtags-container');
                 for (const hashtag in data) {
                   const aTag = document.createElement('a');
-                  aTag.href = `https://kiwe.social/search/query/%23${hashtag}`;
-                  aTag.innerHTML = `#${hashtag}<br>${data[hashtag]}`;
+                  aTag.href = `https://kiwe.social/search/query/%23${hashtag}`; // Replace with your website URL
+                  aTag.innerHTML = `<span>#${hashtag}</span><span>${data[hashtag]}</span>`;
                   hashtagsContainer.appendChild(aTag);
                 }
               })
