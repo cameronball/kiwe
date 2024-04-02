@@ -55,6 +55,7 @@ html(lang="en")
                 for (const hashtag in data) {
                   const divTag = document.createElement('div');
                   divTag.style.borderBottom = '1px solid var(--lightGrey)';
+                  divTag.style.marginTop = '1vh';
 
                   const aTag = document.createElement('a');
                   aTag.href = `https://kiwe.social/search/query/%23${hashtag}`; // Replace with your website URL
