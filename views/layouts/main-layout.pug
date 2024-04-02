@@ -53,9 +53,10 @@ html(lang="en")
               .then(data => {
                 const hashtagsContainer = document.getElementById('hashtags-container');
                 for (const hashtag in data) {
-                  const pTag = document.createElement('p');
-                  pTag.textContent = `${hashtag}: ${data[hashtag]}`;
-                  hashtagsContainer.appendChild(pTag);
+                  const aTag = document.createElement('a');
+                  aTag.href = `https://kiwe.social/search/query/%23${hashtag}`;
+                  aTag.innerHTML = `#${hashtag}<br>${data[hashtag]}`;
+                  hashtagsContainer.appendChild(aTag);
                 }
               })
               .catch(error => console.error('Error fetching hashtags:', error));
