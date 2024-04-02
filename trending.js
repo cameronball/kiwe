@@ -1,4 +1,4 @@
-const { getPostsWithin24Hours } = require('./getPostsWithin24HoursFunction');
+const { getPostsWithin24Hours } = require('./24HourPosts');
 
 async function main() {
   try {
