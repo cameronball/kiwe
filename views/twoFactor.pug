@@ -1,0 +1,12 @@
+extends layouts/login-layout.pug
+
+block content
+  .loginContainer
+    h1 Two factor authentication code:
+    form(method="post")
+
+      p.errorMessage #{errorMessage}
+
+      input(type="text", name="twoFactorCode", placeholder="2FA Code", required="")
+      input(type="submit", value="Submit")
+    p We are unable to reset any forgotten or lost 2fa codes.
