@@ -72,6 +72,7 @@ const legalRoute = require('./routes/legalRoutes');
 const adminRoute = require('./routes/adminRoutes');
 const sslRoute = require('./routes/sslRoutes');
 const banRoute = require('./routes/bannedRoutes');
+const twoFactorRoute = require('./routes/twoFactorRoutes');
 
 // Api routes
 const postApiRoute = require('./routes/api/posts');
@@ -81,6 +82,7 @@ const messagesApiRoute = require('./routes/api/messages');
 const notificationsApiRoute = require('./routes/api/notifications');
 const settingsApiRoute = require('./routes/api/settings');
 const adminApiRoute = require('./routes/api/admin');
+const twoFactorApiRoute = require('./routes/api/twoFactor');
 
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
@@ -92,6 +94,7 @@ app.use("/search", middleware.requireLogin, searchRoute);
 app.use("/messages", middleware.requireLogin, messagesRoute);
 app.use("/notifications", middleware.requireLogin, notificationsRoute);
 app.use("/settings", middleware.requireLogin, settingsRoute);
+app.use("/twofactor", middleware.requireLogin, twoFactorRoute);
 app.use("/legal", legalRoute);
 app.use("/admin", middleware.requireAdmin, adminRoute);
 app.use("/.well-known", sslRoute);
@@ -104,6 +107,7 @@ app.use("/api/chats", chatsApiRoute);
 app.use("/api/messages", messagesApiRoute);
 app.use("/api/notifications", notificationsApiRoute);
 app.use("/api/settings", settingsApiRoute);
+app.use("/api/twofactor", twoFactorApiRoute);
 app.use("/api/admin", adminApiRoute);
 
 app.get("/", middleware.requireLogin, (req, res, next) => {
