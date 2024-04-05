@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 router.get("/", (req, res, next) => {
   var payload = req.body;
   payload.pageTitle = "Two Factor Auth";
-  res.status(200).render("twofactor", payload);
+  res.status(200).render("twoFactor", payload);
 })
 
 module.exports = router;
