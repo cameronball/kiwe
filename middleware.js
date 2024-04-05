@@ -4,7 +4,7 @@ exports.requireLogin = (req, res, next) => {
       return res.redirect('/banned');
     }
     else if (req.session.user.twoFactorEnabled && !req.session.user.twoFactorVerified) {
-      return res.redirect('/twofactor/verify');
+      return res.redirect('/twofactor');
     }
     else {
       return next();
