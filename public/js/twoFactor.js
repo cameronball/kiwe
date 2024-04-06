@@ -22,10 +22,29 @@ $("#twoFactorSetupButton").click(() => {
 			$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'>");
 			$("#twoFactorSetupModalBody").append("<input id='twoFactorCodeVerification' class='twoFactorResults' type='text' style='margin-bottom: 20px;padding: 5px 10px;border-radius: 2px;border: 1px solid #dedede;background-color: #f2f2f2;'>");
 			$("#twoFactorSetupModalBody").append("<button id='twofactorCodeSubmissionButton' class='twofactorResults btn btn-primary' type='button' style='margin-left:10px;'>Submit</button>");
+			$("#twofactorSetupModalBody").append("<span id='twofactorVerifyError' class='text-danger twoFactorResults'></span>");
 		},
 		error: (xhr, status, error) => {
 			$(".errorMessageTwoFactor").text("Error: " + xhr.status);
 			$(".errorMessageTwoFactor").append("<br>");
+		}
+	});
+});
+
+
+$("#twofactorCodeSubmissionButton").click(() => {
+	var givenCode = $("#twoFactorCodeVerification").val();
+
+	$.ajax({
+		url: "/api/twofactor/validate",
+		type: "POST",
+		data: { twoFactorCode: givenCode },
+		success: (data, status, xhr) => {
+			$(".twoFactorResults").remove();
+			$("#twofactorSetupModalBody").append("<span class='text-success twoFactorResults'>2FA Setup successfully!</span>");
+		},
+		error: (xhr, status, error) => {
+			$("#twofactorVerifyError").text("The code you supplied could not be verified.");
 		}
 	});
 });
