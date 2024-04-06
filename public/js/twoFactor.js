@@ -3,6 +3,12 @@ $(document).ready(() => {
 })
 
 $("#twoFactorSetupButton").click(() => {
+
+	if (twofactorEnabled) {
+		$("#twoFactorSetupButton").remove();
+		$("#twoFactorSetupModalBody").append("<span class='text-danger'>2FA Has already been setup!</span>");
+		return;
+	}
 	
 	$(".errorMessageTwoFactor").text("");
 	$(".twoFactorResults").remove();
