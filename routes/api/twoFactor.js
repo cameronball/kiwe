@@ -64,7 +64,24 @@ router.post("/validate", async (req, res, next) => {
                                        encoding: 'base32',
                                        token: givenCode });
 		if (verified) {
-			return res.sendStatus(200);
+			try {
+				var twoFactorUpdate = User.findByIdAndUpdate(
+					req.session.user._id,
+					{ twoFactorSecret: secretKey },
+					{ new: true }
+				);
+	
+				var [updatedUser, _] = await Promise.all([
+					twoFactorUpdate,
+				]);
+				
+				req.session.user = updatedUser;
+	
+				return res.sendStatus(200);
+			} catch (error) {
+				console.error(error);
+				return res.sendStatus(500);
+			}
 		}
 		else {
 			return res.sendStatus(403);
