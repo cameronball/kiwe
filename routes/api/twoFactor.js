@@ -56,6 +56,9 @@ router.post("/validate", async (req, res, next) => {
 		var secretKey = req.body.totpSecretKey;
 	}
 
+	console.log(givenCode);
+	console.log(secretKey);
+
 	var username = req.session.user.username;
 
 	var user = await User.findOne({ username: username });
