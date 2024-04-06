@@ -52,9 +52,6 @@ router.post("/validate", async (req, res, next) => {
 		var secretKey = req.body.totpSecretKey;
 	}
 
-	console.log(givenCode);
-	console.log(secretKey);
-
 	var username = req.session.user.username;
 
 	var user = await User.findOne({ username: username });
@@ -71,6 +68,12 @@ router.post("/validate", async (req, res, next) => {
 				var twoFactorUpdate = User.findByIdAndUpdate(
 					req.session.user._id,
 					{ twoFactorSecret: secretKey },
+					{ new: true }
+				);
+
+				var twoFactorEnable = User.findByIdAndUpdate(
+					req.session.user._id,
+					{ twoFactorEnabled: true },
 					{ new: true }
 				);
 	
