@@ -684,3 +684,17 @@ mixin createTwoFactorSetupModal()
 					button#twoFactorSetupButton.btn.btn-primary(type='button') Setup
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+
+mixin createTwoFactorRemovalModal()
+	#twoFactorRemovalModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='twoFactorRemovalModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#twoFactorRemovalModalLabel.modal-title Disable 2FA
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(id="twoFactorRemovalModalBody")
+					span.text-danger Are you sure you want to disable 2FA?
+				.modal-footer
+					button#twoFactorSetupButton.btn.btn-primary(type='button', style='background-color:red;') Disable
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
