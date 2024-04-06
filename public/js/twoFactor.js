@@ -59,7 +59,7 @@ $("#twoFactorSetupButton").click(() => {
 $("#twoFactorDisableButton").click(() => {
 	if (!twoFactorEnabled) {
 		$("#twoFactorSetupButton").remove();
-		$("#twoFactorRemovalModalBody").append("<span class='text-danger'>2FA is already disabled.</span>");
+		$("#twoFactorRemovalModalBody").append("<br><span class='text-danger'>2FA is already disabled.</span>");
 		return;
 	}
 
