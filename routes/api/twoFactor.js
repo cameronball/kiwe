@@ -95,4 +95,41 @@ router.post("/validate", async (req, res, next) => {
 	}
 });
 
+router.post("/disable", async (req, res, next) => {
+
+	var username = req.session.user.username;
+
+	var user = await User.findOne({ username: username });
+
+	if (user==null) {
+		return res.sendStatus(404);
+	}
+	else {
+		try {
+			var twoFactorUpdate = User.findByIdAndUpdate(
+				req.session.user._id,
+				{ twoFactorSecret: secretKey },
+				{ new: true }
+			);
+
+			var twoFactorEnable = User.findByIdAndUpdate(
+				req.session.user._id,
+				{ twoFactorEnabled: true },
+				{ new: true }
+			);
+
+			var [updatedUser, _] = await Promise.all([
+				twoFactorUpdate,
+			]);
+			
+			req.session.user = updatedUser;
+
+			return res.sendStatus(200);
+		} catch (error) {
+			console.error(error);
+			return res.sendStatus(500);
+		}
+	}
+});
+
 module.exports = router;
