@@ -94,7 +94,7 @@ app.use("/search", middleware.requireLogin, searchRoute);
 app.use("/messages", middleware.requireLogin, messagesRoute);
 app.use("/notifications", middleware.requireLogin, notificationsRoute);
 app.use("/settings", middleware.requireLogin, settingsRoute);
-app.use("/twofactor", middleware.requireLogin, twoFactorRoute);
+app.use("/twofactor", twoFactorRoute);
 app.use("/legal", legalRoute);
 app.use("/admin", middleware.requireAdmin, adminRoute);
 app.use("/.well-known", sslRoute);
