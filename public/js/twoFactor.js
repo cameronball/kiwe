@@ -34,11 +34,11 @@ $("#twoFactorSetupButton").click(() => {
 					data: { twoFactorCode: givenCode, totpSecretKey: secretKey },
 					success: (data, status, xhr) => {
 						$(".twoFactorResults").remove();
-						$("#twofactorSetupModalBody").append("<span class='text-success twoFactorResults'>2FA Setup successfully!</span>");
+						$("#twofactorSetupModalBody").append("<br><span class='text-success'>2FA Setup successfully!</span>");
 					},
 					error: (xhr, status, error) => {
 						$("#twoFactorVerifyError").remove();
-						$("#twoFactorSetupModalBody").append("<span id='twofactorVerifyError' class='text-danger twoFactorResults'>The code you supplied could not be verified.</span>");
+						$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'><span id='twofactorVerifyError' class='text-danger twoFactorResults'>The code you supplied could not be verified.</span>");
 					}
 				});
 			});
