@@ -12,8 +12,6 @@ $("#twoFactorSetupButton").click(() => {
 		type: "GET",
 		success: (data, status, xhr) => {
 			$("#twoFactorSetupButton").remove();
-			$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'>");
-			$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'>");
 			$("#twoFactorSetupModalBody").append("<span class='text-success twoFactorResults'>Secret: " + data.secretKey + "</span>");
 			$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'>");
       			$("#twoFactorSetupModalBody").append("<img class='twoFactorResults' src='" + data.url + "' style='display: block;margin: auto;'>");
