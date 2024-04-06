@@ -43,4 +43,33 @@ router.get("/requestSecret", async (req, res, next) => {
 	});
 });
 
+router.post("/validate", async (req, res, next) => {
+	if(!req.query.twoFactorCode || !req.query.totpSecretKey) {
+		return res.sendStatus(400);	
+	}
+	else {
+		var givenCode = twoFactorCode;
+		var secretKey = req.query.totpSecretKey;
+	}
+
+	var username = req.body.user.username;
+
+	var user = await User.findOne({ username: username });
+
+	if (user==null) {
+		return res.sendStatus(404);
+	}
+	else {
+		var verified = speakeasy.totp.verify({ secret: secretKey,
+                                       encoding: 'base32',
+                                       token: givenCode });
+		if (verified) {
+			return res.sendStatus(200);
+		}
+		else {
+			return res.sendStatus(403);
+		}
+	}
+});
+
 module.exports = router;
