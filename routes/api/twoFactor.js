@@ -44,14 +44,12 @@ router.get("/requestSecret", async (req, res, next) => {
 });
 
 router.post("/validate", async (req, res, next) => {
-	if(!req.query.twoFactorCode || !req.query.totpSecretKey) {
-		console.log(req.query.totpSecretKey);
-		console.log(req.query.twoFactorCode);
+	if(!req.body.twoFactorCode || !req.body.totpSecretKey) {
 		return res.sendStatus(400);	
 	}
 	else {
-		var givenCode = twoFactorCode;
-		var secretKey = req.query.totpSecretKey;
+		var givenCode = req.body.twoFactorCode;
+		var secretKey = req.body.totpSecretKey;
 	}
 
 	var username = req.body.user.username;
