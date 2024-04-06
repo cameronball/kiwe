@@ -45,6 +45,8 @@ router.get("/requestSecret", async (req, res, next) => {
 
 router.post("/validate", async (req, res, next) => {
 	if(!req.query.twoFactorCode || !req.query.totpSecretKey) {
+		console.log(req.query.totpSecretKey);
+		console.log(req.query.twoFactorCode);
 		return res.sendStatus(400);	
 	}
 	else {
