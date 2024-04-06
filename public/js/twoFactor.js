@@ -55,3 +55,22 @@ $("#twoFactorSetupButton").click(() => {
 		}
 	});
 });
+
+$("#twoFactorSetupButton").click(() => {
+	if (!twoFactorEnabled) {
+		$("#twoFactorSetupButton").remove();
+		$("#twoFactorRemovalModalBody").append("<span class='text-danger'>2FA is already disabled.</span>");
+		return;
+	}
+
+	$.ajax({
+		url: "/api/twofactor/disable",
+		type: "POST",
+		success: (data, status, xhr) => {
+			$("#twoFactorRemovalModalBody").append("<span class='text-success'>Successfully disabled 2fa.</span>");
+		},
+		error: (xhr, status, error) => {
+			$("#twoFactorRemovalModalBody").append("<span class='text-danger'>Error: " + xhr.status + "</span>");
+		}
+	});
+});
