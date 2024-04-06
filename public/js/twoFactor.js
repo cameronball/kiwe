@@ -37,8 +37,8 @@ $("#twoFactorSetupButton").click(() => {
 						$("#twofactorSetupModalBody").append("<span class='text-success twoFactorResults'>2FA Setup successfully!</span>");
 					},
 					error: (xhr, status, error) => {
-						$("#twofactorVerifyError").remove();
-						$("#twofactorSetupModalBody").append("<span id='twofactorVerifyError' class='text-danger twoFactorResults'>The code you supplied could not be verified.</span>");
+						$("#twoFactorVerifyError").remove();
+						$("#twoFactorSetupModalBody").append("<span id='twofactorVerifyError' class='text-danger twoFactorResults'>The code you supplied could not be verified.</span>");
 					}
 				});
 			});
