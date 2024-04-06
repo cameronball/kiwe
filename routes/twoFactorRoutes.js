@@ -38,6 +38,7 @@ router.get("/setup", (req, res, next) => {
     else {
       var payload = req.body;
       payload.pageTitle = "2FA Setup";
+      payload.twoFactorSetup = req.session.user.twoFactorEnabled;
       res.status(200).render("twoFactorSettings", payload);
     }
   }
