@@ -44,7 +44,12 @@ router.post("/", async (req, res, next) => {
       if (result === true) {
         req.session.user = user;
         req.session.user.twoFactorVerified = false;
-        return res.redirect("/");
+        if(req.session.user.twoFactorEnabled) {
+          return res.redirect("/twofactor");
+        }
+        else {
+          return res.redirect("/");
+        }
       }
       
     }
