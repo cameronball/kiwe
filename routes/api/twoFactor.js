@@ -26,6 +26,7 @@ router.get("/requestSecret", async (req, res, next) => {
 	var secretObject = speakeasy.generateSecret({length: 20});
 	var secretKey = secretObject.base32;
 	var url = "";
+	var userEmail = req.session.user.email;
 
 	var label = "kiwe:" + userEmail;
 	var otpauth_url = speakeasy.otpauthURL({ secret: secretKey, label: label });
