@@ -24,6 +24,8 @@ router.post("/", async (req, res, next) => {
   givenCode=req.body.twoFactorCode.trim();
   console.log(givenCode);
   console.log(req.session.user.username);
+
+  res.status(200).render("twoFactor", payload);
 })
 
 module.exports = router;
