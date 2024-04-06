@@ -26,6 +26,26 @@ router.get("/", (req, res, next) => {
   res.status(200).render("twoFactor", payload);
 })
 
+router.get("/setup", (req, res, next) => {
+
+  if (req.session && req.session.user) {
+    if (req.session.user.banned) {
+      return res.redirect('/banned');
+    }
+    else if (req.session.user.twoFactorEnabled && !req.session.user.twoFactorVerified) {
+      return res.redirect('/twofactor');
+    }
+    else {
+      var payload = req.body;
+      payload.pageTitle = "2FA Setup";
+      res.status(200).render("twoFactorSettings", payload);
+    }
+  }
+  else {
+    return res.redirect('/login');
+  }
+})
+
 router.post("/", async (req, res, next) => {
   var payload = req.body;
   payload.pageTitle = "Two Factor Auth";
