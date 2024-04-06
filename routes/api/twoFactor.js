@@ -79,6 +79,7 @@ router.post("/validate", async (req, res, next) => {
 	
 				var [updatedUser, _] = await Promise.all([
 					twoFactorUpdate,
+					twoFactorEnable,
 				]);
 				
 				req.session.user = updatedUser;
@@ -106,20 +107,14 @@ router.post("/disable", async (req, res, next) => {
 	}
 	else {
 		try {
-			var twoFactorUpdate = User.findByIdAndUpdate(
+			var twoFactorDisable = User.findByIdAndUpdate(
 				req.session.user._id,
-				{ twoFactorSecret: secretKey },
-				{ new: true }
-			);
-
-			var twoFactorEnable = User.findByIdAndUpdate(
-				req.session.user._id,
-				{ twoFactorEnabled: true },
+				{ twoFactorEnabled: false },
 				{ new: true }
 			);
 
 			var [updatedUser, _] = await Promise.all([
-				twoFactorUpdate,
+				twoFactorDisable,
 			]);
 			
 			req.session.user = updatedUser;
