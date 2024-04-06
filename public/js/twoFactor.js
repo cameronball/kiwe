@@ -22,7 +22,7 @@ $("#twoFactorSetupButton").click(() => {
 			$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'>");
 			$("#twoFactorSetupModalBody").append("<input id='twoFactorCodeVerification' class='twoFactorResults' type='text' style='margin-bottom: 20px;padding: 5px 10px;border-radius: 2px;border: 1px solid #dedede;background-color: #f2f2f2;'>");
 			$("#twoFactorSetupModalBody").append("<input id='secretKeyInput' type='hidden' value='" + data.secretKey + "'>");
-			$("#twoFactorSetupModalBody").append("<button id='twofactorCodeSubmissionButton' class='twofactorResults btn btn-primary' type='button' style='margin-left:10px;'>Submit</button>");
+			$("#twoFactorSetupModalBody").append("<button id='twofactorCodeSubmissionButton' class='twoFactorResults btn btn-primary' type='button' style='margin-left:10px;'>Submit</button>");
 
 			$("#twofactorCodeSubmissionButton").click(() => {
 				var givenCode = $("#twoFactorCodeVerification").val();
@@ -34,7 +34,7 @@ $("#twoFactorSetupButton").click(() => {
 					data: { twoFactorCode: givenCode, totpSecretKey: secretKey },
 					success: (data, status, xhr) => {
 						$(".twoFactorResults").remove();
-						$("#twofactorSetupModalBody").append("<br><span class='text-success'>2FA Setup successfully!</span>");
+						$("#twoFactorSetupModalBody").append("<br><span class='text-success'>2FA Setup successfully!</span>");
 					},
 					error: (xhr, status, error) => {
 						$("#twoFactorVerifyError").remove();
