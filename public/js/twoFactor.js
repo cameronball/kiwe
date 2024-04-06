@@ -23,7 +23,6 @@ $("#twoFactorSetupButton").click(() => {
 			$("#twoFactorSetupModalBody").append("<input id='twoFactorCodeVerification' class='twoFactorResults' type='text' style='margin-bottom: 20px;padding: 5px 10px;border-radius: 2px;border: 1px solid #dedede;background-color: #f2f2f2;'>");
 			$("#twoFactorSetupModalBody").append("<input id='secretKeyInput' type='hidden' value='" + data.secretKey + "'>");
 			$("#twoFactorSetupModalBody").append("<button id='twofactorCodeSubmissionButton' class='twofactorResults btn btn-primary' type='button' style='margin-left:10px;'>Submit</button>");
-			$("#twofactorSetupModalBody").append("<span id='twofactorVerifyError' class='text-danger twoFactorResults'></span>");
 
 			$("#twofactorCodeSubmissionButton").click(() => {
 				var givenCode = $("#twoFactorCodeVerification").val();
@@ -38,7 +37,8 @@ $("#twoFactorSetupButton").click(() => {
 						$("#twofactorSetupModalBody").append("<span class='text-success twoFactorResults'>2FA Setup successfully!</span>");
 					},
 					error: (xhr, status, error) => {
-						$("#twofactorVerifyError").text("The code you supplied could not be verified.");
+						$("twofactorVerifyError").remove();
+						$("#twofactorSetupModalBody").append("<span id='twofactorVerifyError' class='text-danger twoFactorResults'>The code you supplied could not be verified.</span>");
 					}
 				});
 			});
