@@ -34,6 +34,7 @@ $("#twoFactorSetupButton").click(() => {
 
 $("#twofactorCodeSubmissionButton").click(() => {
 	var givenCode = $("#twoFactorCodeVerification").val();
+	console.log(givenCode);
 
 	$.ajax({
 		url: "/api/twofactor/validate",
