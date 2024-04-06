@@ -34,7 +34,7 @@ $("#twoFactorSetupButton").click(() => {
 					data: { twoFactorCode: givenCode, totpSecretKey: secretKey },
 					success: (data, status, xhr) => {
 						$(".twoFactorResults").remove();
-						$("#twoFactorSetupModalBody").append("<br><span class='text-success'>2FA Setup successfully!</span>");
+						$("#twoFactorSetupModalBody").append("<span class='text-success'>2FA Setup successfully!</span>");
 					},
 					error: (xhr, status, error) => {
 						$("#twoFactorVerifyError").remove();
