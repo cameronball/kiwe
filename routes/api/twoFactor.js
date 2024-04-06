@@ -28,15 +28,19 @@ router.get("/requestSecret", async (req, res, next) => {
 	var url = "";
 
 	QRCode.toDataURL(secretObject.otpauth_url, function(err, data_url) {
-		url = data_url
+		if (err) {
+			console.error(err);
+			return res.sendStatus(500);
+	    	} else {
+			url = data_url;
+			var secrets = {
+				secretKey,
+				url,
+			};
+		
+			return res.status(200).send(secrets);
+	    	}
 	});
-
-	var secrets = {
-		secretKey,
-		url,
-	};
-
-	return res.status(200).send(secrets);
 });
 
 module.exports = router;
