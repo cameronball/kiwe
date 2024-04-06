@@ -25,9 +25,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 router.get("/requestSecret", async (req, res, next) => {
 	var secretObject = speakeasy.generateSecret({length: 20});
 	var secretKey = secretObject.base32;
+	var url = "";
 
 	QRCode.toDataURL(secretObject.otpauth_url, function(err, data_url) {
-	  var url = data_url
+		url = data_url
 	});
 
 	var secrets = {
