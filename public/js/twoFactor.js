@@ -4,7 +4,7 @@ $(document).ready(() => {
 
 $("#twoFactorSetupButton").click(() => {
 
-	if (twofactorEnabled) {
+	if (twoFactorEnabled) {
 		$("#twoFactorSetupButton").remove();
 		$("#twoFactorSetupModalBody").append("<span class='text-danger'>2FA Has already been setup!</span>");
 		return;
