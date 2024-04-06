@@ -18,8 +18,12 @@ router.get("/", (req, res, next) => {
 })
 
 router.post("/", async (req, res, next) => {
-  //-TODO
-  console.log("pass");
+  var payload = req.body;
+  payload.pageTitle = "Two Factor Auth";
+  
+  givenCode=req.body.twoFactorCode.trim();
+  console.log(givenCode);
+  console.log(req.session.user.username);
 })
 
 module.exports = router;
