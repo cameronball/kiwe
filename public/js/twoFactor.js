@@ -13,9 +13,9 @@ $("#twoFactorSetupButton").click(() => {
 		success: (data, status, xhr) => {
 			$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'>");
 			$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'>");
-			$("#twoFactorSetupModalBody").append("<span class='text-success twoFactorResults'>Secret: " + data.secret + "</span>");
+			$("#twoFactorSetupModalBody").append("<span class='text-success twoFactorResults'>Secret: " + data.secretKey + "</span>");
 			$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'>");
-      $("#twoFactorSetupModalBody").append("<img class='twoFactorResults' src='" + data_url + "'>");
+      			$("#twoFactorSetupModalBody").append("<img class='twoFactorResults' src='" + data.url + "'>");
 		},
 		error: (xhr, status, error) => {
 			$(".errorMessageTwoFactor").text("Error: " + xhr.status);
