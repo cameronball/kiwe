@@ -669,3 +669,18 @@ mixin createStatsModal()
 					button#statsSearchButton.btn.btn-primary(type='button') Refresh
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+
+
+mixin createTwoFactorSetupModal()
+	#twoFactorSetupModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='twoFactorSetupModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#twoFactorSetupModalLabel.modal-title 2FA Setup
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(id="twoFactorSetupModalBody")
+					span.errorMessage.errorMessageTwoFactor
+					button#twoFactorSetupButton.btn.btn-primary(type='button') Setup
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
