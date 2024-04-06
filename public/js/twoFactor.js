@@ -15,7 +15,7 @@ $("#twoFactorSetupButton").click(() => {
 			$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'>");
 			$("#twoFactorSetupModalBody").append("<span class='text-success twoFactorResults'>Secret: " + data.secretKey + "</span>");
 			$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'>");
-      			$("#twoFactorSetupModalBody").append("<img class='twoFactorResults' src='" + data.url + "'> style='display: block;margin: auto;'");
+      			$("#twoFactorSetupModalBody").append("<img class='twoFactorResults' src='" + data.url + "' style='display: block;margin: auto;'>");
 			$("#twoFactorSetupModalBody").append("<span class='text-success twoFactorResults'>Either scan the QR code in your preferred 2FA app, or manually input the secret.</span>");
 			$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'>");
 			$("#twoFactorSetupModalBody").append("<br class='twoFactorResults'>");
