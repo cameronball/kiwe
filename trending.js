@@ -24,14 +24,16 @@ async function main() {
 function extractHashtagsFrequency(posts) {
   const hashtagsFrequency = {};
   posts.forEach(post => {
-    const hashtags = extractHashtags(post.content);
-    hashtags.forEach(hashtag => {
-      if (hashtagsFrequency.hasOwnProperty(hashtag)) {
-        hashtagsFrequency[hashtag]++;
-      } else {
-        hashtagsFrequency[hashtag] = 1;
-      }
-    });
+    if (post.content) {
+      const hashtags = extractHashtags(post.content);
+      hashtags.forEach(hashtag => {
+        if (hashtagsFrequency.hasOwnProperty(hashtag)) {
+          hashtagsFrequency[hashtag]++;
+        } else {
+          hashtagsFrequency[hashtag] = 1;
+        }
+      });
+    }
   });
   const sortedHashtagsFrequency = Object.fromEntries(
     Object.entries(hashtagsFrequency).sort(([,a],[,b]) => b - a)
