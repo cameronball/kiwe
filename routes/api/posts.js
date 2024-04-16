@@ -49,6 +49,13 @@ router.get("/", async (req, res, next) => {
 		delete searchObj.followingOnly;
 	}
 
+	if(searchObj.trendingPage !== undefined) {
+		var trendingPage = searchObj.trendingPage == "true";
+		delete searchObj.trendingPage;
+		var results = await getTrendingPosts();
+		return res.status(200).send(results);
+	}
+
 	var results = await getPosts(searchObj);
 	res.status(200).send(results);
 })
@@ -310,6 +317,18 @@ async function getPosts(filter) {
 
 	results = await User.populate(results, { path: "replyTo.postedBy" });
 	return await User.populate(results, { path: "reshareData.postedBy" });
-}	
+}
+
+async function getTrendingPosts() {
+	var results = await Post.find({ "likes.3": { "$exists": true } })
+	.populate("postedBy")
+	.populate("reshareData")
+	.populate("replyTo")
+	.sort({ createdAt: -1 })
+	.catch(error => console.log(error))
+
+	results = await User.populate(results, { path: "replyTo.postedBy" });
+	return await User.populate(results, { path: "reshareData.postedBy" });
+}
 
 module.exports = router;
