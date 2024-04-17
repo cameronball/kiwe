@@ -4,7 +4,19 @@
 
 ### <a href="https://kiwe.social">kiwe.social</a>
 
-Welcome to Kiwe, a social media platform where you can chirp, like, rechirp, and connect with others in a fun and engaging way. This `readme.md` provides an overview of the features and updates in version 2, as well as a sneak peek at what's planned for version 3.
+Welcome to Kiwe, a social media platform where you can chirp, like, rechirp, and connect with others in a fun and engaging way. This `readme.md` provides an overview of the features and updates in version 3, an installation guide, as well as a sneak peek at what's planned for version 4.
+
+## Table of contents:
+- <a href="https://github.com/cameronball/kiwe#installation">Installation</a>
+- <a href="https://github.com/cameronball/kiwe#updates-in-v3">Updates in v3</a>
+  - <a href="https://github.com/cameronball/kiwe#main-features">Main features</a>
+  - <a href="https://github.com/cameronball/kiwe#smaller-fixes-improvements">Smaller fixes and improvements</a>
+- <a href="https://github.com/cameronball/kiwe#roadmap">Roadmap</a>
+  - <a href="https://github.com/cameronball/kiwe?tab=readme-ov-file#features-definitely-planned-for-v4">Features confirmed for v4</a>
+  - <a href="https://github.com/cameronball/kiwe?tab=readme-ov-file#features-which-are-planned-but-which-may-or-may-not-be-in-v4-depending-on-the-size-and-timeline-for-v4-release">Planned features which may or may not be included in v4</a>
+- <a href="https://github.com/cameronball/kiwe?tab=readme-ov-file#key-features">Key features of the site</a>
+
+<hr>
 
 ## Installation
 ### Prerequisites:
@@ -93,7 +105,7 @@ The server should now be running, you can check using
 - Website embeds
 - Read receipts
 
-## Key Features
+# Key Features of the site
 Kiwe offers a wide range of features, including:
 - Chirping (Tweeting)
 - Liking chirps
