@@ -41,33 +41,57 @@ The server should now be running, you can check using
 
 ```pm2 status```
 
-## Updates in v2
-- **Notifications Page:** Keep track of likes, follows, retweets, and other activities with a dedicated notifications page.
-
-- **Receive Message Notifications:** Receive notifications when you get a message while you are on the site but not on that specific message thread.
-
-- **Settings Page:** Customize your profile with ease. You can change your username, email, password, manage legal settings, delete your account, update your bio, photo, and cover photo.
-
-- **Moderator/Admin Page:** Manage user interactions and the platform's health through a user-friendly graphical interface. You can delete users, verify users, and perform other administrative actions.
-
-- **Auto-Follow Feature:** Users will now automatically follow the Kiwe and Kiwe creators' accounts upon signup.
-
-- **Enhanced Notifications:** Notifications now embed the relevant post for actions like rechirping, liking, or replying. If the notification is related to a message, it will display the message details.
-
-- **SSL Integration:** We've added SSL support to ensure that real-time Socket.IO features work seamlessly on Safari.
-
-## v3 Features already implemented
-### These are features currently in the main branch that will be officially production ready in the upcoming v3 update
-- Ban users, admin ban panel
+# Updates in v3:
+## Main Features:
+- Admin panel finished - user verification, ban user, add debug likes, get site stats
+- Allow app to be installed as a PWA.
+- Added hashtags, hashtags get automatically highlighted, and link to a page where you can browse all posts containing the hashtag.
+- Trending sidebar
+- Popular homepage tab (Will likely improve algorithm for this tab in v4 when it may switch to being a "For you" tab)
+- Image chirps
+- Image messages
+- Code chirps (Still need to implement reposting code chirps)
+- Added two factor authentication
+- Inline advert chirps
 - Redirect http traffic to https by creating a http redirect server (fixes a safari issue where sometimes a user putting in the page url will get put onto an error page due to no page being served on port 80)
-- Update to FontAwesome regular icons rather than solid so it is cleaner and to facilitate the feature below.
 - Highlight the icon of the page that you are currently on in the side panel.
 - Add site favicon
-- Add button alt text for accessibility
-- Add stats in admin panel
-- Advert Chips
-- Image Chirps
-- Implementation of sending images in DM's is about 50% done.
+- Add legal page links to signup page, allow access to them when not signed in.
+- Add alt text to lots more buttons to improve accessibility.
+
+## Smaller fixes, improvements
+- Increased modal size for quite a few modals where content previously felt squished (Such as legal modals)
+- Fix the border radius on the post interaction buttons, previously the code used %, now we define a px value so that the rounding isn't weird.
+- Fix issues with CSS caching by adding a ?v=**_X_** to the end.
+- Allow more characters in user bios - previously only a-Z were allowed.
+- Change default icons to FA regular rather than solid and change some icons to fontawesome duotone ones which look nicer in some places.
+- When the user is on the page for an individual post, clicking on the post won't refresh the page, this allows the user to highlight and copy text.
+
+# Roadmap:
+## Features definitely planned for v4:
+- Implement code chirp reposts
+- Improve popular/for you page algorithm
+- Add websockets code so that when an image message is sent it is displayed immediately rather than having to refresh for it to be displayed.
+- Bookmarks
+- Polls
+- Muting and blocking
+- Mentions
+
+## Features which are planned but which may or may not be in v4 depending on the size and timeline for v4 release
+- Dark mode / themes in general (Considering just implementing dark mode in v4 and then adding more themes later on)
+- Video, Audio calls
+- Audio spaces
+- Communities
+- Chirp analytics - impression count, more maybe?
+- Emoji picker
+- More advanced search tools - date, media contained, like count etc
+- Community Notes
+- Advert creation & buying center
+- Private accounts
+- Circles/ close friends
+- Reshares with comment (quote repost)
+- Website embeds
+- Read receipts
 
 ## Key Features
 Kiwe offers a wide range of features, including:
@@ -81,7 +105,6 @@ Kiwe offers a wide range of features, including:
 - Following and followers
 - Home page showcasing followers
 - Deleting posts
-- Database access for user verification, brand and government verification, and moderator assignment
 - Moderators can delete posts
 - Messaging with typing indicators
 - Real-time message sending and receiving
@@ -89,17 +112,20 @@ Kiwe offers a wide range of features, including:
 - Search for posts and users
 - User bios
 - Notifications page for various interactions
-
-## Planned for Version 3 (Coming Soon TM)
-- **Admin Panel Completion:** Finish off the admin panel, including features like banning users for better moderation.
-
-- **Trending Page:** Explore trending topics and posts on Kiwe.
-
-- **Image Chirps:** Share images alongside your chirps for a richer multimedia experience.
-
-- **Advert Chirps:** Promote products and services with advert chirps.
-
-- **And More:** We have exciting plans for version 3, depending on ongoing developments.
+- Admin panel finished - user verification, ban user, add debug likes, get site stats
+- Allow app to be installed as a PWA.
+- Added hashtags, hashtags get automatically highlighted, and link to a page where you can browse all posts containing the hashtag.
+- Trending sidebar
+- Popular homepage tab (Will likely improve algorithm for this tab in v4 when it may switch to being a "For you" tab)
+- Image chirps & messages
+- Code chirps (Still need to implement reposting code chirps)
+- Added two factor authentication
+- Inline advert chirps
+- Redirect http traffic to https by creating a http redirect server (fixes a safari issue where sometimes a user putting in the page url will get put onto an error page due to no page being served on port 80)
+- Highlight the icon of the page that you are currently on in the side panel.
+- Add site favicon
+- Add legal page links to signup page, allow access to them when not signed in.
+- Add alt text to lots more buttons to improve accessibility.
 
 We hope you enjoy using Kiwe! If you have any feedback or suggestions, please feel free to share them with us. Stay connected and chirp away!
 
