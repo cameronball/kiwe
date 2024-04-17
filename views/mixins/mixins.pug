@@ -6,14 +6,14 @@ mixin createPostForm(userLoggedIn)
 			else
 				img(src=userLoggedIn.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image")
 		.textareaContainer
-			textarea#postTextarea(placeholder="What's happening?")
+			textarea#postTextarea(placeholder="What's happening?", style="    background-color:#eee;padding:10px;border-radius:15px;")
 			.buttonsContainer(style="display: flex; flex-direction: row;")
 				button#submitPostButton(disabled="") Post
 				button(type="button", data-toggle="modal", data-target="#imagePostUploadModal")
-					.imageUploadButton(style="color: var(--blue);margin-left:10px;display: flex; align-items: center; justify-content: center;")
+					.imageUploadButton(style="color: var(--blue);margin-left:10px;margin-top:20%;display: flex; align-items: center; justify-content: center;")
 						i.fad.fa-camera(style="font-size:2.5vh;" color="var(--blue)")
 				button(type="button", data-toggle="modal", data-target="#codeUploadModal")
-					.codeUploadButton(style="color: #008800;margin-left:10px;display:flex; align-items:center; jutify-content:center;")
+					.codeUploadButton(style="color: #008800;margin-left:10px;margin-top:20%;display:flex; align-items:center; jutify-content:center;")
 						i.fad.fa-code(style="font-size:2.5vh;")
 
 mixin createReplyModal(userLoggedIn)
