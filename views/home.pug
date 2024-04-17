@@ -2,9 +2,10 @@ extends layouts/main-layout.pug
 
 block content
   .tabsContainer
-    +createTab("Following", `/home`, selectedTab != "trending")
-    +createTab("Trending", `/home/trending`, selectedTab == "trending")
-+createPostForm(userLoggedIn)
+    +createTab("Following", `/home`, true)
+    +createTab("Trending", `/home/trending`, false)
+
+  +createPostForm(userLoggedIn)
   +createImagePostUploadModal(userLoggedIn)
   +createCodeUploadModal(userLoggedIn)
   .postsContainer
