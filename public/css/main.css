@@ -225,7 +225,7 @@ button i, button span {
 .postButtonContainer button:hover {
     background-color: var(--buttonHoverBg);
     color: var(--blue);
-    border-radius: 50%;
+    border-radius: 15px;
 }
 
 .postButtonContainer.red button.active {
@@ -341,7 +341,7 @@ button i, button span {
 .postButtonContainer button:hover {
     background-color: var(--buttonHoverBg);
     color: var(--blue);
-    border-radius: 50%;
+    border-radius: 15px;
 }
 
 .postButtonContainer.red button.active {
