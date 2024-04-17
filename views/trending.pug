@@ -1,0 +1,16 @@
+extends layouts/main-layout.pug
+
+block content
+  .tabsContainer
+    +createTab("Following", `/home`, false)
+    +createTab("Trending", `/home/trending`, true)
+
+  +createPostForm(userLoggedIn)
+  +createImagePostUploadModal(userLoggedIn)
+  +createCodeUploadModal(userLoggedIn)
+  .postsContainer
+
+  +createPostModals(userLoggedIn)
+
+block scripts
+  script(src="/js/trending.js")
