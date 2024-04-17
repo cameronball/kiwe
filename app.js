@@ -121,6 +121,17 @@ app.get("/", middleware.requireLogin, (req, res, next) => {
   res.status(200).render("home", payload);
 })
 
+app.get("/home/trending", middleware.requireLogin, (req, res, next) => {
+
+  var payload = {
+      pageTitle: "Trending",
+      userLoggedIn: req.session.user,
+      userLoggedInJs: JSON.stringify(req.session.user)
+  }
+
+  res.status(200).render("trending", payload);
+})
+
 app.use((req, res) => {
   res.redirect('/');
 });
