@@ -606,6 +606,17 @@ function createPostHtml(postData, boldFont = false) {
     var reshareText = '';
     if(isReshare) {
         reshareText = `<span><i class='fas fa-repeat'></i>&nbsp;&nbsp;Reshared by <a href='/profile/${resharedBy}'>@${resharedBy}</a></span>`
+	var hasReshareCode = postData.reshareData.code !== '';
+	var reshareCodeContent = hasReshareCode ? postData.reshareData.code : null;
+
+	if(hasReshareCode) {
+		if(postData.reshareData.content) {
+		            var codeHtml = `<pre><code>${reshareCodeContent}</code></pre>`
+	        }
+	        else {
+		            var codeHtml = `<br><pre><code>${reshareCodeContent}</code></pre>`
+	        }
+	}
     }
 	
 	var replyFlag = '';
