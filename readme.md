@@ -82,12 +82,12 @@ The server should now be running, you can check using
 # Roadmap:
 ## Features definitely planned for v4:
 - [x] Implement code chirp reposts
-- [x] Improve popular/for you page algorithm
-- [x] Add websockets code so that when an image message is sent it is displayed immediately rather than having to refresh for it to be displayed.
-- [x] Bookmarks
-- [x] Polls
-- [x] Muting and blocking
-- [x] Mentions
+- [ ] Improve popular/for you page algorithm
+- [ ] Add websockets code so that when an image message is sent it is displayed immediately rather than having to refresh for it to be displayed.
+- [ ] Bookmarks
+- [ ] Polls
+- [ ] Muting and blocking
+- [ ] Mentions
 
 ## Features which are planned but which may or may not be in v4 depending on the size and timeline for v4 release
 - Dark mode / themes in general (Considering just implementing dark mode in v4 and then adding more themes later on)
