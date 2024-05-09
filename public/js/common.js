@@ -564,9 +564,9 @@ function createPostHtml(postData, boldFont = false) {
 
     var isReshare = postData.reshareData !== undefined;
     var resharedBy = isReshare ? postData.postedBy.username : null;
-    var codeContent = hasCode ? postData.code : null;
     postData = isReshare ? postData.reshareData : postData;
     var hasCode = postData.code !== '';
+    var codeContent = hasCode ? postData.code : null;
 
     var postedBy = postData.postedBy;
 
