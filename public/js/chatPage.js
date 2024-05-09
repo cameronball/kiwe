@@ -101,6 +101,7 @@ function updateTyping() {
 
 function addMessagesHtmlToPage(html) {
 	$(".chatMessages").append(html);
+	scrollToBottom(false);
 }
 
 function messageSubmitted() {
