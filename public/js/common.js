@@ -567,6 +567,7 @@ function createPostHtml(postData, boldFont = false) {
     postData = isReshare ? postData.reshareData : postData;
     var hasCode = postData.code !== '';
     var codeContent = hasCode ? postData.code : null;
+    var replyCount = postData.replyCount;
 
     var postedBy = postData.postedBy;
 
@@ -701,13 +702,13 @@ function createPostHtml(postData, boldFont = false) {
                         <div class='postFooter' style="${LargeFontStyle}">
                             <div class='postButtonContainer'>
                                 <button aria-label="Comment" data-toggle='modal' data-target='#replyModal'>
-                                    <i class='fas fa-comments'></i>
+                                    <i class='fas fa-comments'></i>&nbsp;&nbsp;<span>${}</span>
                                 </button>
                             </div>
                             <div class='postButtonContainer green'>
                                 <button aria-label="Reshare" class='reshareButton ${reshareButtonActiveClass}'>
                                     <i class='fas fa-repeat'></i>
-                                    <span>${postData.reshareUsers.length || ""}</span>
+                                    <span>${replyCount === 0 ? '' : replyCount}</span>
                                 </button>
                             </div>
                             <div class='postButtonContainer red'>
