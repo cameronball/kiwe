@@ -370,15 +370,62 @@ async function getPosts(filter) {
 
 
 async function getTrendingPosts() {
-	var results = await Post.find({ "likes.3": { "$exists": true } })
-	.populate("postedBy")
-	.populate("reshareData")
-	.populate("replyTo")
-	.sort({ createdAt: -1 })
-	.catch(error => console.log(error))
+	try {
+	    var results = await Post.find({ "likes.3": { "$exists": true } })
+	    .populate("postedBy")
+            .populate("reshareData")
+            .populate("replyTo")
+            .sort({ createdAt: -1 });
 
-	results = await User.populate(results, { path: "replyTo.postedBy" });
-	return await User.populate(results, { path: "reshareData.postedBy" });
-}
+        // Further populate the results
+        results = await User.populate(results, { path: "replyTo.postedBy" });
+        results = await User.populate(results, { path: "reshareData.postedBy" });
+
+        // Extract all unique post IDs, including those from reshareData
+        const postIds = results.map(post => post._id);
+        const resharedPostIds = results
+            .filter(post => post.reshareData)
+            .map(post => post.reshareData._id);
+        const allPostIds = [...new Set([...postIds, ...resharedPostIds])];
+
+        // Count the replies for each post
+        const replyCounts = await Post.aggregate([
+            {
+                $match: {
+                    replyTo: { $in: allPostIds }
+                }
+            },
+            {
+                $group: {
+                    _id: "$replyTo",
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+
+        // Create a map for easy lookup of reply counts
+        const replyCountMap = replyCounts.reduce((map, item) => {
+            map[item._id] = item.count;
+            return map;
+        }, {});
+
+        // Attach the reply count to each post
+        results = results.map(post => {
+            post = post.toObject();  // Convert Mongoose document to plain JS object if necessary
+            post.replyCount = replyCountMap[post._id] || 0;  // Default to 0 if no replies
+
+            // If the post is a reshared post, set replyCount for the reshared data
+            if (post.reshareData) {
+                post.reshareData.replyCount = replyCountMap[post.reshareData._id] || 0;
+            }
+
+            return post;
+        });
+
+        return results;
+    } catch (error) {
+        console.error("Error fetching posts: ", error);
+        return [];
+    }
 
 module.exports = router;
