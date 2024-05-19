@@ -320,12 +320,15 @@ async function getPosts(filter) {
         results = await User.populate(results, { path: "replyTo.postedBy" });
         results = await User.populate(results, { path: "reshareData.postedBy" });
 
-        // Extract all unique post IDs, including those from reshareData
+        // Extract all unique post IDs, including those from reshareData and replyTo
         const postIds = results.map(post => post._id);
         const resharedPostIds = results
             .filter(post => post.reshareData)
             .map(post => post.reshareData._id);
-        const allPostIds = [...new Set([...postIds, ...resharedPostIds])];
+        const replyToIds = results
+            .filter(post => post.replyTo)
+            .map(post => post.replyTo._id);
+        const allPostIds = [...new Set([...postIds, ...resharedPostIds, ...replyToIds])];
 
         // Count the replies for each post
         const replyCounts = await Post.aggregate([
@@ -348,7 +351,7 @@ async function getPosts(filter) {
             return map;
         }, {});
 
-        // Attach the reply count to each post
+        // Attach the reply count to each post and its replyTo if exists
         results = results.map(post => {
             post = post.toObject();  // Convert Mongoose document to plain JS object if necessary
             post.replyCount = replyCountMap[post._id] || 0;  // Default to 0 if no replies
@@ -356,6 +359,11 @@ async function getPosts(filter) {
             // If the post is a reshared post, set replyCount for the reshared data
             if (post.reshareData) {
                 post.reshareData.replyCount = replyCountMap[post.reshareData._id] || 0;
+            }
+
+            // If the post is a reply, set replyCount for the replied post
+            if (post.replyTo) {
+                post.replyTo.replyCount = replyCountMap[post.replyTo._id] || 0;
             }
 
             return post;
@@ -367,6 +375,7 @@ async function getPosts(filter) {
         return [];
     }
 }
+
 async function getTrendingPosts() {
 	try {
 	    var results = await Post.find({ "likes.3": { "$exists": true } })
