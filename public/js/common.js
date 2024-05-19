@@ -702,13 +702,13 @@ function createPostHtml(postData, boldFont = false) {
                         <div class='postFooter' style="${LargeFontStyle}">
                             <div class='postButtonContainer'>
                                 <button aria-label="Comment" data-toggle='modal' data-target='#replyModal'>
-                                    <i class='fas fa-comments'></i>&nbsp;&nbsp;<span>${}</span>
+                                    <i class='fas fa-comments'></i>&nbsp;&nbsp;<span>${replyCount === 0 ? '' : replyCount}</span>
                                 </button>
                             </div>
                             <div class='postButtonContainer green'>
                                 <button aria-label="Reshare" class='reshareButton ${reshareButtonActiveClass}'>
                                     <i class='fas fa-repeat'></i>
-                                    <span>${replyCount === 0 ? '' : replyCount}</span>
+                                    <span>${postData.reshareUsers.length || ""}</span>
                                 </button>
                             </div>
                             <div class='postButtonContainer red'>
