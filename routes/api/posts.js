@@ -57,6 +57,8 @@ router.get("/", async (req, res, next) => {
 	}
 
 	var results = await getPosts(searchObj);
+	console.log(results[0]._id);
+	console.log(results[0].replyCount);
 	res.status(200).send(results);
 })
 
