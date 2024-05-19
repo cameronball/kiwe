@@ -320,12 +320,16 @@ async function getPosts(filter) {
         results = await User.populate(results, { path: "replyTo.postedBy" });
         results = await User.populate(results, { path: "reshareData.postedBy" });
 
-        // Extract all unique post IDs, including those from reshareData
+        // Extract all unique post IDs, including those from reshareData and replyTo
         const postIds = results.map(post => post._id);
         const resharedPostIds = results
             .filter(post => post.reshareData)
             .map(post => post.reshareData._id);
-        const allPostIds = [...new Set([...postIds, ...resharedPostIds])];
+        const replyToPostIds = results
+            .filter(post => post.replyTo)
+            .map(post => post.replyTo._id);
+
+        const allPostIds = [...new Set([...postIds, ...resharedPostIds, ...replyToPostIds])];
 
         // Count the replies for each post
         const replyCounts = await Post.aggregate([
@@ -358,6 +362,12 @@ async function getPosts(filter) {
                 post.reshareData.replyCount = replyCountMap[post.reshareData._id] || 0;
             }
 
+            // If the post is a reply to another post, set replyCount for the replyTo post
+            if (post.replyTo) {
+                post.replyTo = post.replyTo.toObject();  // Convert to plain JS object if necessary
+                post.replyTo.replyCount = replyCountMap[post.replyTo._id] || 0;
+            }
+
             return post;
         });
 
@@ -367,7 +377,6 @@ async function getPosts(filter) {
         return [];
     }
 }
-
 
 async function getTrendingPosts() {
 	try {
