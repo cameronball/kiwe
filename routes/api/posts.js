@@ -427,5 +427,6 @@ async function getTrendingPosts() {
         console.error("Error fetching posts: ", error);
         return [];
     }
+}
 
 module.exports = router;
