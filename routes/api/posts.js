@@ -308,15 +308,47 @@ router.put("/:id", async (req, res, next) => {
 })
 
 async function getPosts(filter) {
-	var results = await Post.find(filter)
-	.populate("postedBy")
-	.populate("reshareData")
-	.populate("replyTo")
-	.sort({ createdAt: -1 })
-	.catch(error => console.log(error))
+    // Fetch the posts with the initial population
+    var results = await Post.find(filter)
+        .populate("postedBy")
+        .populate("reshareData")
+        .populate("replyTo")
+        .sort({ createdAt: -1 })
+        .catch(error => console.log(error));
 
-	results = await User.populate(results, { path: "replyTo.postedBy" });
-	return await User.populate(results, { path: "reshareData.postedBy" });
+    // Further populate the results
+    results = await User.populate(results, { path: "replyTo.postedBy" });
+    results = await User.populate(results, { path: "reshareData.postedBy" });
+
+    // Count the replies for each post
+    const replyCounts = await Post.aggregate([
+        {
+            $match: {
+                replyTo: { $in: results.map(post => post._id) }
+            }
+        },
+        {
+            $group: {
+                _id: "$replyTo",
+                count: { $sum: 1 }
+            }
+        }
+    ]);
+
+    // Create a map for easy lookup of reply counts
+    const replyCountMap = replyCounts.reduce((map, item) => {
+        map[item._id] = item.count;
+        return map;
+    }, {});
+
+    // Attach the reply count to each post
+    results = results.map(post => {
+        post = post.toObject();  // Convert Mongoose document to plain JS object if necessary
+        post.replyCount = replyCountMap[post._id] || 0;  // Default to 0 if no replies
+        return post;
+    });
+
+    return results;
 }
 
 async function getTrendingPosts() {
