@@ -320,18 +320,12 @@ async function getPosts(filter) {
         results = await User.populate(results, { path: "replyTo.postedBy" });
         results = await User.populate(results, { path: "reshareData.postedBy" });
 
-        // Log results to check the structure and IDs
-        console.log("Fetched Posts: ", results);
-
         // Extract all unique post IDs, including those from reshareData
         const postIds = results.map(post => post._id);
         const resharedPostIds = results
             .filter(post => post.reshareData)
             .map(post => post.reshareData._id);
         const allPostIds = [...new Set([...postIds, ...resharedPostIds])];
-
-        // Log all unique post IDs
-        console.log("All Post IDs for Reply Count: ", allPostIds);
 
         // Count the replies for each post
         const replyCounts = await Post.aggregate([
@@ -358,6 +352,12 @@ async function getPosts(filter) {
         results = results.map(post => {
             post = post.toObject();  // Convert Mongoose document to plain JS object if necessary
             post.replyCount = replyCountMap[post._id] || 0;  // Default to 0 if no replies
+
+            // If the post is a reshared post, set replyCount for the reshared data
+            if (post.reshareData) {
+                post.reshareData.replyCount = replyCountMap[post.reshareData._id] || 0;
+            }
+
             return post;
         });
 
@@ -367,6 +367,7 @@ async function getPosts(filter) {
         return [];
     }
 }
+
 
 async function getTrendingPosts() {
 	var results = await Post.find({ "likes.3": { "$exists": true } })
