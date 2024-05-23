@@ -289,7 +289,10 @@ $("#imageMessageSendButton").click(() => {
             data: formData,
             processData: false,
             contentType: false,
-            success: () => window.location.href = "/messages/"+chatId
+            success: () => {
+		    addChatMessageHtml(formData);
+		    //window.location.href = "/messages/"+chatId;
+	    }
         });
     });
 });
