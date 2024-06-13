@@ -47,6 +47,20 @@ router.get("/:username/replies", async (req, res, next) => {
 	}
 })
 
+router.get("/:username/likes", async (req, res, next) => {
+
+	var payload = await getPayload(req.params.username, req.session.user);
+	
+	if(payload==404) {
+		res.sendStatus(404);
+		return;
+	}
+	else{
+		payload.selectedTab = "likes";
+		res.status(200).render("profilePage", payload);
+	}
+})
+
 router.get("/:username/followers", async (req, res, next) => {
 
 	var payload = await getPayload(req.params.username, req.session.user);
