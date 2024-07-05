@@ -1,31 +1,31 @@
 $(document).ready(() => {
 
-	if(selectedTab == "replies") {
-		loadPosts(true);
-	}
-	else {
-		loadPosts(false);
-	}
+	loadPosts(selectedTab)
 
 	$("#profileButtonIcon").removeClass("far").addClass("fas");
 })
 
-function loadPosts(replyBool) {
-	if(!replyBool) {
-		$.get("/api/posts", { postedBy: profileUserId, isReply: false, pinned: true }, results => {
-			outputPinnedPost(results, $(".pinnedPostContainer"));
-		});
-
-		$.get("/api/posts", { postedBy: profileUserId, isReply: false, pinned: false }, results => {
+function loadPosts(type) {
+	if (type == "likes") {
+		$.get("/api/posts", { postedBy: profileUserId, isReply: false, pinned: false, isLikes: true }, results => {
 			outputPosts(results, $(".postsContainer"));
 		});
 	}
-	else {
+	else if (type == "replies" {
 		$.get("/api/posts", { postedBy: profileUserId, isReply: true, pinned: true}, results => {
 			outputPinnedPost(results, $(".pinnedPostContainer"));
 		});
 
 		$.get("/api/posts", { postedBy: profileUserId, isReply: true, pinned: false}, results => {
+			outputPosts(results, $(".postsContainer"));
+		});
+	}
+	else {
+		$.get("/api/posts", { postedBy: profileUserId, isReply: false, pinned: true }, results => {
+			outputPinnedPost(results, $(".pinnedPostContainer"));
+		});
+
+		$.get("/api/posts", { postedBy: profileUserId, isReply: false, pinned: false }, results => {
 			outputPosts(results, $(".postsContainer"));
 		});
 	}
