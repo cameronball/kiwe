@@ -156,7 +156,7 @@ block content
 				span.bio(style='margin-top:10px;') #{profileUser.bio} !{editBioButton}
 				
 		.tabsContainer
-			+createTab("Posts", `/profile/${profileUser.username}`, selectedTab == "")
+			+createTab("Posts", `/profile/${profileUser.username}`, (selectedTab != "replies" && selectedTab != "likes"))
 			+createTab("Replies", `/profile/${profileUser.username}/replies`, selectedTab == "replies")
 			+createTab("Likes", `/profile/${profileUser.username}/likes`, selectedTab == "likes")
 
