@@ -12,6 +12,9 @@ block content
 		script.
 			var profileUserId = '!{profileUser._id}';
 			var selectedTab = '{selectedTab}';
+			if selectedTab == '' {
+				selectedTab = 'posts';
+			}
 
 		- followerCount = profileUser.followers.length;
 		- followingCount = profileUser.following.length;
