@@ -7,7 +7,7 @@ $(document).ready(() => {
 
 function loadPosts(type) {
 	if (type == "likes") {
-		$.get("/api/posts", { postedBy: profileUserId, isReply: false, pinned: false, isLikes: true }, results => {
+		$.get("/api/posts", { pinned: false, isLikes: true }, results => {
 			outputPosts(results, $(".postsContainer"));
 		});
 	}
