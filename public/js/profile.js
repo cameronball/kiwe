@@ -11,7 +11,7 @@ function loadPosts(type) {
 			outputPosts(results, $(".postsContainer"));
 		});
 	}
-	else if (type == "replies" {
+	else if (type == "replies") {
 		$.get("/api/posts", { postedBy: profileUserId, isReply: true, pinned: true}, results => {
 			outputPinnedPost(results, $(".pinnedPostContainer"));
 		});
