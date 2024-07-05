@@ -321,7 +321,7 @@ async function getPosts(filter) {
             .populate("postedBy")
             .populate("reshareData")
             .populate("replyTo")
-	    .popu
+            .populate("likes") // Ensure that the likes field is populated with user details
             .sort({ createdAt: -1 });
 
         // Further populate the results
