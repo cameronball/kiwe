@@ -14,58 +14,51 @@ const upload = multer({ dest: 'uploads/' });
 app.use(bodyParser.urlencoded({ extended: false }));
 
 router.get("/", async (req, res, next) => {
-    var searchObj = req.query;
 
-    if(searchObj.isReply !== undefined) {
-        var isReply = searchObj.isReply == "true";
-        searchObj.replyTo = { $exists: isReply };
-        delete searchObj.isReply;
-    }
+	var searchObj = req.query;
 
-    if(searchObj.search !== undefined) {
-        searchObj.content = { $regex: searchObj.search, $options: "i" };
-        delete searchObj.search;
-    }
+	if(searchObj.isReply !== undefined) {
+		var isReply = searchObj.isReply == "true";
+		searchObj.replyTo = { $exists: isReply };
+		delete searchObj.isReply;
+	}
 
-    if(searchObj.followingOnly !== undefined) {
-        var followingOnly = searchObj.followingOnly == "true";
+	if(searchObj.search !== undefined) {
+		searchObj.content = { $regex: searchObj.search, $options: "i" };
+		delete searchObj.search;
+	}
 
-        if(followingOnly) {
-            var objectIds = [];
+	if(searchObj.followingOnly !== undefined) {
+		var followingOnly = searchObj.followingOnly == "true";
 
-            if(!req.session.user.following) {
-                req.session.user.following = [];    
-            }
+		if(followingOnly) {
+			var objectIds = [];
 
-            req.session.user.following.forEach(user => {
-                objectIds.push(user);
-            });
-            
-            objectIds.push(req.session.user._id);
-            searchObj.postedBy = { $in: objectIds };
-        }
+			if(!req.session.user.following) {
+				req.session.user.following = [];	
+			}
 
-        delete searchObj.followingOnly;
-    }
+			req.session.user.following.forEach(user => {
+				objectIds.push(user);
+			})
+			
+			objectIds.push(req.session.user._id);
+			searchObj.postedBy = { $in: objectIds };
+		}
 
-    if(searchObj.trendingPage !== undefined) {
-        var trendingPage = searchObj.trendingPage == "true";
-        delete searchObj.trendingPage;
-        var results = await getTrendingPosts();
-        return res.status(200).send(results);
-    }
+		delete searchObj.followingOnly;
+	}
 
-    if(searchObj.isLikes !== undefined) {
-        var isLikes = searchObj.isLikes == "true";
-        if (isLikes) {
-            searchObj.likes = req.session.user._id;
-        }
-        delete searchObj.isLikes;
-    }
+	if(searchObj.trendingPage !== undefined) {
+		var trendingPage = searchObj.trendingPage == "true";
+		delete searchObj.trendingPage;
+		var results = await getTrendingPosts();
+		return res.status(200).send(results);
+	}
 
-    var results = await getPosts(searchObj);
-    res.status(200).send(results);
-});
+	var results = await getPosts(searchObj);
+	res.status(200).send(results);
+})
 
 router.get("/:id", async (req, res, next) => {
 	
