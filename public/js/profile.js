@@ -1,26 +1,31 @@
 $(document).ready(() => {
 
-	loadPosts(selectedTab)
+	if(selectedTab == "replies") {
+		loadPosts(true);
+	}
+	else {
+		loadPosts(false);
+	}
 
 	$("#profileButtonIcon").removeClass("far").addClass("fas");
 })
 
-function loadPosts(type) {
-	if (type == "replies") {
-		$.get("/api/posts", { postedBy: profileUserId, isReply: true, pinned: true}, results => {
-			outputPinnedPost(results, $(".pinnedPostContainer"));
-		});
-
-		$.get("/api/posts", { postedBy: profileUserId, isReply: true, pinned: false}, results => {
-			outputPosts(results, $(".postsContainer"));
-		});
-	}
-	else {
+function loadPosts(replyBool) {
+	if(!replyBool) {
 		$.get("/api/posts", { postedBy: profileUserId, isReply: false, pinned: true }, results => {
 			outputPinnedPost(results, $(".pinnedPostContainer"));
 		});
 
 		$.get("/api/posts", { postedBy: profileUserId, isReply: false, pinned: false }, results => {
+			outputPosts(results, $(".postsContainer"));
+		});
+	}
+	else {
+		$.get("/api/posts", { postedBy: profileUserId, isReply: true, pinned: true}, results => {
+			outputPinnedPost(results, $(".pinnedPostContainer"));
+		});
+
+		$.get("/api/posts", { postedBy: profileUserId, isReply: true, pinned: false}, results => {
 			outputPosts(results, $(".postsContainer"));
 		});
 	}
