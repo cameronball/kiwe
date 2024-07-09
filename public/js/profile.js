@@ -6,12 +6,7 @@ $(document).ready(() => {
 })
 
 function loadPosts(type) {
-	if (type == "likes") {
-		$.get("/api/posts", { pinned: false, isLikes: true }, results => {
-			outputPosts(results, $(".postsContainer"));
-		});
-	}
-	else if (type == "replies") {
+	if (type == "replies") {
 		$.get("/api/posts", { postedBy: profileUserId, isReply: true, pinned: true}, results => {
 			outputPinnedPost(results, $(".pinnedPostContainer"));
 		});
