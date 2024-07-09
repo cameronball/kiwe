@@ -71,9 +71,17 @@ router.post("/", async (req, res, next) => {
             return res.redirect("/");
         })
       }
+      //else {
+        //payload.errorMessage = "Invalid signup code.";
+        //res.status(200).render("register", payload);
+      //}
       else {
-        payload.errorMessage = "Invalid signup code.";
-        res.status(200).render("register", payload);
+        User.create(data)
+        .then((user) => {
+            req.session.user = user;
+            req.session.user.twoFactorVerified = false;
+            return res.redirect("/");
+        })
       }
       
     }
