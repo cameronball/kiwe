@@ -113,18 +113,4 @@ router.put("/:chatId/messages/markAsRead", async (req, res, next) => {
 	})
 });
 
-router.get("/paris", async (req, res, next) => {
-	const message = req.body.message;
-	const chat = model.startChat({
-	history: [
-	   {
-	     role: "model",
-	     parts: [{ text: "Hi! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?" }],
-	   },
-	 ],
-	});
-	let result = await chat.sendMessage(message);
-	res.status(200).send(result.response.text());
-});
-
 module.exports = router;
