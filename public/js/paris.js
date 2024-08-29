@@ -25,6 +25,7 @@ $(document).ready(() => {
 		  else {
 		      model=false;
 		  }
+		  console.log(item.parts[0].text);
 		  addChatMessageHtml(item.parts[0].text, model);
 	});
 });
