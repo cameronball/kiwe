@@ -25,7 +25,6 @@ $(document).ready(() => {
 		  else {
 		      model=false;
 		  }
-		  console.log(item.parts[0].text);
 		  addChatMessageHtml(item.parts[0].text, model);
 	});
 });
@@ -62,6 +61,7 @@ function sendMessage(content) {
 		parisHistory.push({role: 'user', parts: [{ text: content }] });
 		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
 		addChatMessageHtml(data.response.candidates[0].content.parts[0].text, true);
+		console.log(data.response.candidates[0].content.parts[0].text);
 		parisHistory.push({role: 'model', parts: [{ text: data.response.candidates[0].content.parts[0].text }] });
 		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
 	})
