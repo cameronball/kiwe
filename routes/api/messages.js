@@ -119,54 +119,57 @@ router.post("/imageMessage", upload.single("croppedImage"), async (req, res, nex
 router.get("/paris", async (req, res, next) => {
     try {
         const message = req.query.message;
-	const parisHistory = req.query.parisHistory;
-        
+        const parisHistory = req.query.parisHistory;
+
         // Ensure message is a string and not undefined
         if (!message || typeof message !== 'string') {
             return res.status(400).send({ error: "Invalid message" });
         }
 
-	const chat = model.startChat({
-	    history: parisHistory,
-	});
-	
-	let result = await chat.sendMessage(message);
+        const chat = model.startChat({
+            history: parisHistory,
+        });
 
-	let resultText = result.candidates[0].content.parts[0].text.replace(/\*/g, "").replace(/\n+$/, '');
+        let result = await chat.sendMessage(message);
 
-	const extractedBraces = detectAndExtractObject(resultText);
+        let resultText = result.candidates[0].content.parts[0].text.replace(/\*/g, "").replace(/\n+$/, '');
 
-	if (extractedBraces.hasDoubleCurlyBraces) {
-		const calledFunction = extractedBraces.extractedObject.type;
-		if (calledFunction == 'postSearch') {
-			parisHistory.push({role: 'model', parts: [{ text: resultText }], display: false });
-			const reqUrl = "/api/posts"
-			const searchTerm = extractedBraces.extractedObject.content;
-			axios.get(reqUrl, {
-			    params: {
-			        search: searchTerm
-			    }
-			})
-			.then(response => {
-			    const secondChat = model.startChat({
-				    history: parisHistory,
-			    })
-			    let secondResult = await chat.sendMessage(`{{Search results:\n${response.data}\nEnd of search}}`);
-		 	    
-			    return res.status(200).send({ response: secondResult.response, display: true, functionCalled: true, parisHistory: parisHistory });
-			})
-			.catch(error => {
-			    console.error('Error fetching data:', error);
-			});
-		} // Add user search in future
-		else {
-			return res.status(400).send({ error: "Invalid function call" });
-		}
-	}
-	else {
-		parisHistory.push({role: 'model', parts: [{ text: resultText }], display: false });
-		res.status(200).send({ response: result.response, display: true, functionCalled: false });
-    	}
+        const extractedBraces = detectAndExtractObject(resultText);
+
+        if (extractedBraces.hasDoubleCurlyBraces) {
+            const calledFunction = extractedBraces.extractedObject.type;
+            if (calledFunction == 'postSearch') {
+                parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: false });
+                const reqUrl = "/api/posts";
+                const searchTerm = extractedBraces.extractedObject.content;
+                
+                try {
+                    const response = await axios.get(reqUrl, {
+                        params: {
+                            search: searchTerm
+                        }
+                    });
+
+                    const secondChat = model.startChat({
+                        history: parisHistory,
+                    });
+
+                    let secondResult = await secondChat.sendMessage(`{{Search results:\n${response.data}\nEnd of search}}`);
+
+                    return res.status(200).send({ response: secondResult.response, display: true, functionCalled: true, parisHistory: parisHistory });
+
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                    return res.status(500).send({ error: "Error fetching data" });
+                }
+
+            } else {
+                return res.status(400).send({ error: "Invalid function call" });
+            }
+        } else {
+            parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: false });
+            res.status(200).send({ response: result.response, display: true, functionCalled: false });
+        }
 
     } catch (error) {
         console.error(error);
