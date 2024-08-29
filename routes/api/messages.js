@@ -184,32 +184,33 @@ router.get("/paris", async (req, res, next) => {
 });
 
 function detectAndExtractObject(str) {
-    // Regular expression to detect and extract content within double curly braces {{...}}
     const regex = /\{\{(.+?)\}\}/;
-
-    // Check if the string contains double curly braces
     const match = str.match(regex);
 
-    // If a match is found
     if (match) {
-        const extractedContent = match[1].trim(); // Extract and trim the content inside {{...}}
-        let obj;
+        let extractedContent = match[1].trim(); // Extract and trim the content inside {{...}}
+
+        // Convert single quotes to double quotes for JSON validity
+        extractedContent = extractedContent.replace(/'/g, '"');
+        
+        console.log("Preprocessed Content: ", extractedContent); // Debugging log
 
         try {
             // Try to parse the extracted content as a JavaScript object
-            obj = JSON.parse(extractedContent);
+            const obj = JSON.parse(extractedContent);
+            return {
+                hasDoubleCurlyBraces: true,
+                extractedObject: obj
+            };
         } catch (e) {
-            // If JSON.parse fails, use eval (Use with caution, as eval can execute arbitrary code)
-            obj = eval(`(${extractedContent})`);
+            console.error("Failed to parse JSON:", e);
+            return {
+                hasDoubleCurlyBraces: true,
+                extractedObject: null
+            };
         }
-
-        return {
-            hasDoubleCurlyBraces: true,
-            extractedObject: obj
-        };
     }
 
-    // If no double curly braces were found
     return {
         hasDoubleCurlyBraces: false,
         extractedObject: null
