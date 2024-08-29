@@ -10,7 +10,7 @@ $(document).ready(() => {
 			},
 			 {
 				 role: "model",
-				 parts: [{ text: "Hi! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?" }],
+				 parts: [{ text: `Hi ${userLoggedIn.firstName}! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?` }],
 			 },
 			]
 		));
