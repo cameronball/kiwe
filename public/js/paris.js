@@ -57,13 +57,24 @@ function messageSubmitted() {
 
 function sendMessage(content) {
 	addChatMessageHtml(content, false);
+	$(".chatMessages").append(`<li class="message theirs first last" id="typingIndicator">
+		<div style="height:50px;width:50px;" class="imageContainer">
+							<img src="/images/paris.png">
+						</div>
+		<div class="messageContainer">
+			<span class="senderName">Paris</span>
+<div class="typingDots" style="height:50px;padding-left:0px;"> <img src="/images/dots.gif" alt="Typing..."></div>
+			
+		</div>
+	</li>`);
 	$.get("/api/messages/paris", { message: content, parisHistory: parisHistory }, (data, status, xhr) => {
 		parisHistory.push({role: 'user', parts: [{ text: content }] });
 		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
 		addChatMessageHtml(data.response.candidates[0].content.parts[0].text.replace(/\*/g, ""), true);
+		$('#typingIndicator').remove();
 		parisHistory.push({role: 'model', parts: [{ text: data.response.candidates[0].content.parts[0].text.replace(/\*/g, "") }] });
 		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
-	})
+	});
 }
 
 function addChatMessageHtml(message, model) {
