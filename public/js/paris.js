@@ -52,7 +52,7 @@ function messageSubmitted() {
 
 function sendMessage(content) {
 	addChatMessageHtml(content, false);
-	$.get("/api/messages/paris", { message: content }, (data, status, xhr) => {
+	$.get("/api/messages/paris", { message: content, parisHistory: parisHistory }, (data, status, xhr) => {
 		parisHistory.push({role: 'user', parts: [{ text: content }] });
 		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
 		addChatMessageHtml(data.response.candidates[0].content.parts[0].text, true);
