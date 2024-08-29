@@ -117,7 +117,7 @@ router.post("/imageMessage", upload.single("croppedImage"), async (req, res, nex
 
 router.get("/paris", async (req, res, next) => {
     try {
-        const message = req.body.message;
+        const message = req.query.message;
         
         // Ensure message is a string and not undefined
         if (!message || typeof message !== 'string') {
