@@ -98,7 +98,7 @@ function createMessageHtml(message, model) {
 	var profileImage = "";
 	liClassName += " last";
 	if (model) {
-		profileImage = "/images/profilePic.jpeg";
+		profileImage = "/images/paris.png";
 	}
 	else {
 		profileImage = userLoggedIn.profilePic;
