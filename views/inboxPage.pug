@@ -8,6 +8,31 @@ block content
 			.resultsDetailsContainer.ellipsis
 				span.heading.ellipsis New chat
 				span.subText.ellipsis Create new message
+		a#parisButton.resultListItem(href='/messages/paris' style='padding-top:7px;padding-bottom:7px;animation: gradientAnimation 5s ease infinite;')
+			.resultsImageContainer(style='display: inline-block; vertical-align: middle;height:75px;width:75px;margin-right:0')
+				img(src='/images/paris.png' alt="User's profile pic" style='height:65px;width:65px;')
+			.resultsDetailsContainer.ellipsis(style='margin-left:10px; display: inline-block; vertical-align: middle;')
+				span.heading.ellipsis(style='font-size:20px;font-weight: 700;color:white;') Paris
+				br
+				span.subText.ellipsis(style='font-size:15px;color: #ffffffaa;') Chat with Paris, Kiwe&apos;s AI assistant
+		style.
+			@keyframes gradientAnimation {
+				0% {
+					background-position: 0% 50%;
+				}
+				50% {
+					background-position: 100% 50%;
+				}
+				100% {
+					background-position: 0% 50%;
+				}
+			}
+			#parisButton {
+				background: linear-gradient(100deg, rgb(153, 68, 230), rgb(235, 18, 180));
+				background-size: 800% 800%;
+				animation: gradientAnimation 2s ease infinite;
+			}
+
 
 
 block headerButton
