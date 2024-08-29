@@ -125,6 +125,6 @@ router.get("/paris", async (req, res, next) => {
 	});
 	let result = await chat.sendMessage(message);
 	res.status(200).send(result.response.text());
-}
+});
 
 module.exports = router;
