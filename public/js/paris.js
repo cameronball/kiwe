@@ -1,3 +1,30 @@
+$(document).ready(() => {
+	var history = JSON.parse(localStorage.getItem("parisHistory"));
+	if (history == null) {
+		localStorage.setItem("parisHistory", JSON.stringify(
+			[{
+				role: "user",
+				text: "Hello",
+			},
+			 {
+				 role: "model",
+				 text: "Hi! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?",
+			 },
+			]
+		));
+	}
+
+	history.slice(1).forEach(item => {
+		  if (item.role == "model") {
+		      let model=true;
+		  }
+		  else {
+		      let model=false;
+		  }
+		  addChatMessageHtml(item.text, model);
+	});
+});
+
 $(".sendMessageButton").click(() => {
 	messageSubmitted();
 });
@@ -20,10 +47,11 @@ function messageSubmitted() {
 }
 
 function sendMessage(content) {
+	addChatMessageHtml(content, false);
 	$.get("/api/messages/paris", { message: content }, (data, status, xhr) => {
-		console.log(data);
-                addChatMessageHtml(content, false);
+		history.push({role: 'user', text: content});
 		addChatMessageHtml(data.response.candidates[0].content.parts[0].text, true);
+		history.push({role: 'model', text: data.response.candidates[0].content.parts[0].text});
 	})
 }
 
