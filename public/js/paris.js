@@ -22,10 +22,21 @@ function messageSubmitted() {
 function sendMessage(content) {
 	$.get("/api/messages/paris", { message: content }, (data, status, xhr) => {
 		console.log(data);
+                addChatMessageHtml(content, false);
+		addChatMessageHtml(data.response.candidates[0].content.parts[0].text, true);
 	})
 }
 
-function createMessageHtml(message, nextMessage, lastSenderId, model) {
+function addChatMessageHtml(message, model) {
+	var messageDiv = createMessageHtml(message, model);
+	addMessagesHtmlToPage(messageDiv);
+}
+
+function addMessagesHtmlToPage(html) {
+	$(".chatMessages").append(html);
+}
+
+function createMessageHtml(message, model) {
 
 	if (model === true) {
 		senderName = "Paris"
