@@ -1,0 +1,21 @@
+extends layouts/main-layout.pug
+
+block content
+
+  .chatPageContainer 
+    .chatTitleBarContainer
+      span#chatName(data-toggle="modal", data-target="#chatNameModal") Paris
+
+    .mainContentContainer 
+      .chatContainer(style="visibility: hidden;")
+        ul.chatMessages
+
+        .footer
+          textarea.inputTextbox(name="messageInput", placeholder="Type a message...")
+          button#sendImageMessageButton(data-toggle="modal", data-target="#sendImageMessageModal")
+            i.fad.fa-camera-retro
+          button.sendMessageButton 
+            i.fad.fa-paper-plane
+
+block scripts
+	script(src="/js/paris.js")
