@@ -132,9 +132,9 @@ router.get("/paris", async (req, res, next) => {
 
 	console.log(message);
         let result = await chat.sendMessage(message);
-	console.log(result)
 	
         let resultText = result.response.candidates[0].content.parts[0].text.replace(/\*/g, "").replace(/\n+$/, '');
+	console.log(resultText);
 
         const extractedBraces = detectAndExtractObject(resultText);
 
