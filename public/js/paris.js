@@ -20,7 +20,7 @@ $(document).ready(() => {
 	}
 
 	parisHistory.forEach(item => {
-		  if (item.display == true) {
+		  if (item.display == false) {
 			  return
 		  }
 		  else {
