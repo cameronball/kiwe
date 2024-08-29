@@ -24,3 +24,53 @@ function sendMessage(content) {
 		console.log(data);
 	})
 }
+
+function createMessageHtml(message, nextMessage, lastSenderId, model) {
+
+	if (model === true) {
+		senderName = "Paris"
+	}
+	else {
+		senderName = "You"
+	}
+
+	var liClassName = model ? "theirs" : "mine";
+
+	liClassName += " first";
+
+	if(model) {
+		nameElement = `<span class='senderName'>${senderName}</span>`;
+	}
+	else {
+		nameElement = "";
+	}
+
+	var profileImage = "";
+	liClassName += " last";
+	if (model) {
+		profileImage = "/images/profilePic.jpeg";
+	}
+	else {
+		profileImage = userLoggedIn.profilePic;
+	}
+	profileImage = `<img src='${profileImage}'>`;
+
+	var imageContainer = "";
+	if(model) {
+		imageContainer = `<div class='imageContainer'>
+							${profileImage}
+						</div>`;
+	}
+	
+	var messageContent = message;
+
+	return `<li class='message ${liClassName}'>
+		${imageContainer}
+		<div class='messageContainer'>
+			${nameElement}
+			<span class='messageBody'>
+				${messageContent}
+			</span>
+		</div>
+	</li>`
+}
