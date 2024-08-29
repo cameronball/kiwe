@@ -100,6 +100,20 @@ router.post("/imageMessage", upload.single("croppedImage"), async (req, res, nex
 	})
 });
 
+router.get("/paris", async (req, res, next) => {
+	const message = req.body.message;
+	const chat = model.startChat({
+	history: [
+	   {
+	     role: "model",
+	     parts: [{ text: "Hi! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?" }],
+	   },
+	 ],
+	});
+	let result = await chat.sendMessage(message);
+	res.status(200).send(result.response.text());
+});
+
 function insertNotifications(chat, message) {
 	chat.users.forEach(userId => {
 		if(userId == message.sender._id.toString()) return;
