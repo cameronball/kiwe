@@ -117,6 +117,7 @@ router.post("/imageMessage", upload.single("croppedImage"), async (req, res, nex
 
 router.get("/paris", async (req, res, next) => {
 	const message = req.body.message;
+	console.log(message);
 	const chat = model.startChat({
 	history: [
 	   {
