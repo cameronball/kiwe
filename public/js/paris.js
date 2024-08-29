@@ -7,25 +7,32 @@ $(document).ready(() => {
 			[{
 				role: "user",
 				parts: [{ text: "Hello" }],
+				display: false,
 			},
 			 {
 				 role: "model",
 				 parts: [{ text: `Hi ${userLoggedIn.firstName}! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?` }],
+				 display: true,
 			 },
 			]
 		));
 		parisHistory = JSON.parse(localStorage.getItem("parisHistory"));
 	}
 
-	parisHistory.slice(1).forEach(item => {
-		  let model = null;
-		  if (item.role == "model") {
-		      model=true;
+	parisHistory.forEach(item => {
+		  if (item.display == true) {
+			  return
 		  }
 		  else {
-		      model=false;
+			  let model = null;
+			  if (item.role == "model") {
+			      model=true;
+			  }
+			  else {
+			      model=false;
+			  }
+			  addChatMessageHtml(item.parts[0].text, model);
 		  }
-		  addChatMessageHtml(item.parts[0].text, model);
 	});
 });
 
@@ -70,12 +77,12 @@ function sendMessage(content) {
 	</li>`);
 	scrollDown();
 	$.get("/api/messages/paris", { message: content, parisHistory: parisHistory }, (data, status, xhr) => {
-		parisHistory.push({role: 'user', parts: [{ text: content }] });
+		parisHistory.push({role: 'user', parts: [{ text: content }], display: true });
 		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
 		addChatMessageHtml(data.response.candidates[0].content.parts[0].text.replace(/\*/g, "").replace(/\n+$/, ''), true);
 		scrollDown();
 		$('#typingIndicator').remove();
-		parisHistory.push({role: 'model', parts: [{ text: data.response.candidates[0].content.parts[0].text.replace(/\*/g, "").replace(/\n+$/, '') }] });
+		parisHistory.push({role: 'model', parts: [{ text: data.response.candidates[0].content.parts[0].text.replace(/\*/g, "").replace(/\n+$/, '') }], display: data.display });
 		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
 	});
 }
