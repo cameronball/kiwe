@@ -120,6 +120,10 @@ router.get("/paris", async (req, res, next) => {
 	const chat = model.startChat({
 	history: [
 	   {
+	     role: "user",
+	     parts: [{ text: "Hello" }],
+	   },
+	   {
 	     role: "model",
 	     parts: [{ text: "Hi! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?" }],
 	   },
