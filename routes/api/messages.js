@@ -118,6 +118,7 @@ router.post("/imageMessage", upload.single("croppedImage"), async (req, res, nex
 router.get("/paris", async (req, res, next) => {
     try {
         const message = req.query.message;
+	const parisHistory = req.query.parisHistory;
         
         // Ensure message is a string and not undefined
         if (!message || typeof message !== 'string') {
@@ -125,16 +126,7 @@ router.get("/paris", async (req, res, next) => {
         }
 
         const chat = model.startChat({
-            history: [
-                {
-                    role: "user",
-                    parts: [{ text: "Hello" }],
-                },
-                {
-                    role: "model",
-                    parts: [{ text: "Hi! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?" }],
-                },
-            ],
+            history: parisHistory,
         });
 
         let result = await chat.sendMessage(message);
