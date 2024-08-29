@@ -1,5 +1,7 @@
+var parisHistory = null;
+
 $(document).ready(() => {
-	var parisHistory = JSON.parse(localStorage.getItem("parisHistory"));
+	parisHistory = JSON.parse(localStorage.getItem("parisHistory"));
 	if (parisHistory == null) {
 		localStorage.setItem("parisHistory", JSON.stringify(
 			[{
