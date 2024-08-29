@@ -30,6 +30,16 @@ router.get("/new", (req, res, next) => {
   	res.status(200).render("newMessage", payload);
 })
 
+router.get("/paris", (req, res, next) => {
+	var payload = {
+		pageTitle: "Paris",
+		userLoggedIn: req.session.user,
+		userLoggedInJs: JSON.stringify(req.session.user)
+	};
+
+	res.status(200).render("paris", payload);
+})
+
 router.get("/:chatId", async (req, res, next) => {
 
 	var userId = req.session.user._id;
