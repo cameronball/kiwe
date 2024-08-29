@@ -1,6 +1,6 @@
 $(document).ready(() => {
-	var history = JSON.parse(localStorage.getItem("parisHistory"));
-	if (history == null) {
+	var parisHistory = JSON.parse(localStorage.getItem("parisHistory"));
+	if (parisHistory == null) {
 		localStorage.setItem("parisHistory", JSON.stringify(
 			[{
 				role: "user",
@@ -14,7 +14,7 @@ $(document).ready(() => {
 		));
 	}
 
-	history.slice(1).forEach(item => {
+	parisHistory.slice(1).forEach(item => {
 		  if (item.role == "model") {
 		      let model=true;
 		  }
@@ -49,9 +49,9 @@ function messageSubmitted() {
 function sendMessage(content) {
 	addChatMessageHtml(content, false);
 	$.get("/api/messages/paris", { message: content }, (data, status, xhr) => {
-		history.push({role: 'user', parts: [{ text: content }] });
+		parisHistory.push({role: 'user', parts: [{ text: content }] });
 		addChatMessageHtml(data.response.candidates[0].content.parts[0].text, true);
-		history.push({role: 'model', parts: [{ text: data.response.candidates[0].content.parts[0].text }] });
+		parisHistory.push({role: 'model', parts: [{ text: data.response.candidates[0].content.parts[0].text }] });
 	})
 }
 
