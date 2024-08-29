@@ -20,7 +20,7 @@ function messageSubmitted() {
 }
 
 function sendMessage(content) {
-	$.get("/api/chats/paris", { message: content }, (data, status, xhr) => {
+	$.get("/api/messages/paris", { message: content }, (data, status, xhr) => {
 		console.log(data);
 	})
 }
