@@ -103,11 +103,11 @@ function createMessageHtml(message, model) {
 	else {
 		profileImage = userLoggedIn.profilePic;
 	}
-	profileImage = `<img style="height:50px;width:50px;" src='${profileImage}'>`;
+	profileImage = `<img src='${profileImage}'>`;
 
 	var imageContainer = "";
 	if(model) {
-		imageContainer = `<div class='imageContainer'>
+		imageContainer = `<div style="height:50px;width:50px;" class='imageContainer'>
 							${profileImage}
 						</div>`;
 	}
