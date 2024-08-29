@@ -119,7 +119,7 @@ router.post("/imageMessage", upload.single("croppedImage"), async (req, res, nex
 router.get("/paris", async (req, res, next) => {
     try {
         const message = req.query.message;
-        const parisHistory = req.query.parisHistory;
+        var parisHistory = req.query.parisHistory;
 
         // Ensure message is a string and not undefined
         if (!message || typeof message !== 'string') {
@@ -130,6 +130,7 @@ router.get("/paris", async (req, res, next) => {
             history: parisHistory,
         });
 
+	console.log(message);
         let result = await chat.sendMessage(message);
 
         let resultText = result.candidates[0].content.parts[0].text.replace(/\*/g, "").replace(/\n+$/, '');
@@ -138,10 +139,12 @@ router.get("/paris", async (req, res, next) => {
 
         if (extractedBraces.hasDoubleCurlyBraces) {
             const calledFunction = extractedBraces.extractedObject.type;
+	    console.log(calledFunction);
             if (calledFunction == 'postSearch') {
                 parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: false });
                 const reqUrl = "/api/posts";
                 const searchTerm = extractedBraces.extractedObject.content;
+		console.log(searchTerm);
                 
                 try {
                     const response = await axios.get(reqUrl, {
@@ -155,6 +158,8 @@ router.get("/paris", async (req, res, next) => {
                     });
 
                     let secondResult = await secondChat.sendMessage(`{{Search results:\n${response.data}\nEnd of search}}`);
+
+		    
 
                     return res.status(200).send({ response: secondResult.response, display: true, functionCalled: true, parisHistory: parisHistory });
 
