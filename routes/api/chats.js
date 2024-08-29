@@ -122,6 +122,7 @@ router.get("/paris", async (req, res, next) => {
 	     parts: [{ text: "Hi! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?" }],
 	   },
 	 ],
+	});
 	let result = await chat.sendMessage(message);
 	res.status(200).send(result.response.text());
 }
