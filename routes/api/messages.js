@@ -127,7 +127,7 @@ router.get("/paris", async (req, res, next) => {
         }
 
         const chat = model.startChat({
-            history: parisHistory,
+            history: parisHistory.map(({ display, ...rest }) => rest);,
         });
 
 	console.log(message);
@@ -154,7 +154,7 @@ router.get("/paris", async (req, res, next) => {
                     });
 
                     const secondChat = model.startChat({
-                        history: parisHistory,
+                        history: parisHistory.map(({ display, ...rest }) => rest);,
                     });
 
                     let secondResult = await secondChat.sendMessage(`{{Search results:\n${response.data}\nEnd of search}}`);
