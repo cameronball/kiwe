@@ -7,8 +7,16 @@ block content
       span#chatName(data-toggle="modal", data-target="#chatNameModal") Paris
 
     .mainContentContainer 
-      .chatContainer(style="visibility: hidden;")
+      .chatContainer
         ul.chatMessages
+          li.message.theirs.first.last
+            .imageContainer
+              img(src='/images/profilePic.jpeg')
+            .messageContainer
+              span.senderName Paris
+              span.messageBody
+                | Hi! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?
+
 
         .footer
           textarea.inputTextbox(name="messageInput", placeholder="Type a message...")
