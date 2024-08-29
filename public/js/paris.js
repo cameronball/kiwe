@@ -60,8 +60,8 @@ function sendMessage(content) {
 	$.get("/api/messages/paris", { message: content, parisHistory: parisHistory }, (data, status, xhr) => {
 		parisHistory.push({role: 'user', parts: [{ text: content }] });
 		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
-		addChatMessageHtml(data.response.candidates[0].content.parts[0].text.replace(/\n/g, ""), true);
-		parisHistory.push({role: 'model', parts: [{ text: data.response.candidates[0].content.parts[0].text.replace(/\n/g, "") }] });
+		addChatMessageHtml(data.response.candidates[0].content.parts[0].text.replace(/\*/g, ""), true);
+		parisHistory.push({role: 'model', parts: [{ text: data.response.candidates[0].content.parts[0].text.replace(/\*/g, "") }] });
 		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
 	})
 }
