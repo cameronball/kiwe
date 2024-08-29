@@ -116,22 +116,35 @@ router.post("/imageMessage", upload.single("croppedImage"), async (req, res, nex
 });
 
 router.get("/paris", async (req, res, next) => {
-	const message = req.body.message;
-	console.log(message);
-	const chat = model.startChat({
-	history: [
-	   {
-	     role: "user",
-	     parts: [{ text: "Hello" }],
-	   },
-	   {
-	     role: "model",
-	     parts: [{ text: "Hi! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?" }],
-	   },
-	 ],
-	});
-	let result = await chat.sendMessage(message);
-	res.status(200).send(result.response.text());
+    try {
+        const message = req.body.message;
+        
+        // Ensure message is a string and not undefined
+        if (!message || typeof message !== 'string') {
+            return res.status(400).send({ error: "Invalid message" });
+        }
+
+        const chat = model.startChat({
+            history: [
+                {
+                    role: "user",
+                    parts: [{ text: "Hello" }],
+                },
+                {
+                    role: "model",
+                    parts: [{ text: "Hi! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?" }],
+                },
+            ],
+        });
+
+        let result = await chat.sendMessage(message);
+        
+        // Assuming result contains the response text directly
+        res.status(200).send({ response: result.response });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: "Internal server error" });
+    }
 });
 
 function insertNotifications(chat, message) {
