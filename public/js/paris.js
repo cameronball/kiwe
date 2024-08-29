@@ -79,6 +79,10 @@ function sendMessage(content) {
 	$.get("/api/messages/paris", { message: content, parisHistory: parisHistory }, (data, status, xhr) => {
 		parisHistory.push({role: 'user', parts: [{ text: content }], display: true });
 		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
+		if (data.functionCalled) {
+			localStorage.setItem("parisHistory", JSON.stringify(data.parisHistory));
+			parisHistory = JSON.parse(localStorage.getItem("parisHistory"));
+		}
 		addChatMessageHtml(data.response.candidates[0].content.parts[0].text.replace(/\*/g, "").replace(/\n+$/, ''), true);
 		scrollDown();
 		$('#typingIndicator').remove();
