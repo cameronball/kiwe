@@ -85,6 +85,8 @@ function createMessageHtml(message, model) {
 		senderName = "You"
 	}
 
+	message = message.replace(/\n/g, "<br>");
+
 	var liClassName = model ? "theirs" : "mine";
 
 	liClassName += " first";
