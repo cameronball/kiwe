@@ -15,11 +15,12 @@ $(document).ready(() => {
 	}
 
 	parisHistory.slice(1).forEach(item => {
+		  let model = null;
 		  if (item.role == "model") {
-		      let model=true;
+		      model=true;
 		  }
 		  else {
-		      let model=false;
+		      model=false;
 		  }
 		  addChatMessageHtml(item.parts[0].text, model);
 	});
