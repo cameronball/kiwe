@@ -4,11 +4,11 @@ $(document).ready(() => {
 		localStorage.setItem("parisHistory", JSON.stringify(
 			[{
 				role: "user",
-				text: "Hello",
+				parts: [{ text: "Hello" }],
 			},
 			 {
 				 role: "model",
-				 text: "Hi! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?",
+				 parts: [{ text: "Hi! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?" }],
 			 },
 			]
 		));
@@ -21,7 +21,7 @@ $(document).ready(() => {
 		  else {
 		      let model=false;
 		  }
-		  addChatMessageHtml(item.text, model);
+		  addChatMessageHtml(item.parts[0].text, model);
 	});
 });
 
@@ -49,9 +49,9 @@ function messageSubmitted() {
 function sendMessage(content) {
 	addChatMessageHtml(content, false);
 	$.get("/api/messages/paris", { message: content }, (data, status, xhr) => {
-		history.push({role: 'user', text: content});
+		history.push({role: 'user', parts: [{ text: content }] });
 		addChatMessageHtml(data.response.candidates[0].content.parts[0].text, true);
-		history.push({role: 'model', text: data.response.candidates[0].content.parts[0].text});
+		history.push({role: 'model', parts: [{ text: data.response.candidates[0].content.parts[0].text }] });
 	})
 }
 
