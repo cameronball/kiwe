@@ -57,6 +57,7 @@ function messageSubmitted() {
 
 function sendMessage(content) {
 	addChatMessageHtml(content, false);
+	scrollDown();
 	$(".chatMessages").append(`<li class="message theirs first last" id="typingIndicator">
 		<div style="height:50px;width:50px;" class="imageContainer">
 							<img src="/images/paris.png">
@@ -67,15 +68,30 @@ function sendMessage(content) {
 			
 		</div>
 	</li>`);
+	scrollDown();
 	$.get("/api/messages/paris", { message: content, parisHistory: parisHistory }, (data, status, xhr) => {
 		parisHistory.push({role: 'user', parts: [{ text: content }] });
 		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
 		addChatMessageHtml(data.response.candidates[0].content.parts[0].text.replace(/\*/g, "").replace(/\n+$/, ''), true);
+		scrollDown();
 		$('#typingIndicator').remove();
 		parisHistory.push({role: 'model', parts: [{ text: data.response.candidates[0].content.parts[0].text.replace(/\*/g, "").replace(/\n+$/, '') }] });
 		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
 	});
 }
+
+function scrollDown() {
+    // Select the UL element with the class 'chatMessages'
+    const chatMessages = document.querySelector('.chatMessages');
+
+    if (chatMessages) {
+        // Scroll to the bottom by setting scrollTop to the scrollHeight
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    } else {
+        console.error('Element with class "chatMessages" not found.');
+    }
+}
+
 
 function addChatMessageHtml(message, model) {
 	var messageDiv = createMessageHtml(message, model);
