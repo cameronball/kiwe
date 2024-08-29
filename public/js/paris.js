@@ -12,6 +12,7 @@ $(document).ready(() => {
 			 },
 			]
 		));
+		var parisHistory = JSON.parse(localStorage.getItem("parisHistory"));
 	}
 
 	parisHistory.slice(1).forEach(item => {
