@@ -63,7 +63,7 @@ function sendMessage(content) {
 						</div>
 		<div class="messageContainer">
 			<span class="senderName">Paris</span>
-<div class="typingDots" style="height:50px;padding-left:0px;"> <img src="/images/dots.gif" alt="Typing..."></div>
+<div class="typingDots" style="height:50px;padding-left:0px;display:block;"> <img src="/images/dots.gif" alt="Typing..."></div>
 			
 		</div>
 	</li>`);
