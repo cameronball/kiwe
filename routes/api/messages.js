@@ -202,6 +202,9 @@ router.get("/paris", async (req, res, next) => {
 
 		    parisHistory.push({ role: 'user', parts: [{ text: `{{Search results:\n${searchResultsString}\nEnd of search}}` }], display: 'false' });
 
+		    logData.response = secondResult.response.candidates[0].content.parts[0].text;
+	            ParisLog.create(logData);
+
                     return res.status(200).send({ response: secondResult.response, display: 'true', functionCalled: true, parisHistory: parisHistory });
 
                 } catch (error) {
@@ -237,6 +240,9 @@ router.get("/paris", async (req, res, next) => {
 	                    let secondResult = await secondChat.sendMessage(`{{Bio updated successfully, inform the user of that with a confirmation of what it was updated to and let them know they may need to logout and back in to see the change.}}`);
 	
 			    parisHistory.push({ role: 'user', parts: [{ text: `{{Bio updated successfully, inform the user of that with a confirmation of what it was updated to and let them know they may need to logout and back in to see the change.}}` }], display: 'false' });
+
+			    logData.response = secondResult.response.candidates[0].content.parts[0].text;
+	                    ParisLog.create(logData);
 	
 	                    return res.status(200).send({ response: secondResult.response, display: 'true', functionCalled: true, parisHistory: parisHistory, userUpdated: true, newUser: bioResults.data.newUser });
 
