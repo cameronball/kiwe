@@ -74,7 +74,7 @@ const adminRoute = require('./routes/adminRoutes');
 const sslRoute = require('./routes/sslRoutes');
 const banRoute = require('./routes/bannedRoutes');
 const twoFactorRoute = require('./routes/twoFactorRoutes');
-const tokensRoute = require('./routes/tokensRoute');
+const tokensRoute = require('./routes/tokensRoutes');
 
 // Api routes
 const postApiRoute = require('./routes/api/posts');
