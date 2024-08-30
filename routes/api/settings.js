@@ -119,6 +119,16 @@ router.put("/bio", async (req, res, next) => {
 	return res.sendStatus(200);
 });
 
+router.put("/bioServer", async (req, res, next) => {
+	var bio = req.body.bio.trim();
+	//bio = bio.replace(/[^\w\s.]/gi, '');
+	bio = sanitizer.escape(bio);
+
+	var newUser = await User.findByIdAndUpdate(req.body.user, { bio: bio }, { new: true });
+
+	return res.status(200).send({ newUser: newUser });
+});
+
 router.put("/password", async (req, res, next) => {
 	var oldPassword = req.body.oldPassword;
 	var newPassword = req.body.newPassword;
