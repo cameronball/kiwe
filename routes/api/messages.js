@@ -207,6 +207,8 @@ router.get("/paris", async (req, res, next) => {
 	            parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: 'false' });
 	            const reqUrl = "https://kiwe.social/api/settings/bioServer";
 		    const bioTerm = extractedBraces.extractedObject.content;
+
+		    console.log(bioTerm);
 		    
 		    try {
 	                    const bioResults = await axios.put(reqUrl, {
