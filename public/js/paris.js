@@ -77,9 +77,11 @@ function sendMessage(content) {
 	</li>`);
 	scrollDown();
 	$.get("/api/messages/paris", { message: content, parisHistory: parisHistory }, (data, status, xhr) => {
-		parisHistory.push({role: 'user', parts: [{ text: content }], display: true });
-		localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
-		if (data.functionCalled) {
+		if (!data.functionCalled) {
+			parisHistory.push({role: 'user', parts: [{ text: content }], display: true });
+			localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
+		}
+		else {
 			localStorage.setItem("parisHistory", JSON.stringify(data.parisHistory));
 			parisHistory = JSON.parse(localStorage.getItem("parisHistory"));
 		}
