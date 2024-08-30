@@ -205,13 +205,14 @@ router.get("/paris", async (req, res, next) => {
             } else if (calledFunction == 'updateBio') {
 		    parisHistory.push({ role: 'user', parts: [{ text: message }], display: 'true' });
 	            parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: 'false' });
-	            const reqUrl = "https://kiwe.social/api/settings/bio";
+	            const reqUrl = "https://kiwe.social/api/settings/bioServer";
 		    const bioTerm = extractedBraces.extractedObject.content;
 		    
 		    try {
 	                    const bioResults = await axios.put(reqUrl, {
 				    params: {
-					    bio: bioTerm
+					    bio: bioTerm,
+					    user: req.session.user._id
 				    }
 			    });
 	
