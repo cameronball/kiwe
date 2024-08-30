@@ -227,9 +227,9 @@ router.get("/paris", async (req, res, next) => {
 	                        history: parisHistory.map(({ display, ...rest }) => rest),
 	                    });
 	
-	                    let secondResult = await secondChat.sendMessage(`{{Bio updated successfully, inform the user of that with a confirmation of what it was updated to.}}`);
+	                    let secondResult = await secondChat.sendMessage(`{{Bio updated successfully, inform the user of that with a confirmation of what it was updated to and let them know they may need to logout and back in to see the change.}}`);
 	
-			    parisHistory.push({ role: 'user', parts: [{ text: `{{Bio updated successfully, inform the user of that with a confirmation of what it was updated to.}}` }], display: 'false' });
+			    parisHistory.push({ role: 'user', parts: [{ text: `{{Bio updated successfully, inform the user of that with a confirmation of what it was updated to and let them know they may need to logout and back in to see the change.}}` }], display: 'false' });
 	
 	                    return res.status(200).send({ response: secondResult.response, display: 'true', functionCalled: true, parisHistory: parisHistory, userUpdated: true, newUser: bioResults.data.newUser });
 
