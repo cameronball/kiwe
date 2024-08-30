@@ -150,6 +150,8 @@ router.get("/paris", async (req, res, next) => {
                         }
                     });
 
+		    parisHistory.push({ role: 'user', parts: [{ text: resultText }], display: false });
+
                     const secondChat = model.startChat({
                         history: parisHistory.map(({ display, ...rest }) => rest),
                     });
