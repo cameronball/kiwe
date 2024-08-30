@@ -212,12 +212,10 @@ router.get("/paris", async (req, res, next) => {
 		    
 		    try {
 	                    const bioResults = await axios.put(reqUrl, {
-				    params: {
-					    bio: bioTerm,
-					    user: req.session.user._id
-				    }
+				    bio: bioTerm,
+				    user: req.session.user._id
 			    });
-	
+					
 	                    const secondChat = secondModel.startChat({
 	                        history: parisHistory.map(({ display, ...rest }) => rest),
 	                    });
