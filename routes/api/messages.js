@@ -8,6 +8,7 @@ const User = require('../../schemas/UserSchema');
 const Post = require('../../schemas/PostSchema');
 const Chat = require('../../schemas/ChatSchema');
 const Message = require('../../schemas/MessageSchema');
+const ParisLog = require('../../schemas/ParisLogSchema');
 const Notification = require('../../schemas/NotificationSchema');
 
 const { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory  } = require("@google/generative-ai");
@@ -153,6 +154,12 @@ router.post("/imageMessage", upload.single("croppedImage"), async (req, res, nex
 router.get("/paris", async (req, res, next) => {
     try {
         const message = req.query.message;
+	    
+        var logData = {
+		sentBy = req.session.user,
+		request = message,
+	}
+		
         var parisHistory = req.query.parisHistory;
 
         // Ensure message is a string and not undefined
@@ -255,6 +262,9 @@ router.get("/paris", async (req, res, next) => {
 
 		    parisHistory.push({ role: 'user', parts: [{ text: `{{Stats results:\n${searchResultsString}\nEnd of stats}}` }], display: 'false' });
 
+		    logData.response = secondResult.response.candidates[0].content.parts[0].text;
+	            ParisLog.create(logData);
+
                     return res.status(200).send({ response: secondResult.response, display: 'true', functionCalled: true, parisHistory: parisHistory });
 
                     } catch (error) {
@@ -265,6 +275,8 @@ router.get("/paris", async (req, res, next) => {
                 return res.status(400).send({ error: "Invalid function call" });
             }
         } else {
+	    logData.response = resultText;
+	    ParisLog.create(logData);
             parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: 'false' });
             res.status(200).send({ response: result.response, display: 'true', functionCalled: false });
         }
