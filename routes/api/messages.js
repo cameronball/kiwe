@@ -144,6 +144,7 @@ router.get("/paris", async (req, res, next) => {
             if (calledFunction == 'postSearch') {
 		console.log(parisHistory[parisHistory.length-1]);
                 parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: false });
+		console.log(parisHistory[parisHistory.length-1]);
                 const reqUrl = "https://kiwe.social/api/posts";
                 const searchTerm = extractedBraces.extractedObject.content;
 		console.log(searchTerm);
