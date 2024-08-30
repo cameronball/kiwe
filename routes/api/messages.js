@@ -156,8 +156,8 @@ router.get("/paris", async (req, res, next) => {
         const message = req.query.message;
 	    
         var logData = {
-		sentBy = req.session.user,
-		request = message,
+		sentBy: req.session.user,
+		request: message,
 	}
 		
         var parisHistory = req.query.parisHistory;
