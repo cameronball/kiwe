@@ -34,10 +34,15 @@ block content
 							i.fas.fa-camera
 			.profileButtonsContainer
 				if profileUser._id != userLoggedIn._id
-					a.profileButton(href=`/tokens/donate/${profileUser._id}`)
-						i.fas.fa-hand-holding-seedling
-					a.profileButton(href=`/messages/${profileUser._id}`)
-						i.fas.fa-envelope
+					if if profileUser._id != "66d2012d79c1ff9354985eed"
+						a.profileButton(href=`/tokens/donate/${profileUser._id}`)
+							i.fas.fa-hand-holding-seedling
+					if profileUser._id = "66d2012d79c1ff9354985eed"
+						a.profileButton(href=`/messages/paris`)
+							i.fas.fa-envelope
+					else
+						a.profileButton(href=`/messages/${profileUser._id}`)
+							i.fas.fa-envelope
 
 					- var profileUserId = profileUser._id.toString();
 					- if(userLoggedIn.following && userLoggedIn.following.includes(profileUserId))
