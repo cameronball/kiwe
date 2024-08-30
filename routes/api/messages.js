@@ -165,9 +165,9 @@ router.get("/paris", async (req, res, next) => {
                         history: parisHistory.map(({ display, ...rest }) => rest),
                     });
 
-                    let secondResult = await secondChat.sendMessage(`{{Search results:\n${searchResultsString}\nEnd of search}}`);
-
 		    let searchResultsString = JSON.stringify(searchResponse.data, null, 2);
+
+                    let secondResult = await secondChat.sendMessage(`{{Search results:\n${searchResultsString}\nEnd of search}}`);
 
 		    parisHistory.push({ role: 'user', parts: [{ text: `{{Search results:\n${searchResultsString}\nEnd of search}}` }], display: 'false' });
 
