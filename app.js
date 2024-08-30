@@ -34,7 +34,8 @@ const options = {
   ca: [
     fs.readFileSync('intermediate.cert.pem') // Read the intermediate certificate file
     // Add more intermediate certificates if there are any
-  ]
+  ],
+  maxHeaderSize: 2 * 1024 * 1024 // Set maximum header size to 2 MB
 };
 
 const server = https.createServer(options, app);
