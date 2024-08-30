@@ -120,7 +120,6 @@ router.put("/bio", async (req, res, next) => {
 });
 
 router.put("/bioServer", async (req, res, next) => {
-	console.log(req.body);
 	var bio = req.body.bio.trim();
 	//bio = bio.replace(/[^\w\s.]/gi, '');
 	bio = sanitizer.escape(bio);
