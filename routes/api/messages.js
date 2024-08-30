@@ -170,7 +170,7 @@ router.get("/paris", async (req, res, next) => {
 
 		    console.log(secondResult.response);
 		    console.log('-------------------------------------------------');
-		    console.log(reponse.data);
+		    console.log(response.data);
 
                     return res.status(200).send({ response: secondResult.response, display: true, functionCalled: true, parisHistory: parisHistory });
 
