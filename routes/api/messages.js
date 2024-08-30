@@ -10,9 +10,7 @@ const Chat = require('../../schemas/ChatSchema');
 const Message = require('../../schemas/MessageSchema');
 const Notification = require('../../schemas/NotificationSchema');
 
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-
-import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
+const { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory  } = require("@google/generative-ai");
 
 const safetySettings = [
   {
