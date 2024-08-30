@@ -74,6 +74,7 @@ const adminRoute = require('./routes/adminRoutes');
 const sslRoute = require('./routes/sslRoutes');
 const banRoute = require('./routes/bannedRoutes');
 const twoFactorRoute = require('./routes/twoFactorRoutes');
+const tokensRoute = require('./routes/tokensRoute');
 
 // Api routes
 const postApiRoute = require('./routes/api/posts');
@@ -100,6 +101,7 @@ app.use("/legal", legalRoute);
 app.use("/admin", middleware.requireAdmin, adminRoute);
 app.use("/.well-known", sslRoute);
 app.use("/banned", banRoute);
+app.use("/tokens", tokensRoute);
 
 // Api routes
 app.use("/api/posts", postApiRoute);
