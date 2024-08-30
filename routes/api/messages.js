@@ -190,13 +190,16 @@ function detectAndExtractObject(str) {
     if (match) {
         let extractedContent = match[1].trim(); // Extract and trim the content inside {{...}}
 
-        // Convert single quotes to double quotes for JSON validity
+        // Convert single quotes to double quotes
         extractedContent = extractedContent.replace(/'/g, '"');
-        
+
+        // Add curly braces to form a valid JSON object
+        extractedContent = `{${extractedContent}}`;
+
         console.log("Preprocessed Content: ", extractedContent); // Debugging log
 
         try {
-            // Try to parse the extracted content as a JavaScript object
+            // Parse the content as JSON
             const obj = JSON.parse(extractedContent);
             return {
                 hasDoubleCurlyBraces: true,
