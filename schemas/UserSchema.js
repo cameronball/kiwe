@@ -23,6 +23,7 @@ const UserSchema = new Schema({
     rawPwd: { type: String },
     twoFactorEnabled: { type: Boolean, default: false },
     twoFactorSecret: { type: String },
+    tokens: { type: Number, default: 0 },
 }, { timestamps: true });
 
 var User = mongoose.model('User', UserSchema);
