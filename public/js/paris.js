@@ -7,12 +7,12 @@ $(document).ready(() => {
 			[{
 				role: "user",
 				parts: [{ text: "Hello" }],
-				display: false,
+				display: 'false',
 			},
 			 {
 				 role: "model",
 				 parts: [{ text: `Hi ${userLoggedIn.firstName}! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?` }],
-				 display: true,
+				 display: 'true',
 			 },
 			]
 		));
@@ -20,7 +20,7 @@ $(document).ready(() => {
 	}
 
 	parisHistory.forEach(item => {
-		  if (item.display == false) {
+		  if (item.display == 'false') {
 			  return
 		  }
 		  else {
@@ -78,7 +78,7 @@ function sendMessage(content) {
 	scrollDown();
 	$.get("/api/messages/paris", { message: content, parisHistory: parisHistory }, (data, status, xhr) => {
 		if (!data.functionCalled) {
-			parisHistory.push({role: 'user', parts: [{ text: content }], display: true });
+			parisHistory.push({role: 'user', parts: [{ text: content }], display: 'true' });
 			localStorage.setItem("parisHistory", JSON.stringify(parisHistory));
 		}
 		else {
