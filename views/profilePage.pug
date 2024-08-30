@@ -34,6 +34,8 @@ block content
 							i.fas.fa-camera
 			.profileButtonsContainer
 				if profileUser._id != userLoggedIn._id
+					a.profileButton(href=`/tokens/donate/${profileUser._id}`)
+						i.fas.fa-hand-holding-seedling
 					a.profileButton(href=`/messages/${profileUser._id}`)
 						i.fas.fa-envelope
 
