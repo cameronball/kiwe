@@ -156,13 +156,16 @@ router.get("/paris", async (req, res, next) => {
                         }
                     });
 
+		    console.log(response);
+		    console.log(parisHistory.map(({ display, ...rest }) => rest));
+
                     const secondChat = model.startChat({
                         history: parisHistory.map(({ display, ...rest }) => rest),
                     });
 
                     let secondResult = await secondChat.sendMessage(`{{Search results:\n${response.data}\nEnd of search}}`);
 
-		    
+		    console.log(secondResult);
 
                     return res.status(200).send({ response: secondResult.response, display: true, functionCalled: true, parisHistory: parisHistory });
 
