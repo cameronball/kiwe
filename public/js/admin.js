@@ -392,5 +392,5 @@ $("#statsSearchButton").click(() => {
 });
 
 $(document).ready(() => {
-	$("#settingsButtonIcon").removeClass("far").addClass("fas");
+	$("#adminButtonIcon").removeClass("far").addClass("fas");
 })
