@@ -224,7 +224,7 @@ router.get("/paris", async (req, res, next) => {
 	
 			    parisHistory.push({ role: 'user', parts: [{ text: `{{Bio updated successfully, inform the user of that with a confirmation of what it was updated to.}}` }], display: 'false' });
 	
-	                    return res.status(200).send({ response: secondResult.response, display: 'true', functionCalled: true, parisHistory: parisHistory });
+	                    return res.status(200).send({ response: secondResult.response, display: 'true', functionCalled: true, parisHistory: parisHistory, userUpdated: true, newUser: bioResults.data.newUser });
 
                     } catch (error) {
 	                    console.error('Error fetching data:', error);
