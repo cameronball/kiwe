@@ -11,7 +11,7 @@ $(document).ready(() => {
 			},
 			 {
 				 role: "model",
-				 parts: [{ text: `Hi ${userLoggedIn.firstName}! I am Paris, your personal assistant here on Kiwe. What would you like to know or talk about today?` }],
+				 parts: [{ text: `Hi ${userLoggedIn.firstName}! I am Paris, your personal assistant here on Kiwe. I can help you with various things, such as searching for posts, giving you stats about the site or updating your bio! What would you like to know or talk about today?` }],
 				 display: 'true',
 			 },
 			]
