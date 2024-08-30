@@ -170,7 +170,7 @@ router.get("/paris", async (req, res, next) => {
 
                     let secondResult = await secondChat.sendMessage(`{{Search results:\n${searchResultsString}\nEnd of search}}`);
 
-		    console.log(secondResult);
+		    console.log(secondResult.response.candidates[0].content.parts[0].text);
 
                     return res.status(200).send({ response: secondResult.response, display: true, functionCalled: true, parisHistory: parisHistory });
 
