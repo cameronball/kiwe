@@ -159,6 +159,7 @@ router.get("/paris", async (req, res, next) => {
 
 		    console.log(response);
 		    console.log('-------------------------------------------------');
+		    console.log(parisHistory);
 		    console.log(parisHistory.map(({ display, ...rest }) => rest));
 		    console.log('-------------------------------------------------');
 
