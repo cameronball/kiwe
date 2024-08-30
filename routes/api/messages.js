@@ -142,12 +142,13 @@ router.get("/paris", async (req, res, next) => {
             const calledFunction = extractedBraces.extractedObject.type;
 	    console.log(calledFunction);
             if (calledFunction == 'postSearch') {
-		console.log(parisHistory[parisHistory.length-1]);
                 parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: false });
 		console.log(parisHistory[parisHistory.length-1]);
+		console.log('-------------------------------------------------');
                 const reqUrl = "https://kiwe.social/api/posts";
                 const searchTerm = extractedBraces.extractedObject.content;
 		console.log(searchTerm);
+		console.log('-------------------------------------------------');
                 
                 try {
                     const response = await axios.get(reqUrl, {
@@ -157,7 +158,9 @@ router.get("/paris", async (req, res, next) => {
                     });
 
 		    console.log(response);
+		    console.log('-------------------------------------------------');
 		    console.log(parisHistory.map(({ display, ...rest }) => rest));
+		    console.log('-------------------------------------------------');
 
                     const secondChat = model.startChat({
                         history: parisHistory.map(({ display, ...rest }) => rest),
@@ -165,7 +168,9 @@ router.get("/paris", async (req, res, next) => {
 
                     let secondResult = await secondChat.sendMessage(`{{Search results:\n${response.data}\nEnd of search}}`);
 
-		    console.log(secondResult);
+		    console.log(secondResult.response);
+		    console.log('-------------------------------------------------');
+		    console.log(reponse.data);
 
                     return res.status(200).send({ response: secondResult.response, display: true, functionCalled: true, parisHistory: parisHistory });
 
