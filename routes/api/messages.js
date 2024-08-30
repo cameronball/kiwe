@@ -149,7 +149,7 @@ router.get("/paris", async (req, res, next) => {
         if (extractedBraces.hasDoubleCurlyBraces) {
             const calledFunction = extractedBraces.extractedObject.type;
             if (calledFunction == 'postSearch') {
-                parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: false });
+                parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: 'false' });
                 const reqUrl = "https://kiwe.social/api/posts";
                 const searchTerm = extractedBraces.extractedObject.content;
                 
@@ -160,19 +160,23 @@ router.get("/paris", async (req, res, next) => {
                         }
                     });
 
+		    let searchResultsString = JSON.stringify(searchResponse.data, null, 2);
+
+		    parisHistory.push({ role: 'user', parts: [{ text: `{{Search results:\n${searchResultsString}\nEnd of search}}` }], display: 'false' });
+
+		    console.log(parisHistory);
+
                     const secondChat = secondModel.startChat({
                         history: parisHistory.map(({ display, ...rest }) => rest),
                     });
 
-		    let searchResultsString = JSON.stringify(searchResponse.data, null, 2);
+                    let secondResult = await secondChat.sendMessage("{{Now use these results to help the user.}}");
 
-		    parisHistory.push({ role: 'user', parts: [{ text: `{{Search results:\n${searchResultsString}\nEnd of search, now follow any instructions given to you by the user regarding this search}}` }], display: false });
-
-                    let secondResult = await secondChat.sendMessage(`{{Search results:\n${searchResultsString}\nEnd of search, now follow any instructions given to you by the user regarding this search}}`);
-
+		    parisHistory.push({ role: 'user', parts: [{ text: "{{Now use these results to help the user.}}" }], display: 'false' });
+			
 		    console.log(secondResult.response.candidates[0].content.parts[0].text);
 
-                    return res.status(200).send({ response: secondResult.response, display: true, functionCalled: true, parisHistory: parisHistory });
+                    return res.status(200).send({ response: secondResult.response, display: 'true', functionCalled: true, parisHistory: parisHistory });
 
                 } catch (error) {
                     console.error('Error fetching data:', error);
@@ -183,8 +187,8 @@ router.get("/paris", async (req, res, next) => {
                 return res.status(400).send({ error: "Invalid function call" });
             }
         } else {
-            parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: false });
-            res.status(200).send({ response: result.response, display: true, functionCalled: false });
+            parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: 'false' });
+            res.status(200).send({ response: result.response, display: 'true', functionCalled: false });
         }
 
     } catch (error) {
