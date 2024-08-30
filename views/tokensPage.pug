@@ -1,13 +1,30 @@
 extends layouts/main-layout.pug
 
 block content
-	h1 On Kiwe you earn credits by viewing adverts which can be donated to others or redeemed. You can earn up to 10 tokens a day.
+	h4(style="margin:20px;") On Kiwe you earn credits by viewing adverts which can be donated to others or redeemed. You can earn up to 10 tokens a day.
+	.settingsContainer
+		.resultListItem(class="settingsListItem")
+			.resultsImageContainer
+				i(class="fas fa-coins")
+			span You currently have {userLoggedIn.tokens} tokens.
 	.settingsContainer
 		a(href="/tokens/donate", style="text-decoration: none;padding-left:6px;")
 			.resultListItem(class="settingsListItem")
 				.resultsImageContainer
-					i(class="fas fa-user-lock")
-				span 2FA
+					i(class="fas fa-hand-holding-seedling")
+				span Donate tokens
+	.settingsContainer
+		a(href="/tokens/redeem", style="text-decoration: none;padding-left:6px;")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fas fa-credit-card-blank")
+				span Redeem tokens
+	.settingsContainer
+		a(href="/tokens/withdraw", style="text-decoration: none;padding-left:6px;")
+			.resultListItem(class="settingsListItem")
+				.resultsImageContainer
+					i(class="fas fa-money-bill")
+				span Withdraw tokens
 
 block scripts
 	script(src="/js/tokens.js")
