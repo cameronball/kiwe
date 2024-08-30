@@ -211,10 +211,17 @@ router.get("/paris", async (req, res, next) => {
 		    console.log(bioTerm);
 		    
 		    try {
-	                    const bioResults = await axios.put(reqUrl, {
-				    bio: bioTerm,
-				    user: req.session.user._id
-			    });
+	                    const bioResults = await axios.put(reqUrl, 
+			        new URLSearchParams({
+			            bio: bioTerm,
+			            user: req.session.user._id
+			        }).toString(),
+			        {
+			            headers: {
+			                'Content-Type': 'application/x-www-form-urlencoded' // Ensure this matches the server expectation
+			            }
+			        }
+			    );
 					
 	                    const secondChat = secondModel.startChat({
 	                        history: parisHistory.map(({ display, ...rest }) => rest),
