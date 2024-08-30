@@ -130,25 +130,18 @@ router.get("/paris", async (req, res, next) => {
             history: parisHistory.map(({ display, ...rest }) => rest),
         });
 
-	console.log(message);
         let result = await chat.sendMessage(message);
 	
         let resultText = result.response.candidates[0].content.parts[0].text.replace(/\*/g, "").replace(/\n+$/, '');
-	console.log(resultText);
 
         const extractedBraces = detectAndExtractObject(resultText);
 
         if (extractedBraces.hasDoubleCurlyBraces) {
             const calledFunction = extractedBraces.extractedObject.type;
-	    console.log(calledFunction);
             if (calledFunction == 'postSearch') {
                 parisHistory.push({ role: 'model', parts: [{ text: resultText }], display: false });
-		console.log(parisHistory[parisHistory.length-1]);
-		console.log('-------------------------------------------------');
                 const reqUrl = "https://kiwe.social/api/posts";
                 const searchTerm = extractedBraces.extractedObject.content;
-		console.log(searchTerm);
-		console.log('-------------------------------------------------');
                 
                 try {
                     const response = await axios.get(reqUrl, {
@@ -157,23 +150,15 @@ router.get("/paris", async (req, res, next) => {
                         }
                     });
 
-		    console.log(response);
-		    console.log('-------------------------------------------------');
-		    console.log(parisHistory);
-		    console.log(parisHistory.map(({ display, ...rest }) => rest));
-		    console.log('-------------------------------------------------');
-
                     const secondChat = model.startChat({
                         history: parisHistory.map(({ display, ...rest }) => rest),
                     });
 
 		    parisHistory.push({ role: 'user', parts: [{ text: `{{Search results:\n${response.data}\nEnd of search}}` }], display: false });
 
-                    let secondResult = await secondChat.sendMessage(`{{Search results:\n${response.data}\nEnd of search}}`);
+		    console.log(parisHistory.map(({ display, ...rest }) => rest)[parisHistory.length -1].parts.text);
 
-		    console.log(secondResult.response);
-		    console.log('-------------------------------------------------');
-		    console.log(response.data);
+                    let secondResult = await secondChat.sendMessage(`{{Search results:\n${response.data}\nEnd of search}}`);
 
                     return res.status(200).send({ response: secondResult.response, display: true, functionCalled: true, parisHistory: parisHistory });
 
