@@ -190,10 +190,14 @@ function detectAndExtractObject(str) {
     if (match) {
         let extractedContent = match[1].trim(); // Extract and trim the content inside {{...}}
 
-        // Convert single quotes to double quotes
-        extractedContent = extractedContent.replace(/'/g, '"');
-
         // Add curly braces to form a valid JSON object
+        // Replace single quotes with double quotes
+        extractedContent = extractedContent
+            .replace(/'/g, '"') // Replace single quotes with double quotes
+            .replace(/(\w+):/g, '"$1":') // Add double quotes around keys
+            .replace(/,\s*}/g, '}'); // Fix trailing comma issues
+
+        // Add curly braces to ensure valid JSON object
         extractedContent = `{${extractedContent}}`;
 
         console.log("Preprocessed Content: ", extractedContent); // Debugging log
