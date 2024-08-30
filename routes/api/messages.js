@@ -1,4 +1,4 @@
-const express = require('express');
+	const express = require('express');
 const app = express();
 const router = express.Router();
 const bodyParser = require("body-parser")
@@ -154,7 +154,7 @@ router.get("/paris", async (req, res, next) => {
                 const searchTerm = extractedBraces.extractedObject.content;
                 
                 try {
-                    const response = await axios.get(reqUrl, {
+                    const searchResponse = await axios.get(reqUrl, {
                         params: {
                             search: searchTerm
                         }
@@ -164,9 +164,9 @@ router.get("/paris", async (req, res, next) => {
                         history: parisHistory.map(({ display, ...rest }) => rest),
                     });
 
-		    parisHistory.push({ role: 'user', parts: [{ text: resultText }], display: false });
+		    parisHistory.push({ role: 'user', parts: [{ text: `{{Search results:\n${searchResponse.data}\nEnd of search}}` }], display: false });
 
-                    let secondResult = await secondChat.sendMessage(`{{Search results:\n${response.data}\nEnd of search}}`);
+                    let secondResult = await secondChat.sendMessage(`{{Search results:\n${searchResponse.data}\nEnd of search}}`);
 
                     return res.status(200).send({ response: secondResult.response, display: true, functionCalled: true, parisHistory: parisHistory });
 
