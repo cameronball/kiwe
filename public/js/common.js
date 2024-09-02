@@ -572,7 +572,7 @@ function createPostHtml(postData, boldFont = false) {
     var codeContent = hasCode ? postData.code : null;
     var replyCount = postData.replyCount;
 
-    if replyCount === undefined {
+    if (replyCount === undefined) {
 	    replyCount = 0;
     }
 
