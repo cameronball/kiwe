@@ -75,7 +75,7 @@ const sslRoute = require('./routes/sslRoutes');
 const banRoute = require('./routes/bannedRoutes');
 const twoFactorRoute = require('./routes/twoFactorRoutes');
 const tokensRoute = require('./routes/tokensRoutes');
-const bookmarksRoute = require('./routes/bookmarksRoutes');
+//const bookmarksRoute = require('./routes/bookmarksRoutes');
 
 // Api routes
 const postApiRoute = require('./routes/api/posts');
@@ -86,7 +86,7 @@ const notificationsApiRoute = require('./routes/api/notifications');
 const settingsApiRoute = require('./routes/api/settings');
 const adminApiRoute = require('./routes/api/admin');
 const twoFactorApiRoute = require('./routes/api/twoFactor');
-const bookmarksApiRoute = require('./routes/api/bookmarksApiRoute');
+//const bookmarksApiRoute = require('./routes/api/bookmarksApiRoute');
 
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
@@ -104,7 +104,7 @@ app.use("/admin", middleware.requireAdmin, adminRoute);
 app.use("/.well-known", sslRoute);
 app.use("/banned", banRoute);
 app.use("/tokens", tokensRoute);
-app.use("/bookmarks", bookmarksRoute);
+//app.use("/bookmarks", bookmarksRoute);
 
 // Api routes
 app.use("/api/posts", postApiRoute);
@@ -115,7 +115,7 @@ app.use("/api/notifications", notificationsApiRoute);
 app.use("/api/settings", settingsApiRoute);
 app.use("/api/twofactor", twoFactorApiRoute);
 app.use("/api/admin", adminApiRoute);
-app.use("/api/bookmarks", bookmarksApiRoute);
+//app.use("/api/bookmarks", bookmarksApiRoute);
 
 app.get("/", middleware.requireLogin, (req, res, next) => {
 
