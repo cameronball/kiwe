@@ -480,7 +480,7 @@ $(document).on("click", ".bookmarkButton", (event) => {
     
     if(postId === undefined) return;
 
-    .ajax({
+    $.ajax({
         url: `/api/bookmarks/${postId}/bookmark`,
         type: "PUT",
         success: (postData) => {
