@@ -15,6 +15,9 @@ mixin createPostForm(userLoggedIn)
 				button(type="button", data-toggle="modal", data-target="#codeUploadModal")
 					.codeUploadButton(style="color: #008800;margin-left:10px;margin-top:20%;display:flex; align-items:center; jutify-content:center;")
 						i.fad.fa-code(style="font-size:2.5vh;")
+				button(type="button", data-toggle="modal", data-target="#pollUploadModal")
+					.codeUploadButton(style="color: #000;margin-left:5px;margin-top:30%;display:flex; align-items:center; jutify-content:center;")
+						i.fas.fa-chart-bar(style="font-size:2.5vh;")
 
 mixin createReplyModal(userLoggedIn)
 	#replyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='replyModalLabel', aria-hidden='true')
@@ -113,6 +116,25 @@ mixin createCodeUploadModal()
 							textarea#codePostTextarea(placeholder="Post main body...")
 					.codeContainer
 						textarea#codePostCodeTextarea(placeholder="Code snippet...", style="height:40vh;")
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button#codePostUploadButton.btn.btn-primary(type='button') Post
+
+mixin createPollUploadModal()
+	#pollUploadModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='pollUploadModalLabel', aria-hidden='true')
+		.modal-dialog.modal-lg(role='document')
+			.modal-content
+				.modal-header
+					h5#pollUploadModalLabel.modal-title Create a poll.
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body
+					.postFormContainer
+						.userImageContainer
+							img(src=userLoggedIn.profilePic, alt="User's profile picture")
+						.textareaContainer
+							textarea#codePostTextarea(placeholder="Post main body...")
+					.pollCreationContainer
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#codePostUploadButton.btn.btn-primary(type='button') Post
