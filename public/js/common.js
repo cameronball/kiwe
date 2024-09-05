@@ -480,24 +480,27 @@ $(document).on("click", ".bookmarkButton", (event) => {
     
     if(postId === undefined) return;
 
-    $.ajax({
+    .ajax({
         url: `/api/bookmarks/${postId}/bookmark`,
         type: "PUT",
         success: (postData) => {
-	    userLoggedIn.bookmarks.push(postData._id);
-            if(userLoggedIn.bookmarks.includes(postData._id)) {
+            // Check if the post is already bookmarked
+            var bookmarkIndex = userLoggedIn.bookmarks.indexOf(postData._id);
+
+            if (bookmarkIndex === -1) {
+                // Post is not bookmarked, so add it
+                userLoggedIn.bookmarks.push(postData._id);
                 button.addClass("active");
-				button.find("i").removeClass("far").addClass("fas");
-            }
-            else {
+                button.find("i").removeClass("far").addClass("fas");
+            } else {
+                // Post is already bookmarked, so remove it
+                userLoggedIn.bookmarks.splice(bookmarkIndex, 1);
                 button.removeClass("active");
-				button.find("i").removeClass("fas").addClass("far");
+                button.find("i").removeClass("fas").addClass("far");
             }
-
         }
-    })
-
-})
+    });
+});
 
 $(document).on("click", ".post", (event) => {
 	var element = $(event.target);
