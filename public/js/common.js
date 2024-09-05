@@ -37,16 +37,18 @@ $("#postTextarea, #replyTextarea").keyup(event => {
 })
 
 $(".pollOptions").keyup(event => {
-    var textbox = $("#pollOption" + pollOptions);
-    var value = textbox.val().trim();
-	
-    if (value == "" && pollOptions > 1) {
-	    textbox.remove();
-    }
-    else {
-	    pollOptions+=1;
-	    $(".pollBodyContainer").append(`<textarea id="pollOption${pollOptions}" placeholder="Enter poll option..." style="width: 100%;border: none;resize: none;font-size: 19px;background-color: var(--buttonHoverBg);border-radius: 15px;padding: 7px;height: 47px;" class="pollOptions"></textarea>`);
-    }
+	if (pollOptions > 1) {
+		var textbox = $("#pollOption" + pollOptions-1);
+		var value = textbox.val().trim();
+		
+		if (value == "" {
+		    textbox.remove();
+		}
+		else {
+			pollOptions+=1;
+			$(".pollBodyContainer").append(`<textarea id="pollOption${pollOptions}" placeholder="Enter poll option..." style="width: 100%;border: none;resize: none;font-size: 19px;background-color: var(--buttonHoverBg);border-radius: 15px;padding: 7px;height: 47px;" class="pollOptions"></textarea>`);
+		}
+	}
 })
 
 $("#submitPostButton, #submitReplyButton").click(() => {
