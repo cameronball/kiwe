@@ -751,7 +751,7 @@ function createPostHtml(postData, boldFont = false) {
                                     &nbsp;<span>${postData.likes.length || ""}</span>
                                 </button>
                             </div>
-			    <div class='postButtonContainer'>
+			    <div class='postButtonContainer blue'>
                                 <button aria-label="Bookmark" class='bookmarkButton ${bookmarkButtonActiveClass}'>
                                     <i class='${bookmarkButtonFillIcon} fa-bookmark'></i>
                                 </button>
