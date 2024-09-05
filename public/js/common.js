@@ -756,7 +756,7 @@ function createPostHtml(postData, boldFont = false) {
                                 </button>
                             </div>
 			    <div class='postButtonContainer blue'>
-                                <button aria-label="Bookmark" class='bookmarkButton ${bookmarkButtonActiveClass}'>
+                                <button aria-label="Bookmark" style="width:75px;" class='bookmarkButton ${bookmarkButtonActiveClass}'>
                                     <i class='${bookmarkButtonFillIcon} fa-bookmark'></i>
                                 </button>
                             </div>
