@@ -1,0 +1,9 @@
+extends layouts/main-layout.pug
+
+block content
+  .postsContainer
+
+  +createPostModals(userLoggedIn)
+
+block scripts
+  script(src="/js/bookmarks.js")
