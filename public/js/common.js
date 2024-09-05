@@ -485,18 +485,17 @@ $(document).on("click", ".bookmarkButton", (event) => {
         url: `/api/bookmarks/${postId}/bookmark`,
         type: "PUT",
         success: (newUserData) => {
-	    userLoggedIn = newUserData;
             // Check if the post is already bookmarked
             var bookmarkIndex = userLoggedIn.bookmarks.indexOf(postId);
 
+	    userLoggedIn = newUserData;
+
             if (bookmarkIndex === -1) {
                 // Post is not bookmarked, so add it
-                userLoggedIn.bookmarks.push(postId);
                 button.addClass("active");
                 button.find("i").removeClass("far").addClass("fas");
             } else {
                 // Post is already bookmarked, so remove it
-                userLoggedIn.bookmarks.splice(bookmarkIndex, 1);
                 button.removeClass("active");
                 button.find("i").removeClass("fas").addClass("far");
             }
