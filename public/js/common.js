@@ -41,7 +41,7 @@ $(".pollOptions").keyup(event => {
 		var textbox = $("#pollOption" + pollOptions-1);
 		var value = textbox.val().trim();
 		
-		if (value == "" {
+		if (value == "") {
 		    textbox.remove();
 		}
 		else {
