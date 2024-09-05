@@ -961,6 +961,19 @@ function outputPosts(results, container) {
 	if (results.length == 0) {
 		container.append("<span class='noResults'>Nothing to show :(</span>");
 	}
+
+	$(".bookmarkButton").each(function() {
+	        var button = $(this);
+	        var postId = getPostIdFromElement(button);
+	
+	        if (userLoggedIn.bookmarks.includes(postId)) {
+	            button.addClass("active");
+	            button.find("i").removeClass("far").addClass("fas");
+	        } else {
+	            button.removeClass("active");
+	            button.find("i").removeClass("fas").addClass("far");
+	        }
+	    });
 }
 
 function outputPostsWithReplies(results, container) {
