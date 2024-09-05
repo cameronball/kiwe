@@ -28,7 +28,7 @@ router.put("/:id/bookmark", async (req, res, next) => {
 		res.sendStatus(400);
 	});
 
-	res.status(200).send(post);
+	res.status(200).send(req.session.user);
 })
 
 module.exports = router;
