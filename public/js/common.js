@@ -591,7 +591,10 @@ function createPostHtml(postData, boldFont = false) {
     var timestamp = timeDifference(new Date(), new Date(postData.createdAt));
 
     var likeButtonActiveClass = postData.likes.includes(userLoggedIn._id) ? "active" : "";
-	var likeButtonFillIcon = postData.likes.includes(userLoggedIn._id) ? "fas" : "far";
+    var likeButtonFillIcon = postData.likes.includes(userLoggedIn._id) ? "fas" : "far";
+
+    var bookmarkButtonActiveClass = userLoggedIn.bookmarks.includes(postData._id) ? "active" : "";
+    var bookmarkButtonFillIcon = userLoggedIn.bookmarks.includes(postData._id) ? "fas" : "far";
 	
     var reshareButtonActiveClass = postData.reshareUsers.includes(userLoggedIn._id) ? "active" : "";
 
@@ -722,6 +725,11 @@ function createPostHtml(postData, boldFont = false) {
                                 <button aria-label="Like" class='likeButton ${likeButtonActiveClass}'>
                                     <i class='${likeButtonFillIcon} fa-heart'></i>
                                     &nbsp;<span>${postData.likes.length || ""}</span>
+                                </button>
+                            </div>
+			    <div class='postButtonContainer'>
+                                <button aria-label="Bookmark" class='bookmarkButton ${bookmarkButtonActiveClass}'>
+                                    <i class='${bookmarkButtonFillIcon} fa-bookmark'></i>
                                 </button>
                             </div>
                         </div>
