@@ -896,6 +896,15 @@ button i, button span {
     background-color: var(--greenBackground);
 }
 
+.postButtonContainer.blue button.active {
+    color: var(--blue);
+}
+
+.postButtonContainer.blue button:hover {
+    color: var(--blue);
+    background-color: var(--buttonHoverBg);
+}
+
 .postButtonContainer.red button:hover {
     color: var(--red);
     background-color: var(--redBackground);
