@@ -50,7 +50,7 @@ $(".pollOptions").keyup(event => {
 		}
 	}
 	else {
-		var textbox = $("#pollOption" + pollOptions-1);
+		var textbox = $("#pollOption" + pollOptions);
 		var value = textbox.val().trim();
 
 		pollOptions+=1;
