@@ -16,7 +16,7 @@ mixin createPostForm(userLoggedIn)
 					.codeUploadButton(style="color: #008800;margin-left:10px;margin-top:20%;display:flex; align-items:center; jutify-content:center;")
 						i.fad.fa-code(style="font-size:2.5vh;")
 				button(type="button", data-toggle="modal", data-target="#pollUploadModal")
-					.codeUploadButton(style="color: #000;margin-left:5px;margin-top:30%;display:flex; align-items:center; jutify-content:center;")
+					.pollUploadButton(style="color: #000;margin-left:5px;margin-top:30%;display:flex; align-items:center; jutify-content:center;")
 						i.fas.fa-chart-bar(style="font-size:2.5vh;")
 
 mixin createReplyModal(userLoggedIn)
@@ -133,7 +133,7 @@ mixin createPollUploadModal()
 						.userImageContainer
 							img(src=userLoggedIn.profilePic, alt="User's profile picture")
 						.textareaContainer
-							textarea#codePostTextarea(placeholder="Post main body...")
+							textarea#pollPostTextarea(placeholder="Post main body...")
 					.pollCreationContainer
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
