@@ -474,6 +474,30 @@ $(document).on("click", ".reshareButton", (event) => {
 
 })
 
+$(document).on("click", ".bookmarkButton", (event) => {
+    var button = $(event.target);
+    var postId = getPostIdFromElement(button);
+    
+    if(postId === undefined) return;
+
+    $.ajax({
+        url: `/api/bookmarks/${postId}/bookmark`,
+        type: "PUT",
+        success: (postData) => {
+            if(userLoggedIn.bookmarks.includes(postData._id)) {
+                button.addClass("active");
+				button.find("i").removeClass("far").addClass("fas");
+            }
+            else {
+                button.removeClass("active");
+				button.find("i").removeClass("fas").addClass("far");
+            }
+
+        }
+    })
+
+})
+
 $(document).on("click", ".post", (event) => {
 	var element = $(event.target);
 	var postId = getPostIdFromElement(element);
