@@ -134,12 +134,16 @@ mixin createPollUploadModal()
 							img(src=userLoggedIn.profilePic, alt="User's profile picture")
 						.textareaContainer
 							textarea#pollPostTextarea(placeholder="Post main body...")
-					.pollCreationContainer
+					.pollCreationContainer(style="padding:5px;border-radius: 20px;")
+						.textareaContainer
+							textarea#pollPostTitleTextarea(placeholder="Poll title...")
+						.pollBodyContainer(style="margin-left:2vw;margin-right:2vw;margin-bottom:1vh;")
+							textarea#pollOption1(placeholder="Enter poll option...", style="width: 100%;border: none;resize: none;font-size: 19px;background-color: var(--buttonHoverBg);border-radius: 15px;padding: 7px;height: 47px;")
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#codePostUploadButton.btn.btn-primary(type='button') Post
 
-
+- var pollOptions = 1;
 
 mixin createImagePostUploadModal(userLoggedIn)
 	#imagePostUploadModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='imagePostUploadModalLabel', aria-hidden='true')
