@@ -24,6 +24,7 @@ const UserSchema = new Schema({
     twoFactorEnabled: { type: Boolean, default: false },
     twoFactorSecret: { type: String },
     tokens: { type: Number, default: 0 },
+    bookmarks: [{ type: Schema.Types.ObjectId, ref: "Post" }],
 }, { timestamps: true });
 
 var User = mongoose.model('User', UserSchema);
