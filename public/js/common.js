@@ -475,6 +475,7 @@ $(document).on("click", ".reshareButton", (event) => {
 })
 
 $(document).on("click", ".bookmarkButton", (event) => {
+    event.stopPropagation();
     var button = $(event.currentTarget);
     var postId = getPostIdFromElement(button);
     
