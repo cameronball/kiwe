@@ -28,6 +28,22 @@ router.get("/", async (req, res, next) => {
 		delete searchObj.search;
 	}
 
+	if (searchObj.bookmarksOnly !== undefined) {
+	        var bookmarksOnly = searchObj.bookmarksOnly == "true";
+	
+	        if (bookmarksOnly) {
+	            if (!req.session.user.bookmarks || req.session.user.bookmarks.length === 0) {
+	                // If the user has no bookmarks, return an empty result set
+	                return res.status(200).send([]);
+	            }
+	
+	            // Filter posts by the bookmarked IDs
+	            searchObj._id = { $in: req.session.user.bookmarks };
+	        }
+	
+	        delete searchObj.bookmarksOnly;
+	    }
+
 	if(searchObj.followingOnly !== undefined) {
 		var followingOnly = searchObj.followingOnly == "true";
 
