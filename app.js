@@ -86,7 +86,7 @@ const notificationsApiRoute = require('./routes/api/notifications');
 const settingsApiRoute = require('./routes/api/settings');
 const adminApiRoute = require('./routes/api/admin');
 const twoFactorApiRoute = require('./routes/api/twoFactor');
-const bookmarksApiRoute = require('./routes/api/bookmarksApiRoute');
+const bookmarksApiRoute = require('./routes/api/bookmarks');
 
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
