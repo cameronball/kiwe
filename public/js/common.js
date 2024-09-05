@@ -483,13 +483,14 @@ $(document).on("click", ".bookmarkButton", (event) => {
     $.ajax({
         url: `/api/bookmarks/${postId}/bookmark`,
         type: "PUT",
-        success: (postData) => {
+        success: (newUserData) => {
+	    userLoggedIn = newUserData;
             // Check if the post is already bookmarked
-            var bookmarkIndex = userLoggedIn.bookmarks.indexOf(postData._id);
+            var bookmarkIndex = userLoggedIn.bookmarks.indexOf(postId);
 
             if (bookmarkIndex === -1) {
                 // Post is not bookmarked, so add it
-                userLoggedIn.bookmarks.push(postData._id);
+                userLoggedIn.bookmarks.push(postId);
                 button.addClass("active");
                 button.find("i").removeClass("far").addClass("fas");
             } else {
