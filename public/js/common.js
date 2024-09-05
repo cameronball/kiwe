@@ -484,6 +484,7 @@ $(document).on("click", ".bookmarkButton", (event) => {
         url: `/api/bookmarks/${postId}/bookmark`,
         type: "PUT",
         success: (postData) => {
+	    userLoggedIn.bookmarks.push(postData._id);
             if(userLoggedIn.bookmarks.includes(postData._id)) {
                 button.addClass("active");
 				button.find("i").removeClass("far").addClass("fas");
