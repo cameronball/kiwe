@@ -475,7 +475,7 @@ $(document).on("click", ".reshareButton", (event) => {
 })
 
 $(document).on("click", ".bookmarkButton", (event) => {
-    var button = $(event.target);
+    var button = $(event.currentTarget);
     var postId = getPostIdFromElement(button);
     
     if(postId === undefined) return;
