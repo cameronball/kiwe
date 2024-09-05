@@ -85,7 +85,7 @@ The server should now be running, you can check using
 - [x] Implement code chirp reposts
 - [ ] Improve popular/for you page algorithm
 - [ ] Add websockets code so that when an image message is sent it is displayed immediately rather than having to refresh for it to be displayed.
-- [ ] Bookmarks
+- [x] Bookmarks
 - [ ] Polls
 - [ ] Muting and blocking
 - [ ] Mentions
