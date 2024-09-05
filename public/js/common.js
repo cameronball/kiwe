@@ -7,6 +7,8 @@ $(document).ready(() => {
     refreshMessagesBadge();
     refreshNotificationsBadge();
 
+    var pollOptions = 1;
+
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
         .then(function(registration) {
