@@ -38,7 +38,9 @@ $("#postTextarea, #replyTextarea").keyup(event => {
 
 $(".pollOptions").keyup(event => {
 	if (pollOptions > 1) {
-		var textbox = $("#pollOption" + pollOptions-1);
+		var currentNum = pollOptions-1;
+		var textboxId = "#pollOption" + currentNum;
+		var textbox = $(textboxId);
 		var value = textbox.val().trim();
 		
 		if (value == "") {
@@ -50,7 +52,9 @@ $(".pollOptions").keyup(event => {
 		}
 	}
 	else {
-		var textbox = $("#pollOption" + pollOptions);
+		var currentNum = pollOptions;
+		var textboxId = "#pollOption" + currentNum;
+		var textbox = $(textboxId);
 		var value = textbox.val().trim();
 
 		pollOptions+=1;
