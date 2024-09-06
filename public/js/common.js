@@ -36,31 +36,30 @@ $("#postTextarea, #replyTextarea").keyup(event => {
     submitButton.prop("disabled", false);
 })
 
-$(".pollOptions").keyup(event => {
-	if (pollOptions > 1) {
-		var currentNum = pollOptions-1;
-		var textboxId = "#pollOption" + currentNum;
-		var textbox = $(textboxId);
-		var value = textbox.val().trim();
-		
-		if (value == "") {
-		    textbox.remove();
-		}
-		else {
-			pollOptions+=1;
-			$(".pollBodyContainer").append(`<textarea id="pollOption${pollOptions}" placeholder="Enter poll option..." style="width: 100%;border: none;resize: none;font-size: 19px;background-color: var(--buttonHoverBg);border-radius: 15px;padding: 7px;height: 47px;" class="pollOptions"></textarea>`);
-		}
-	}
-	else {
-		var currentNum = pollOptions;
-		var textboxId = "#pollOption" + currentNum;
-		var textbox = $(textboxId);
-		var value = textbox.val().trim();
+$(document).on('keyup', '.pollOptions', event => {
+    if (pollOptions > 1) {
+        var currentNum = pollOptions - 1;
+        var textboxId = "#pollOption" + currentNum;
+        var textbox = $(textboxId);
+        var value = textbox.val().trim();
+        
+        if (value == "") {
+            textbox.remove();
+        } else {
+            pollOptions += 1;
+            $(".pollBodyContainer").append(`<textarea id="pollOption${pollOptions}" placeholder="Enter poll option..." style="width: 100%;border: none;resize: none;font-size: 19px;background-color: var(--buttonHoverBg);border-radius: 15px;padding: 7px;height: 47px;" class="pollOptions"></textarea>`);
+        }
+    } else {
+        var currentNum = pollOptions;
+        var textboxId = "#pollOption" + currentNum;
+        var textbox = $(textboxId);
+        var value = textbox.val().trim();
 
-		pollOptions+=1;
-		$(".pollBodyContainer").append(`<textarea id="pollOption${pollOptions}" placeholder="Enter poll option..." style="width: 100%;border: none;resize: none;font-size: 19px;background-color: var(--buttonHoverBg);border-radius: 15px;padding: 7px;height: 47px;" class="pollOptions"></textarea>`);
-	}
-})
+        pollOptions += 1;
+        $(".pollBodyContainer").append(`<textarea id="pollOption${pollOptions}" placeholder="Enter poll option..." style="width: 100%;border: none;resize: none;font-size: 19px;background-color: var(--buttonHoverBg);border-radius: 15px;padding: 7px;height: 47px;" class="pollOptions"></textarea>`);
+    }
+});
+
 
 $("#submitPostButton, #submitReplyButton").click(() => {
     var button = $(event.target);
