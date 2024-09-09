@@ -40,7 +40,7 @@ $("#twoFactorSetupButton").click(() => {
 					data: { twoFactorCode: givenCode, totpSecretKey: secretKey },
 					success: (data, status, xhr) => {
 						$(".twoFactorResults").remove();
-						$("#twoFactorSetupModalBody").append("<span class='text-success'>2FA Setup successfully!</span>");
+						$("#twoFactorSetupModalBody").append("<span class='text-success'>2FA Setup successfully! Logout and login to see the effect here.</span>");
 					},
 					error: (xhr, status, error) => {
 						$("#twoFactorVerifyError").remove();
@@ -67,7 +67,7 @@ $("#twoFactorDisableButton").click(() => {
 		url: "/api/twofactor/disable",
 		type: "POST",
 		success: (data, status, xhr) => {
-			$("#twoFactorRemovalModalBody").append("<br><span class='text-success'>Successfully disabled 2fa.</span>");
+			$("#twoFactorRemovalModalBody").append("<br><span class='text-success'>Successfully disabled 2fa, logout and login to verify.</span>");
 		},
 		error: (xhr, status, error) => {
 			$("#twoFactorRemovalModalBody").append("<br><span class='text-danger'>Error: " + xhr.status + "</span>");
