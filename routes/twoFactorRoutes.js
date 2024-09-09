@@ -23,6 +23,7 @@ router.get("/", (req, res, next) => {
   
   var payload = req.body;
   payload.pageTitle = "Two Factor Auth";
+  payload.userLoggedIn = req.session.user;
   res.status(200).render("twoFactor", payload);
 })
 
@@ -39,6 +40,7 @@ router.get("/setup", (req, res, next) => {
       var payload = req.body;
       payload.pageTitle = "2FA Setup";
       payload.twoFactorSetup = req.session.user.twoFactorEnabled;
+      payload.userLoggedIn = req.session.user;
       res.status(200).render("twoFactorSettings", payload);
     }
   }
@@ -50,6 +52,7 @@ router.get("/setup", (req, res, next) => {
 router.post("/", async (req, res, next) => {
   var payload = req.body;
   payload.pageTitle = "Two Factor Auth";
+  payload.userLoggedIn = req.session.user;
 
   if  (!req.session || !req.session.user) {
     return res.redirect('/login');
