@@ -83,8 +83,10 @@ The server should now be running, you can check using
 # Roadmap:
 ## Features definitely planned for v4:
 - [x] Implement code chirp reposts
-- [ ] Improve popular/for you page algorithm
+- [x] Improve popular/for you page algorithm
+- [ ] Add ability to mark answers as correct in replies
 - [ ] Add websockets code so that when an image message is sent it is displayed immediately rather than having to refresh for it to be displayed.
+- [ ] E2E Encryption
 - [x] Bookmarks
 - [ ] Polls
 - [ ] Muting and blocking
