@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const mongoose = require("mongoose");
 const User = require('../schemas/UserSchema');
 const Chat = require('../schemas/ChatSchema');
-const EncryptionKeys = require('../schemas/EncryptionKeysSchema');
+const Keys = require('../schemas/KeysSchema');
 
 app.set("view engine", "pug");
 app.set("views", "views");
