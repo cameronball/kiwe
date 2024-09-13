@@ -8,4 +8,4 @@ const ChatSchema = new Schema({
     chat: { type: Schema.Types.ObjectId, ref: "Chat" },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Keys', KeysSchema);
+module.exports = mongoose.model('EncryptionKeys', EncryptionKeysSchema);
