@@ -10,6 +10,10 @@ const Chat = require('../../schemas/ChatSchema');
 const Message = require('../../schemas/MessageSchema');
 const ParisLog = require('../../schemas/ParisLogSchema');
 const Notification = require('../../schemas/NotificationSchema');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const upload = multer({ dest: 'uploads/' });
 
 const { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory  } = require("@google/generative-ai");
 
@@ -59,11 +63,6 @@ const secondModel = genAI.getGenerativeModel({
   },
   systemInstruction: systemPrompt,
 });
-
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-const upload = multer({ dest: 'uploads/' });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
