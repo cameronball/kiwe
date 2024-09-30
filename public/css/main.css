@@ -38,6 +38,10 @@ h1 {
     margin: 0;
 }
 
+.tooltip:not(.shown) {
+    display: none;
+}
+
 nav {
     display: flex;
     flex-direction: column;
