@@ -104,7 +104,17 @@ html(lang="en")
     script(src='https://code.jquery.com/jquery-3.5.1.min.js', integrity='sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=', crossorigin='anonymous')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.1/socket.io.slim.js')
+    script(type='module', src='https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js')
     script(src="/js/bootstrap.min.js")
+    script(type='module').
+      import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js'
+      const button = document.querySelector('#emojiPickerButton')
+      const tooltip = document.querySelector('.tooltip')
+      Popper.createPopper(button, tooltip)
+      document.querySelector('#emojiPickerButton').onclick = () => {
+        tooltip.classList.toggle('shown')
+      }
+
     
     block scripts
 
