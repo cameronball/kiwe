@@ -13,6 +13,9 @@ const PostSchema = new Schema({
 	pinned: { type: Boolean, default: false },
 	image: { type: String, default: "" },
 	code: { type: String, default: "" },
+	pollTitle: { type: String, default: "" },
+	option1: { type: String, default: "" },
+	option2: { type: String, default: "" },
 }, { timestamps: true });
 
 var Post = mongoose.model('Post', PostSchema);
