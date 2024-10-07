@@ -633,6 +633,10 @@ function createPostHtml(postData, boldFont = false) {
     postData = isReshare ? postData.reshareData : postData;
     var hasCode = postData.code !== '';
     var codeContent = hasCode ? postData.code : null;
+	var hasPoll = postData.pollTitle !== '';
+	var pollTitle = hasPoll ? postData.pollTitle : null;
+	var option1 = hasPoll ? postData.option1 : null;
+	var option2 = hasPoll ? postData.option2 : null;
     var replyCount = postData.replyCount;
 
     if (replyCount === undefined) {
@@ -739,15 +743,32 @@ function createPostHtml(postData, boldFont = false) {
 
     if(hasCode) {
         if(postData.content) {
-            var codeHtml = `<pre><code>${codeContent}</code></pre>`
+            var codeHtml = `<pre><code>${codeContent}</code></pre>`;
         }
         else {
-            var codeHtml = `<br><pre><code>${codeContent}</code></pre>`
+            var codeHtml = `<br><pre><code>${codeContent}</code></pre>`;
         }
     }
     else {
         var codeHtml = ``;
     }
+
+	var pollHtml = ``;
+	if(hasPoll) {
+		if(postData.content) {
+			pollHtml = pollHtml + `<br>`;
+		}
+		pollHtml = pollHtml + `<div class="pollContainer" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
+  									<h1 style="font-weight:700;">${pollTitle}</h1>
+									<br>
+									<button id="pollSelection1" style="width: 100%;">
+		 								<p onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option1}</p>
+		   							</button>
+									<button id="pollSelection2" style="width:100%;">
+										<p onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option2}</p>
+									</button>
+		 						</div>`;
+	}
 
     return `<div class='post' data-id='${postData._id}' data-mainPostBool="${postPageMainPost}">
                 <div class='postActionContainer'>
@@ -771,6 +792,7 @@ function createPostHtml(postData, boldFont = false) {
                             <span class="${boldFontClass}" style="${LargeFontStyle}">${postData.content}</span>
                             ${codeHtml}
                         </div>
+						${pollHtml}
                         ${image}
                         <div class='postFooter' style="${LargeFontStyle}">
                             <div class='postButtonContainer'>
