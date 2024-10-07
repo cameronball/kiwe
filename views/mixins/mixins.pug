@@ -172,6 +172,27 @@ mixin createImagePostUploadModal(userLoggedIn)
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#imagePostUploadButton.btn.btn-primary(type='button') Post
 
+mixin createModelUploadModal(userLoggedIn)
+	#modelUploadModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='modelUploadModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#modelUploadModalLabel.modal-title Upload a model
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body
+					.postFormContainer
+						.userImageContainer
+							img(src=userLoggedIn.profilePic, alt="User's profile picture")
+						.textareaContainer
+							textarea#imagePostTextarea(placeholder="What's happening?")
+					input#postModel(type="file", name="postModel")
+					.modelPreviewContainer
+						img#postModelPreview
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button#modelUploadButton.btn.btn-primary(type='button') Post
+
 mixin createCoverPhotoUploadModal()
 	- const phrases = ["Looks like your cover photo could use a little love. Time for a refresh, don't you think?","Well, your old cover photo was...certainly a choice. Let's try something new, shall we?","It's time to give your profile the Hollywood treatment with a brand new cover photo!","Listen, I'm not saying your old cover photo was terrible, but...okay, fine, I am saying that. Let's do better this time around, yeah?","Your old cover photo was like a relic from the MySpace era. Let's bring your profile into the modern age."]
 	- const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)]
