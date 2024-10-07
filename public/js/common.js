@@ -391,7 +391,7 @@ $("#pollPostUploadButton").click(() => {
 
     var formData = new FormData();
     formData.append('content', $("#pollPostTextarea").val());
-    formData.append('pollTitle', $().val("#pollPostTitleTextarea"));
+    formData.append('pollTitle', pollTitle);
     formData.append('option1', option1);
     formData.append('option2', option2);
 
