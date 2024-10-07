@@ -142,6 +142,8 @@ mixin createPollUploadModal()
 							textarea#pollPostTitleTextarea(placeholder="Poll title...")
 						.pollBodyContainer(style="margin-left:2vw;margin-right:2vw;margin-bottom:1vh;")
 							textarea#pollOption1.pollOptions(placeholder="Enter poll option...", style="width: 100%;border: none;resize: none;font-size: 19px;background-color: var(--buttonHoverBg);border-radius: 15px;padding: 7px;height: 47px;")
+						.pollBodyContainer(style="margin-left:2vw;margin-right:2vw;margin-bottom:1vh;")
+							textarea#pollOption2.pollOptions(placeholder="Enter poll option...", style="width: 100%;border: none;resize: none;font-size: 19px;background-color: var(--buttonHoverBg);border-radius: 15px;padding: 7px;height: 47px;")
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button#codePostUploadButton.btn.btn-primary(type='button') Post
