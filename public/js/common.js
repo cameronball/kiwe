@@ -379,6 +379,39 @@ $("#codePostUploadButton").click(() => {
     });
 });
 
+$("#pollPostUploadButton").click(() => {
+    var option1 = $("#pollOption1").val();
+    var option2 = $("#pollOption2").val();
+
+    if(option1 == "" || option2 == "") {
+        alert("Enter poll options.");
+        return;
+    }
+
+    var formData = new FormData();
+    formData.append('content', $("#pollPostTextarea").val());
+	formData.append('pollTitle', $().val("#pollPostTitleTextarea"));
+    formData.append('option1', option1);
+    formData.append('option2', option2);
+
+    $.ajax({
+        url: "/api/posts",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: (postData) => {
+            var html = createPostHtml(postData);
+            $(".postsContainer").prepend(html);
+            $("#pollPostTitleTextarea").val("");
+            $("#pollPostTextarea").val("");
+			$("#pollOption1").val("");
+			$("#pollOption2").val("");
+            $("#pollUploadModal").modal("hide");
+        }
+    });
+});
+
 $("#userSearchTextbox").keydown(function(event) {
 	clearTimeout(timer);
 	var textbox = $(event.target);
