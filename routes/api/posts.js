@@ -107,10 +107,18 @@ router.post("/", upload.single("croppedImage"), async (req, res, next) => {
 	
 	var includesImage = false;
 	var includesCode = false;
+	var includesPoll = false;
 
 	if(req.body.codeContent) {
 		var code = sanitizer.escape(req.body.codeContent);
 		includesCode = true;
+	}
+
+	if(req.body.pollTitle) {
+		var pollTitle = sanitizer.escape(req.body.pollTitle);
+		var option1 = sanitizer.escape(req.body.option1);
+		var option2 = sanitizer.escape(req.body.option2);
+		includesPoll = true;
 	}
 	
 	if(req.file) {
@@ -160,6 +168,15 @@ router.post("/", upload.single("croppedImage"), async (req, res, next) => {
 			content: sanitizedContent,
 			postedBy: req.session.user,
 			code: code
+		}
+	}
+	else if (includesPoll) {
+		var postData = {
+			content: sanitizedContent,
+			postedBy: req.session.user,
+			pollTitle: pollTitle,
+			option1: option1,
+			option2: option2
 		}
 	}
 	else {
