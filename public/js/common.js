@@ -382,15 +382,16 @@ $("#codePostUploadButton").click(() => {
 $("#pollPostUploadButton").click(() => {
     var option1 = $("#pollOption1").val();
     var option2 = $("#pollOption2").val();
+    var pollTitle = $("#pollPostTitleTextarea").val();
 
-    if(option1 == "" || option2 == "") {
-        alert("Enter poll options.");
+    if(option1 == "" || option2 == "" || pollTitle == "") {
+        alert("Enter poll options and title");
         return;
     }
 
     var formData = new FormData();
     formData.append('content', $("#pollPostTextarea").val());
-	formData.append('pollTitle', $().val("#pollPostTitleTextarea"));
+    formData.append('pollTitle', $().val("#pollPostTitleTextarea"));
     formData.append('option1', option1);
     formData.append('option2', option2);
 
