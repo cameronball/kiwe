@@ -3,7 +3,6 @@ var cropper;
 var timer;
 var selectedUsers = [];
 
-
 $(document).ready(() => {
     refreshMessagesBadge();
     refreshNotificationsBadge();
