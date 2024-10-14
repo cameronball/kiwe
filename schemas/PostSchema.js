@@ -16,6 +16,8 @@ const PostSchema = new Schema({
 	pollTitle: { type: String, default: "" },
 	option1: { type: String, default: "" },
 	option2: { type: String, default: "" },
+	votes1: [{ type: Schema.Types.ObjectId, ref: "User" }],
+	votes2: [{ type: Schema.Types.ObjectId, ref: "User" }],
 }, { timestamps: true });
 
 var Post = mongoose.model('Post', PostSchema);
