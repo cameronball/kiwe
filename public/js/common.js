@@ -166,12 +166,17 @@ $("#unpinPostButton").click((event) => {
 })
 
 $(document).on("click", "#pollSelection1", (event) => {
-    var postId = $(event.target).data("id");
+    if($(event.target).tagName == "P") {
+		var postId = $(event.target).parentElement.data("id);
+	}
+	else {
+		var postId = $(event.target).data("id");	
+	}
 
     $.ajax({
         url: `/api/posts/${postId}/vote`,
         type: "PUT",
-	data: { voteChoice: false },
+		data: { voteChoice: false },
         success: (data, status, xhr) => {
 
             if(xhr.status == 403) {
