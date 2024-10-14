@@ -10,7 +10,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const upload = multer({ dest: 'uploads/' });
-import fetch from "node-fetch";
+const fetch = require('node-fetch');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
