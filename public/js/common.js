@@ -165,7 +165,7 @@ $("#unpinPostButton").click((event) => {
     })
 })
 
-$(".pollSelection1").click((event) => {
+$(document).on("click", ".pollSelection1", (event) => {
     var postId = $(event.target).data("id");
 
     $.ajax({
@@ -189,7 +189,7 @@ $(".pollSelection1").click((event) => {
     })
 })
 
-$(".pollSelection2").click((event) => {
+$(document).on("click", ".pollSelection2", (event) => {
     var postId = $(event.target).data("id");
 
     $.ajax({
