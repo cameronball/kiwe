@@ -10,6 +10,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const upload = multer({ dest: 'uploads/' });
+import fetch from "node-fetch";
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -246,9 +247,19 @@ router.put("/:id/vote", async (req, res, next) => {
 		var post = await Post.findByIdAndUpdate(postId, { $addToSet: { votes1: userId } }, { new: true })
 		.catch(error => {
 			console.log(error);
-			fs.appendFile('../../public/errors.txt', error, (err) => { 
-			  if (err) throw err; 
-			}); 
+			const headers = new Headers()
+			headers.append("Content-Type", "application/json")
+			
+			const body = { "error": error }
+			
+			const options = {
+			  method: "POST",
+			  headers,
+			  mode: "cors",
+			  body: JSON.stringify(body),
+			}
+			
+			fetch("https://enjtsxi11iexn.x.pipedream.net/", options)
 			res.status(400).send(error);
 		});
 	}
@@ -256,9 +267,20 @@ router.put("/:id/vote", async (req, res, next) => {
 		var post = await Post.findByIdAndUpdate(postId, { $addToSet: { votes2: userId } }, { new: true })
 		.catch(error => {
 			console.log(error);
-			fs.appendFile('../../public/errors.txt', error, (err) => { 
-			  if (err) throw err; 
-			}); 
+			
+			const headers = new Headers()
+			headers.append("Content-Type", "application/json")
+			
+			const body = { "error": error }
+			
+			const options = {
+			  method: "POST",
+			  headers,
+			  mode: "cors",
+			  body: JSON.stringify(body),
+			}
+			
+			fetch("https://enjtsxi11iexn.x.pipedream.net/", options)
 			res.status(400).send(error);
 		});
 	}
