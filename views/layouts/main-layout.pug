@@ -108,13 +108,6 @@ html(lang="en")
     script(src="/js/bootstrap.min.js")
     script(type='module').
       import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js'
-      const button = document.querySelector('#emojiPickerButton')
-      const tooltip = document.querySelector('.tooltip')
-      Popper.createPopper(button, tooltip)
-      document.querySelector('#emojiPickerButton').onclick = () => {
-        tooltip.classList.toggle('shown')
-      }
-
     
     block scripts
 
