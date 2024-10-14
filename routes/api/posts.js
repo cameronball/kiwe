@@ -246,19 +246,6 @@ router.put("/:id/vote", async (req, res, next) => {
 		var post = await Post.findByIdAndUpdate(postId, { $addToSet: { votes1: userId } }, { new: true })
 		.catch(error => {
 			console.log(error);
-			const headers = new Headers()
-			headers.append("Content-Type", "application/json")
-			
-			const body = { "error": error }
-			
-			const options = {
-			  method: "POST",
-			  headers,
-			  mode: "cors",
-			  body: JSON.stringify(body),
-			}
-			
-			fetch("https://enjtsxi11iexn.x.pipedream.net/", options)
 			res.status(400).send(error);
 		});
 	}
@@ -266,20 +253,6 @@ router.put("/:id/vote", async (req, res, next) => {
 		var post = await Post.findByIdAndUpdate(postId, { $addToSet: { votes2: userId } }, { new: true })
 		.catch(error => {
 			console.log(error);
-			
-			const headers = new Headers()
-			headers.append("Content-Type", "application/json")
-			
-			const body = { "error": error }
-			
-			const options = {
-			  method: "POST",
-			  headers,
-			  mode: "cors",
-			  body: JSON.stringify(body),
-			}
-			
-			fetch("https://enjtsxi11iexn.x.pipedream.net/", options)
 			res.status(400).send(error);
 		});
 	}
