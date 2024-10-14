@@ -167,7 +167,7 @@ $("#unpinPostButton").click((event) => {
 
 $(document).on("click", "#pollSelection1", (event) => {
     if($(event.target).tagName == "P") {
-		var postId = $(event.target).parentElement.data("id);
+		var postId = $(event.target).parentElement.data("id");
 	}
 	else {
 		var postId = $(event.target).data("id");	
@@ -195,7 +195,12 @@ $(document).on("click", "#pollSelection1", (event) => {
 })
 
 $(document).on("click", "#pollSelection2", (event) => {
-    var postId = $(event.target).data("id");
+    if($(event.target).tagName == "P") {
+		var postId = $(event.target).parentElement.data("id");
+	}
+    else {
+		var postId = $(event.target).data("id");	
+    }
 
     $.ajax({
         url: `/api/posts/${postId}/vote`,
