@@ -246,14 +246,14 @@ router.put("/:id/vote", async (req, res, next) => {
 		var post = await Post.findByIdAndUpdate(postId, { $addToSet: { votes1: userId } }, { new: true })
 		.catch(error => {
 			console.log(error);
-			res.sendStatus(400);
+			res.status(400).send(error);
 		});
 	}
 	else if (voteChoice == true) {
 		var post = await Post.findByIdAndUpdate(postId, { $addToSet: { votes2: userId } }, { new: true })
 		.catch(error => {
 			console.log(error);
-			res.sendStatus(400);
+			res.status(400).send(error);
 		});
 	}
 	else {
