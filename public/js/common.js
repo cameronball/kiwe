@@ -165,6 +165,54 @@ $("#unpinPostButton").click((event) => {
     })
 })
 
+$(".pollSelection1").click((event) => {
+    var postId = $(event.target).data("id");
+
+    $.ajax({
+        url: `/api/posts/${postId}/vote`,
+        type: "PUT",
+	data: { voteChoice: false },
+        success: (data, status, xhr) => {
+
+            if(xhr.status == 403) {
+                alert("You do not have permission to perform this action");
+                return;
+            }
+
+            if(xhr.status != 204) {
+                alert("Could not delete post");
+                return;
+            }
+
+            console.log(data);
+        }
+    })
+})
+
+$(".pollSelection2").click((event) => {
+    var postId = $(event.target).data("id");
+
+    $.ajax({
+        url: `/api/posts/${postId}/vote`,
+        type: "PUT",
+	data: { voteChoice: true },
+        success: (data, status, xhr) => {
+
+            if(xhr.status == 403) {
+                alert("You do not have permission to perform this action");
+                return;
+            }
+
+            if(xhr.status != 204) {
+                alert("Could not delete post");
+                return;
+            }
+
+            console.log(data);
+        }
+    })
+})
+
 $("#filePhoto").change(function(){
     if(this.files && this.files[0]) {
         var reader = new FileReader();
@@ -761,10 +809,10 @@ function createPostHtml(postData, boldFont = false) {
 		pollHtml = pollHtml + `<div class="pollContainer" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
   									<h1 style="font-weight:700;">${pollTitle}</h1>
 									<br>
-									<button id="pollSelection1" style="width: 100%;">
+									<button id="pollSelection1" data-id="${postData._id}" style="width: 100%;">
 		 								<p onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option1}</p>
 		   							</button>
-									<button id="pollSelection2" style="width:100%;">
+									<button id="pollSelection2" data-id="${postData._id}" style="width:100%;">
 										<p onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option2}</p>
 									</button>
 		 						</div>`;
