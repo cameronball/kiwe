@@ -209,7 +209,6 @@ router.post("/", upload.single("croppedImage"), async (req, res, next) => {
 })
 
 router.put("/:id/like", async (req, res, next) => {
-
 	var postId = req.params.id;
 	var userId = req.session.user._id;
 
@@ -235,6 +234,31 @@ router.put("/:id/like", async (req, res, next) => {
 		await Notification.insertNotification(post.postedBy, userId, "postLike", post._id);
 	}
 
+	res.status(200).send(post);
+})
+
+router.put("/:id/vote", async (req, res, next) => {
+	var postId = req.params.id;
+	var voteChoice = req.body.voteChoice;
+	var userId = req.session.user._id;
+
+	if (voteChoice == false) {
+		var post = await Post.findByIdAndUpdate(postId, { $addToSet: { votes1: userId } }, { new: true })
+		.catch(error => {
+			console.log(error);
+			res.sendStatus(400);
+		});
+	}
+	else if (voteChoice == true) {
+		var post = await Post.findByIdAndUpdate(postId, { $addToSet: { votes2: userId } }, { new: true })
+		.catch(error => {
+			console.log(error);
+			res.sendStatus(400);
+		});
+	}
+	else {
+		res.sendStatus(400);
+	}
 	res.status(200).send(post);
 })
 
