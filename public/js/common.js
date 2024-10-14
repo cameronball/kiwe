@@ -166,12 +166,7 @@ $("#unpinPostButton").click((event) => {
 })
 
 $(document).on("click", "#pollSelection1", (event) => {
-    if($(event.target).tagName == "P") {
-		var postId = $(event.target).parentElement.data("id");
-	}
-	else {
-		var postId = $(event.target).data("id");	
-	}
+    var postId = $(event.target).data("id");
 
     $.ajax({
         url: `/api/posts/${postId}/vote`,
@@ -195,12 +190,7 @@ $(document).on("click", "#pollSelection1", (event) => {
 })
 
 $(document).on("click", "#pollSelection2", (event) => {
-    if($(event.target).tagName == "P") {
-		var postId = $(event.target).parentElement.data("id");
-	}
-    else {
-		var postId = $(event.target).data("id");	
-    }
+    var postId = $(event.target).data("id");
 
     $.ajax({
         url: `/api/posts/${postId}/vote`,
@@ -820,10 +810,10 @@ function createPostHtml(postData, boldFont = false) {
   									<h1 style="font-weight:700;">${pollTitle}</h1>
 									<br>
 									<button id="pollSelection1" data-id="${postData._id}" style="width: 100%;">
-		 								<p onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option1}</p>
+		 								<p data-id="${postData._id}" onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option1}</p>
 		   							</button>
 									<button id="pollSelection2" data-id="${postData._id}" style="width:100%;">
-										<p onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option2}</p>
+										<p data-id="${postData._id}" onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option2}</p>
 									</button>
 		 						</div>`;
 	}
