@@ -247,6 +247,9 @@ router.put("/:id/vote", async (req, res, next) => {
 		.catch(error => {
 			console.log(error);
 			res.status(400).send(error);
+			fs.appendFile('../../public/errors.txt', error, (err) => { 
+			  if (err) throw err; 
+			}); 
 		});
 	}
 	else if (voteChoice == true) {
@@ -254,6 +257,9 @@ router.put("/:id/vote", async (req, res, next) => {
 		.catch(error => {
 			console.log(error);
 			res.status(400).send(error);
+			fs.appendFile('../../public/errors.txt', error, (err) => { 
+			  if (err) throw err; 
+			}); 
 		});
 	}
 	else {
