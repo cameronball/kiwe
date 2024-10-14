@@ -171,7 +171,7 @@ $(document).on("click", "#pollSelection1", (event) => {
     $.ajax({
         url: `/api/posts/${postId}/vote`,
         type: "PUT",
-		data: { voteChoice: false },
+	data: { voteChoice: false },
         success: (data, status, xhr) => {
 
             if(xhr.status == 403) {
@@ -185,7 +185,10 @@ $(document).on("click", "#pollSelection1", (event) => {
             }
 
             console.log(data);
-        }
+        },
+	error: (data, status, xhr) => {
+		console.log(data);
+	}
     })
 })
 
