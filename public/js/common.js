@@ -688,6 +688,8 @@ function createPostHtml(postData, boldFont = false) {
 	var pollTitle = hasPoll ? postData.pollTitle : null;
 	var option1 = hasPoll ? postData.option1 : null;
 	var option2 = hasPoll ? postData.option2 : null;
+	var votes1 = hasPoll ? postData.votes1 : null;
+	var votes2 = hasPoll ? postData.votes2 : null;
     var replyCount = postData.replyCount;
 
     if (replyCount === undefined) {
@@ -809,7 +811,7 @@ function createPostHtml(postData, boldFont = false) {
 		if(postData.content) {
 			pollHtml = pollHtml + `<br>`;
 		}
-		pollHtml = pollHtml + `<div class="pollContainer" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
+		pollHtml = pollHtml + `<div class="pollContainer" onload="addToPollDictionary(${postData._id}, ${votes1}, ${votes2})" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
   									<h1 style="font-weight:700;">${pollTitle}</h1>
 									<br>
 									<button id="pollSelection1" data-id="${postData._id}" style="width: 100%;">
