@@ -811,7 +811,7 @@ function createPostHtml(postData, boldFont = false) {
 		if(postData.content) {
 			pollHtml = pollHtml + `<br>`;
 		}
-		pollHtml = pollHtml + `<div class="pollContainer" onload="addToPollDictionary(${postData._id}, ${votes1}, ${votes2})" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
+		pollHtml = pollHtml + `<div class="pollContainer" onload="addToPollDictionary('${postData._id}', ['${votes1.join("', '")}'], ['${votes2.join("', '")}'])" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
   									<h1 style="font-weight:700;">${pollTitle}</h1>
 									<br>
 									<button id="pollSelection1" data-id="${postData._id}" style="width: 100%;">
