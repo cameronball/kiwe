@@ -814,6 +814,23 @@ function createPostHtml(postData, boldFont = false) {
 						<p style="margin-top:10px;margin-bottom:20px;padding-left:5px;">Click here to view the poll</p>
 				    </div>`;
 		}
+		else if (pollDictionary[`${postDaya._id}`].votes1.includes(userLoggedIn._id) || pollDictionary[`${postDaya._id}`].votes2.includes(userLoggedIn._id);) {
+			if(postData.content) {
+				pollHtml = pollHtml + `<br>`;
+			}
+			pollHtml = pollHtml + `<div class="pollContainer" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
+										<h1 style="font-weight:700;">${pollTitle}</h1>
+										<br>
+										<button id="pollSelection1" data-id="${postData._id}" style="width: 100%;">
+											<p data-id="${postData._id}" onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option1}</p>
+										</button>
+										<button id="pollSelection2" data-id="${postData._id}" style="width:100%;">
+											<p data-id="${postData._id}" onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option2}</p>
+										</button>
+									</div>
+	  
+			 `;
+		}
 		else {
 			if(postData.content) {
 				pollHtml = pollHtml + `<br>`;
