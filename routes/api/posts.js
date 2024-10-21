@@ -238,6 +238,7 @@ router.put("/:id/like", async (req, res, next) => {
 })
 
 router.put("/:id/vote", async (req, res, next) => {
+	console.log(req);
 	var postId = req.params.id;
 	var voteChoice = req.body.voteChoice;
 	var userId = req.session.user._id;
