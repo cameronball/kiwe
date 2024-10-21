@@ -811,7 +811,7 @@ function createPostHtml(postData, boldFont = false) {
 		if(postData.content) {
 			pollHtml = pollHtml + `<br>`;
 		}
-		pollHtml = pollHtml + `<div class="pollContainer" onload="addToPollDictionary('${postData._id}', ['${votes1.join("', '")}'], ['${votes2.join("', '")}'])" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
+		pollHtml = pollHtml + `<div class="pollContainer" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
   									<h1 style="font-weight:700;">${pollTitle}</h1>
 									<br>
 									<button id="pollSelection1" data-id="${postData._id}" style="width: 100%;">
@@ -820,7 +820,16 @@ function createPostHtml(postData, boldFont = false) {
 									<button id="pollSelection2" data-id="${postData._id}" style="width:100%;">
 										<p data-id="${postData._id}" onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option2}</p>
 									</button>
-		 						</div>`;
+		 						</div>
+
+     					<script>
+						document.addEventListener('DOMContentLoaded',
+      						function() {
+	    						addToPollDictionary('${postData._id}', ['${votes1.join("', '")}'], ['${votes2.join("', '")}']);
+						});
+   					</script>
+  
+  `;
 	}
 
     return `<div class='post' data-id='${postData._id}' data-mainPostBool="${postPageMainPost}">
