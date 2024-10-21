@@ -836,12 +836,12 @@ function createPostHtml(postData, boldFont = false) {
 										<br>
 										<button id="pollSelection1" data-id="${postData._id}" disabled style="width: 100%;">
 											<div style="margin-left:10px;width:100%;border-radius:10px;background-color:var(--blueLight);">
-	   											<p data-id="${postData._id}" style="margin-right: 10px; background-color: var(--blue); font-weight: 500; color: white; padding: 10px; width: ${pollPercentage1}%; border-radius: 10px;">${option1}</p>
+	   											<p data-id="${postData._id}" style="margin-right: 10px; background-color: var(--blue); font-weight: 500; color: white; padding: 10px; width: ${pollPercentage1}%; border-radius: 10px;"><span style="display: block;margin-left: 13vw;width: 15vw;">${option1}</span></p>
 	       										</div>
 										</button>
 										<button id="pollSelection2" data-id="${postData._id}" disabled style="width:100%;">
 	  										<div style="margin-left:10px;width:100%;border-radius:10px;background-color:var(--blueLight);">
-	   											<p data-id="${postData._id}" style="margin-right: 10px; background-color: var(--blue); font-weight: 500; color: white; padding: 10px; width: ${pollPercentage2}%; border-radius: 10px;">${option2}</p>
+	   											<p data-id="${postData._id}" style="margin-right: 10px; background-color: var(--blue); font-weight: 500; color: white; padding: 10px; width: ${pollPercentage2}%; border-radius: 10px;"><span style="display: block;margin-left: 13vw;width: 15vw;">${option2}</span></p>
 	       										</div>
 										</button>
 									</div>
