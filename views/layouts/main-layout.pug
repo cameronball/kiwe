@@ -30,6 +30,14 @@ html(lang="en")
   body
     script.
       var userLoggedIn = !{userLoggedInJs}
+      var pollDictionary = {};
+
+      function addToPollDictionary(id, vote1Ids, vote2Ids) {
+        dictionary[id] = {
+          votes1: vote1Ids,
+          votes2: vote2Ids
+        }
+      }
     .wrapper
       .row
         nav.col-2
