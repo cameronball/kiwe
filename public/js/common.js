@@ -823,10 +823,7 @@ function createPostHtml(postData, boldFont = false) {
 		 						</div>
 
      					<script>
-						document.addEventListener('DOMContentLoaded',
-      						function() {
-	    						addToPollDictionary('${postData._id}', ['${votes1.join("', '")}'], ['${votes2.join("', '")}']);
-						});
+						addToPollDictionary('${postData._id}', ['${votes1.join("', '")}'], ['${votes2.join("', '")}']);
    					</script>
   
   `;
