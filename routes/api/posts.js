@@ -259,7 +259,7 @@ router.put("/:id/vote", async (req, res, next) => {
 	else {
 		res.sendStatus(400);
 	}
-	res.status(200).send(post);
+	res.status(202).send(post);
 })
 
 router.post("/:id/reshare", async (req, res, next) => {
