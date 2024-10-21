@@ -179,8 +179,8 @@ $(document).on("click", "#pollSelection1", (event) => {
                 return;
             }
 
-            if(xhr.status != 204) {
-                alert("Could not delete post");
+            if(xhr.status != 202) {
+                alert("Could not cast your vote.");
                 return;
             }
 
@@ -206,8 +206,8 @@ $(document).on("click", "#pollSelection2", (event) => {
                 return;
             }
 
-            if(xhr.status != 204) {
-                alert("Could not delete post");
+            if(xhr.status != 202) {
+                alert("Could not cast your vote.");
                 return;
             }
 
