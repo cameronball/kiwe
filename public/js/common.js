@@ -184,10 +184,10 @@ $(document).on("click", "#pollSelection1", (event) => {
                 return;
             }
 
-            console.log(data);
+            location.reload();
         },
 	error: (data, status, xhr) => {
-		console.log(data);
+		location.reload();
 	}
     })
 })
@@ -211,8 +211,11 @@ $(document).on("click", "#pollSelection2", (event) => {
                 return;
             }
 
-            console.log(data);
-        }
+            location.reload();
+	},
+	error: (data, status, xhr) => {
+		location.reload();
+	}
     })
 })
 
