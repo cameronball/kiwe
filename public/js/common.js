@@ -814,7 +814,7 @@ function createPostHtml(postData, boldFont = false) {
 						<p style="margin-top:10px;margin-bottom:20px;padding-left:5px;">Click here to view the poll</p>
 				    </div>`;
 		}
-		else if (pollDictionary[`${postDaya._id}`].votes1.includes(userLoggedIn._id) || pollDictionary[`${postDaya._id}`].votes2.includes(userLoggedIn._id);) {
+		else if (pollDictionary[`${postDaya._id}`].votes1.includes(userLoggedIn._id) || pollDictionary[`${postDaya._id}`].votes2.includes(userLoggedIn._id)) {
 			if(postData.content) {
 				pollHtml = pollHtml + `<br>`;
 			}
