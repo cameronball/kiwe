@@ -808,6 +808,7 @@ function createPostHtml(postData, boldFont = false) {
 
 	var pollHtml = ``;
 	if(hasPoll) {
+		addToPollDictionary(`${postData._id}`, [`${votes1.join("', '")}`], [`${votes2.join("', '")}`]);
 		if(postPageMainPost !== 'yes') {
 			pollHtml = `<div class="pollContainer" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
 	  					<h1 style="font-weight:700;">Poll: ${pollTitle}</h1>
