@@ -819,14 +819,30 @@ function createPostHtml(postData, boldFont = false) {
 			if(postData.content) {
 				pollHtml = pollHtml + `<br>`;
 			}
+
+			let pollPercentage1 = 0;
+			let pollPercentage2 = 0;
+			
+			if (votes1.length == 0 && votes2.length == 0) {
+				pollPercentage1 = 0;
+				pollPercentage2 = 0;
+			}
+			else {
+				pollPercentage1 = ((votes1.length)/(votes1.length + votes2.length))*100;
+				pollPercentage2 = ((votes2.length)/(votes1.length + votes2.length))*100;
+			}
 			pollHtml = pollHtml + `<div class="pollContainer" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
 										<h1 style="font-weight:700;">${pollTitle}</h1>
 										<br>
-										<button id="pollSelection1" data-id="${postData._id}" style="width: 100%;">
-											<p data-id="${postData._id}" onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option1}</p>
+										<button id="pollSelection1" data-id="${postData._id}" disabled style="width: 100%;">
+											<div style="margin-left:10px;width:100%;border-radius:10px;background-color:var(--blueLight);">
+	   											<p data-id="${postData._id}" style="margin-right: 10px; background-color: var(--blue); font-weight: 500; color: white; padding: 10px; width: ${pollPercentage1}%; border-radius: 10px;">${option1}</p>
+	       										</div>
 										</button>
-										<button id="pollSelection2" data-id="${postData._id}" style="width:100%;">
-											<p data-id="${postData._id}" onmouseover="this.style.backgroundColor='var(--blue)'" onmouseout="this.style.backgroundColor='var(--blueLight)'" style="margin-left: 10px; margin-right: 10px; background-color: var(--blueLight); font-weight: 500; color: white; padding: 10px; width: 100%; border-radius: 10px;">${option2}</p>
+										<button id="pollSelection2" data-id="${postData._id}" disabled style="width:100%;">
+	  										<div style="margin-left:10px;width:100%;border-radius:10px;background-color:var(--blueLight);">
+	   											<p data-id="${postData._id}" style="margin-right: 10px; background-color: var(--blue); font-weight: 500; color: white; padding: 10px; width: ${pollPercentage2}%; border-radius: 10px;">${option1}</p>
+	       										</div>
 										</button>
 									</div>
 	  
