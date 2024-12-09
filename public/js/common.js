@@ -1,264 +1,383 @@
-// Globals
+// Initialise globals
 var cropper;
 var timer;
 var selectedUsers = [];
 
+// Run this code on page load
 $(document).ready(() => {
+    // Run the functions to refresh the number of unread notifications and messages
     refreshMessagesBadge();
     refreshNotificationsBadge();
 
+    // If the user has installed the app and the service worker is available
     if ('serviceWorker' in navigator) {
+	// Register the service worker
         navigator.serviceWorker.register('/service-worker.js')
         .then(function(registration) {
         })
         .catch(function(err) {
+			// Log any errors encountered when registering the service worker
         console.log('Service Worker registration failed: ', err);
         });
     }
 });
 
+// Run this function when the user keyups on the post text area or reply text area
 $("#postTextarea, #replyTextarea").keyup(event => {
+    // Get the textbox supplied
     var textbox = $(event.target);
+	// Get the value of the content in the textbox minus any whitespace
     var value = textbox.val().trim();
 
+	// Determine whether the parent is a modal
     var isModal = textbox.parents(".modal").length == 1;
-    
+
+	// Determine which submit button must be referenced based on if the parent is a modal, if the box is in a modal, it is a reply box, if it isn't then it is a post text box.
     var submitButton = isModal ? $("#submitReplyButton") : $("#submitPostButton");
 
+	// Return an error if there is no submit button found.
     if(submitButton.length == 0) return alert("No submit button found");
 
+	// If the textbox doesn;t have any content, then disable the submit button.
     if (value == "") {
         submitButton.prop("disabled", true);
         return;
     }
 
+	// If the textbox does have content, enable the button (set disabled to false)
     submitButton.prop("disabled", false);
 })
 
+// Function to be ran when the submit post or reply buttons are clicked
 $("#submitPostButton, #submitReplyButton").click(() => {
+	// Get the button that was clicked
     var button = $(event.target);
 
+	// Get whether the parent is a modal
 	var isModal = button.parents(".modal").length == 1;
+	// Determine whether to use the reply or post text area due to whether its a modal for same logic as in previous function
 	var textbox = isModal ? $("#replyTextarea") : $("#postTextarea");
 
+	// Get the data
     var data = {
+		// Get the value of the textbox and save it as content
         content: textbox.val()
     }
 
+	// If it is a modal, it is a reply and needs to reference who it is replying to.
 	if(isModal) {
+		// Get the ID of the post being replied to.
 		var id = button.data().id;
+		// Return an error if the ID cannot be found.
 		if(id === null) return alert("Button id is null");
+		// Add a replyTo field to the data array with the ID of the post being replied to.
 		data.replyTo = id;
 	}
 
+	// Run a post request to the /api/posts routes, passing the data and postData
     $.post("/api/posts", data, postData => {
 
+		// If the post was a reply to someone
 		if(postData.replyTo) {
+			// Send a notification to them telling them that someone replied to their post
             emitNotification(postData.replyTo.postedBy);
+			// Reload the page
 			location.reload();
 		}
         else {
+			// If it is not a reply, get the html to render to the page
 			var html = createPostHtml(postData);
+			// Render the new post to the end of the postContainer container
 			$(".postsContainer").prepend(html);
+			// Empty the texbox
 			textbox.val("");
+			// Re-disable the button
 			button.prop("disabled", true);
 		}
     })
 })
 
+// Code to be ran when the reply to post modal is opened
 $("#replyModal").on("show.bs.modal", (event) => {
+	// Get the reference to the button in the modal
     var button = $(event.relatedTarget);
+	// Get the ID of the post being replied to
     var postId = getPostIdFromElement(button);
+	// Add the ID retrived to the submit button for easier retrival when submitting the reply.
 	$("#submitReplyButton").data("id", postId);
 
+	// Run a get request to the /api/posts/[postID] route to get the post that is being replied to
     $.get("/api/posts/" + postId, results => {
+		// Output the obtained post above the textbox so that the user can see the post that they are replying to whilst the reply modal is open.
         outputPosts(results.postData, $("#originalPostContainer"));
     })
 })
 
+// Code to be ran when the delete post modal is opened
 $("#deletePostModal").on("show.bs.modal", (event) => {
+	// Get the button
     var button = $(event.relatedTarget);
+	// Get the relevant post ID
     var postId = getPostIdFromElement(button);
+	// Add the ID to the delete post button for easier retrival
 	$("#deletePostButton").data("id", postId);
 })
 
 $("#confirmPinModal").on("show.bs.modal", (event) => {
+	// Get the button
     var button = $(event.relatedTarget);
+	// Get the relevant post ID
     var postId = getPostIdFromElement(button);
+	// Add the ID to the pin post button for easier retrival
 	$("#pinPostButton").data("id", postId);
 })
 
 $("#unpinModal").on("show.bs.modal", (event) => {
+	// Get the button
     var button = $(event.relatedTarget);
+	// Get the relevant post ID
     var postId = getPostIdFromElement(button);
+	// Add the ID to the unpin post button for easier retrival
 	$("#unpinPostButton").data("id", postId);
 })
 
+// Code to be ran when the user clicks on the delete post button
 $("#deletePostButton").click((event) => {
+	// Get the relevant post ID
     var postId = $(event.target).data("id");
 
+	// Run an AJAX request
     $.ajax({
+		// Send the request to the /api/posts/[postID] route
         url: `/api/posts/${postId}`,
+		// The request is of type DELETE
         type: "DELETE",
+		// On successful send
         success: (data, status, xhr) => {
 
+			// If the user is not authenticated (403 error)
             if(xhr.status == 403) {
+				// Alert them of the error and stop execution
                 alert("You do not have permission to perform this action");
                 return;
             }
 
+			// If there is another error, let the user know
             if(xhr.status != 202) {
                 alert("Could not delete post");
                 return;
             }
-
+			
+			// Otherwise, the post was deleted successfully and the page is reloaded to reflect this.
             location.reload();
         }
     })
 })
 
+// Code to be ran when the user clicks the pin post button
 $("#pinPostButton").click((event) => {
+	// Get the relevant post id
     var postId = $(event.target).data("id");
 
+	// Issue and ajax request
     $.ajax({
+		// Send the request to the relevant url
         url: `/api/posts/${postId}`,
+		// Request type of PUT
         type: "PUT",
+		// Send data requesting that the post be pinned
         data: { pinned: true },
+		// On successful send
         success: (data, status, xhr) => {
 
+			// Let the user know if request refused due to insufficient permissions and then stop execution of the function
             if(xhr.status == 403) {
                 alert("You do not have permission to perform this action");
                 return;
             }
 
+			// Inform the user of any other errors and stop execution of the function
             if(xhr.status != 204) {
                 alert("Could not delete post");
                 return;
             }
-
+			
+			// Reload the page
             location.reload();
         }
     })
 })
 
 $("#unpinPostButton").click((event) => {
+	// Get the relevant post ID
     var postId = $(event.target).data("id");
 
+	// Send an AJAX request
     $.ajax({
+		// Send it to the relevant URL
         url: `/api/posts/${postId}`,
+		// Request type of PUT
         type: "PUT",
+		// Send data requesting for the post to be unpinned
         data: { pinned: false },
+		// On successful send
         success: (data, status, xhr) => {
 
+			// If the request is denied due to lack of permissions, inform the user and stop execution of the function.
             if(xhr.status == 403) {
                 alert("You do not have permission to perform this action");
                 return;
             }
 
+			// Inform the user of any other errors and stop execution of the function.
             if(xhr.status != 204) {
                 alert("Could not delete post");
                 return;
             }
 
+			// If successful, reload the page.
             location.reload();
         }
     })
 })
 
+// Code to be ran when the user clicks on the first option in a poll
 $(document).on("click", "#pollSelection1", (event) => {
+	// Get the relevant post ID
     var postId = $(event.target).data("id");
 
+	// Issue an ajax request
     $.ajax({
+		// Send it to the correct route
         url: `/api/posts/${postId}/vote`,
+		// Of type PUT
         type: "PUT",
+		// Send data indicating the user is voting for option 1
 	data: { voteChoice: false },
+		// On successful send
         success: (data, status, xhr) => {
 
+			// Alert and end execution if user has insufficient permissions
             if(xhr.status == 403) {
                 alert("You do not have permission to perform this action");
                 return;
             }
 
+			// Alert and end execution for any other errors
             if(xhr.status != 202) {
                 alert("Could not cast your vote.");
                 return;
             }
 
+			// If successful reload the page
             location.reload();
         },
+	// On error
 	error: (data, status, xhr) => {
+		// Reload the page as could be an issue with poll caching
 		location.reload();
 	}
     })
 })
 
+// Code to be ran when the user clicks on the second option in a poll
 $(document).on("click", "#pollSelection2", (event) => {
+	// Get the relevant post ID
     var postId = $(event.target).data("id");
 
+	// Issue an ajax request
     $.ajax({
+		// Send it to the correct route
         url: `/api/posts/${postId}/vote`,
+		// Of type PUT
         type: "PUT",
+		// Send data indicating the user is voting for option 2
 	data: { voteChoice: true },
+		// On successful send
         success: (data, status, xhr) => {
 
+			// Alert and end execution if user has insufficient permissions
             if(xhr.status == 403) {
                 alert("You do not have permission to perform this action");
                 return;
             }
 
+			// Alert and end execution for any other errors
             if(xhr.status != 202) {
                 alert("Could not cast your vote.");
                 return;
             }
 
+			// If successful reload the page
             location.reload();
-	},
+        },
+	// On error
 	error: (data, status, xhr) => {
+		// Reload the page as could be an issue with poll caching
 		location.reload();
 	}
     })
 })
 
+// Code to be ran when a user uploads a file
 $("#filePhoto").change(function(){
+	// Make sure there is a file contained
     if(this.files && this.files[0]) {
+		// Create a new file reader
         var reader = new FileReader();
+		// Once the reader loads
         reader.onload = (e) => {
+			// Get the image
             var image = document.getElementById("imagePreview");
+			// Get the source of the image
             image.src = e.target.result;
 
+			// Destroy the cropper element
             if(cropper !== undefined) {
                 cropper.destroy();
             }
 
+			// Create a new cropper element with correct options
             cropper = new Cropper(image, {
                 aspectRatio: 1/1,
                 background: false
             });
         }
+		// Get the URL of the uploaded image
         reader.readAsDataURL(this.files[0]);
     }
 });
 
+// Code to be ran when a user uploads a file
 $("#coverPhoto").change(function(){
+	// Make sure there is a file contained
     if(this.files && this.files[0]) {
+		// Create a new file reader
         var reader = new FileReader();
+		// Once the reader loads
         reader.onload = (e) => {
+			// Get the image
             var image = document.getElementById("coverPreview");
+			// Get the source of the image
             image.src = e.target.result;
 
+			// Destroy the cropper element
             if(cropper !== undefined) {
                 cropper.destroy();
             }
 
+			// Create a new cropper element with correct options
             cropper = new Cropper(image, {
                 aspectRatio: 3 / 1,
                 background: false
             });
         }
         reader.readAsDataURL(this.files[0]);
+		// Get the URL of the uploaded image
     }
 });
 
+// Same as previous 2 functions
 $("#postPhoto").change(function(){
     if(this.files && this.files[0]) {
         var reader = new FileReader();
@@ -280,6 +399,7 @@ $("#postPhoto").change(function(){
     }
 });
 
+// Same as previous 3 functions
 $("#messagePhoto").change(function(){
     if(this.files && this.files[0]) {
         var reader = new FileReader();
@@ -301,50 +421,81 @@ $("#messagePhoto").change(function(){
     }
 });
 
+// Code to be ran when the user clicks on the image upload button
 $("#imageUploadButton").click(() => {
+	// Create a new canvas with cropper
     var canvas = cropper.getCroppedCanvas();
 
+	// If the canvas doesn't exist
     if(canvas == null) {
+		// There was an error creating the canvas, alert the user
         alert("Could not upload image. Make sure it is an image file.");
+		// End function execution
         return;
     }
 
+	// Convert the image to storable blob format
     canvas.toBlob((blob) => {
+		// Create a new form data object
         var formData = new FormData();
+		// Add the cropped image to the payload
         formData.append("croppedImage", blob);
 
+		// Send an ajax request
         $.ajax({
+			// Send it to the correct URL
             url: "/api/users/profilePicture",
+			// Of type POST
             type: "POST",
+			// Send the form data
             data: formData,
+			// Don't process
             processData: false,
+			// Content type image
             contentType: false,
+			// On success, show successful page
             success: () => window.location.href = "/profile"
         });
     });
 });
 
+// When the image message send button is clicked, this function will be ran
 $("#imageMessageSendButton").click(() => {
+	// Create a cropper canvas
     var canvas = cropper.getCroppedCanvas();
 
+	// If the canvas doesn;t exist
     if(canvas == null) {
+		// There was an error, alert and end execution
         alert("Could not upload image. Make sure it is an image file.");
         return;
     }
 
+	// Convert to storable blob format
     canvas.toBlob((blob) => {
+		// Create new form data object
         var formData = new FormData();
+		// Add the cropped image to it
         formData.append("croppedImage", blob);
-	formData.append("chatId", chatId);
+		// Add the relevent chatID
+		formData.append("chatId", chatId);
 
+		// Issue an AJAX request
         $.ajax({
+			// Send it to the relevant URL
             url: "/api/messages/imageMessage",
+			// Type of POST
             type: "POST",
+			// Send the previously defined form data
             data: formData,
+			// Don't process
             processData: false,
+			// Type of image
             contentType: false,
+			// On success
             success: () => {
 		    //addChatMessageHtml(formData);
+			// Reflect the changes
 		    window.location.href = "/messages/"+chatId;
 	    }
         });
