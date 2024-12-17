@@ -502,51 +502,77 @@ $("#imageMessageSendButton").click(() => {
     });
 });
 
+// Function to be ran when the cover photo button is clicked
 $("#coverPhotoButton").click(() => {
+	// Get the cropped canvas
     var canvas = cropper.getCroppedCanvas();
 
+	// If the canvas is null
     if(canvas == null) {
+		// ALert the user
         alert("Could not upload image. Make sure it is an image file.");
+		// Halt execution
         return;
     }
 
+	// Get the canvas in blob format
     canvas.toBlob((blob) => {
+		// Create a new formdata object
         var formData = new FormData();
+		// Add the cropped image in blob format to the form data
         formData.append("croppedImage", blob);
 
+		// Issue an aja request
         $.ajax({
+			// Send it to the relevant url
             url: "/api/users/coverPhoto",
+			// Request type of POST
             type: "POST",
+			// Include the form data
             data: formData,
+			// Dont process
             processData: false,
+			// COntent type 0
             contentType: false,
+			// Redirect user on success
             success: () => window.location.href = "/profile"
         });
     });
 });
 
+// Same as the previous function
 $("#imagePostUploadButton").click(() => {
+	// Get canvas
     var canvas = cropper.getCroppedCanvas();
 
     if(canvas == null) {
+		//Alert user
         alert("Could not upload image. Make sure it is an image file.");
+		// Halt execution
         return;
     }
 
+	// Get as blob
     canvas.toBlob((blob) => {
         var formData = new FormData();
+		// Append data
         formData.append('content', $("#imagePostTextarea").val());
         formData.append('croppedImage', blob);
-    
+
+		// Issue equest
         $.ajax({
             url: "/api/posts",
             type: "POST",
             data: formData,
             processData: false,
             contentType: false,
+			// On success
             success: (postData) => {
+				// Create html to be rendered
                 var html = createPostHtml(postData);
+				// Prepend the post
                 $(".postsContainer").prepend(html);
+				// Reset everything
                 $("#imagePostTextarea").val("");
                 cropper.destroy();
                 $("#imagePostUploadModal").modal("hide");
@@ -555,60 +581,101 @@ $("#imagePostUploadButton").click(() => {
     });
 });
 
+// To be ran when the code posr upload button is clicked
 $("#codePostUploadButton").click(() => {
+	// Get the contents of the code box textbox
     var codeBoxContent = $("#codePostCodeTextarea").val();
 
+	// If it is empty
     if(codeBoxContent == "") {
+		// Alert the user
         alert("Enter some code.");
+		// Halt execution of the function
         return;
     }
 
+	// Create new form data object
     var formData = new FormData();
+	// Append the code post text content
     formData.append('content', $("#codePostTextarea").val());
+	// Append the code content
     formData.append('codeContent', codeBoxContent);
 
+	// Send an ajax request
     $.ajax({
+		// To the posts api route
         url: "/api/posts",
+		// POST type
         type: "POST",
+		// Include form data
         data: formData,
+		// Dont process data
         processData: false,
+		// Content type 0
         contentType: false,
+		// On success
         success: (postData) => {
+			// Create html to be render
             var html = createPostHtml(postData);
+			// Render the html - prepend it to the start of the posts container
             $(".postsContainer").prepend(html);
+			// Reset everything
             $("#codePostTextarea").val("");
             $("#codePostCodeTextarea").val("");
             $("#codePostUploadModal").modal("hide");
+			// Ensure code boxes are highlighted
             hljs.highlightAll();
         }
     });
 });
 
+// Code to be ran when the poll post upload button is clicked
 $("#pollPostUploadButton").click(() => {
+	// Get what user inputted for poll option 1
     var option1 = $("#pollOption1").val();
+	// Get what the user inputted for poll option 2
     var option2 = $("#pollOption2").val();
+	// Get the poll title cntent
     var pollTitle = $("#pollPostTitleTextarea").val();
 
+	// If any of the extracted contents are empty
     if(option1 == "" || option2 == "" || pollTitle == "") {
+		// Alert the user
         alert("Enter poll options and title");
+		// Halt execution of the function
         return;
     }
 
+	// Create a new form data object
     var formData = new FormData();
+	// Append the content from the poll post textarea to form data
     formData.append('content', $("#pollPostTextarea").val());
+	// Add the poll title
     formData.append('pollTitle', pollTitle);
+	// Add the first option
     formData.append('option1', option1);
+	// Add the second option
     formData.append('option2', option2);
 
+	// Send an ajax request
     $.ajax({
+		// Send it to the posts api route
         url: "/api/posts",
+		// POST type
         type: "POST",
+		// Include the form data
         data: formData,
+		// Dont process
         processData: false,
+		// Content type 0
         contentType: false,
+		// On success
         success: (postData) => {
+			// Get post html
             var html = createPostHtml(postData);
+			// Render at the start of the posts container
             $(".postsContainer").prepend(html);
+			// Clear and reset everything
             $("#pollPostTitleTextarea").val("");
             $("#pollPostTextarea").val("");
 			$("#pollOption1").val("");
@@ -618,68 +685,108 @@ $("#pollPostUploadButton").click(() => {
     });
 });
 
+// Function to be ran when any key is pressed by the user in the user search textbox
 $("#userSearchTextbox").keydown(function(event) {
+	// Call the clear timeot function, passing in the existing timer object
 	clearTimeout(timer);
+	// Get the relevant textbox
 	var textbox = $(event.target);
+	// Get the value in the textbox
 	var value = textbox.val();
 
+	// If the textbox is empty, and the last key pressed was the backspace (code 8)
     if(value=="" && (event.which == 8 || event.keyCode == 8)) {
+		// Remove the selected user at the end of the stack
         selectedUsers.pop();
+		// Render the update to the page
         updateSelectedUsersHtml();
+		// Clear the results container
         $(".resultsContainer").html("");
 
+		// If there ae no selected users
         if(selectedUsers.length == 0) {
+			// Disable the button to create a chat if no users are selected
             $("#createChatButton").prop("disabled", true);
         }
-        
+
+		// Halt execution
         return;
     }
 
+	// Create timer object
 	timer = setTimeout(() => {
+		// Set value var to be the contents of the textbox, not including whitespace
 		value = textbox.val().trim();
+		// If the textbox is empty
 		if (value == "") {
+			// Clear the results container
 			$(".resultsContainer").html("");
+			// Halt execution
 			return;
 		}
 		else {
+			// Search for users using the value of the textbox
 			searchUsers(value);
 		}
+		// Run the timer unciton every 5ms
 	}, 5);
 })
 
+// Code to be ran when the create chat button is clicked.
 $("#createChatButton").click(() => {
+	// Set the data var to be a stringified version of the selectedUsers array
     var data = JSON.stringify(selectedUsers);
 
+	// Issue a post request to the chats api endpoint passing the selected users stringified var
     $.post("/api/chats", { users: data }, chat => {
 
+		// If the server doesn't respond with a chat, or if the retured chat doesn't contain an id, something has gone wrong and we should alert the user of this
         if(!chat || !chat._id) return alert("Invalid response from server");
 
+		// If all went well, redirect the user to the newly created chat
         window.location.href = `/messages/${chat._id}`;
     })
 });
 
+// When the reply modal is hidden, reset it
 $("#replyModal").on("hidden.bs.modal", () => $("#originalPostContainer").html(""))
 
+// When any post like buttons are clicked, run this funciton0
 $(document).on("click", ".likeButton", (event) => {
+	// Get the particular like button that was clicked
     var button = $(event.target);
+	// Get the post ID from the button
     var postId = getPostIdFromElement(button);
-    
+
+	// If postID was not found, halt execution as something has gone wrong
     if(postId === undefined) return;
 
+	// Issue an ajax request
     $.ajax({
+		// Send it to the posts api endpoint, passing the postID and that the user wishes to like the post
         url: `/api/posts/${postId}/like`,
+		// PUT type
         type: "PUT",
+		// On success
         success: (postData) => {
-            
+
+			// Find the span element within the button, set the span to contain the number of likes, or to be empty if there are not any likes
             button.find("span").text(postData.likes.length || "");
 
+			// If the current user has liked this post
             if(postData.likes.includes(userLoggedIn._id)) {
+				// Make the button red
                 button.addClass("active");
+				// Make the button solid
 				button.find("i").removeClass("far").addClass("fas");
+				// Send a notification saying the post was liked
                 emitNotification(postData.postedBy);
             }
+			// If user is unliking
             else {
+				// Make button regular colour
                 button.removeClass("active");
+				// Make button hollow
 				button.find("i").removeClass("fas").addClass("far");
             }
 
@@ -688,23 +795,37 @@ $(document).on("click", ".likeButton", (event) => {
 
 })
 
+// If the reshare button is clicked
 $(document).on("click", ".reshareButton", (event) => {
+	// Get the relevant button
     var button = $(event.target);
+	// Get the post id from the button
     var postId = getPostIdFromElement(button);
-    
+
+	// If the post was not found, halt execution
     if(postId === undefined) return;
 
+	// Send an ajax request
     $.ajax({
+		// Send it to the posts api route, passing the post Id and that the user wishes to reshare
         url: `/api/posts/${postId}/reshare`,
+		// Type: POST
         type: "POST",
+		// On success
         success: (postData) => {            
+			// Add the number of reshares next to the reshare button or make it empty if there are none
             button.find("span").text(postData.reshareUsers.length || "");
 
+			// If the current user has reshared
             if(postData.reshareUsers.includes(userLoggedIn._id)) {
+				// Make reshare button green
                 button.addClass("active");
+				// Send the relevant notification
                 emitNotification(postData.postedBy);
             }
+			// If unreshare
             else {
+				// Make  button regular colour
                 button.removeClass("active");
             }
 
@@ -713,22 +834,33 @@ $(document).on("click", ".reshareButton", (event) => {
 
 })
 
+// Code to be ran when the bookmark button is clicked
 $(document).on("click", ".bookmarkButton", (event) => {
+	// Fix bug where clicking the bookmark button would cause this function to be ran many times, 
     event.stopPropagation();
+	// Get the relevant button
     var button = $(event.currentTarget);
+	// Get the post id from the button
     var postId = getPostIdFromElement(button);
-    
+
+	// If the post id not found, then halt execution
     if(postId === undefined) return;
 
+	// Issue an ajax request
     $.ajax({
+		// Send the request to the bookmarks api endpoint, passing the post id and that the user wishes to bookmark the post
         url: `/api/bookmarks/${postId}/bookmark`,
+		// Type of PUT
         type: "PUT",
+		// On success
         success: (newUserData) => {
             // Check if the post is already bookmarked
             var bookmarkIndex = userLoggedIn.bookmarks.indexOf(postId);
 
-	    userLoggedIn = newUserData;
+			// Update the local copy of the user's data so that it includes the updated bookmarks
+	    	userLoggedIn = newUserData;
 
+			// Check if the post is currently bookmarked
             if (bookmarkIndex === -1) {
                 // Post is not bookmarked, so add it
                 button.addClass("active");
@@ -742,48 +874,79 @@ $(document).on("click", ".bookmarkButton", (event) => {
     });
 });
 
+// When the user clicks on a post
 $(document).on("click", ".post", (event) => {
+	// Get the element the user cicked on
 	var element = $(event.target);
+	// Get the post id from the element
 	var postId = getPostIdFromElement(element);
+	// Get whether the post clicked on is the main post in a reply thread (ie the one currently focused)
     var isMainPostBoolean = getIsMainPostFromElement(element);
 
+	// If the post id was found, the element is not a button and it is not the main focused post
 	if (postId !== undefined && !element.is("button") && !isMainPostBoolean) {
+		// Redirect to the focused post page for the post the user just clicked on
 		window.location.href = "/post/" + postId;
 	}
 });
 
+// When the user clicks on the follow button
 $(document).on("click", ".followButton", (event) => {
+	// Get the relevant button
     var button = $(event.target);
+	// Get the userid from the button
     var userId = button.data().user;
-    
+
+	// If user id not found, halt execution
     if (userId === undefined) return;
 
+	// Issue an ajax request
     $.ajax({
+		// Send the request to the users api, passing the target user id and that the current user wishes to update their follow status
         url: `/api/users/${userId}/follow`,
+		// Of type put
         type: "PUT",
+		// On success
         success: (data, status, xhr) => {
 
+			// If a 404 error is returned
             if(xhr.status == 404) {
+				// Alert the user that the user was not found
                 alert("User not found");
+				// Halt execution
                 return;
             }
 
+			// If returned following list includes the target user
             if(data.following && data.following.includes(userId)) {
+				// Add class making button solid and blue
                 button.addClass("following");
+				// Change follow text to say unfollow
                 button.find("span").text("Unfollow");
+				// Change the follow icon to the unfollow icon
                 button.find("i").removeClass("fa-user-plus").addClass("fa-user-minus");
+				// Send a notification to the target user
                 emitNotification(userId);
             }
             else {
+				// Remove the class making the button solid and blue
                 button.removeClass("following");
+				// Change the unfollow text to say follow
                 button.find("span").text("Follow");
+				// Change unfollow icon to follow icon
                 button.find("i").removeClass("fa-user-minus").addClass("fa-user-plus");
             }
 
+			// Get the followers label
             var followersLabel = $("#followersValue");
+			// If followers label found - ie if user is on target user page or elsewhere where the followersvalue is present,
+			// there are places such as search where the followers label is not shown, but users can follow other users
             if(followersLabel.length != 0) {
+				// Get current content of the followers label
                 var followersText = followersLabel.text();
+				// Get int from the followers text
                 followersText = parseInt(followersText);
+				// Set the updated followers label text to either be 1 more or 1 less depending on if the current user followed or unfollowed the target user
                 followersLabel.text(followersText + (data.following && data.following.includes(userId) ? 1 : -1));
             }
 
@@ -791,200 +954,305 @@ $(document).on("click", ".followButton", (event) => {
     })
 });
 
+// Code to be ran when a user clicks an unread notification
 $(document).on("click", ".notification.active", (event) => {
+	// Get the notification container
     var container = $(event.target);
+
+	// Get the ID of the notification from the container
     var notificationId = container.data().id;
-    
+	
+    // Get the link from the notification container
     var href = container.attr("href");
+	// Fix a bug where links were incorrectly parsed
     event.preventDefault();
 
+	// Set the callback to be the location specfified in the href attribute
     var callback = () => window.location = href;
+	// Run the function to make the notification as opened and pass in the callback on success
     markNotificationsAsOpened(notificationId, callback);
 });
 
+// Function to get post ID from an element
 function getPostIdFromElement(element) {
+	// Check if the provided element is already the root element
     var isRoot = element.hasClass("post");
+	// If the element passed is the root element, set rootelement as it, otherwise find and set the root element
     var rootElement = isRoot == true ? element : element.closest(".post");
+	// Set the post id var
     var postId = rootElement.data().id;
 
+	// If post id not found then return an error
     if(postId === undefined) return console.log("Post id undefined");
 
+	// Return the found post id
     return postId;
 }
 
+// Function to get whether the provided post is the main focused post
 function getIsMainPostFromElement(element) {
+	// Same code as previous to get root post element
     var isRoot = element.hasClass("post");
     var rootElement = isRoot == true ? element : element.closest(".post");
+	// See if the post has the mainpostbool element
     var isMainPost = rootElement.data("mainpostbool");
 
+	// If mainpostbool not found, return an error
     if(isMainPost === undefined) return alert("Post id undefined");
 
+	// If it is main post, return as such
     if (isMainPost == "yes") {
         var isMainPostBool = true;
     }
+	// If not main post, also return as such
     else {
         var isMainPostBool = false;
     }
 
+	// Return result of search
     return isMainPostBool;
 }
 
+// Function to create HTML to be rendered from provided post data, post should not be bold unless specified otherwise
 function createPostHtml(postData, boldFont = false) {
 
+	// If no data passed return an error
     if(postData == null) return alert("post object is null");
 
+	// If post is a reshare set isReshare to true
     var isReshare = postData.reshareData !== undefined;
+	// If post is reshare, set who the post was reshared by
     var resharedBy = isReshare ? postData.postedBy.username : null;
+	// If the post is a reshare, set the post data to the reshared post, otherwise leave it as is
     postData = isReshare ? postData.reshareData : postData;
+	// If the post has code, set the var as such
     var hasCode = postData.code !== '';
+	// Set the code contnt var if the post has code
     var codeContent = hasCode ? postData.code : null;
+	// Set the var as to whether the post is a poll
 	var hasPoll = postData.pollTitle !== '';
+	// Set the poll title
 	var pollTitle = hasPoll ? postData.pollTitle : null;
+	// Set the first option var
 	var option1 = hasPoll ? postData.option1 : null;
+	// Set the second option var
 	var option2 = hasPoll ? postData.option2 : null;
+	// Set the first votes var
 	var votes1 = hasPoll ? postData.votes1 : null;
+	// Set the second votes var
 	var votes2 = hasPoll ? postData.votes2 : null;
+	// Set the reply count var
     var replyCount = postData.replyCount;
 
+	// If there are no replies, set the reply count to 0
     if (replyCount === undefined) {
 	    replyCount = 0;
     }
 
+	// Set who the post was posted by
     var postedBy = postData.postedBy;
 
+	// If the postedby user doesnt have an id
     if(postedBy._id === undefined) {
+		// Return an error as the postedby user object has not been populated
         return console.log("User object not populated");
     }
 
+	// If the user doesnt have a last name set
     if (postedBy.lastName == "") {
+		// Set the display name to be just their first name
         var displayName = postedBy.firstName;
     }
     else {
+		// If the user has a last name, set their display name to be their first and last names seperated with a space
         var displayName = postedBy.firstName + " " + postedBy.lastName;
     }
+
+	// Set the timestamp using the timeDifference function with the current date using the date class and the object of the date when the post was created 
     var timestamp = timeDifference(new Date(), new Date(postData.createdAt));
 
+	// Set whether the like button should be red
     var likeButtonActiveClass = postData.likes.includes(userLoggedIn._id) ? "active" : "";
+	// Set whether the like button should be filled
     var likeButtonFillIcon = postData.likes.includes(userLoggedIn._id) ? "fas" : "far";
 
+	// Set whether the bookmark button should be blue
     var bookmarkButtonActiveClass = userLoggedIn.bookmarks.includes(postData._id) ? "active" : "";
+	// Set whether the bookmark button should be filled
     var bookmarkButtonFillIcon = userLoggedIn.bookmarks.includes(postData._id) ? "fas" : "far";
-	
+
+	// Set whether the reshare button should be green
     var reshareButtonActiveClass = postData.reshareUsers.includes(userLoggedIn._id) ? "active" : "";
 
+	// Remove bold weight temporarily as just font size looks cleaner
     //- var boldFontClass = boldFont ? "font-weight-bold" : "";
     var boldFontClass = "";
+	// Set posts with bold font to hve larger font
     var LargeFontStyle = boldFont ? "font-size:23px;" : "";
+	// If the post has bold font, it is the main focused post
     var postPageMainPost = boldFont ? "yes" : "";
 
+	// If the user posting is verified, then add the verification badge
     var verified = postedBy.verified ? `<img style="height: 1em;padding-left:5px;vertical-align:-0.175em;filter: invert(44%) sepia(91%) saturate(1231%) hue-rotate(185deg) brightness(106%) contrast(101%);" src="/images/badge-check.svg" data-toggle="tooltip" data-placement="top" title="Verified"></img>` : "";
+	// If the user posting is a verified brand, then add the brand verification badge
     var verifiedBrand = postedBy.verifiedBrand ? `<svg viewBox="0 0 22 22" data-toggle="tooltip" data-placement="top" title="" data-original-title="Verified Brand" style="height: 1.5em;padding-left:0px;vertical-align: -0.45em;"><rect width="10" height="10" x="6" y="6" fill="#000000"></rect><g><linearGradient id="12-a" gradientUnits="userSpaceOnUse" x1="4.411" x2="18.083" y1="2.495" y2="21.508"><stop offset="0" stop-color="#f4e72a"></stop><stop offset=".539" stop-color="#cd8105"></stop><stop offset=".68" stop-color="#cb7b00"></stop><stop offset="1" stop-color="#f4ec26"></stop><stop offset="1" stop-color="#f4e72a"></stop></linearGradient><linearGradient id="12-b" gradientUnits="userSpaceOnUse" x1="5.355" x2="16.361" y1="3.395" y2="19.133"><stop offset="0" stop-color="#f9e87f"></stop><stop offset=".406" stop-color="#e2b719"></stop><stop offset=".989" stop-color="#e2b719"></stop></linearGradient><g clip-rule="evenodd" fill-rule="evenodd"><path d="M13.324 3.848L11 1.6 8.676 3.848l-3.201-.453-.559 3.184L2.06 8.095 3.48 11l-1.42 2.904 2.856 1.516.559 3.184 3.201-.452L11 20.4l2.324-2.248 3.201.452.559-3.184 2.856-1.516L18.52 11l1.42-2.905-2.856-1.516-.559-3.184zm-7.09 7.575l3.428 3.428 5.683-6.206-1.347-1.247-4.4 4.795-2.072-2.072z" fill="url(#12-a)"></path><path d="M13.101 4.533L11 2.5 8.899 4.533l-2.895-.41-.505 2.88-2.583 1.37L4.2 11l-1.284 2.627 2.583 1.37.505 2.88 2.895-.41L11 19.5l2.101-2.033 2.895.41.505-2.88 2.583-1.37L17.8 11l1.284-2.627-2.583-1.37-.505-2.88zm-6.868 6.89l3.429 3.428 5.683-6.206-1.347-1.247-4.4 4.795-2.072-2.072z" fill="url(#12-b)"></path><path d="M6.233 11.423l3.429 3.428 5.65-6.17.038-.033-.005 1.398-5.683 6.206-3.429-3.429-.003-1.405.005.003z" fill="#d18800"></path></g></g></svg>` : "";
+	// Verified brands also have a square image rather than circular to further distinguish
     var squarePicture = postedBy.verifiedBrand ? `style="border-radius: 10%;"` : "";
     
-    // Troll verified
+    // Testing what the maximum amount of verification badges could be
     //var verified = postedBy.verified ? `<img style="height: 1em;padding-left:5px;vertical-align:-0.175em;filter: invert(44%) sepia(91%) saturate(1231%) hue-rotate(185deg) brightness(106%) contrast(101%);" src="/images/badge-check.svg" data-toggle="tooltip" data-placement="top" title="" data-original-title="Verified"><i class="fa-solid fa-circle-check" style="color:hotpink;"></i><i style="margin-left:5px; color:salmon;" class="fa-solid fa-spell-check"></i><i class="fa-solid fa-calendar-check" style="margin-left:5px; color:#ff5555;"></i><i style="margin-left:5px;" class="fa-solid fa-user-ninja"></i><i style="margin-left:5px;color:#0000ff;" class="fa-solid fa-user-astronaut"></i><i style="margin-left:5px;" class="fa-solid fa-person-through-window"></i><i style="margin-left:5px;color:#eebb55;" class="fa-solid fa-radiation"></i><i style="margin-left:5px;color:#888888;" class="fa-solid fa-person-rifle"></i><i style="margin-left:5px;color:#5555ff;" class="fa-solid fa-person-drowning"></i><i style="margin-left:5px;" class="fa-solid fa-people-robbery"></i><i style="margin-left:5px;color:#22ff00;" class="fa-solid fa-magnifying-glass-dollar"></i><i style="margin-left:5px;" class="fa-solid fa-child-combatant"></i><i style="margin-left:5px;color:#ff0000;" class="fa-solid fa-biohazard"></i><i style="margin-left:5px;" class="fa-solid fa-chess-knight"></i>` : "";
-    
+
+	// If the user is an admin, add the admin badge
     var admin = postedBy.admin ? `<i class="fad fa-kiwi-bird" style="margin-left:5px;color:#1D9BF0;" data-toggle="tooltip" data-placement="top" title="Kiwi Employee"></i>` : "";
 
+	// If the user is a verified govrnment, add their respective verification badge
     var verifiedGovernment = postedBy.verifiedGovernment ? `<i class="fad fa-check-circle" style="margin-left:5px;color:#696969;" data-toggle="tooltip" data-placement="top" title="Government Affiliated Account"></i>` : "";
 
+	// Initialise reshare text var
     var reshareText = '';
+	// If the post is a reshare
     if(isReshare) {
+		// Add the reshare text
         reshareText = `<span><i class='fas fa-repeat'></i>&nbsp;&nbsp;Reshared by <a href='/profile/${resharedBy}'>@${resharedBy}</a></span>`
     }
-	
+
+	// Initialise the reply flag var
 	var replyFlag = '';
+	// If the post is a reply and the the reply to id is properly set
 	if(postData.replyTo && postData.replyTo._id) {
-		
+
+		// If there is no post id
 		if(!postData.replyTo._id) {
+			// Return an error and alert user
 			return alert("Reply to is not populated");
 		}
 		else if(!postData.replyTo.postedBy._id) {
+			// If there is no user id return an error and alert user
 			return alert("Posted by is not populated");
 		}
 
+		// Get the username of the user being replied to
 		var replyToUsername = postData.replyTo.postedBy.username;
+		// Create the text saying who is being replied to
 		replyFlag = `<div class='replyFlag'>
 						Replying to <a href='/profile/${replyToUsername}'>@${replyToUsername}</a>
 					</div>`
 	}
 
+	// Initialise buttons var
     var buttons = "";
+	// Initalise pinned post text var
     var pinnedPostText = "";
+	// If the supplied post was created by the logged in user
     if (postData.postedBy._id == userLoggedIn._id) {
+		// If pinned
         if(postData.pinned === true) {
+			// Add the unpin button to the buttons var
             buttons = `<button class="unpinButton" aria-label="Unpin post" data-id="${postData._id}" data-mainPostBool="${postPageMainPost}" data-toggle="modal" data-target="#unpinModal"><i class="fas fa-thumbtack"></i></button><button class="deleteButton" aria-label="Delete post" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fad fa-trash"></i></button>`    
         }
+		//  If not pinned
         else {
+			// Add the pin button to the buttons var
             buttons = `<button class="pinButton" aria-label="Pin post" data-id="${postData._id}" data-mainPostBool="${postPageMainPost}" data-toggle="modal" data-target="#confirmPinModal"><i class="fas fa-thumbtack"></i></button><button class="deleteButton" aria-label="Delete Post" data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fad fa-trash"></i></button>`
         }
     }
+	// If the post is not by the logged in user, but the logged in user is an admin:
     else if (userLoggedIn.admin) {
+		//Add the delete post button
         buttons = `<button class="deleteButton" data-id="${postData._id}" data-mainPostBool="${postPageMainPost}" aria-label="Delete Post" data-toggle="modal" aria-label="Delete Post" data-target="#deletePostModal"><i class="fad fa-trash"></i></button>`
     }
 
+	//If the post is pinned, create the text saying as such
     if(postData.pinned === true) {
         pinnedPostText = `<span><i class="fas fa-thumbtack" style="color: rgb(101, 119, 134);"></i>&nbsp;&nbsp;Pinned<span>`
     }
 
+	// If the post is a reshare and is pinned, the text needs to go in same place so:
     if(isReshare && postData.pinned) {
+		// Set a temp var containing pinned post text
         temp = pinnedPostText;
+		// Create the new pinnedposttext combining pinned text with reshare text
         pinnedPostText = pinnedPostText + '&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;' + reshareText;
+		// Empty reshare text as contained in new pin message
         reshareText = '';
     }
 
+	// Initialise image var
     var image = "";
 
+	// If the post has an image
     if(postData.image) {
+		// If the post also has text
         if(postData.content) {
+			// Set the image var to the post image
             var image = `<div class='postImage'>
                             <img src='${postData.image}'>
                         </div>`;
         }
         else {
+			// Set the image var to the post image + extra padding to account for absence of text
             var image = `<br><div class='postImage'>
                             <img src='${postData.image}'>
                         </div>`;
         }
     }
 
+	// If the post contains code
     if(hasCode) {
+		// If the post also has text
         if(postData.content) {
+			// Create the codehtml var with the code content
             var codeHtml = `<pre><code>${codeContent}</code></pre>`;
         }
         else {
+			// Create the codehtml var with the code content + extra spacing due to absence of text
             var codeHtml = `<br><pre><code>${codeContent}</code></pre>`;
         }
     }
     else {
+		// Else set code html to be blank
         var codeHtml = ``;
     }
 
+	// Initalise poll html var
 	var pollHtml = ``;
+	// If the post has a poll
 	if(hasPoll) {
+		// Add this poll to the poll dictionary
 		addToPollDictionary(`${postData._id}`, [`${votes1.join("', '")}`], [`${votes2.join("', '")}`]);
+		// If the post with the poll is not focused
 		if(postPageMainPost !== 'yes') {
+			// Create the poll html, stating that the post must be focused in order to view the poll
 			pollHtml = `<div class="pollContainer" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
 	  					<h1 style="font-weight:700;">Poll: ${pollTitle}</h1>
 						<p style="margin-top:10px;margin-bottom:20px;padding-left:5px;">Click here to view the poll</p>
 				    </div>`;
 		}
+		// Check this poll is in the poll dictionary
 		else if (pollDictionary[`${postData._id}`].votes1.includes(userLoggedIn._id) || pollDictionary[`${postData._id}`].votes2.includes(userLoggedIn._id)) {
+			
+			// Check if the poll contains regular content
 			if(postData.content) {
+				// If it does, add spacing
 				pollHtml = pollHtml + `<br>`;
 			}
 
+			// Initalise poll percentage vars
 			let pollPercentage1 = 0;
 			let pollPercentage2 = 0;
-			
+
+			// Check if either vote is 0 to avoid a division by 0 error
 			if (votes1.length == 0 && votes2.length == 0) {
 				pollPercentage1 = 0;
 				pollPercentage2 = 0;
 			}
+			// If both are non zero
 			else {
+				// Get the percentages of the the votes
 				pollPercentage1 = ((votes1.length)/(votes1.length + votes2.length))*100;
 				pollPercentage2 = ((votes2.length)/(votes1.length + votes2.length))*100;
 			}
+			// Create the poll html with all of the previously defined variables, user has voted so show current results
 			pollHtml = pollHtml + `<div class="pollContainer" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
 										<h1 style="font-weight:700;">${pollTitle}</h1>
 										<br>
@@ -1002,10 +1270,13 @@ function createPostHtml(postData, boldFont = false) {
 	  
 			 `;
 		}
+		// If the user has not yet voted on this poll
 		else {
+			// If content present, add spacing
 			if(postData.content) {
 				pollHtml = pollHtml + `<br>`;
 			}
+			// Create poll html, user hasn't voted yet so show the voting buttons
 			pollHtml = pollHtml + `<div class="pollContainer" style="margin-top:10px;padding: 15px;padding-bottom: 0px;background-color: var(--lightGrey););border-radius: 15px;">
 	  									<h1 style="font-weight:700;">${pollTitle}</h1>
 										<br>
@@ -1025,6 +1296,7 @@ function createPostHtml(postData, boldFont = false) {
 		}
 	}
 
+	// Return the final post HTML with all of the relevant options as previously defined
     return `<div class='post' data-id='${postData._id}' data-mainPostBool="${postPageMainPost}">
                 <div class='postActionContainer'>
                     ${pinnedPostText}
@@ -1078,39 +1350,59 @@ function createPostHtml(postData, boldFont = false) {
             </div>`;
 }
 
+// Function to calculate worded time diff based on two epoch timestamps
 function timeDifference(current, previous) {
 
+	// Milliseconds in a minute (UNIX timestamp measured in ms)
     var msPerMinute = 60 * 1000;
+	// ms per hour
     var msPerHour = msPerMinute * 60;
+	// Per day
     var msPerDay = msPerHour * 24;
+	// Per month
     var msPerMonth = msPerDay * 30;
+	// Per year
     var msPerYear = msPerDay * 365;
 
+	// Get the elapsed time between the timestamps
     var elapsed = current - previous;
 
+	// If it was under a minute ago
     if (elapsed < msPerMinute) {
+		// If under 30s ago, return just now
         if(elapsed/1000 < 30) return "Just now";
-        
+
+		// 30s - 1 min say the number of seconds ago it was
         return Math.round(elapsed/1000) + ' seconds ago';   
     }
 
+	// If < 1 hour
     else if (elapsed < msPerHour) {
+		// Return number of mins ago it was
          return Math.round(elapsed/msPerMinute) + ' minutes ago';   
     }
 
+	// If < 1 day
     else if (elapsed < msPerDay ) {
+		// Return number of hours ago it was
          return Math.round(elapsed/msPerHour ) + ' hours ago';   
     }
 
+	// If < 1 month
     else if (elapsed < msPerMonth) {
+		// Return number of days ago
         return Math.round(elapsed/msPerDay) + ' days ago';   
     }
 
+	// If < 1 year
     else if (elapsed < msPerYear) {
+		// Return number of months ago
         return Math.round(elapsed/msPerMonth) + ' months ago';   
     }
 
+	// If > 1 year
     else {
+		// Return number of years ago
         return Math.round(elapsed/msPerYear ) + ' years ago';   
     }
 }
@@ -1239,47 +1531,73 @@ ads.push(`<div class="post" data-id="654645e0bbe171788dd7ada7">
 </div>
 </div>`);
 
+// Function to output an array of posts to a provided container
 function outputPosts(results, container) {
+	// Set the minimum spacing for ads
     var adIncrement = 5;
+
+	// Reset the container
 	container.html("");
 
+	// If the results are not in array form
 	if(!Array.isArray(results)) {
+		// Set them to array form
 		results = [results];
 	}
 
+	// Iterate through each result
 	results.forEach(result => {
+		// Create the html for this result
 		var html = createPostHtml(result);
+		// Add the html to the end of the container
 		container.append(html);
+		// Ensure any code is syntax highlighted
         hljs.highlightAll();
+		// Get the spacing between ads (0-4+5, ie between 5 and 9 post spacing)
         var random = Math.floor(Math.random() * 4) + 5;
+		// If there is an ad due
         if (adIncrement >= random) {
+			// If no ads
             if (ads.length == 0) {
+				// Just reset the increment
                 adIncrement = 0;
             }
+			// If there are ads left
             else {
+				// Get a random id for an ad
                 var randomAdId = Math.floor(Math.random() * ads.length);
+				// Add the selected ad
                 container.append(ads[randomAdId]);
                 // Remove that ad from ads
                 ads.splice(randomAdId, 1);
+				// Reset the ad tracker
                 adIncrement = 0;
             }
         }
+		// Add one to ad tracker
         adIncrement++;
 	});
 
+	// Set the tooltip data to the tooltip
 	$('[data-toggle="tooltip"]').tooltip()
 
+	// If there are no results, return as such
 	if (results.length == 0) {
 		container.append("<span class='noResults'>Nothing to show :(</span>");
 	}
 
+	// Iterate over each bookmark button
 	$(".bookmarkButton").each(function() {
-	        var button = $(this);
+	        // Get the relevant bookmark button
+			var button = $(this);
+			// Get the post id from the button
 	        var postId = getPostIdFromElement(button);
-	
+
+			// If the current post is bookmarked, update the button to reflect that
 	        if (userLoggedIn.bookmarks.includes(postId)) {
 	            button.addClass("active");
 	            button.find("i").removeClass("far").addClass("fas");
+			// If current post not bookmarked, update to reflect that
 	        } else {
 	            button.removeClass("active");
 	            button.find("i").removeClass("fas").addClass("far");
@@ -1287,66 +1605,100 @@ function outputPosts(results, container) {
 	    });
 }
 
+// Function for outputting posts with replies
 function outputPostsWithReplies(results, container) {
+	// Set the container to empty to start
     container.html("");
+
+	// If the post being replied to is deleted
     if(results.replyTo !== undefined && results.replyTo === null) {
+		// Output this
         container.append("<span class='noResults'>Original post was deleted</span>")
     }
+	// If replied to post still exists
     else if(results.replyTo !== undefined && results.replyTo._id !== undefined) {
+		// Create html for this post
         var html = createPostHtml(results.replyTo);
+		// Output this post
         container.append(html);
+		// Highlight any code
         hljs.highlightAll();
     }
 
+	// Create html for the focused post
     var mainPostHtml = createPostHtml(results.postData, true);
+	// Append the main post
     container.append(mainPostHtml);
+	// Highlight any code syntax
     hljs.highlightAll();
 
+	// Iterate over each reply
     results.replies.forEach(result => {
+		// Get html for this reply
         var html = createPostHtml(result);
+		// Output the post to the container
         container.append(html);
+		// Highlight any code syntax
         hljs.highlightAll();
     });
 }
 
+// Function to output users
 function outputUsers(results, container) {
+	// Start by resetting the container
 	container.html("");
-	
+
+	// For each result
 	results.forEach(result => {
+		// Create html for this user
 		var html = createUserHtml(result, true);
+		// Add the user to the container
 		container.append(html);
 	});
 
+	// If no users were supplied
 	if(results.length == 0) {
+		// Add the no results message to the container
 		container.append(`<span class='noResults'>Nothing to show :(</span>`);
 	}
 }
 
+// Function to create HTML for users
 function createUserHtml(userData, showFollowButton) {
 
+	// If last name is not set, set it to an empty string
     if(userData.lastName == null) {
         userData.lastName = "";
     }
+	// If the user does not have a last name, there should be no space between first and last name as there is not a last name
     if(userData.lastName == ""){
         var nameSpace = "";
     }
+	// Do the opposite if the user does have a last name
     else {
         var nameSpace = " ";
     }
 
+	// If the follow button should be shown in this context and all other data correctly provided
 	if (showFollowButton && userLoggedIn._id != userData._id) {
+		// Determine whether current user following target user
 		if(userLoggedIn.following && userLoggedIn.following.includes(userData._id)) {
 			isFollowing = true;
 		}
 		else {
 			isFollowing = false;
 		}
+		// Set the text to be used depending on whether target user is currently followed by current user or not
 		text = isFollowing ? "Unfollow" : "Follow"
+		// Set button class in same manner
 		buttonClass = isFollowing ? "followButton following" : "followButton"
+		// Set the type of icon as well
 		buttonIcon = isFollowing ? "fa-user-minus" : "fa-user-plus"
+		// Create the final follow text to be rendered
 		followText = `<div class='followButtonContainer'><button class="${buttonClass}" data-user="${userData._id}"><i class="fas ${buttonIcon}"></i><span>${text}</span></button></div>`
 	}
 	else {
+		// If follow text not needed in this context, set it to an empty string
 		followText = "";
 	}
 
