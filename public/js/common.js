@@ -1702,12 +1702,17 @@ function createUserHtml(userData, showFollowButton) {
 		followText = "";
 	}
 
+    // If the user is verified, add the relevant badge
     var verified = userData.verified ? `<img style="padding-left:5px;filter: invert(44%) sepia(91%) saturate(1231%) hue-rotate(185deg) brightness(106%) contrast(101%);" src="/images/badge-check.svg" data-toggle="tooltip" data-placement="top" title="Verified"></img>` : "";
+    // Add badge for verified brand accounts
     var verifiedBrand = userData.verifiedBrand ? `<svg viewBox="0 0 22 22" data-toggle="tooltip" data-placement="top" title="" data-original-title="Verified Brand" style="height: 1.5em;padding-left:5px;vertical-align: -0.45em;"><rect width="10" height="10" x="6" y="6" fill="#000000"></rect><g><linearGradient id="12-a" gradientUnits="userSpaceOnUse" x1="4.411" x2="18.083" y1="2.495" y2="21.508"><stop offset="0" stop-color="#f4e72a"></stop><stop offset=".539" stop-color="#cd8105"></stop><stop offset=".68" stop-color="#cb7b00"></stop><stop offset="1" stop-color="#f4ec26"></stop><stop offset="1" stop-color="#f4e72a"></stop></linearGradient><linearGradient id="12-b" gradientUnits="userSpaceOnUse" x1="5.355" x2="16.361" y1="3.395" y2="19.133"><stop offset="0" stop-color="#f9e87f"></stop><stop offset=".406" stop-color="#e2b719"></stop><stop offset=".989" stop-color="#e2b719"></stop></linearGradient><g clip-rule="evenodd" fill-rule="evenodd"><path d="M13.324 3.848L11 1.6 8.676 3.848l-3.201-.453-.559 3.184L2.06 8.095 3.48 11l-1.42 2.904 2.856 1.516.559 3.184 3.201-.452L11 20.4l2.324-2.248 3.201.452.559-3.184 2.856-1.516L18.52 11l1.42-2.905-2.856-1.516-.559-3.184zm-7.09 7.575l3.428 3.428 5.683-6.206-1.347-1.247-4.4 4.795-2.072-2.072z" fill="url(#12-a)"></path><path d="M13.101 4.533L11 2.5 8.899 4.533l-2.895-.41-.505 2.88-2.583 1.37L4.2 11l-1.284 2.627 2.583 1.37.505 2.88 2.895-.41L11 19.5l2.101-2.033 2.895.41.505-2.88 2.583-1.37L17.8 11l1.284-2.627-2.583-1.37-.505-2.88zm-6.868 6.89l3.429 3.428 5.683-6.206-1.347-1.247-4.4 4.795-2.072-2.072z" fill="url(#12-b)"></path><path d="M6.233 11.423l3.429 3.428 5.65-6.17.038-.033-.005 1.398-5.683 6.206-3.429-3.429-.003-1.405.005.003z" fill="#d18800"></path></g></g></svg>` : "";
+    // Add badge for verified govs
     var verifiedGovernment = userData.verifiedGovernment ? `<i class="fas fa-circle-check" style="padding-left:5px;color:#696969;" data-toggle="tooltip" data-placement="top" title="Government Affiliated Account"></i>` : "";
 
+    // Verified brands should also have square profile pictures
     var squarePicture = userData.verifiedBrand ? "style='border-radius:10%;'" : "";
 
+    // Return the user HTML with previously set information
 	return `<div class="user">
 				<div class="userImageContainer">
 					<img ${squarePicture} src="${userData.profilePic}">
@@ -1725,132 +1730,209 @@ function createUserHtml(userData, showFollowButton) {
 			</div>`;
 }
 
+// Function to search for users
 function searchUsers(searchTerm) {
+    // Send a get request to the users API providing the searchterm 
     $.get("/api/users", { search: searchTerm }, results => {
+        // Output users returned into the results container
         outputSelectableUsers(results, $(".resultsContainer"));
     });
 }
 
+// Function to output selectable users - ie not youself or already added to group chat
 function outputSelectableUsers(results, container) {
+    // Empty container
 	container.html("");
 	
+    // Iterate over each result
 	results.forEach(result => {
 
+        // If result user is already selected or is the logged in user
         if(result._id == userLoggedIn._id || selectedUsers.some(u => u._id == result._id)) {
+            // Halt execution of function
             return;
         }
 
+        // Create the user html
 		var html = createUserHtml(result, false);
+        // Get the element from html
         var element = $(html);
+        // Set element click to user
         element.click(() => userSelected(result));
+        // Append the element to the container
 		container.append(element);
 	});
 
+    // If no results
 	if(results.length == 0) {
+        // Append the no results text
 		container.append(`<span class='noResults'>Nothing to show :(</span>`);
 	}
 }
 
+// Function to select user
 function userSelected(user) {
+    // Add user to the selected user array
     selectedUsers.push(user);
+    // Run code to update the selected user html
     updateSelectedUsersHtml();
+    // Empty the search textbox and focus it
     $("#userSearchTextbox").val("").focus();
+    // Empty the results container
     $(".resultsContainer").html("");
+    // Enable the create chat button (set disabled to false)
     $("#createChatButton").prop("disabled", false);
 }
 
+// Function to update the html of a selected user
 function updateSelectedUsersHtml() {
+    // Initialise element var
     var element = []
+
+    // for each selected user
     selectedUsers.forEach(user => {
+        // Start with a space betwen first and last names
         var nameSpace = " "
+        // If no last name
         if(user.lastName == null){
+            // Set last name to empty string
             user.lastName = "";
         }
+        // If last name is empty string
         if(user.lastName == ""){
+            // Remove space between names - no last name
             nameSpace = "";
         }
+        // Create concatenated name
         var name = user.firstName + nameSpace + user.lastName;
+        // Create user element
         var userElement = $(`<span class='selectedUser'>${name}</span>`);
+        // Add the user element to the element array
         element.push(userElement);
     });
 
+    // Remove the selected user
     $(".selectedUser").remove();
+    // Add selected users to the selected users element
     $("#selectedUsers").prepend(element);
 }
 
+// Function to get chat name
 function getChatName(chatData) {
+    // Chat name set to supplied chataData's chat name
 	var chatName = chatData.chatName;
 
+    // If no chat name was supplied
 	if(!chatName) {
+        // Get the other users's names
 		var otherChatUsers = getOtherChatUsers(chatData.users);
+        // Create an array with the names of the users that were returned
 		var namesArray = otherChatUsers.map(user => user.firstName + " " + user.lastName);
+        // Update the chat name with the user#s names seperated by ", 0" 
 		chatName = namesArray.join(", ");
 	}
 
+    // Return the newly generated
 	return chatName;
 }
 
+// Function to get the other users in a chat
 function getOtherChatUsers(users) {
+    // If the users array is only containing another user, then just return that user
 	if(users.length == 1) return users;
 
+    // Return all users
 	return users.filter(user => user._id != userLoggedIn._id);
 }
 
+// Function to be ran when a message is recieved
 function messageReceived(newMessage) {
+    // If nt on chat page
     if($(`[data-room=${newMessage.chat._id}]`).length == 0) {
+        // Popup the message 
         showMessagePopup(newMessage);
     }
+    // If on the chat page
     else {
+        // Add the chat message html to the chat
         addChatMessageHtml(newMessage);
     }
 
+    // Refresh the messages badge in the navbar
     refreshMessagesBadge();
 }
 
+// Function  to mark notifications as opened when clicked
 function markNotificationsAsOpened(notificationId = null, callback = null) {
+    // If there is no callback supplied, then use a reload as the callback
     if(callback == null) callback = () => location.reload();
 
+    // Set the specific api request to run, if an id is provided - provide that as the particular notification to be provided.
+    // If there is not an ID provided, then dont pass it, all notifications should be marked as read
     var url = notificationId != null ? `/api/notifications/${notificationId}/markAsOpened` : `/api/notifications/markAsOpened`;
+    // Issue an ajax request
     $.ajax({
+        // Put the url to be used
         url: url,
+        // PUT request
         type: "PUT",
+        // Run the callback on success
         success: () => callback()
     })
 }
 
+// Function to refresh the messages badge
 function refreshMessagesBadge() {
+    // Issue a get request to the chats api endpoint, specifying that only unread messages are wanted
     $.get("/api/chats", { unreadOnly: true }, (data) => {
+        // Set a var containing the number of results contained
         var numResults = data.length;
 
+        // IF there are more than 0 results
         if(numResults > 0) {
+            // Add the number to the badge and make it visible
             $("#messagesBadge").text(numResults).addClass("active");
         }
         else {
+            // Remove any text and make it invisibile
             $("#messagesBadge").text("").removeClass("active");
         }
     })
 }
 
+// Function to refresh the notifications bade
 function refreshNotificationsBadge() {
+    // Issue a get request to the notifications endpoint, only requesting unread notifications
     $.get("/api/notifications", { unreadOnly: true }, (data) => {
+        // Set a var with the length of the results
         var numResults = data.length;
 
+        // If more than zero results
         if(numResults > 0) {
+            // Set the notificatins badge text to the number of results and make it visible
             $("#notificationsBadge").text(numResults).addClass("active");
         }
         else {
+            // Remove text from badge and make it invisible
             $("#notificationsBadge").text("").removeClass("active");
         }
     })
 }
 
+// Function to create the chat html
 function createChatHtml(chatData) {
+    // Get the chat name and save to a var
 	var chatName = getChatName(chatData);
+    // Get the chat image and save as var
 	var image = getChatImageElements(chatData);
+
+    // Get and save the latest chat message to a var
 	var latestMessage = getLatestMessage(chatData.latestMessage);
 
+    // Set whether the chat should be highlighted - this is when there are unread messages in the chat
   	var activeClass = !chatData.latestMessage || chatData.latestMessage.readBy.includes(userLoggedIn._id) ? "" : "active";
 
+    // Return the chat html with the previously defined variables
 	return `<a href='/messages/${chatData._id}' class='resultListItem ${activeClass}'>
 				${image}
 				<div class='resultsDetailsContainer ellipsis'>
@@ -1860,95 +1942,142 @@ function createChatHtml(chatData) {
 			</a>`
 }
 
+// Get the latest message in the chat
 function getLatestMessage(latestMessage) {
+    // If there is a latest message
 	if(latestMessage != null) {
+        // Store the sender of the latest message in a var
 		var sender = latestMessage.sender;
+        // Initialise a sender name variable
 		let senderName = "";
 
+        // If there is no last name
 		if (sender.lastName == "") {
+            // Set the sender name to just the senders first name
 			senderName = `${sender.firstName}`;
 		}
 		else {
+            // Set the sender name to both first and last name, seperated with a space.
 			senderName = `${sender.firstName} ${sender.lastName}`;
 		}
 
+        // If there is content
 		if (latestMessage.content !== undefined) {
+            // Return the senders name with the message content
 			return `${senderName}: ${latestMessage.content}`;
 		}
+        // If there is not content, then it is an image message
 		else if (latestMessage.imageMessage !== undefined) {
+            // Return the senders name as well as noting that it is an image message
 			return `${senderName}: Image Message`;
 		}
 	}
 
+    // Else, if there are no messages, return that it is a new chat.
 	return "New chat";
 }
 
+// Function to create the chat image - it uses profile images of people in the chat
 function getChatImageElements(chatData) {
+    // Get other users in the chat and store it as a var
 	var otherChatUsers = getOtherChatUsers(chatData.users);
+    // Initalise the groupchatclass var
 	var groupChatClass = "";
+    // Set the first chat image
 	var chatImage = getUserChatImageElement(otherChatUsers[0]);
 
+    // If there is more than 1 users
 	if(otherChatUsers.length > 1) {
+        // Set that it is a groupchat
 		groupChatClass = "groupChatImage";
+        // Add a second user image
 		chatImage += getUserChatImageElement(otherChatUsers[1]);
 	}
 
+    // Return the chat image
 	return `<div class='resultsImageContainer ${groupChatClass}'>${chatImage}</div>`
 }
 
+// Function to get users image from user element passed in
 function getUserChatImageElement(user) {
+    // If no user passed or the user does not have a profile image
 	if(!user || !user.profilePic) {
+        // Return an alert letting the user know that somehing went wrong
 		return alert("User passed into function is invalid");
 	}
 
+    // Return the user's profile picture, also adding alt text for accessability
 	return `<img src='${user.profilePic}' alt="User's profile pic">`
 }
 
+// FUnction to show notification popup
 function showNotificationPopup(data) {
+    // Create html for the notification
     var html = createBasicNotificationHtml(data);
+    // Create an element
     var element = $(html);
 
+    // Hide the element, add it to the notification list element and begin the slide down animation
     element.hide().prependTo("#notificationList").slideDown("fast");
 
+    // Set the notification to fadeout after 4 seconds.
     setTimeout(() => element.fadeOut(400), 5000);
 }
 
+// Function to show message popup
 function showMessagePopup(data) {
 
-    // TODO - if new chat this won't work, need to find another way cuz it can't check if ._id is set without erroring
+    // If there is no latestest message
     if(!data.chat.latestMessage._id) {
+        // Set the latest message to data
         data.chat.latestMessage = data;
     }
 
+    // Create the message html
     var html = createChatHtml(data.chat);
+    // Create the element
     var element = $(html);
 
+    // Hide element, prepend to notification list, begin animation
     element.hide().prependTo("#notificationList").slideDown("fast");
 
+    // Fadeout after 5 seconds
     setTimeout(() => element.fadeOut(400), 5000);
 }
 
+// Function to output the basic notifications list
 function outputBasicNotificationsList(notifications, container,) {
-	var increment = 0;
+	// Initialise increment var
+    var increment = 0;
+    // Iterate through each notifiction
 	for (const notification of notifications) {
+        // CReate html for notifications 
 		var html =  createBasicNotificationHtml(notification, increment);
+        // Add html to the container
 		container.append(html);
+        // Increase the increment
 		increment++;
 	}
 
+    // If there are no notifcations
 	if (notifications.length == 0) {
+        // Set the message saying no results with a little joke at the end as well
 		container.append("<span class='noResults'>No notifications? It's almost as if your phone is trying to tell you something.</span>");
 	}
 }
 
-
-
+// Function to create notification html
 function createBasicNotificationHtml(notification, increment) {
+    // Create var with user from
 	var userFrom = notification.userFrom;
+    // Get notification text
 	var text = getBasicNotificationText(notification);
+    // Get notification url
 	var url = getBasicNotificationUrl(notification);
+    // Choose whether to highlight the notification based on if the notification has been opened or not
 	var className = notification.opened ? "" : "active";
 
+    // Return the notification html with the variables previously set
 	return `<a href="${url}" class="resultListItem notification ${className}" data-id="${notification._id}">
 				<div class="resultsImageContainer">
 					<img src="${userFrom.profilePic}">
@@ -1959,67 +2088,97 @@ function createBasicNotificationHtml(notification, increment) {
 			</a>`;
 }
 
+// Function get the notification text
 function getBasicNotificationText(notification) {
-
+    // Set a var with the userfrom
 	var userFrom = notification.userFrom;
 
+    // Testing verification badge
 	//var verified = userFrom.verified ? `<img style="height: 1.5em;padding-left:0px;vertical-align: -0.45em;filter: invert(44%) sepia(91%) saturate(1231%) hue-rotate(185deg) brightness(106%) contrast(101%);" src="/images/badge-check.svg" data-toggle="tooltip" data-placement="top" title="Verified"></img>` : "";
+    // Verified brand badge
 	var verifiedBrand = userFrom.verifiedBrand ? `<svg viewBox="0 0 22 22" data-toggle="tooltip" data-placement="top" title="" data-original-title="Verified Brand" style="height: 1.5em;padding-left:0px;vertical-align: -0.45em;"><rect width="10" height="10" x="6" y="6" fill="#000000"></rect><g><linearGradient id="12-a" gradientUnits="userSpaceOnUse" x1="4.411" x2="18.083" y1="2.495" y2="21.508"><stop offset="0" stop-color="#f4e72a"></stop><stop offset=".539" stop-color="#cd8105"></stop><stop offset=".68" stop-color="#cb7b00"></stop><stop offset="1" stop-color="#f4ec26"></stop><stop offset="1" stop-color="#f4e72a"></stop></linearGradient><linearGradient id="12-b" gradientUnits="userSpaceOnUse" x1="5.355" x2="16.361" y1="3.395" y2="19.133"><stop offset="0" stop-color="#f9e87f"></stop><stop offset=".406" stop-color="#e2b719"></stop><stop offset=".989" stop-color="#e2b719"></stop></linearGradient><g clip-rule="evenodd" fill-rule="evenodd"><path d="M13.324 3.848L11 1.6 8.676 3.848l-3.201-.453-.559 3.184L2.06 8.095 3.48 11l-1.42 2.904 2.856 1.516.559 3.184 3.201-.452L11 20.4l2.324-2.248 3.201.452.559-3.184 2.856-1.516L18.52 11l1.42-2.905-2.856-1.516-.559-3.184zm-7.09 7.575l3.428 3.428 5.683-6.206-1.347-1.247-4.4 4.795-2.072-2.072z" fill="url(#12-a)"></path><path d="M13.101 4.533L11 2.5 8.899 4.533l-2.895-.41-.505 2.88-2.583 1.37L4.2 11l-1.284 2.627 2.583 1.37.505 2.88 2.895-.41L11 19.5l2.101-2.033 2.895.41.505-2.88 2.583-1.37L17.8 11l1.284-2.627-2.583-1.37-.505-2.88zm-6.868 6.89l3.429 3.428 5.683-6.206-1.347-1.247-4.4 4.795-2.072-2.072z" fill="url(#12-b)"></path><path d="M6.233 11.423l3.429 3.428 5.65-6.17.038-.033-.005 1.398-5.683 6.206-3.429-3.429-.003-1.405.005.003z" fill="#d18800"></path></g></g></svg>` : "";
 	
+    // Add verified brand suffix
 	var suffixes = verifiedBrand;
 
+    // If there is no user from variable
 	if(!userFrom.firstName) {
+        // Return an error alerting the user
 		return alert("user from data not populated");
 	}
 
+    // If user has no last name
 	if (userFrom.lastName == "") {
+        // Set the userfromname to be just the first name
 		var userFromName = userFrom.firstName;
 	}
 	else {
+        // Set the userfromname to be the firstname and lastname seperated with a space
 		var userFromName = `${userFrom.firstName} ${userFrom.lastName}`;
 	}
 
+    // Initialise the text variable
 	var text;
 
+    // If it is a reshare, set the relevant text
 	if(notification.notificationType == "postReshare") {
 		text = `${userFromName}${suffixes}  reshared one of your posts`;
 	}
+    // Set relevant like text
 	else if (notification.notificationType == "postLike") {
 		text = `${userFromName}${suffixes}  liked one of your posts`;
 	}
+    // Set relevant reply text
 	else if (notification.notificationType == "reply") {
 		text = `${userFromName}${suffixes}  replied to one of your posts`;
 	}
+    // Set relevant follow text
 	else if (notification.notificationType == "follow") {
 		text = `${userFromName}${suffixes}  followed you`;
 	}
 
+    // Return the definded text
 	return `<span class="ellipsis">${text}</span>`;
 }
 
+// Functio to get the url for notifications
 function getBasicNotificationUrl(notification) {
-
+    // Initialise the url variable (# just represents a refresh)
 	var url = "#";
 
+    // If it is a reshare, like, or reply
 	if(notification.notificationType == "postReshare" || notification.notificationType == "postLike" || notification.notificationType == "reply") {
+        // Set the url to the relevant post
 		url = `/post/${notification.entityId}`;
 	}
+    // If it is a follow
 	else if (notification.notificationType == "follow") {
+        // Set the url to the relevant profile
 		url = `/profile/${notification.entityId}`;
 	}
 
+    // Return the defined url
 	return url;
 }
 
+// Function to be ran when the user clicks on the change bio button
 $("#changeBioButton").click(() => {
+    // Send an ajax request
 	$.ajax({
+        // Send to the bio settings api request
 		url: "/api/settings/bio/",
+        // PUT request type
 		type: "PUT",
+        // Send the bio textbox value
 		data: { bio: $("#bioTextbox").val() },
+        // On success
 		success: (data, status, xhr) => {
+            // Redirect to profile page
 			window.location.href = "/profile";
 		},
+        // On error
 		error: (xhr, status, error) => {
+            // Append the error message
 			$(".errorMessageBio").text("An error occured.");
 			$(".errorMessageBio").append("<br>");
 		}
