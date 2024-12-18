@@ -1,18 +1,28 @@
+// Code to be ran when the verify search button is running 
 $("#verifySearchButton").click(() => {
-	
+	// Clear any error message
 	$(".errorMessageVerify").text("");
+	// Remove the results container
 	$(".verifyResults").remove();
 
+	// Issue an ajax request
 	$.ajax({
+		// Send to the verify search admin api route
 		url: "/api/admin/verifySearch",
+		// GET Request type
 		type: "GET",
+		// Add the username textbox value data
 		data: { username: $("#verifyUserUsernameTextbox").val() },
+		// On Success
 		success: (data, status, xhr) => {
+			// Append the verify results containing
 			$("#verifyUserModalBody").append("<br class='verifyResults'>");
 			$("#verifyUserModalBody").append("<br class='verifyResults'>");
 
+			// Add the username attibute
 			$("#verifyUserUsernameTextbox").attr("data-username", data.username);
 			
+			// Say whether to verify or unverify user
 			if(data.verified) {
 				$("#verifyUserModalBody").append("<span class='text-success verifyResults'>" + data.username + " is verified.</span>");
 				$("#verifyUserModalBody").append("<button class='btn btn-danger verifyResults' id='unverifyUserButton'>Unverify</button>");
@@ -24,6 +34,7 @@ $("#verifySearchButton").click(() => {
 			
 			$("#verifyUserModalBody").append("<br class='verifyResults'>");
 
+			// Same but for brand verification
 			if(data.verifiedBrand) {
 				$("#verifyUserModalBody").append("<span class='text-success verifyResults'>" + data.username + " is a verified brand.</span>");
 				$("#verifyUserModalBody").append("<button class='btn btn-danger verifyResults' id='unverifyBrandButton'>Unverify brand</button>");
@@ -35,6 +46,7 @@ $("#verifySearchButton").click(() => {
 
 			$("#verifyUserModalBody").append("<br class='verifyResults'>");
 
+			// Same but for admin verification
 			if(data.admin) {
 				$("#verifyUserModalBody").append("<span class='text-success verifyResults'>" + data.username + " is an admin.</span>");
 				$("#verifyUserModalBody").append("<button class='btn btn-danger verifyResults' id='removeAdminButton'>Remove admin</button>");
@@ -46,6 +58,7 @@ $("#verifySearchButton").click(() => {
 
 			$("#verifyUserModalBody").append("<br class='verifyResults'>");
 
+			// Same but for gov verification
 			if(data.verifiedGovernment) {
 				$("#verifyUserModalBody").append("<span class='text-success verifyResults'>" + data.username + " is a verified government.</span>");
 				$("#verifyUserModalBody").append("<button class='btn btn-danger verifyResults' id='unverifyGovernmentButton'>Unverify government</button>");
@@ -55,15 +68,19 @@ $("#verifySearchButton").click(() => {
 				$("#verifyUserModalBody").append("<button class='btn btn-success verifyResults' id='verifyGovernmentButton'>Verify government</button>");
 			}
 		},
+		// On error
 		error: (xhr, status, error) => {
+			// Show error code for 400
 			if (xhr.status == 400) {
 				$(".errorMessageVerify").text("Please enter a username.");
 				$(".errorMessageVerify").append("<br>");
 			}
+			// Show error code for 404
 			else if (xhr.status == 404) {
 				$(".errorMessageVerify").text("That user could not be found.");
 				$(".errorMessageVerify").append("<br>");
 			}
+			// Show error code for other errors
 			else {
 				$(".errorMessageVerify").text("Unknown error occured. Code: " + xhr.status);
 				$(".errorMessageVerify").append("<br>");
@@ -72,18 +89,26 @@ $("#verifySearchButton").click(() => {
 	});
 });
 
+// Function to run the verification api call
 function verifyApiCall(textboxName, type, action) {
+	// Issue ajax request
 	$.ajax({
+		// Send to admin api verification endpoint
 		url: "/api/admin/verify",
+		// PUT request
 		type: "PUT",
+		// Add the type, action and username
 		data: { username: $(textboxName).attr("data-username"), type: type, action: action },
+		// On sucess
 		success: (data, status, xhr) => {
 
 			$(".errorMessageVerify").text("");
 			$(".verifyResults").remove();
 
+			// Print that it is successful
 			$("#verifyUserModalBody").append("<span class='text-success verifyResults'>Success!</span>");
 
+			// Repeat the code from before
 			$.ajax({
 				url: "/api/admin/verifySearch",
 				type: "GET",
@@ -158,47 +183,62 @@ function verifyApiCall(textboxName, type, action) {
 	});
 };
 
+// Call individual verify
 $(document).on("click", "#verifyUserButton", () => {
 	verifyApiCall("#verifyUserUsernameTextbox", "user", "verify");
 });
 
+// Call individual unverify
 $(document).on("click", "#unverifyUserButton", () => {
 	verifyApiCall("#verifyUserUsernameTextbox", "user", "unverify");
 });
 
+// Call brand verify
 $(document).on("click", "#verifyBrandButton", () => {
 	verifyApiCall("#verifyUserUsernameTextbox", "brand", "verify");
 });
 
+// Call brand unverify
 $(document).on("click", "#unverifyBrandButton", () => {
 	verifyApiCall("#verifyUserUsernameTextbox", "brand", "unverify");
 });
 
+// Call admin verify
 $(document).on("click", "#makeAdminButton", () => {
 	verifyApiCall("#verifyUserUsernameTextbox", "admin", "make");
 });
 
+// Call admin unverify
 $(document).on("click", "#removeAdminButton", () => {
 	verifyApiCall("#verifyUserUsernameTextbox", "admin", "remove");
 });
 
+// Call gov verify
 $(document).on("click", "#verifyGovernmentButton", () => {
 	verifyApiCall("#verifyUserUsernameTextbox", "government", "verify");
 });
 
+// Call gov unverify
 $(document).on("click", "#unverifyGovernmentButton", () => {
 	verifyApiCall("#verifyUserUsernameTextbox", "government", "unverify");
 });
 
+// Function to be ran when the ban search button is clicked
 $("#banSearchButton").click(() => {
 	
+	// Clear any previous results
 	$(".errorMessageBan").text("");
 	$(".banResults").remove();
 
+	// Issue the ajax request and output any results
 	$.ajax({
+		// Send to the ban search admin api endpoint
 		url: "/api/admin/banSearch",
+		// Type of GET
 		type: "GET",
+		// Send the username as supplied in the textbox
 		data: { username: $("#banUserUsernameTextbox").val() },
+		// On success update the results accordingly
 		success: (data, status, xhr) => {
 			$("#banUserModalBody").append("<br class='banResults'>");
 			$("#banUserModalBody").append("<br class='banResults'>");
@@ -214,6 +254,7 @@ $("#banSearchButton").click(() => {
 				$("#banUserModalBody").append("<button class='btn btn-danger banResults' id='banUserButton'>Ban</button>");
 			}
 		},
+		// On error, return the appropriate error message
 		error: (xhr, status, error) => {
 			if (xhr.status == 400) {
 				$(".errorMessageBan").text("Please enter a username.");
@@ -231,8 +272,9 @@ $("#banSearchButton").click(() => {
 	});
 });
 
-// We use the same structure as verify (ie including type) for simplicity but also for future when we add suspensions, shadowbans etc
+// I use the same structure as verify (ie including type) despite currently only having 1 type for simplicity but also for future when I add suspensions, shadowbans etc
 function banApiCall(textboxName, type, action) {
+	// Same as the verify api call but with ban route instead of verification
 	$.ajax({
 		url: "/api/admin/ban",
 		type: "PUT",
@@ -285,15 +327,20 @@ function banApiCall(textboxName, type, action) {
 	});
 };
 
+// Code to be ran when the ban user button is clicked
 $(document).on("click", "#banUserButton", () => {
 	// Format is username container, type and action (type represents ban/suspension etc action is the positive or negative action)
+	// Issue the ban user api call
 	banApiCall("#banUserUsernameTextbox", "ban", "ban");
 });
 
+// Code to be ran when the unban user button is clicked
 $(document).on("click", "#unbanUserButton", () => {
+	// Issue the unban user api call
 	banApiCall("#banUserUsernameTextbox", "ban", "unban");
 });
 
+// Same as previous but for adding debug likes
 $("#addLikeSearchButton").on("click", () => {
 	$(".errorMessageAddLike").text("");
 	$(".addLikeResults").remove();
@@ -330,6 +377,8 @@ $("#addLikeSearchButton").on("click", () => {
 		}
 	});
 });
+
+// Code to be ran to issue ajax request when the add like button is clicked adding a like to the specified post 
 $(document).on("click", "#addLikeButton", () => {
 	$.ajax({
 		url: "/api/admin/addLike",
@@ -348,6 +397,7 @@ $(document).on("click", "#addLikeButton", () => {
 	});
 });
 
+// Same code in previous block, but adding 5 likes instead of just 1
 $(document).on("click", "#addFiveLikesButton", () => {
 	$.ajax({
 		url: "/api/admin/addLike",
@@ -421,13 +471,19 @@ $(document).on("click", "#addBoostButton", () => {
 
 $("#statsSearchButton").click(() => {
 	
+	// Remove any results from previous search
 	$(".errorMessageStats").text("");
 	$(".statsResults").remove();
 
+	// Issue ajax request
 	$.ajax({
+		// Send it to the stats endpoint
 		url: "/api/admin/stats",
+		// Type of GET
 		type: "GET",
+		// On success
 		success: (data, status, xhr) => {
+			// Append the retrieved statistics to the stats results container
 			$("#statsModalBody").append("<br class='statsResults'>");
 			$("#statsModalBody").append("<br class='statsResults'>");
 			$("#statsModalBody").append("<span class='text-success statsResults'>Users: " + data.getUserCount + "</span>");
@@ -437,13 +493,16 @@ $("#statsSearchButton").click(() => {
 			$("#statsModalBody").append("<span class='text-success statsResults'>Messages: " + data.getMessageCount + "</span>");
 			$("#statsModalBody").append("<br class='statsResults'>");
 		},
+		// On error
 		error: (xhr, status, error) => {
+			// Output the errors so user can see them
 			$(".errorMessageStats").text("Error: " + xhr.status);
 			$(".errorMessageStats").append("<br>");
 		}
 	});
 });
 
+// On page load, fill in the admin button on the navbar
 $(document).ready(() => {
 	$("#adminButtonIcon").removeClass("far").addClass("fas");
 })
