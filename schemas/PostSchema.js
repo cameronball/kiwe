@@ -11,6 +11,7 @@ const PostSchema = new Schema({
 	reshareData: { type: Schema.Types.ObjectId, ref: "Post" },
 	replyTo: { type: Schema.Types.ObjectId, ref: "Post" },
 	pinned: { type: Boolean, default: false },
+	boosted: { type: Boolean, default: false },
 	image: { type: String, default: "" },
 	code: { type: String, default: "" },
 	pollTitle: { type: String, default: "" },

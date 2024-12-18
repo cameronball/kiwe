@@ -366,6 +366,59 @@ $(document).on("click", "#addFiveLikesButton", () => {
 	});
 });
 
+$("#addBoostSearchButton").on("click", () => {
+	$(".errorMessageAddBoost").text("");
+	$(".addBoostResults").remove();
+
+	$.ajax({
+		url: "/api/admin/addBoostSearch",
+		type: "GET",
+		data: { id: $("#addBoostIdTextbox").val() },
+		success: (data, status, xhr) => {
+			$("#addBoostModalBody").append("<br class='addBoostResults'>");
+			$("#addBoostModalBody").attr("data-id", data._id);
+
+			$("#addBoostModalBody").append("<span class='text-success addBoostResults'>Post found!</span><br class='addBoostResults'>");
+
+			$("#addBoostModalBody").append("<span class=text-success addBoostResults'>Boost Status: " + data.boosted + "</span>");
+
+			$("#addBoostModalBody").append("<br class='addBoostResults'>");
+
+			$("#addBoostModalBody").append("<button class='btn btn-success addBoostResults' id='addBoostButton'>Add boost</button>&nbsp;&nbsp;");
+		},
+		error: (xhr, status, error) => {
+			if (xhr.status == 400) {
+				$(".errorMessageAddBoost").text("Please enter a post id.");
+				$(".errorMessageAddBoost").append("<br>");
+			}
+			else if (xhr.status == 404) {
+				$(".errorMessageAddBoost").text("That post could not be found.");
+				$(".errorMessageAddBoost").append("<br>");
+			}
+			else {
+				$(".errorMessageAddBoost").text("Unknown error occured. Code: " + xhr.status);
+				$(".errorMessageAddBoost").append("<br>");
+			}
+		}
+	});
+});
+$(document).on("click", "#addBoostButton", () => {
+	$.ajax({
+		url: "/api/admin/addBoost",
+		type: "PUT",
+		data: { id: $("#addBoostModalBody").attr("data-id") },
+		success: (data, status, xhr) => {
+			$(".errorMessageAddBoost").text("");
+			$(".addBoostFinalResults").remove();
+
+			$("#addBoostModalBody").append("<span class='text-success addBoostFinalResults'>Success!</span>");
+		},
+		error: (xhr, status, error) => {
+			$(".errorMessageAddBoost").text("Something went wrong: " + error);
+		}
+	});
+});
+
 $("#statsSearchButton").click(() => {
 	
 	$(".errorMessageStats").text("");

@@ -253,6 +253,53 @@ router.put("/addLike", async (req, res, next) => {
 	return res.status(200).send(update);
 });
 
+router.get("/addBoostSearch", async (req, res, next) => {
+
+	if(!req.query.id) {
+		return res.sendStatus(400);	
+	}
+
+	var id = req.query.id;
+
+	try {
+		var post = await Post.findById(id);
+	}
+	catch {
+		return res.sendStatus(400);
+	}
+
+	if (post==null) {
+		return res.sendStatus(404);
+	}
+	else {
+		return res.status(200).send(post);
+	}
+});
+
+router.put("/addBoost", async (req, res, next) => {
+	if(!req.body.id) {
+		return res.sendStatus(400);	
+	}
+
+	var id = req.body.id;
+
+	// Flip the status of the post boost (true to false, false to true)
+
+	var update = await Post.findOneAndUpdate(
+		{ _id: id },
+		[
+			{ $set: { boosted: { $not: "$boosted" } } } // Using aggregation to flip the boolean
+		],
+		{ new: true } // Return the updated document
+	);
+
+	if (update == null) {
+		return res.sendStatus(500);
+	}
+
+	return res.status(200).send(update);
+});
+
 router.get("/stats", async (req, res, next) => {
 	var getUserCount = await User.count({});
 	var getPostCount = await Post.count({});

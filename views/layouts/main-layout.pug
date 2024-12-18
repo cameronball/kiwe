@@ -64,7 +64,7 @@ html(lang="en")
               i.far.fa-user(id="profileButtonIcon")
             a(href="/settings")
               i.far.fa-cog(id="settingsButtonIcon")
-            if userLoggedIn.admin
+            if typeof userLoggedIn !== 'undefined' && userLoggedIn.admin
               a(href="/admin")
                 i.far.fa-user-crown(id="adminButtonIcon")
             a(href="/logout") 

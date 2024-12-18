@@ -1,10 +1,11 @@
 mixin createPostForm(userLoggedIn)
 	.postFormContainer
 		.userImageContainer
-			if userLoggedIn.verifiedBrand
-				img(src=userLoggedIn.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image", style="border-radius: 10%;")
-			else
-				img(src=userLoggedIn.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image")
+			if typeof userLoggedIn !== 'undefined'
+				if userLoggedIn.verifiedBrand
+					img(src=userLoggedIn.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image", style="border-radius: 10%;")
+				else
+					img(src=userLoggedIn.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image")
 		.textareaContainer
 			textarea#postTextarea(placeholder="What's happening?", style="    background-color:#eee;padding:10px;border-radius:15px;")
 			.buttonsContainer(style="display: flex; flex-direction: row;")
@@ -37,7 +38,8 @@ mixin createReplyModal(userLoggedIn)
 					#originalPostContainer
 					.postFormContainer
 						.userImageContainer
-							img(src=userLoggedIn.profilePic, alt="User's profile picture")
+							if typeof userLoggedIn !== 'undefined'
+								img(src=userLoggedIn.profilePic, alt="User's profile picture")
 						.textareaContainer
 							textarea#replyTextarea(placeholder="What's happening?")
 				.modal-footer
@@ -656,6 +658,7 @@ mixin createAdminModals()
 	+createVerifyUserModal()
 	+createBanUserModal()
 	+createAddLikeModal()
+	+createAddBoostModal()
 	+createStatsModal()
 
 mixin createVerifyUserModal()
@@ -706,6 +709,23 @@ mixin createAddLikeModal()
 					input#addLikeIdTextbox(type="text", placeholder="Post ID...")
 					| &nbsp;
 					button#addLikeSearchButton.btn.btn-primary(type='button') Search
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+
+mixin createAddBoostModal()
+	#addBoostModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addBoostModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					h5#addBoostModalLabel.modal-title Add like to post
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') &times;
+				.modal-body(id="addBoostModalBody")
+					span.errorMessage.errorMessageAddBoost
+					p Post ID:
+					input#addBoostIdTextbox(type="text", placeholder="Post ID...")
+					| &nbsp;
+					button#addBoostSearchButton.btn.btn-primary(type='button') Search
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
 

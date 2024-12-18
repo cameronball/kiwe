@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
+const http = require('http');
 const https = require('https');
 const fs = require('fs');
-const port = 443;
 const middleware = require('./middleware')
 const path = require('path')
 const bodyParser = require("body-parser")
@@ -10,35 +10,40 @@ const mongoose = require("./database");
 const session = require('express-session');
 const sha512 = require('js-sha512').sha512;
 
+const args = process.argv.slice(2);
+const isDebugMode = args.includes('--debug');
+
+const port = isDebugMode ? 80 : 443; // Use HTTP on port 80 if in debug mode, otherwise use HTTPS on port 443
+
 const sslKeyPath = './kiwi.social.key';
 const sslCertPath = './kiwi.social.pem';
 
 var datetime = new Date();
 console.log("app.js started at: " + datetime);
+console.log("App started in " + (isDebugMode ? "debug" : "production") + " mode");
 
 // Create http server to ensure users to use secure connection
-const httpApp = express();
-const http = require('http');
+if (!isDebugMode) {
+  const httpApp = express();
+  httpApp.get("*", function(req, res, next) {
+      res.redirect("https://" + req.headers.host + req.path);
+  });
 
-httpApp.get("*", function(req, res, next) {
-    res.redirect("https://" + req.headers.host + req.path);
-});
+  http.createServer(httpApp).listen(80, function() {
+      console.log("HTTP redirect server listening on port 80");
+  });
+}
 
-http.createServer(httpApp).listen(80, function() {
-    console.log("HTTP redirect server listening on port 80");
-});
-
-const options = {
-  key: fs.readFileSync('private.key.pem'), // Read the private key file
-  cert: fs.readFileSync('domain.cert.pem'), // Read the domain certificate file
+const options = !isDebugMode ? {
+  key: fs.readFileSync(sslKeyPath),
+  cert: fs.readFileSync(sslCertPath),
   ca: [
-    fs.readFileSync('intermediate.cert.pem') // Read the intermediate certificate file
-    // Add more intermediate certificates if there are any
+      fs.readFileSync('./intermediate.cert.pem')
   ],
   maxHeaderSize: 2 * 1024 * 1024 // Set maximum header size to 2 MB
-};
+} : {};
 
-const server = https.createServer(options, app);
+const server = isDebugMode ? http.createServer(app) : https.createServer(options, app);
 
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);

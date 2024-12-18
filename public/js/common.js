@@ -773,13 +773,31 @@ function createPostHtml(postData, boldFont = false) {
     }
 
     if(postData.pinned === true) {
-        pinnedPostText = `<span><i class="fas fa-thumbtack" style="color: rgb(101, 119, 134);"></i>&nbsp;&nbsp;Pinned<span>`
+        pinnedPostText = `<span style="color: rgb(101, 119, 134);"><i class="fas fa-thumbtack" style="color: rgb(101, 119, 134);"></i>&nbsp;&nbsp;Pinned<span>`
     }
 
     if(isReshare && postData.pinned) {
         temp = pinnedPostText;
         pinnedPostText = pinnedPostText + '&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;' + reshareText;
         reshareText = '';
+    }
+
+    var boosted = postData.boosted == true;
+    var boostedStyle = boosted ? "background-color: #e6feff;border-style: solid;border-width: 2px;border-color: #ff0000;border-radius: 5px;margin: 10px;" : "";
+
+    if (boosted) {
+        if (reshareText !== '') {
+            temp = reshareText;
+            reshareText = '<span style="color: #ff0000;"><i class="fas fa-fire"></i>&nbsp;&nbsp;<b>Boosted</b><span>&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;' + temp; 
+        }
+        else if (pinnedPostText !== '') {
+            temp = pinnedPostText;
+            pinnedPostText = '<span style="color: #ff0000;"><i class="fas fa-fire"></i>&nbsp;&nbsp;<b>Boosted</b><span>&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;' + temp;
+        }
+        else {
+            pinnedPostText = '<span style="color: #ff0000;"><i class="fas fa-fire"></i>&nbsp;&nbsp;<b>Boosted</b><span>';
+        }
+        
     }
 
     var image = "";
@@ -874,7 +892,7 @@ function createPostHtml(postData, boldFont = false) {
 		}
 	}
 
-    return `<div class='post' data-id='${postData._id}' data-mainPostBool="${postPageMainPost}">
+    return `<div class='post' data-id='${postData._id}' style="${boostedStyle}" data-mainPostBool="${postPageMainPost}">
                 <div class='postActionContainer'>
                     ${pinnedPostText}
                     ${reshareText}
