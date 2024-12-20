@@ -1,320 +1,375 @@
+/* Define CSS variables for consistent styling */
 :root {
-    --blue: #1D9BF0;
-    --blueLight: #9BD1F9;
-    --blueBackground: rgba(190, 200, 255, 0.6);
-    --buttonHoverBg: #d4edff;
-    --lightGrey: rgb(230, 236, 240);
-    --spacing: 15px;
-    --greyText: rgb(101, 119, 134);
-    --greyButtonText: rgba(0,0,0,0.34);
-    --red: rgb(224, 36, 94);
-    --redBackground: rgba(224, 36, 94, 0.25);
-    --green: rgb(23, 191, 99);
-    --greenBackground: rgba(23, 191, 99, 0.25);
+    --blue: #1D9BF0; /* Primary blue color */
+    --blueLight: #9BD1F9; /* Light blue color */
+    --blueBackground: rgba(190, 200, 255, 0.6); /* Light blue background color */
+    --buttonHoverBg: #d4edff; /* Button hover background color */
+    --lightGrey: rgb(230, 236, 240); /* Light grey color */
+    --spacing: 15px; /* Spacing value */
+    --greyText: rgb(101, 119, 134); /* Grey text color */
+    --greyButtonText: rgba(0,0,0,0.34); /* Grey button text color */
+    --red: rgb(224, 36, 94); /* Red color */
+    --redBackground: rgba(224, 36, 94, 0.25); /* Red background color */
+    --green: rgb(23, 191, 99); /* Green color */
+    --greenBackground: rgba(23, 191, 99, 0.25); /* Green background color */
 }
 
+/* Set the height and background color for the html and body */
 html, body {
     height: 100%;
     min-height: 100%;
     background-color: #fff;
 }
 
+/* Remove the outline from all elements */
 * {
     outline: none !important;
 }
 
+/* Style the anchor tags */
 a {
-    color: inherit;
-    text-decoration: none;
+    color: inherit; /* Inherit the color from the parent */
+    text-decoration: none; /* Remove the underline */
 }
 
+/* Style the anchor tags when hovered */
 a:hover {
-    color: inherit;
+    color: inherit; /* Inherit the color from the parent */
 }
 
+/* Style the h1 tags */
 h1 {
-    font-size: 19px;
-    font-weight: 800;
-    margin: 0;
+    font-size: 19px; /* Set the font size */
+    font-weight: 800; /* Set the font weight */
+    margin: 0; /* Remove the margin */
 }
 
+/* Hide the tooltip when not shown */
 .tooltip:not(.shown) {
     display: none;
 }
 
+/* Style the navigation bar */
 nav {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    height: 100%;
+    display: flex; /* Use flexbox to layout the navigation bar */
+    flex-direction: column; /* Set the flex direction to column */
+    align-items: flex-end; /* Align the items to the end */
+    height: 100%; /* Set the height to 100% */
 }
 
+/* Style the anchor tags in the navigation bar */
 nav a {
-    padding: 10px;
-    font-size: 30px;
-    width: 55px;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #212529;
-    position: relative;
+    padding: 10px; /* Add some padding */
+    font-size: 30px; /* Set the font size */
+    width: 55px; /* Set the width */
+    height: 55px; /* Set the height */
+    display: flex; /* Use flexbox to layout the anchor tags */
+    align-items: center; /* Align the items to the center */
+    justify-content: center; /* Center the items horizontally */
+    color: #212529; /* Set the color */
+    position: relative; /* Set the position to relative */
 }
 
+/* Style the anchor tags in the navigation bar when they have the blue class */
 nav a.blue {
-    color: var(--blue);
+    color: var(--blue); /* Set the color to the blue variable */
 }
 
+/* Style the anchor tags in the navigation bar when hovered */
 nav a:hover {
-    background-color: var(--buttonHoverBg);
-    text-decoration: none;
-    color: var(--blue);
-    border-radius: 50%;
+    background-color: var(--buttonHoverBg); /* Set the background color */
+    text-decoration: none; /* Remove the text decoration */
+    color: var(--blue); /* Set the color to the blue variable */
+    border-radius: 50%; /* Add a border radius */
 }
 
+/* Style the wrapper div */
 .wrapper {
-    display:flex;
-    flex-direction:column;
-    height: 100%;
-    max-width: 100% !important;
-    overflow-x: hidden !important;
+    display:flex; /* Use flexbox to layout the wrapper */
+    flex-direction:column; /* Set the flex direction to column */
+    height: 100%; /* Set the height to 100% */
+    max-width: 100% !important; /* Set the max width to 100% */
+    overflow-x: hidden !important; /* Hide the horizontal overflow */
 }
 
+/* Style the rows in the wrapper div */
 .wrapper > .row {
-    margin: 0;
-    height: 100%;
+    margin: 0; /* Remove the margin */
+    height: 100%; /* Set the height to 100% */
 }
 
+/* Style the button elements */
 button {
-    background-color: transparent;
-    border: none;
-    color: var(--greyButtonText);
+    background-color: transparent; /* Set the background color to transparent */
+    border: none; /* Remove the border */
+    color: var(--greyButtonText); /* Set the color to the grey button text variable */
 }
 
+/* Style the i and span elements in the button elements */
 button i, button span {
-    pointer-events: none;
+    pointer-events: none; /* Disable the pointer events */
 }
 
+/* Style the main section container div */
 .mainSectionContainer {
-    padding: 0;
-    border-left: 1px solid var(--lightGrey);
-    border-right: 1px solid var(--lightGrey);
-    display: flex;
-    flex-direction: column;
+    padding: 0; /* Remove the padding */
+    border-left: 1px solid var(--lightGrey); /* Add a left border */
+    border-right: 1px solid var(--lightGrey); /* Add a right border */
+    display: flex; /* Use flexbox to layout the main section container */
+    flex-direction: column; /* Set the flex direction to column */
 }
 
+/* Style the title container div */
 .titleContainer {
-    height: 53px;
-    padding: 0 var(--spacing);
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--lightGrey);
-    flex-shrink: 0;
+    height: 53px; /* Set the height */
+    padding: 0 var(--spacing); /* Add some padding */
+    display: flex; /* Use flexbox to layout the title container */
+    align-items: center; /* Align the items to the center */
+    border-bottom: 1px solid var(--lightGrey); /* Add a bottom border */
+    flex-shrink: 0; /* Set the flex shrink to 0 */
 }
 
+/* Style the h1 tags in the title container div */
 .titleContainer h1 {
-    flex: 1;
+    flex: 1; /* Set the flex to 1 */
 }
 
+/* Style the post form container div */
 .postFormContainer {
-    display: flex;
-    padding: var(--spacing);
-    border-bottom: 10px solid rgb(230, 236, 240);
-    flex-shrink: 0;
+    display: flex; /* Use flexbox to layout the post form container */
+    padding: var(--spacing); /* Add some padding */
+    border-bottom: 10px solid rgb(230, 236, 240); /* Add a bottom border */
+    flex-shrink: 0; /* Set the flex shrink to 0 */
 }
 
+/* Style the post form container div in the modal */
 .modal .postFormContainer {
-    border: none;
-    padding: 0;
-    padding-top: var(--spacing);
+    border: none; /* Remove the border */
+    padding: 0; /* Remove the padding */
+    padding-top: var(--spacing); /* Add some top padding */
 }
 
+/* Style the post div in the modal */
 .modal .post {
-    padding: 0 0 var(--spacing) 0;
+    padding: 0 0 var(--spacing) 0; /* Add some padding */
 }
 
+/* Style the user image container div */
 .userImageContainer {
-    width: 50px;
-    height: 50px;
+    width: 50px; /* Set the width */
+    height: 50px; /* Set the height */
 }
 
+/* Style the img tags in the user image container div */
 .userImageContainer img {
-    width: 100%;
-    border-radius: 50%;
-    background-color: white;
+    width: 100%; /* Set the width to 100% */
+    border-radius: 50%; /* Add a border radius */
+    background-color: white; /* Set the background color to white */
 }
 
+/* Style the textarea container div */
 .textareaContainer {
-    flex: 1;
-    padding-left: var(--spacing);
+    flex: 1; /* Set the flex to 1 */
+    padding-left: var(--spacing); /* Add some left padding */
 }
 
+/* Style the textarea tags in the textarea container div */
 .textareaContainer textarea {
-    width: 100%;
-    border: none;
-    resize: none;
-    font-size: 19px;
+    width: 100%; /* Set the width to 100% */
+    border: none; /* Remove the border */
+    resize: none; /* Remove the resize */
+    font-size: 19px; /* Set the font size */
 }
 
+/* Style the submit post button */
 #submitPostButton {
-    background-color: var(--blue);
-    color: white;
-    border: none;
-    border-radius: 40px;
-    padding: 7px 15px;
+    background-color: var(--blue); /* Set the background color to the blue variable */
+    color: white; /* Set the color to white */
+    border: none; /* Remove the border */
+    border-radius: 40px; /* Add a border radius */
+    padding: 7px 15px; /* Add some padding */
 }
 
+/* Style the submit post button when disabled */
 #submitPostButton:disabled {
-    background-color: var(--blueLight);
+    background-color: var(--blueLight); /* Set the background color to the light blue variable */
 }
 
+/* Style the post div */
 .post {
-    display: flex;
-    flex-direction: column;
-    padding: var(--spacing);
-    cursor: pointer;
-    border-bottom: 1px solid var(--lightGrey);
-    flex-shrink: 0;
+    display: flex; /* Use flexbox to layout the post div */
+    flex-direction: column; /* Set the flex direction to column */
+    padding: var(--spacing); /* Add some padding */
+    cursor: pointer; /* Set the cursor to pointer */
+    border-bottom: 1px solid var(--lightGrey); /* Add a bottom border */
+    flex-shrink: 0; /* Set the flex shrink to 0 */
 }
 
+/* Style the main content container div */
 .mainContentContainer {
-    flex: 1;
-    display: flex;
-    overflow-y: hidden;
+    flex: 1; /* Set the flex to 1 */
+    display: flex; /* Use flexbox to layout the main content container */
+    overflow-y: hidden; /* Hide the vertical overflow */
 }
 
+/* Style the post content container div */
 .postContentContainer {
-    padding-left: var(--spacing);
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    padding-left: var(--spacing); /* Add some left padding */
+    display: flex; /* Use flexbox to layout the post content container */
+    flex-direction: column; /* Set the flex direction to column */
+    flex: 1; /* Set the flex to 1 */
 }
 
+/* Style the display name class */
 .displayName {
-    font-weight: bold;
+    font-weight: bold; /* Set the font weight to bold */
 }
 
+/* Style the username, date, and date placeholder classes */
 .username, .date, .datePlaceholder {
-    color: var(--greyText)
+    color: var(--greyText) /* Set the color to the grey text variable */
 }
 
+/* Style the post footer div */
 .postFooter {
-    display: flex;
-    align-items: center;
+    display: flex; /* Use flexbox to layout the post footer */
+    align-items: center; /* Align the items to the center */
 }
 
+/* Style the post button container div in the post footer div */
 .postFooter .postButtonContainer {
-    flex: 1;
-    display: flex;
+    flex: 1; /* Set the flex to 1 */
+    display: flex; /* Use flexbox to layout the post button container */
 }
 
+/* Style the button tags in the post button container div in the post footer div */
 .postFooter .postButtonContainer button {
-    padding: 4px 7px;
+    padding: 4px 7px; /* Add some padding */
 }
 
+/* Style the anchor tags in the header when hovered */
 .header a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Add an underline */
 }
 
+/* Style the anchor tags in the post action container when hovered */
 .postActionContainer a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Add an underline */
 }
 
+/* Style the anchor tags and span tags in the header */
 .header a, .header span {
-    padding-right: 0px;
+    padding-right: 0px; /* Remove the right padding */
 }
 
+/* Style the post button container when it has the red class and the button is active */
 .postButtonContainer.red button.active {
-    color: var(--red);
+    color: var(--red); /* Set the color to the red variable */
 }
 
+/* Style the code container div */
 .codeContainer {
-    flex: 1;
-    padding-left: var(--spacing);
+    flex: 1; /* Set the flex to 1 */
+    padding-left: var(--spacing); /* Add some left padding */
 }
 
+/* Style the textarea tags in the code container div */
 .codeContainer textarea {
-    width: 100%;
-    border: none;
-    resize: none;
-    font-size: 19px;
+    width: 100%; /* Set the width to 100% */
+    border: none; /* Remove the border */
+    resize: none; /* Remove the resize */
+    font-size: 19px; /* Set the font size */
 }
 
+/* Style the button tags in the post button container when hovered */
 .postButtonContainer button:hover {
-    background-color: var(--buttonHoverBg);
-    color: var(--blue);
-    border-radius: 15px;
+    background-color: var(--buttonHoverBg); /* Set the background color */
+    color: var(--blue); /* Set the color to the blue variable */
+    border-radius: 15px; /* Add a border radius */
 }
 
+/* Style the post button container when it has the green class and the button is active */
 .postButtonContainer.green button.active {
-    color: var(--green);
+    color: var(--green); /* Set the color to the green variable */
 }
 
+/* Style the post button container when it has the green class and the button is hovered */
 .postButtonContainer.green button:hover {
-    color: var(--green);
-    background-color: var(--greenBackground);
+    color: var(--green); /* Set the color to the green variable */
+    background-color: var(--greenBackground); /* Set the background color to the green background variable */
 }
 
+/* Style the post button container when it has the red class and the button is hovered */
 .postButtonContainer.red button:hover {
-    color: var(--red);
-    background-color: var(--redBackground);
+    color: var(--red); /* Set the color to the red variable */
+    background-color: var(--redBackground); /* Set the background color to the red background variable */
 }
 
+/* Style the post action container div */
 .postActionContainer {
-    padding-left: 45px;
-    font-size: 13px;
-    color: var(--greyText);
-    margin-bottom: 5px;
+    padding-left: 45px; /* Add some left padding */
+    font-size: 13px; /* Set the font size */
+    color: var(--greyText); /* Set the color to the grey text variable */
+    margin-bottom: 5px; /* Add some bottom margin */
 }
 
+/* Style the reply flag div */
 .replyFlag {
-    margin-bottom: 5px;
-    color: var(--greyText);
+    margin-bottom: 5px; /* Add some bottom margin */
+    color: var(--greyText); /* Set the color to the grey text variable */
 }
 
+/* Style the anchor tags in the reply flag div */
 .replyFlag a {
-    color: var(--blue);
+    color: var(--blue); /* Set the color to the blue variable */
 }
 
+/* Style the date class in the header */
 .header .date {
-    flex: 1;
+    flex: 1; /* Set the flex to 1 */
 }
 
+/* Style the date placeholder class in the header */
 .header .datePlaceholder {
-    flex: 1;
+    flex: 1; /* Set the flex to 1 */
 }
 
+/* Style the header div */
 .header {
-    display: flex;
-    height: 1.2em;
+    display: flex; /* Use flexbox to layout the header */
+    height: 1.2em; /* Set the height */
 }
 
+/* Style the header when the screen is less than 440px */
 @media screen and (max-width: 440px) {
     .header {
-        font-size: 11px
+        font-size: 11px /* Set the font size */
     }
 
     .replyFlag {
-        font-size: 13px
+        font-size: 13px /* Set the font size */
     }
 
     .col-2 {
-        max-width: 20% !important
+        max-width: 20% !important /* Set the max width */
     }
 
     .col-10 {
-        max-width: 80%
+        max-width: 80% /* Set the max width */
     }
 }
 
+/* Hide the date class */
 .date {
     display: none;
 }
 
+/* Show the date placeholder class */
 .datePlaceholder {
     display: inherit;
 }
 
+/* Style the date and date placeholder classes when the screen is greater than 768px */
 @media only screen and (min-width: 768px) {
     .date {
         display: inherit;
@@ -325,686 +380,801 @@ button i, button span {
     }
 }
 
+/* Style the cover photo section in the profile header container div */
 .profileHeaderContainer .coverPhotoSection {
-    height: 320px;
-    background-color: var(--blue);
-    position: relative;
+    height: 320px; /* Set the height */
+    background-color: var(--blue); /* Set the background color to the blue variable */
+    position: relative; /* Set the position to relative */
 }
 
+/* Style the user image container div in the profile header container div */
 .profileHeaderContainer .userImageContainer {
-    height: 120px;
-    width: 120px;
-    margin-left: 30px;
-    position: absolute;
-    bottom: -60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 120px; /* Set the height */
+    width: 120px; /* Set the width */
+    margin-left: 30px; /* Add some left margin */
+    position: absolute; /* Set the position to absolute */
+    bottom: -60px; /* Set the bottom position */
+    display: flex; /* Use flexbox to layout the user image container */
+    align-items: center; /* Align the items to the center */
+    justify-content: center; /* Center the items horizontally */
 }
 
+/* Style the img tags in the user image container div in the profile header container div */
 .profileHeaderContainer .userImageContainer img {
-    border: 4px solid #ffffff;
+    border: 4px solid #ffffff; /* Add a border */
 }
 
+/* Style the profile buttons container div in the profile header container div */
 .profileHeaderContainer .profileButtonsContainer {
-    text-align: right;
-    padding: var(--spacing);
-    min-height: 60px;
+    text-align: right; /* Align the text to the right */
+    padding: var(--spacing); /* Add some padding */
+    min-height: 60px; /* Set the minimum height */
 }
 
+/* Style the profile button and follow button classes */
 .profileButton, .followButton {
-    border: 1px solid var(--blue);
-    color: var(--blue);
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 60px;
-    display: inline-block;
-    margin-left: var(--spacing);
-    min-height: 36px;
-    min-width: 38px;
+    border: 1px solid var(--blue); /* Add a border */
+    color: var(--blue); /* Set the color to the blue variable */
+    font-weight: bold; /* Set the font weight to bold */
+    padding: 5px 10px; /* Add some padding */
+    border-radius: 60px; /* Add a border radius */
+    display: inline-block; /* Set the display to inline block */
+    margin-left: var(--spacing); /* Add some left margin */
+    min-height: 36px; /* Set the minimum height */
+    min-width: 38px; /* Set the minimum width */
 }
 
+/* Style the profile button and follow button classes when hovered */
 .profileButton:hover, .followButton:hover {
-    background-color: var(--blueBackground);
-    color: var(--blue);
+    background-color: var(--blueBackground); /* Set the background color to the blue background variable */
+    color: var(--blue); /* Set the color to the blue variable */
 }
 
+/* Style the span tags in the follow button class */
 .followButton span {
-    margin-left: 0.3em
+    margin-left: 0.3em /* Add some left margin */
 }
 
+/* Style the follow button class when it has the following class */
 .followButton.following {
-    color: white;
-    background-color: var(--blue);
+    color: white; /* Set the color to white */
+    background-color: var(--blue); /* Set the background color to the blue variable */
 }
 
+/* Style the user details container div in the profile header container div */
 .profileHeaderContainer .userDetailsContainer {
-    display: flex;
-    flex-direction: column;
-    padding: 0 1.5em
+    display: flex; /* Use flexbox to layout the user details container */
+    flex-direction: column; /* Set the flex direction to column */
+    padding: 0 1.5em /* Add some padding */
 }
 
+/* Style the value class in the followers container div */
 .followersContainer .value {
-    font-weight: bold;
-    margin: bold;
-    margin-right: 5px;
+    font-weight: bold; /* Set the font weight to bold */
+    margin: bold; /* Set the margin */
+    margin-right: 5px; /* Add some right margin */
 }
 
+/* Style the span tags that are not the value class in the followers container div */
 .followersContainer span:not(.value) {
-    color: var(--greyText);
+    color: var(--greyText); /* Set the color to the grey text variable */
 }
 
+/* Style the anchor tags in the followers container div */
 .followersContainer a {
-    margin-right: var(--spacing);
+    margin-right: var(--spacing); /* Add some right margin */
 }
 
+/* Style the anchor tags in the followers container div when hovered */
 .followersContainer a:hover {
-    text-decoration: none;
-    border-bottom: 1px solid var(--greyText);
+    text-decoration: none; /* Remove the text decoration */
+    border-bottom: 1px solid var(--greyText); /* Add a bottom border */
 }
 
+/* Style the tabs container div */
 .tabsContainer {
-    display: flex;
-    border-bottom: 1px solid var(--lightGrey);
-    flex-shrink: 0;
+    display: flex; /* Use flexbox to layout the tabs container */
+    border-bottom: 1px solid var(--lightGrey); /* Add a bottom border */
+    flex-shrink: 0; /* Set the flex shrink to 0 */
 }
 
+/* Style the tab class */
 .tab {
-    flex: 1;
-    height: 52px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--greyText);
-    font-weight: bold;
+    flex: 1; /* Set the flex to 1 */
+    height: 52px; /* Set the height */
+    display: flex; /* Use flexbox to layout the tab */
+    justify-content: center; /* Center the items horizontally */
+    align-items: center; /* Align the items to the center */
+    color: var(--greyText); /* Set the color to the grey text variable */
+    font-weight: bold; /* Set the font weight to bold */
 }
 
+/* Style the tab class when it has the active class */
 .tab.active {
-    color: black;
-    border-bottom: 2px solid black
+    color: black; /* Set the color to black */
+    border-bottom: 2px solid black /* Add a bottom border */
 }
 
+/* Style the tab class when hovered */
 .tab:hover {
-    color: black;
-    background-color: #eeeeee
+    color: black; /* Set the color to black */
+    background-color: #eeeeee /* Set the background color */
 }
 
+/* Style the no results class */
 .noResults {
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    padding: var(--spacing)
+    font-weight: bold; /* Set the font weight to bold */
+    display: flex; /* Use flexbox to layout the no results class */
+    justify-content: center; /* Center the items horizontally */
+    padding: var(--spacing) /* Add some padding */
 }
 
+/* Style the user class */
 .user .userDetailsContainer {
-    flex: 1;
-    padding: 0 var(--spacing);
+    flex: 1; /* Set the flex to 1 */
+    padding: 0 var(--spacing); /* Add some padding */
 }
 
+/* Style the username class in the user details container div in the user class */
 .user .userDetailsContainer .header .username {
-    padding-left: 7px;
+    padding-left: 7px; /* Add some left padding */
 }
 
+/* Style the profile picture button and cover photo button classes */
 .profilePictureButton, .coverPhotoButton {
-    position: absolute;
-    font-size: 50px;
-    color: rgb(0,0,0,0.6);
-    display: none;
+    position: absolute; /* Set the position to absolute */
+    font-size: 50px; /* Set the font size */
+    color: rgb(0,0,0,0.6); /* Set the color */
+    display: none; /* Hide the element */
 }
 
+/* Style the profile picture button and cover photo button classes when hovered */
 .userImageContainer:hover .profilePictureButton, .coverPhotoContainer:hover > .coverPhotoButton {
-    display: block;
+    display: block; /* Show the element */
 }
 
+/* Style the img tags in the user image container div in the cover photo section */
 .coverPhotoSection .userImageContainer img {
-    min-height: 120px;
+    min-height: 120px; /* Set the minimum height */
 }
 
+/* Style the cover photo container div */
 .coverPhotoContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%
+    display: flex; /* Use flexbox to layout the cover photo container */
+    align-items: center; /* Align the items to the center */
+    justify-content: center; /* Center the items horizontally */
+    height: 100% /* Set the height to 100% */
 }
 
+/* Style the img tags in the cover photo container div */
 .coverPhotoContainer img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100%; /* Set the width to 100% */
+    height: 100%; /* Set the height to 100% */
+    object-fit: cover; /* Set the object fit to cover */
 }
 
+/* Style the span tags in the post body */
 .postBody span {
-    word-wrap: break-word;
-    word-break: break-word;
+    word-wrap: break-word; /* Set the word wrap to break word */
+    word-break: break-word; /* Set the word break to break word */
 }
 
+/* Style the pin button when hovered */
 .pinButton:hover {
-    color: #E7B10A;
+    color: #E7B10A; /* Set the color */
 }
 
+/* Style the unpin button */
 .unpinButton {
-    color: #E7B10A;
+    color: #E7B10A; /* Set the color */
 }
 
+/* Style the unpin button when hovered */
 .unpinButton:hover {
-    color: #FF0000;
+    color: #FF0000; /* Set the color */
 }
 
+/* Style the delete button when hovered */
 .deleteButton:hover {
-    color: #FF0000;
+    color: #FF0000; /* Set the color */
 }
 
+/* Style the pinned post container div */
 .pinnedPostContainer {
-    border-bottom: 10px solid rgb(230, 236, 240)
+    border-bottom: 10px solid rgb(230, 236, 240) /* Add a bottom border */
 }
 
+/* Style the search bar container div */
 .searchBarContainer {
-    position: relative;
-    color: var(--greyText);
-    padding: 10px var(--spacing);
+    position: relative; /* Set the position to relative */
+    color: var(--greyText); /* Set the color to the grey text variable */
+    padding: 10px var(--spacing); /* Add some padding */
 }
 
+/* Style the i tags in the search bar container div */
 .searchBarContainer i {
-    position: absolute;
-    top: 20px;
-    left: 30px;
+    position: absolute; /* Set the position to absolute */
+    top: 20px; /* Set the top position */
+    left: 30px; /* Set the left position */
 }
 
+/* Style the search box in the search bar container div */
 .searchBarContainer #searchBox {
-    height: 36px;
-    width: 100%;
-    padding: 5px 15px 5px 40px;
-    border-radius: 50px;
-    border: none;
-    background-color: var(--lightGrey);
-    color: var(--greyText);
+    height: 36px; /* Set the height */
+    width: 100%; /* Set the width to 100% */
+    padding: 5px 15px 5px 40px; /* Add some padding */
+    border-radius: 50px; /* Add a border radius */
+    border: none; /* Remove the border */
+    background-color: var(--lightGrey); /* Set the background color to the light grey variable */
+    color: var(--greyText); /* Set the color to the grey text variable */
 }
 
+/* Style the user details container div */
 .userDetailsContainer {
-    position: relative;
+    position: relative; /* Set the position to relative */
 }
 
+/* Style the follow button container div */
 .followButtonContainer {
-    position: absolute;
-    top: 0;
-    right: 0;
+    position: absolute; /* Set the position to absolute */
+    top: 0; /* Set the top position */
+    right: 0; /* Set the right position */
 }
 
+/* Style the image preview, cover preview, and post image preview classes */
 #imagePreview, #coverPreview, #postImagePreview {
-    display: block;
-    max-width: 100%;
-    width: 100%;
+    display: block; /* Set the display to block */
+    max-width: 100%; /* Set the max width to 100% */
+    width: 100%; /* Set the width to 100% */
 }
 
+/* Style the chat title bar div */
 .chatTitleBar {
-    border-bottom: 1px solid var(--lightGrey);
-    display: flex;
-    align-items: center;
-    min-height: 60px;
-    padding: 15px;
+    border-bottom: 1px solid var(--lightGrey); /* Add a bottom border */
+    display: flex; /* Use flexbox to layout the chat title bar */
+    align-items: center; /* Align the items to the center */
+    min-height: 60px; /* Set the minimum height */
+    padding: 15px; /* Add some padding */
 }
 
+/* Style the label tags in the chat title bar div */
 .chatTitleBar label {
-    margin: 0 10px 0 0;
+    margin: 0 10px 0 0; /* Add some margin */
 }
 
+/* Style the user search text box */
 #userSearchTextbox {
-    border: none;
-    flex: 1;
-    font-weight: 200;
-    min-width: 350px;
+    border: none; /* Remove the border */
+    flex: 1; /* Set the flex to 1 */
+    font-weight: 200; /* Set the font weight */
+    min-width: 350px; /* Set the minimum width */
 }
 
+/* Style the create chat button */
 #createChatButton {
-    border: none;
-    background-color: var(--blue);
-    color: #fff;
-    padding: 7px 20px;
-    margin: 10px auto;
-    border-radius: 50px;
+    border: none; /* Remove the border */
+    background-color: var(--blue); /* Set the background color to the blue variable */
+    color: #fff; /* Set the color to white */
+    padding: 7px 20px; /* Add some padding */
+    margin: 10px auto; /* Add some margin */
+    border-radius: 50px; /* Add a border radius */
 }
 
+/* Style the create chat button when disabled */
 #createChatButton:disabled {
-    background-color: var(--lightGrey);
-    color: var(--greyText);
+    background-color: var(--lightGrey); /* Set the background color to the light grey variable */
+    color: var(--greyText); /* Set the color to the grey text variable */
 }
 
+/* Style the img tags in the header in the user details container div */
 .userDetailsContainer .header img {
-    height: 83.4%;
-    margin-top:3px
+    height: 83.4%; /* Set the height */
+    margin-top:3px /* Add some top margin */
 }
 
+/* Style the selected user class */
 .selectedUser {
-    font-weight: 600;
-    background-color: #42a4f5;
-    padding:5px;
-    border-radius:3px;
-    margin: 5px 5px 0 0;
-    display: inline-block;
+    font-weight: 600; /* Set the font weight */
+    background-color: #42a4f5; /* Set the background color */
+    padding:5px; /* Add some padding */
+    border-radius:3px; /* Add a border radius */
+    margin: 5px 5px 0 0; /* Add some margin */
+    display: inline-block; /* Set the display to inline block */
 }
 
+/* Style the result list item class */
 .resultListItem {
-    padding: 7px;
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    border-bottom: 1px solid var(--lightGrey);
+    padding: 7px; /* Add some padding */
+    display: flex; /* Use flexbox to layout the result list item */
+    align-items: center; /* Align the items to the center */
+    flex-shrink: 0; /* Set the flex shrink to 0 */
+    border-bottom: 1px solid var(--lightGrey); /* Add a bottom border */
 }
 
+/* Style the result list item class when hovered */
 .resultListItem:hover {
-    background-color: #F2f2f2;
+    background-color: #F2f2f2; /* Set the background color */
 }
 
+/* Style the results details container div */
 .resultsDetailsContainer {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    display: flex; /* Use flexbox to layout the results details container */
+    flex-direction: column; /* Set the flex direction to column */
+    flex: 1; /* Set the flex to 1 */
 }
 
+/* Style the heading class in the results details container div */
 .resultsDetailsContainer .heading {
-    font-weight: 500;
+    font-weight: 500; /* Set the font weight */
 }
 
+/* Style the sub text class in the results details container div */
 .resultsDetailsContainer .subText {
-    color: var(--greyText);
-    font-size: 14px;
+    color: var(--greyText); /* Set the color to the grey text variable */
+    font-size: 14px; /* Set the font size */
 }
 
+/* Style the img tags in the result list item class */
 .resultListItem img {
-    height: 100%;
-    width: 100%;
-    border-radius:50%;
+    height: 100%; /* Set the height to 100% */
+    width: 100%; /* Set the width to 100% */
+    border-radius:50%; /* Add a border radius */
 }
 
+/* Style the results image container div */
 .resultsImageContainer {
-    height: 40px;
-    width: 40px;
-    position: relative;
-    margin-right: 10px;
-    display:flex;
-    align-items: center;
-    padding: 5px;
+    height: 40px; /* Set the height */
+    width: 40px; /* Set the width */
+    position: relative; /* Set the position to relative */
+    margin-right: 10px; /* Add some right margin */
+    display:flex; /* Use flexbox to layout the results image container */
+    align-items: center; /* Align the items to the center */
+    padding: 5px; /* Add some padding */
 }
 
+/* Style the img tags in the group chat image class */
 .groupChatImage img {
-    height: 65%;
-    width: 65%;
-    position: absolute;
-    bottom: 0;
-    margin: 0;
-    border: 2px solid #fff;
+    height: 65%; /* Set the height */
+    width: 65%; /* Set the width */
+    position: absolute; /* Set the position to absolute */
+    bottom: 0; /* Set the bottom position */
+    margin: 0; /* Remove the margin */
+    border: 2px solid #fff; /* Add a border */
 }
 
+/* Style the first img tag in the group chat image class */
 .groupChatImage img:first-of-type {
-    top: 0;
-    right: 0;
+    top: 0; /* Set the top position */
+    right: 0; /* Set the right position */
 }
 
+/* Style the ellipsis class */
 .ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    overflow: hidden; /* Hide the overflow */
+    text-overflow: ellipsis; /* Set the text overflow to ellipsis */
+    white-space: nowrap; /* Set the white space to nowrap */
 }
 
+/* Style the chat title bar container div */
 .chatTitleBarContainer {
-    border-bottom: 1px solid var(--lightGrey);
-    display: flex;
-    align-items: center;
-    padding: var(--spacing);
+    border-bottom: 1px solid var(--lightGrey); /* Add a bottom border */
+    display: flex; /* Use flexbox to layout the chat title bar container */
+    align-items: center; /* Align the items to the center */
+    padding: var(--spacing); /* Add some padding */
 }
 
+/* Style the chat name text box */
 #chatName {
-    width: 100%;
-    border: 1px solid transparent;
-    padding: 0 5px;
+    width: 100%; /* Set the width to 100% */
+    border: 1px solid transparent; /* Add a transparent border */
+    padding: 0 5px; /* Add some padding */
 }
 
+/* Style the chat name text box when hovered */
 #chatName:hover {
-    border: 1px solid var(--greyButtonText);
-    cursor: text;
+    border: 1px solid var(--greyButtonText); /* Add a border */
+    cursor: text; /* Set the cursor to text */
 }
 
+/* Style the chat container div */
 .chatContainer {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: hidden;
+    flex: 1; /* Set the flex to 1 */
+    display: flex; /* Use flexbox to layout the chat container */
+    flex-direction: column; /* Set the flex direction to column */
+    overflow-y: hidden; /* Hide the vertical overflow */
 }
 
+/* Style the footer div in the chat container div */
 .chatContainer .footer {
-    display: flex;
-    padding: var(--spacing);
-    flex-shrink: 0px;
+    display: flex; /* Use flexbox to layout the footer */
+    padding: var(--spacing); /* Add some padding */
+    flex-shrink: 0px; /* Set the flex shrink to 0 */
 }
 
+/* Style the textarea tags in the footer div in the chat container div */
 .chatContainer .footer textarea {
-    flex: 1;
-    resize: none;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 18px;
-    border: none;
-    padding: 8px 12px;
-    height: 70px;
+    flex: 1; /* Set the flex to 1 */
+    resize: none; /* Remove the resize */
+    background-color: rgba(0,0,0,0.1); /* Set the background color */
+    border-radius: 18px; /* Add a border radius */
+    border: none; /* Remove the border */
+    padding: 8px 12px; /* Add some padding */
+    height: 70px; /* Set the height */
 }
 
+/* Style the button tags in the footer div in the chat container div */
 .chatContainer .footer button {
-    background-color: transparent;
-    color: var(--blue);
-    font-size: 24px;
+    background-color: transparent; /* Set the background color to transparent */
+    color: var(--blue); /* Set the color to the blue variable */
+    font-size: 24px; /* Set the font size */
 }
 
+/* Style the chat messages div */
 .chatMessages {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    padding: var(--spacing);
+    flex: 1; /* Set the flex to 1 */
+    display: flex; /* Use flexbox to layout the chat messages */
+    flex-direction: column; /* Set the flex direction to column */
+    overflow-y: auto; /* Set the overflow y to auto */
+    padding: var(--spacing); /* Add some padding */
 }
 
+/* Style the chat images container div */
 .chatImagesContainer {
-    display: flex;
-    flex-direction: row-reverse;
-    height: 100%;
-    margin-right: 10px;
+    display: flex; /* Use flexbox to layout the chat images container */
+    flex-direction: row-reverse; /* Set the flex direction to row reverse */
+    height: 100%; /* Set the height to 100% */
+    margin-right: 10px; /* Add some right margin */
 }
 
+/* Style the img tags in the chat images container div */
 .chatImagesContainer img {
-    width: 40px;
-    height: 40px;
-    border: 2px solid #fff;
-    border-radius: 50%;
+    width: 40px; /* Set the width */
+    height: 40px; /* Set the height */
+    border: 2px solid #fff; /* Add a border */
+    border-radius: 50%; /* Add a border radius */
 }
 
+/* Style the user count class in the chat images container div */
 .chatImagesContainer .userCount {
-    height: 40px;
-    width: 40px;
-    background-color: rgb(230,230,230, 0.6);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    border: 2px solid #fff;
-    margin-left: -40px;
+    height: 40px; /* Set the height */
+    width: 40px; /* Set the width */
+    background-color: rgb(230,230,230, 0.6); /* Set the background color */
+    border-radius: 50%; /* Add a border radius */
+    display: flex; /* Use flexbox to layout the user count class */
+    align-items: center; /* Align the items to the center */
+    justify-content: center; /* Center the items horizontally */
+    font-weight: 700; /* Set the font weight */
+    border: 2px solid #fff; /* Add a border */
+    margin-left: -40px; /* Add some left margin */
 }
 
+/* Style the img tags in the chat images container div that are not the last child */
 .chatImagesContainer img:not(:last-child) {
-    margin-left: -10px;
+    margin-left: -10px; /* Add some left margin */
 }
 
+/* Style the chat name text box */
 #chatNameTextbox {
-    width: 100%;
+    width: 100%; /* Set the width to 100% */
 }
 
+/* Style the message class in the chat messages div */
 .chatMessages .message {
-    padding-bottom: 2px;
-    list-style: none;
-    display: flex;
-    align-items: flex-end;
-    flex-shrink: 0;
+    padding-bottom: 2px; /* Add some bottom padding */
+    list-style: none; /* Remove the list style */
+    display: flex; /* Use flexbox to layout the message */
+    align-items: flex-end; /* Align the items to the end */
+    flex-shrink: 0; /* Set the flex shrink to 0 */
 }
 
+/* Style the message container class in the message class in the chat messages div */
 .chatMessages .message .messageContainer {
-    display: flex;
-    flex-direction: column;
-    max-width: 55%;
+    display: flex; /* Use flexbox to layout the message container */
+    flex-direction: column; /* Set the flex direction to column */
+    max-width: 55%; /* Set the max width */
 }
 
+/* Style the tooltip class */
 .tooltip {
-    left: 5px !important;
+    left: 5px !important; /* Set the left position */
 }
 
+/* Style the message class in the chat messages div when it has the mine class */
 .chatMessages .message.mine {
-    flex-direction: row-reverse;
+    flex-direction: row-reverse; /* Set the flex direction to row reverse */
 }
 
+/* Style the message body class in the message class in the chat messages div when it has the mine class */
 .chatMessages .message.mine .messageBody {
-    background-color: var(--blue);
-    color: #fff;
+    background-color: var(--blue); /* Set the background color to the blue variable */
+    color: #fff; /* Set the color to white */
 }
 
+/* Style the message body class in the message class in the chat messages div when it has the mine class and the first class */
 .chatMessages .message.mine.first .messageBody {
-    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px; /* Add a bottom right border radius */
 }
 
+/* Style the message body class in the message class in the chat messages div when it has the mine class and not the first or last class */
 .chatMessages .message.mine:not(.first):not(.last) .messageBody {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px; /* Add a top right border radius */
+    border-bottom-right-radius: 5px; /* Add a bottom right border radius */
 }
 
+/* Style the message body class in the message class in the chat messages div when it has the mine class and the last class */
 .chatMessages .message.mine.last .messageBody {
-    border-bottom-right-radius: 18px;
+    border-bottom-right-radius: 18px; /* Add a bottom right border radius */
 }
 
+/* Style the message body class in the message class in the chat messages div when it has the mine class and the last class and not the first class */
 .chatMessages .message.mine.last:not(.first) .messageBody {
-    border-top-right-radius: 2px;
+    border-top-right-radius: 2px; /* Add a top right border radius */
 }
 
+/* Style the post button container when it has the blue class and the button is active */
 .postButtonContainer.blue button.active {
-    color: var(--blue);
+    color: var(--blue); /* Set the color to the blue variable */
 }
 
+/* Style the post button container when it has the blue class and the button is hovered */
 .postButtonContainer.blue button:hover {
-    color: var(--blue);
-    background-color: var(--buttonHoverBg);
+    color: var(--blue); /* Set the color to the blue variable */
+    background-color: var(--buttonHoverBg); /* Set the background color to the button hover background variable */
 }
 
+/* Style the results container div */
 .resultsContainer {
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Use flexbox to layout the results container */
+    flex-direction: column; /* Set the flex direction to column */
 }
 
+/* Style the user class in the results container div */
 .resultsContainer .user {
-    padding: var(--spacing);
-    display: flex;
-    border-bottom: 1px solid var(--lightGrey);
+    padding: var(--spacing); /* Add some padding */
+    display: flex; /* Use flexbox to layout the user class */
+    border-bottom: 1px solid var(--lightGrey); /* Add a bottom border */
 }
 
+/* Style the settings container div */
 .settingsContainer {
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Use flexbox to layout the settings container */
+    flex-direction: column; /* Set the flex direction to column */
 }
 
+/* Style the user class in the settings container div */
 .settingsContainer .user {
-    padding: var(--spacing);
-    display: flex;
-    border-bottom: 1px solid var(--lightGrey);
+    padding: var(--spacing); /* Add some padding */
+    display: flex; /* Use flexbox to layout the user class */
+    border-bottom: 1px solid var(--lightGrey); /* Add a bottom border */
 }
 
+/* Style the ul tags */
 ul {
-    margin: 0;
+    margin: 0; /* Remove the margin */
 }
 
+/* Style the chat page container div */
 .chatPageContainer {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    flex: 1;
-    flex-basis: 0;
+    display: flex; /* Use flexbox to layout the chat page container */
+    flex-direction: column; /* Set the flex direction to column */
+    min-height: 0; /* Set the minimum height to 0 */
+    flex: 1; /* Set the flex to 1 */
+    flex-basis: 0; /* Set the flex basis to 0 */
 }
 
+/* Style the img tags in the result list item class */
 .resultListItem img {
-    height: 40px;
-    width: 40px;
-    border-radius:50%;
+    height: 40px; /* Set the height */
+    width: 40px; /* Set the width */
+    border-radius:50%; /* Add a border radius */
 }
 
+/* Style the results image container div */
 .resultsImageContainer {
-    height: 50px;
-    width: 50px;
-    position: relative;
-    margin-right: 10px;
-    display:flex;
-    align-items: center;
-    padding: 5px;
+    height: 50px; /* Set the height */
+    width: 50px; /* Set the width */
+    position: relative; /* Set the position to relative */
+    margin-right: 10px; /* Add some right margin */
+    display:flex; /* Use flexbox to layout the results image container */
+    align-items: center; /* Align the items to the center */
+    padding: 5px; /* Add some padding */
 }
 
+/* Style the img tags in the typing dots class and the message body class in the chat messages div */
 .typingDots img,
 .chatMessages .message .messageBody {
-    background-color: #e0e0e0;
-    padding: 6px 12px;
-    border-radius: 18px;
-    font-size: 14px;
+    background-color: #e0e0e0; /* Set the background color */
+    padding: 6px 12px; /* Add some padding */
+    border-radius: 18px; /* Add a border radius */
+    font-size: 14px; /* Set the font size */
 }
 
+/* Style the img tags in the typing dots class */
 .typingDots img {
-    height: 35px;
+    height: 35px; /* Set the height */
 }
 
+/* Style the typing dots class */
 .typingDots {
-    padding-top: 5px;
-    padding-left: 15px;
-    display: none;
+    padding-top: 5px; /* Add some top padding */
+    padding-left: 15px; /* Add some left padding */
+    display: none; /* Hide the element */
     
 }
 
+/* Style the message container class in the message class in the chat messages div when it has the mine class */
 .chatMessages .message.mine .messageContainer {
-    align-items: flex-end;
+    align-items: flex-end; /* Align the items to the end */
 }
 
-.chatMessages .message.mine .messageContainer {
-    align-items: flex-start;
+/* Style the message container class in the message class in the chat messages div when it has the theirs class */
+.chatMessages .message.theirs .messageContainer {
+    align-items: flex-start; /* Align the items to the start */
 }
 
+/* Style the message body class in the message class in the chat messages div when it has the theirs class and the first class */
 .chatMessages .message.theirs.first .messageBody {
-    border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px; /* Add a bottom left border radius */
 }
 
+/* Style the message body class in the message class in the chat messages div when it has the theirs class and not the first or last class */
 .chatMessages .message.theirs:not(.first):not(.last) .messageBody {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px; /* Add a top left border radius */
+    border-bottom-left-radius: 5px; /* Add a bottom left border radius */
 }
 
+/* Style the message body class in the message class in the chat messages div when it has the theirs class and the last class */
 .chatMessages .message.theirs.last .messageBody {
-    border-bottom-left-radius: 18px;
+    border-bottom-left-radius: 18px; /* Add a bottom left border radius */
 }
 
+/* Style the message body class in the message class in the chat messages div when it has the theirs class and the last class and not the first class */
 .chatMessages .message.theirs.last:not(.first) .messageBody {
-    border-top-left-radius: 2px;
+    border-top-left-radius: 2px; /* Add a top left border radius */
 }
 
+/* Style the sender name class */
 .senderName {
-    color: rgba(0,0,0, 0.5);
-    font-weight: 500;
-    font-size:12px;
+    color: rgba(0,0,0, 0.5); /* Set the color */
+    font-weight: 500; /* Set the font weight */
+    font-size:12px; /* Set the font size */
 }
 
+/* Style the image container class in the chat messages div */
 .chatMessages .imageContainer {
-    height: 30px;
-    width: 30px;
-    margin-right: 7px;
+    height: 30px; /* Set the height */
+    width: 30px; /* Set the width */
+    margin-right: 7px; /* Add some right margin */
 }
 
+/* Style the img tags in the chat messages div */
 .chatMessages img {
-    height: 100%;
-    border-radius: 5%;
-    margin-top: -2px;
-    vertical-align: bottom;
+    height: 100%; /* Set the height to 100% */
+    border-radius: 5%; /* Add a border radius */
+    margin-top: -2px; /* Add some top margin */
+    vertical-align: bottom; /* Set the vertical align to bottom */
 }
 
+/* Style the message class in the chat messages div when it has the last class */
 .chatMessages .message.last {
-    margin-bottom: 7px;
+    margin-bottom: 7px; /* Add some bottom margin */
 }
 
+/* Style the loading spinner container div */
 .loadingSpinnerContainer {
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+    display:flex; /* Use flexbox to layout the loading spinner container */
+    align-items: center; /* Align the items to the center */
+    justify-content: center; /* Center the items horizontally */
+    width: 100%; /* Set the width to 100% */
 }
 
+/* Style the img tags in the loading spinner container div */
 .loadingSpinnerContainer img {
-    width: 15%;
-    margin-top: -50vh;
+    width: 15%; /* Set the width */
+    margin-top: -50vh; /* Add some top margin */
 }
 
+/* Style the result list item class when it has the active class */
 .resultListItem.active {
-    background-color: var(--blueBackground);
+    background-color: var(--blueBackground); /* Set the background color to the blue background variable */
 }
 
+/* Style the result list item class when it has the notification class */
 .resultListItem.notification * {
-    pointer-events: none;
+    pointer-events: none; /* Disable the pointer events */
 }
 
+/* Style the notifications badge and messages badge */
 #notificationsBadge,
 #messagesBadge {
-    background-color: var(--red);
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    visibility: hidden;
+    background-color: var(--red); /* Set the background color to the red variable */
+    height: 25px; /* Set the height */
+    width: 25px; /* Set the width */
+    border-radius: 50%; /* Add a border radius */
+    position: absolute; /* Set the position to absolute */
+    top: 0; /* Set the top position */
+    right: 0; /* Set the right position */
+    color: white; /* Set the color to white */
+    font-size: 18px; /* Set the font size */
+    font-weight: 600; /* Set the font weight */
+    display: flex; /* Use flexbox to layout the notifications badge and messages badge */
+    align-items: center; /* Align the items to the center */
+    justify-content: center; /* Center the items horizontally */
+    visibility: hidden; /* Hide the element */
 }
 
+/* Style the notifications badge and messages badge when they have the active class */
 #notificationsBadge.active,
 #messagesBadge.active {
-    visibility: visible;
+    visibility: visible; /* Show the element */
 }
 
+/* Style the notification list */
 #notificationList {
-    position:fixed;
-    top: 5px;
-    right: 5px;
-    width: 400px;
-    background-color: rgb(190, 200, 255);
-    box-shadow: 2px 4px 4px rgba(0,0,0, 0.5);
-    -webkit-box-shadow: 2px 4px 4px rgba(0,0,0, 0.5);
-    -moz-box-shadow: 2px 4px 4px rgba(0,0,0, 0.5);
+    position:fixed; /* Set the position to fixed */
+    top: 5px; /* Set the top position */
+    right: 5px; /* Set the right position */
+    width: 400px; /* Set the width */
+    background-color: rgb(190, 200, 255); /* Set the background color */
+    box-shadow: 2px 4px 4px rgba(0,0,0, 0.5); /* Add a box shadow */
+    -webkit-box-shadow: 2px 4px 4px rgba(0,0,0, 0.5); /* Add a webkit box shadow */
+    -moz-box-shadow: 2px 4px 4px rgba(0,0,0, 0.5); /* Add a mozilla box shadow */
 }
 
+/* Style the i tags in the results image container div */
 .resultsImageContainer i {
-    font-size: 30px;
-    display:flex;
-    margin-left: 25%;
+    font-size: 30px; /* Set the font size */
+    display:flex; /* Use flexbox to layout the i tags */
+    margin-left: 25%; /* Add some left margin */
 }
 
+/* Style the span tags in the settings list item class */
 .settingsListItem span {
-    font-weight:600;
+    font-weight:600; /* Set the font weight */
 }
 
+/* Style the settings list item class */
 .settingsListItem {
-    color:black;
+    color:black; /* Set the color to black */
 }
 
+/* Style the error message class in the modal body */
 .modal-body .errorMessage {
-    color: var(--red);
-    margin-left: 0px;
-    font-weight:700;
+    color: var(--red); /* Set the color to the red variable */
+    margin-left: 0px; /* Remove the left margin */
+    font-weight:700; /* Set the font weight */
 }
 
+/* Style the text danger class */
 .text-danger {
-    color: var(--red);
-    margin-left: 0px;
-    font-weight:700;
+    color: var(--red); /* Set the color to the red variable */
+    margin-left: 0px; /* Remove the left margin */
+    font-weight:700; /* Set the font weight */
 }
 
+/* Style the text success class */
 .text-success {
-    color: var(--green);
-    margin-left: 0px;
-    font-weight:700;
+    color: var(--green); /* Set the color to the green variable */
+    margin-left: 0px; /* Remove the left margin */
+    font-weight:700; /* Set the font weight */
 }
 
+/* Style the img tags in the post image class */
 .postImage img {
-    max-height:300px;
-    max-width: 300px;
-    height:30vh;
-    border-radius: 10%;
+    max-height:300px; /* Set the max height */
+    max-width: 300px; /* Set the max width */
+    height:30vh; /* Set the height */
+    border-radius: 10%; /* Add a border radius */
 }
 
+/* Style the img tags in the message body class */
 .messageBody img {
-    height: 100%;
-    width: 100%;
+    height: 100%; /* Set the height to 100% */
+    width: 100%; /* Set the width to 100% */
 }
 
+/* Style the pre tags in the post body */
 .postBody pre {
-    overflow-x: auto;
-    white-space: pre-wrap;
+    overflow-x: auto; /* Set the overflow x to auto */
+    white-space: pre-wrap; /* Set the white space to pre wrap */
 }
