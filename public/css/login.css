@@ -1,45 +1,51 @@
+/* Set the background color of the body */
 body {
     background-color: #0099ff;
 }
 
+/* Style the wrapper div */
 .wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    display: flex; /* Use flexbox to center the content */
+    justify-content: center; /* Center the content horizontally */
+    margin-top: 20px; /* Add some top margin */
 }
 
+/* Style the login container div */
 .loginContainer {
-    padding: 20px;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 10px;
-    border: 1px solid #dedede;
-    background-color: #fff;
-    text-align: center;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    padding: 20px; /* Add some padding */
+    width: 80%; /* Set the width to 80% of the parent */
+    max-width: 500px; /* Set a maximum width */
+    border-radius: 10px; /* Add some border radius */
+    border: 1px solid #dedede; /* Add a border */
+    background-color: #fff; /* Set the background color to white */
+    text-align: center; /* Center the text */
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3); /* Add a box shadow */
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3); /* Add a box shadow for webkit browsers */
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3); /* Add a box shadow for mozilla browsers */
 }
 
+/* Style the form element */
 form {
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Use flexbox to layout the form */
+    flex-direction: column; /* Set the flex direction to column */
 }
 
+/* Style the input elements */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-    margin-bottom: 20px;
-    padding: 5px 10px;
-    border-radius: 2px;
-    border: 1px solid #dedede;
-    background-color: #f2f2f2;
+    margin-bottom: 20px; /* Add some bottom margin */
+    padding: 5px 10px; /* Add some padding */
+    border-radius: 2px; /* Add some border radius */
+    border: 1px solid #dedede; /* Add a border */
+    background-color: #f2f2f2; /* Set the background color */
 }
 
+/* Style the submit button */
 input[type="submit"] {
-    background-color: #0099ff;
-    color: #fff;
-    border: none;
-    border-radius: 2px;
-    margin-bottom: 10px;
+    background-color: #0099ff; /* Set the background color */
+    color: #fff; /* Set the text color to white */
+    border: none; /* Remove the border */
+    border-radius: 2px; /* Add some border radius */
+    margin-bottom: 10px; /* Add some bottom margin */
 }
