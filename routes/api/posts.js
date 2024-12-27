@@ -9,6 +9,11 @@ const Notification = require('../../schemas/NotificationSchema');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+
+if (!fs.existsSync(path.join(__dirname, '../../uploads/images'))) {
+    fs.mkdirSync(path.join(__dirname, '../../uploads/images'), { recursive: true });
+}
+
 const upload = multer({ dest: 'uploads/' });
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -102,6 +107,15 @@ router.get("/:id", async (req, res, next) => {
 
 	res.status(200).send(results);
 })
+
+function sanitizeInput(input) {
+	// Limit length to 500 characters
+	const MAX_LENGTH = 500;
+	input = input.slice(0, MAX_LENGTH);
+  
+	// Remove non-printable characters
+	return input.replace(/[^\x20-\x7E]/g, '');
+  }
 
 router.post("/", upload.single("croppedImage"), async (req, res, next) => {
 	

@@ -1,30 +1,6 @@
 mixin createPostForm(userLoggedIn)
 	.postFormContainer
-		.userImageContainer
-			if typeof userLoggedIn !== 'undefined'
-				if userLoggedIn.verifiedBrand
-					img(src=userLoggedIn.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image", style="border-radius: 10%;")
-				else
-					img(src=userLoggedIn.profilePic, onerror="if (this.src != '/images/profilePic.jpeg') this.src = '/images/profilePic.jpeg';", alt="User profile image")
-		.textareaContainer
-			textarea#postTextarea(placeholder="What's happening?", style="    background-color:#eee;padding:10px;border-radius:15px;")
-			.buttonsContainer(style="display: flex; flex-direction: row;")
-				button#submitPostButton(disabled="") Post
-				button(type="button", data-toggle="modal", data-target="#imagePostUploadModal")
-					.imageUploadButton(style="color: var(--blue);margin-left:10px;margin-top:20%;display: flex; align-items: center; justify-content: center;")
-						i.fad.fa-camera(style="font-size:2.5vh;" color="var(--blue)")
-				button(type="button", data-toggle="modal", data-target="#codeUploadModal")
-					.codeUploadButton(style="color: #008800;margin-left:10px;margin-top:20%;display:flex; align-items:center; justify-content:center;")
-						i.fad.fa-code(style="font-size:2.5vh;")
-				button(type="button", data-toggle="modal", data-target="#pollUploadModal")
-					.pollUploadButton(style="color: #000;margin-left:5px;margin-top:30%;display:flex; align-items:center; justify-content:center;")
-						i.fas.fa-chart-bar(style="font-size:2.5vh;")
-				button(type="button", id="emojiPickerButton")
-					.emojiPickerButton(style="color: #fcd303;margin-left:5px;margin-top:30%;display:flex; align-items:center; justify-content:center;")
-						i.fas.fa-grin-beam(style="font-size:2.5vh;")
-				button(type="button", data-toggle="modal", data-target="#modelUploadModal")
-					.modelUploadButton(style="color: #000000;margin-left:5px;margin-top:30%;display:flex; align-items:center; justify-content:center;")
-						i.fas.fa-cubes(style="font-size:2.5vh;")
+		 
 
 mixin createReplyModal(userLoggedIn)
 	#replyModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='replyModalLabel', aria-hidden='true')

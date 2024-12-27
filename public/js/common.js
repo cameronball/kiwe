@@ -1426,7 +1426,7 @@ function timeDifference(current, previous) {
 // Create array to store ads in
 var ads = [];
 // Add ads to array
-ads.push(`<div class="post" data-id="65463a609b3c16b8083cbd25">
+/*ads.push(`<div class="post" data-id="65463a609b3c16b8083cbd25">
 <div class="postActionContainer">
     <span style="font-size:14px;"><i class="fas fa-ad" style="color:var(--blue);"></i>&nbsp;&nbsp;Paid promotion</span></div>
 <div class="mainContentContainer">
@@ -1546,6 +1546,7 @@ ads.push(`<div class="post" data-id="654645e0bbe171788dd7ada7">
     </div>
 </div>
 </div>`);
+*/
 
 // Function to output an array of posts to a provided container
 function outputPosts(results, container) {
